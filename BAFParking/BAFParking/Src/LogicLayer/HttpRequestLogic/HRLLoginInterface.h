@@ -27,5 +27,6 @@
  参数类型 ：string
  参数位置 ：bodyParam
  */
-- (void)loginRequestWithNumberIndex:(int)numberIndex delegte:(id)delegate parameters:(NSDictionary *)paramters;
+- (void)loginRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread phone:(NSString *)phone;
+- (void)test;
 @end

@@ -21,9 +21,9 @@
  *  SSL 证书名称，仅支持cer格式。“app.bishe.com.cer”,则填“app.bishe.com”
  */
 #ifdef PUBLISHCONFIG
-#define certName @"XXX_CA"//需要更改服务器给的证书名称（公钥）
+#define certName @"https"//需要更改服务器给的证书名称（公钥）
 #else
-#define certName @"focustest_cn"//正式环境下的
+#define certName @"https"//正式环境下的
 #endif
 
 BOOL isOpenHttpsSSL()
@@ -435,7 +435,7 @@ BOOL isOpenHttpsSSL()
 - (AFSecurityPolicy*)customSecurityPolicy
 {
 #ifndef kCancelHttpsValidation
-    // /先导入证书
+    //先导入证书
     NSString *cerPath = [[NSBundle mainBundle] pathForResource:certName ofType:@"cer"];//证书的路径
     NSData *certData = [NSData dataWithContentsOfFile:cerPath];
 #endif
@@ -455,7 +455,6 @@ BOOL isOpenHttpsSSL()
 #ifndef kCancelHttpsValidation
     securityPolicy.pinnedCertificates = @[certData];
 #endif
-    
     return securityPolicy;
 }
 

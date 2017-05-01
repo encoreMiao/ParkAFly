@@ -15,6 +15,7 @@
 
 #import "BAFConfigFile.h"
 #import "BAFDefine.h"
+#import "DeviceMacro.h"
 #import "BAFGlobalMananger.h"
 #import "BAFServerManager.h"
 

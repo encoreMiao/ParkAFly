@@ -13,14 +13,14 @@
 //#define PUBLISHCONFIG  //发布环境红定义，在测试时注释掉该红定义
 
 /******************HTTPS请求支持******************/
-//#define kOpenHttpsSSL           //添加支持https证书请求
+#define kOpenHttpsSSL           //添加支持https证书请求
 //#define kCancelHttpsValidation  //取消客户端对https证书的验证（测试阶段使用），正式包需要注释掉
 
 /******************请求基地址******************/
 #define Server_Url  [ServerManager mainServerUrl]
 
 /******************请求地址宏定义******************/
-#define REQURL(active)  [NSString stringWithFormat:@"%@/%@?",Server_Url, active]
+#define REQURL(active)  [NSString stringWithFormat:@"%@/%@",Server_Url, active]
 
 
 

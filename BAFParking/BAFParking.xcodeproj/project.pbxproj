@@ -28,6 +28,10 @@
 		007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A081EB6DC1C0070406B /* NetStatusModel.m */; };
 		007A7A0C1EB6DC1C0070406B /* SHNetNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A0A1EB6DC1C0070406B /* SHNetNotificationCenter.m */; };
 		007A7A111EB6DE950070406B /* SHApplicationManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A101EB6DE950070406B /* SHApplicationManagerCenter.m */; };
+		007A7A161EB719670070406B /* NSMutableDictionary+Valuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A151EB719670070406B /* NSMutableDictionary+Valuation.m */; };
+		007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A181EB7245B0070406B /* NSString+HashMD5.m */; };
+		007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A1D1EB736D70070406B /* HRLogicManager.m */; };
+		007A7A201EB74E4D0070406B /* https.cer in Resources */ = {isa = PBXBuildFile; fileRef = 007A7A1F1EB74E4D0070406B /* https.cer */; };
 		00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C8546A1EAF785600EAD557 /* NLReqestMessage.m */; };
 		00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13ED31EB4C60C00B0D766 /* BAFGlobalMananger.m */; };
 		00D13ED81EB4C75A00B0D766 /* BAFUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13ED71EB4C75A00B0D766 /* BAFUserInfo.m */; };
@@ -100,6 +104,15 @@
 		007A7A0E1EB6DE950070406B /* IApplicationInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IApplicationInterface.h; sourceTree = "<group>"; };
 		007A7A0F1EB6DE950070406B /* SHApplicationManagerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHApplicationManagerCenter.h; sourceTree = "<group>"; };
 		007A7A101EB6DE950070406B /* SHApplicationManagerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHApplicationManagerCenter.m; sourceTree = "<group>"; };
+		007A7A121EB718140070406B /* DeviceMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceMacro.h; sourceTree = "<group>"; };
+		007A7A141EB719670070406B /* NSMutableDictionary+Valuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Valuation.h"; sourceTree = "<group>"; };
+		007A7A151EB719670070406B /* NSMutableDictionary+Valuation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Valuation.m"; sourceTree = "<group>"; };
+		007A7A171EB7245B0070406B /* NSString+HashMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HashMD5.h"; sourceTree = "<group>"; };
+		007A7A181EB7245B0070406B /* NSString+HashMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HashMD5.m"; sourceTree = "<group>"; };
+		007A7A1B1EB736C70070406B /* HRLogicManagerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLogicManagerInterface.h; sourceTree = "<group>"; };
+		007A7A1C1EB736D70070406B /* HRLogicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLogicManager.h; sourceTree = "<group>"; };
+		007A7A1D1EB736D70070406B /* HRLogicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLogicManager.m; sourceTree = "<group>"; };
+		007A7A1F1EB74E4D0070406B /* https.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = https.cer; sourceTree = "<group>"; };
 		00C854351EA742C500EAD557 /* BAF-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BAF-Prefix.pch"; sourceTree = "<group>"; };
 		00C854691EAF785600EAD557 /* NLReqestMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLReqestMessage.h; sourceTree = "<group>"; };
 		00C8546A1EAF785600EAD557 /* NLReqestMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLReqestMessage.m; sourceTree = "<group>"; };
@@ -158,6 +171,7 @@
 		0022A2201EB026CC00A920D6 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				007A7A131EB7194C0070406B /* NSDictionaryCategory */,
 				0022A2211EB026CC00A920D6 /* NSStringCategory */,
 			);
 			path = Category;
@@ -172,6 +186,8 @@
 				0022A2261EB0279F00A920D6 /* NSString+Null.m */,
 				0022A2281EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.h */,
 				0022A2291EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m */,
+				007A7A171EB7245B0070406B /* NSString+HashMD5.h */,
+				007A7A181EB7245B0070406B /* NSString+HashMD5.m */,
 			);
 			path = NSStringCategory;
 			sourceTree = "<group>";
@@ -179,6 +195,7 @@
 		005E85B81E97924600115CAD = {
 			isa = PBXGroup;
 			children = (
+				007A7A1F1EB74E4D0070406B /* https.cer */,
 				005E85C31E97924600115CAD /* BAFParking */,
 				005E85DD1E97924600115CAD /* BAFParkingTests */,
 				005E85E81E97924600115CAD /* BAFParkingUITests */,
@@ -271,6 +288,15 @@
 			path = ApplicationManager;
 			sourceTree = "<group>";
 		};
+		007A7A131EB7194C0070406B /* NSDictionaryCategory */ = {
+			isa = PBXGroup;
+			children = (
+				007A7A141EB719670070406B /* NSMutableDictionary+Valuation.h */,
+				007A7A151EB719670070406B /* NSMutableDictionary+Valuation.m */,
+			);
+			path = NSDictionaryCategory;
+			sourceTree = "<group>";
+		};
 		00C854641EAF771300EAD557 /* Src */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +381,9 @@
 		00E3B2EF1EB4BCAD00A4FF73 /* HttpRequestLogic */ = {
 			isa = PBXGroup;
 			children = (
+				007A7A1B1EB736C70070406B /* HRLogicManagerInterface.h */,
+				007A7A1C1EB736D70070406B /* HRLogicManager.h */,
+				007A7A1D1EB736D70070406B /* HRLogicManager.m */,
 				00D13ED91EB591D200B0D766 /* Login */,
 			);
 			path = HttpRequestLogic;
@@ -385,6 +414,7 @@
 			children = (
 				007A79F51EB6C35C0070406B /* BAFConfigFile.h */,
 				00E3B2F91EB4C10B00A4FF73 /* BAFDefine.h */,
+				007A7A121EB718140070406B /* DeviceMacro.h */,
 				00D13ED21EB4C60C00B0D766 /* BAFGlobalMananger.h */,
 				00D13ED31EB4C60C00B0D766 /* BAFGlobalMananger.m */,
 				007A79F61EB6C3ED0070406B /* ServerManager */,
@@ -519,6 +549,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				007A7A201EB74E4D0070406B /* https.cer in Resources */,
 				005E85D41E97924600115CAD /* LaunchScreen.storyboard in Resources */,
 				005E85D11E97924600115CAD /* Assets.xcassets in Resources */,
 				005E85CF1E97924600115CAD /* Main.storyboard in Resources */,
@@ -598,6 +629,7 @@
 				00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
 				007A79FC1EB6C4C50070406B /* DevelopEnvironment.m in Sources */,
+				007A7A161EB719670070406B /* NSMutableDictionary+Valuation.m in Sources */,
 				007A7A0C1EB6DC1C0070406B /* SHNetNotificationCenter.m in Sources */,
 				005E85C91E97924600115CAD /* AppDelegate.m in Sources */,
 				007A7A111EB6DE950070406B /* SHApplicationManagerCenter.m in Sources */,
@@ -607,10 +639,12 @@
 				007A79F91EB6C41F0070406B /* BaseEnvironment.m in Sources */,
 				0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */,
 				0022A2271EB0279F00A920D6 /* NSString+Null.m in Sources */,
+				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */,
 				00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */,
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
+				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
 				007A7A051EB6C7500070406B /* BAFServerManager.m in Sources */,
 				007A7A021EB6C5CE0070406B /* EnvironmentFactory.m in Sources */,
 				00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */,
