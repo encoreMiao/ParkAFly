@@ -14,13 +14,16 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - DCIntrospect-ARC (0.0.8)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - DCIntrospect-ARC (~> 0.0.8)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  DCIntrospect-ARC: 68a97cc2e99420b21bfcd66865b5376701f8e7f5
 
-PODFILE CHECKSUM: c83fb8adc5de64a468455e93e1aa2adb6021ab32
+PODFILE CHECKSUM: 61226b4e5706b5c71197c238dc2bf5aa506bebf3
 
 COCOAPODS: 1.2.0

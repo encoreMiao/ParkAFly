@@ -1,0 +1,21 @@
+//
+//  BAF-Prefix.pch
+//  BAFParking
+//
+//  Created by mengmeng on 2017/4/19.
+//  Copyright © 2017年 boanfei. All rights reserved.
+//
+
+
+#ifndef BAF_Prefix_pch
+#define BAF_Prefix_pch
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "BAFConfigFile.h"
+#import "BAFDefine.h"
+#import "BAFGlobalMananger.h"
+#import "BAFServerManager.h"
+
+#endif
