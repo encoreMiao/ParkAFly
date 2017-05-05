@@ -14,8 +14,9 @@
  /api/login/sms_code_af4a3cc5c6556729
  
  @param numberIndex 请求的标记
- @param delegate 请求回调对象
- @param paramters 
+ @param workThread 请求回调对象
+ @param phone 手机号
+ 
  参数 ：
  phone：手机号
  sim：客户端随机生成6位随机数
@@ -27,6 +28,27 @@
  参数类型 ：string
  参数位置 ：bodyParam
  */
-- (void)loginRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread phone:(NSString *)phone;
-- (void)test;
+- (void)msgCodeRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread phone:(NSString *)phone;
+
+/**
+ 用户登录
+ /api/login/login
+
+ @param numberIndex 请求的标记
+ @param workThread 请求回调对象
+ @param phone 手机号码
+ @param sms_verification_code 短信验证码
+ */
+- (void)loginRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread phone:(NSString *)phone msgCode:(NSString *)sms_verification_code;
+
+
+/**
+ 检测 app 版本号
+ /api/login/check_version
+
+ @param numberIndex 请求的标记
+ @param workThread 请求回调对象
+ @param version app 版本号
+ */
+- (void)checkVersionRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread version:(NSString *)version;
 @end

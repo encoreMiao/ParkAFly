@@ -17,4 +17,9 @@
     return @"";
 }
 
+//获取Secret
+- (NSString *)secretStr
+{
+    return @"";
+}
 @end

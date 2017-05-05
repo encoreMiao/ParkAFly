@@ -12,6 +12,13 @@
 		0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0022A2291EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m */; };
 		0022A22D1EB0339A00A920D6 /* NLRequestMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0022A22C1EB0339A00A920D6 /* NLRequestMessageManager.m */; };
 		0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0022A22F1EB03BE300A920D6 /* NLHttpClientModel.m */; };
+		005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074411EBB090F00A6E8B1 /* HRLOrderRequest.m */; };
+		005074481EBB097000A6E8B1 /* HRLParkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074471EBB097000A6E8B1 /* HRLParkRequest.m */; };
+		0050744B1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050744A1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m */; };
+		0050744D1EBB2CB900A6E8B1 /* maik.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 0050744C1EBB2CB900A6E8B1 /* maik.PNG */; };
+		005074501EBB2DF100A6E8B1 /* NSString+ImageExtName.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050744F1EBB2DF100A6E8B1 /* NSString+ImageExtName.m */; };
+		005074531EBB33BE00A6E8B1 /* BAFChargePageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074521EBB33BE00A6E8B1 /* BAFChargePageInfo.m */; };
+		005074561EBC211000A6E8B1 /* BAFClientPatrInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074551EBC211000A6E8B1 /* BAFClientPatrInfo.m */; };
 		005E85C61E97924600115CAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 005E85C51E97924600115CAD /* main.m */; };
 		005E85C91E97924600115CAD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 005E85C81E97924600115CAD /* AppDelegate.m */; };
 		005E85CC1E97924600115CAD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005E85CB1E97924600115CAD /* ViewController.m */; };
@@ -33,6 +40,7 @@
 		007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A1D1EB736D70070406B /* HRLogicManager.m */; };
 		007A7A201EB74E4D0070406B /* https.cer in Resources */ = {isa = PBXBuildFile; fileRef = 007A7A1F1EB74E4D0070406B /* https.cer */; };
 		00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C8546A1EAF785600EAD557 /* NLReqestMessage.m */; };
+		00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C8558C1EBAF63200157DA8 /* HRLPersonalCenterRequest.m */; };
 		00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13ED31EB4C60C00B0D766 /* BAFGlobalMananger.m */; };
 		00D13ED81EB4C75A00B0D766 /* BAFUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13ED71EB4C75A00B0D766 /* BAFUserInfo.m */; };
 		00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13EDC1EB5927800B0D766 /* HRLLoginRequest.m */; };
@@ -69,6 +77,21 @@
 		0022A22C1EB0339A00A920D6 /* NLRequestMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRequestMessageManager.m; sourceTree = "<group>"; };
 		0022A22E1EB03BE300A920D6 /* NLHttpClientModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHttpClientModel.h; sourceTree = "<group>"; };
 		0022A22F1EB03BE300A920D6 /* NLHttpClientModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHttpClientModel.m; sourceTree = "<group>"; };
+		005074401EBB090F00A6E8B1 /* HRLOrderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLOrderRequest.h; sourceTree = "<group>"; };
+		005074411EBB090F00A6E8B1 /* HRLOrderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLOrderRequest.m; sourceTree = "<group>"; };
+		005074431EBB092200A6E8B1 /* HRLOrderInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLOrderInterface.h; sourceTree = "<group>"; };
+		005074451EBB095D00A6E8B1 /* HRLParkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLParkInterface.h; sourceTree = "<group>"; };
+		005074461EBB097000A6E8B1 /* HRLParkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLParkRequest.h; sourceTree = "<group>"; };
+		005074471EBB097000A6E8B1 /* HRLParkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLParkRequest.m; sourceTree = "<group>"; };
+		005074491EBB248B00A6E8B1 /* BAFEquityAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFEquityAccountInfo.h; sourceTree = "<group>"; };
+		0050744A1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFEquityAccountInfo.m; sourceTree = "<group>"; };
+		0050744C1EBB2CB900A6E8B1 /* maik.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maik.PNG; sourceTree = "<group>"; };
+		0050744E1EBB2DF100A6E8B1 /* NSString+ImageExtName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ImageExtName.h"; sourceTree = "<group>"; };
+		0050744F1EBB2DF100A6E8B1 /* NSString+ImageExtName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ImageExtName.m"; sourceTree = "<group>"; };
+		005074511EBB33BE00A6E8B1 /* BAFChargePageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFChargePageInfo.h; sourceTree = "<group>"; };
+		005074521EBB33BE00A6E8B1 /* BAFChargePageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFChargePageInfo.m; sourceTree = "<group>"; };
+		005074541EBC211000A6E8B1 /* BAFClientPatrInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFClientPatrInfo.h; sourceTree = "<group>"; };
+		005074551EBC211000A6E8B1 /* BAFClientPatrInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFClientPatrInfo.m; sourceTree = "<group>"; };
 		005E85C11E97924600115CAD /* BAFParking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAFParking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		005E85C51E97924600115CAD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		005E85C71E97924600115CAD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -116,6 +139,9 @@
 		00C854351EA742C500EAD557 /* BAF-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BAF-Prefix.pch"; sourceTree = "<group>"; };
 		00C854691EAF785600EAD557 /* NLReqestMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLReqestMessage.h; sourceTree = "<group>"; };
 		00C8546A1EAF785600EAD557 /* NLReqestMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLReqestMessage.m; sourceTree = "<group>"; };
+		00C8558A1EBAF5FF00157DA8 /* HRLPersonalCenterInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLPersonalCenterInterface.h; sourceTree = "<group>"; };
+		00C8558B1EBAF63200157DA8 /* HRLPersonalCenterRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLPersonalCenterRequest.h; sourceTree = "<group>"; };
+		00C8558C1EBAF63200157DA8 /* HRLPersonalCenterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLPersonalCenterRequest.m; sourceTree = "<group>"; };
 		00D13ED21EB4C60C00B0D766 /* BAFGlobalMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFGlobalMananger.h; sourceTree = "<group>"; };
 		00D13ED31EB4C60C00B0D766 /* BAFGlobalMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFGlobalMananger.m; sourceTree = "<group>"; };
 		00D13ED61EB4C75A00B0D766 /* BAFUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFUserInfo.h; sourceTree = "<group>"; };
@@ -188,8 +214,30 @@
 				0022A2291EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m */,
 				007A7A171EB7245B0070406B /* NSString+HashMD5.h */,
 				007A7A181EB7245B0070406B /* NSString+HashMD5.m */,
+				0050744E1EBB2DF100A6E8B1 /* NSString+ImageExtName.h */,
+				0050744F1EBB2DF100A6E8B1 /* NSString+ImageExtName.m */,
 			);
 			path = NSStringCategory;
+			sourceTree = "<group>";
+		};
+		0050743F1EBB08EB00A6E8B1 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				005074431EBB092200A6E8B1 /* HRLOrderInterface.h */,
+				005074401EBB090F00A6E8B1 /* HRLOrderRequest.h */,
+				005074411EBB090F00A6E8B1 /* HRLOrderRequest.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		005074441EBB092B00A6E8B1 /* Park */ = {
+			isa = PBXGroup;
+			children = (
+				005074451EBB095D00A6E8B1 /* HRLParkInterface.h */,
+				005074461EBB097000A6E8B1 /* HRLParkRequest.h */,
+				005074471EBB097000A6E8B1 /* HRLParkRequest.m */,
+			);
+			name = Park;
 			sourceTree = "<group>";
 		};
 		005E85B81E97924600115CAD = {
@@ -222,6 +270,7 @@
 				005E85C81E97924600115CAD /* AppDelegate.m */,
 				005E85CA1E97924600115CAD /* ViewController.h */,
 				005E85CB1E97924600115CAD /* ViewController.m */,
+				0050744C1EBB2CB900A6E8B1 /* maik.PNG */,
 				005E85CD1E97924600115CAD /* Main.storyboard */,
 				005E85D01E97924600115CAD /* Assets.xcassets */,
 				005E85D21E97924600115CAD /* LaunchScreen.storyboard */,
@@ -349,11 +398,27 @@
 			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
+		00C855861EBAF59600157DA8 /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				00C8558A1EBAF5FF00157DA8 /* HRLPersonalCenterInterface.h */,
+				00C8558B1EBAF63200157DA8 /* HRLPersonalCenterRequest.h */,
+				00C8558C1EBAF63200157DA8 /* HRLPersonalCenterRequest.m */,
+			);
+			name = PersonalCenter;
+			sourceTree = "<group>";
+		};
 		00D13ED51EB4C72700B0D766 /* ModelDataLayer */ = {
 			isa = PBXGroup;
 			children = (
 				00D13ED61EB4C75A00B0D766 /* BAFUserInfo.h */,
 				00D13ED71EB4C75A00B0D766 /* BAFUserInfo.m */,
+				005074491EBB248B00A6E8B1 /* BAFEquityAccountInfo.h */,
+				0050744A1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m */,
+				005074511EBB33BE00A6E8B1 /* BAFChargePageInfo.h */,
+				005074521EBB33BE00A6E8B1 /* BAFChargePageInfo.m */,
+				005074541EBC211000A6E8B1 /* BAFClientPatrInfo.h */,
+				005074551EBC211000A6E8B1 /* BAFClientPatrInfo.m */,
 			);
 			path = ModelDataLayer;
 			sourceTree = "<group>";
@@ -384,6 +449,9 @@
 				007A7A1B1EB736C70070406B /* HRLogicManagerInterface.h */,
 				007A7A1C1EB736D70070406B /* HRLogicManager.h */,
 				007A7A1D1EB736D70070406B /* HRLogicManager.m */,
+				005074441EBB092B00A6E8B1 /* Park */,
+				0050743F1EBB08EB00A6E8B1 /* Order */,
+				00C855861EBAF59600157DA8 /* PersonalCenter */,
 				00D13ED91EB591D200B0D766 /* Login */,
 			);
 			path = HttpRequestLogic;
@@ -552,6 +620,7 @@
 				007A7A201EB74E4D0070406B /* https.cer in Resources */,
 				005E85D41E97924600115CAD /* LaunchScreen.storyboard in Resources */,
 				005E85D11E97924600115CAD /* Assets.xcassets in Resources */,
+				0050744D1EBB2CB900A6E8B1 /* maik.PNG in Resources */,
 				005E85CF1E97924600115CAD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,6 +696,7 @@
 			files = (
 				005E85CC1E97924600115CAD /* ViewController.m in Sources */,
 				00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */,
+				00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
 				007A79FC1EB6C4C50070406B /* DevelopEnvironment.m in Sources */,
 				007A7A161EB719670070406B /* NSMutableDictionary+Valuation.m in Sources */,
@@ -636,20 +706,26 @@
 				0022A2241EB0273500A920D6 /* NSString+URL.m in Sources */,
 				00D13ED81EB4C75A00B0D766 /* BAFUserInfo.m in Sources */,
 				005E85C61E97924600115CAD /* main.m in Sources */,
+				005074481EBB097000A6E8B1 /* HRLParkRequest.m in Sources */,
 				007A79F91EB6C41F0070406B /* BaseEnvironment.m in Sources */,
 				0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */,
 				0022A2271EB0279F00A920D6 /* NSString+Null.m in Sources */,
+				0050744B1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m in Sources */,
 				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */,
+				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
 				00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */,
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
 				007A7A051EB6C7500070406B /* BAFServerManager.m in Sources */,
+				005074561EBC211000A6E8B1 /* BAFClientPatrInfo.m in Sources */,
 				007A7A021EB6C5CE0070406B /* EnvironmentFactory.m in Sources */,
 				00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */,
 				0022A22D1EB0339A00A920D6 /* NLRequestMessageManager.m in Sources */,
+				005074501EBB2DF100A6E8B1 /* NSString+ImageExtName.m in Sources */,
 				007A79FF1EB6C5490070406B /* DistributedEnvironment.m in Sources */,
+				005074531EBB33BE00A6E8B1 /* BAFChargePageInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

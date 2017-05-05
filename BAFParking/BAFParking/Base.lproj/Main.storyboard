@@ -21,26 +21,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esg-F9-AdS">
-                                <rect key="frame" x="164" y="293" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s8j-nT-bzi">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="requestTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jRr-pa-Ofu"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Q1E-2a-CIU"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="H4C-rv-f7U"/>
                                 </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ww8-jA-66Z">
-                                <rect key="frame" x="168" y="390" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="s8j-nT-bzi" secondAttribute="trailing" id="bdr-n6-C8b"/>
+                            <constraint firstItem="s8j-nT-bzi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="d6E-Ue-4du"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="s8j-nT-bzi" secondAttribute="bottom" id="tvh-sf-4uY"/>
+                            <constraint firstItem="s8j-nT-bzi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="v1F-I9-X5B"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="testLabel" destination="Ww8-jA-66Z" id="jT8-Eg-GAT"/>
+                        <outlet property="mainTableView" destination="s8j-nT-bzi" id="ebg-MN-0KW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -12,7 +12,13 @@
 //主服务器地址 生产环境
 - (NSString*)mainServerUrl
 {
-    return @"https://parknfly.cn";
+    return @"http://parknfly.cn";
+}
+
+//获取Secret
+- (NSString *)secretStr
+{
+    return @"67e9e377a2ee0f25a274754836fc1f05";
 }
 
 @end

@@ -8,9 +8,15 @@
 
 #import "HRLogicManager.h"
 #import "HRLLoginRequest.h"
+#import "HRLPersonalCenterRequest.h"
+#import "HRLOrderRequest.h"
+#import "HRLParkRequest.h"
 
 @interface HRLogicManager ()
-@property (nonatomic,retain) HRLLoginRequest *loginRequest;
+@property (nonatomic, strong) HRLLoginRequest *loginRequest;
+@property (nonatomic, strong) HRLPersonalCenterRequest *personalCenterRequest;
+@property (nonatomic, strong) HRLOrderRequest *orderRequest;
+@property (nonatomic, strong) HRLParkRequest *parkRequest;
 @end
 
 @implementation HRLogicManager
@@ -28,8 +34,10 @@
 - (id)init
 {
     if (self = [super init]) {
-        //
         _loginRequest = [[HRLLoginRequest alloc] init];
+        _personalCenterRequest = [[HRLPersonalCenterRequest alloc]init];
+        _orderRequest = [[HRLOrderRequest alloc] init];
+        _parkRequest = [[HRLParkRequest alloc]init];
     }
     
     return self;
@@ -90,8 +98,18 @@
  *  登陆
  *  @return 登陆request
  */
-- (id<HRLLoginInterface>)getLoginReqest{
-    
+- (id <HRLLoginInterface>)getLoginReqest{
     return _loginRequest;
+}
+- (id <HRLPersonalCenterInterface>)getPersonalCenterReqest{
+    return _personalCenterRequest;
+}
+- (id <HRLParkInterface>)getParkReqest
+{
+    return _parkRequest;
+}
+- (id <HRLOrderInterface>)getOrderReqest
+{
+    return _orderRequest;
 }
 @end

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 @protocol HRLLoginInterface;
+@protocol HRLPersonalCenterInterface;
+@protocol HRLParkInterface;
+@protocol HRLOrderInterface;
 
 @interface HRLogicManager : NSObject
 /**
@@ -26,12 +29,10 @@
  */
 -(void) enterForeground;
 
-/**
- *  登陆模块
- *
- */
-
--(id<HRLLoginInterface>)getLoginReqest;
 
 
+- (id <HRLLoginInterface>)getLoginReqest;
+- (id <HRLPersonalCenterInterface>)getPersonalCenterReqest;
+- (id <HRLParkInterface>)getParkReqest;
+- (id <HRLOrderInterface>)getOrderReqest;
 @end

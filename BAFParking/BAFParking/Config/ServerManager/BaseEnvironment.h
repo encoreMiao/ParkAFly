@@ -13,4 +13,7 @@
 //主服务器地址
 - (NSString *)mainServerUrl;
 
+//获取Secret
+- (NSString *)secretStr;
+
 @end

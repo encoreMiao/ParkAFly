@@ -61,4 +61,10 @@
     return [_environmentObject mainServerUrl];
 }
 
+//获取Secret
+- (NSString *)secretStr
+{
+    return [_environmentObject secretStr];
+}
+
 @end

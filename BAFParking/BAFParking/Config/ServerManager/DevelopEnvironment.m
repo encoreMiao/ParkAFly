@@ -12,6 +12,12 @@
 //主服务器地址 测试环境
 - (NSString*)mainServerUrl
 {
-    return @"https://parknfly.com.cn";
+    return @"http://parknfly.com.cn";
+}
+
+//获取Secret
+- (NSString *)secretStr
+{
+    return @"a19e9af4a3cc5c6556729770367927ac";
 }
 @end
