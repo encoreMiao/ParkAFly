@@ -342,7 +342,23 @@
  */
 - (void)cityListRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread
 {
+    DLog(@"获取城市列表");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/city/city_list") parameters:nil headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -357,7 +373,25 @@
  */
 - (void)tcCardRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread phone:(NSString *)phone
 {
+    DLog(@"支付页面-个人腾讯权益卡账号列表");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:phone forKey:@"phone"];
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/activity/tc_card") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -378,7 +412,25 @@
  */
 - (void)checkTcCardRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param
 {
+    DLog(@"支付页面-计算腾讯权益卡的费用");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
+
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/activity/check_tc_card") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -415,7 +467,28 @@
  */
 - (void)couponListRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread client_id:(NSString *)client_id status:(NSString *)status
 {
+    DLog(@"个人中心优惠券列表");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:client_id forKey:@"client_id"];
+    [paramters setObject:status forKey:@"status"];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/coupon/get_coupon_list") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        //  1.缺少参数 client_id;2.缺少参数 status;3.没有优惠券;
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -428,7 +501,28 @@
  */
 - (void)getMyCouponRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread client_id:(NSString *)client_id order_id:(NSString *)order_id
 {
+    DLog(@"支付页面-优惠券列表");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:client_id forKey:@"client_id"];
+    [paramters setObject:order_id forKey:@"order_id"];
+    
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/coupon/get_my_coupon") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+//        1.缺少参数 client_id;2.缺少参数 order_id;
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -442,7 +536,28 @@
  */
 - (void)bindCouponRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread client_id:(NSString *)client_id coupon_code:(NSString *)coupon_code
 {
+    DLog(@"绑定优惠码");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:client_id forKey:@"client_id"];
+    [paramters setObject:coupon_code forKey:@"coupon_code"];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/coupon/bind_coupon") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        //  1.缺少参数 client_id;2.缺少参数 coupon_code;3.该优惠券无效;4.优惠码失效或者已 经被使用;5.该优惠码已经被绑定;6.绑定失败;
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -469,7 +584,23 @@
  */
 - (void)payNotifyUrlRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread order_no:(NSString *)order_no
 {
-    
+    DLog(@"微信支付成功后回调接口");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:order_no forKey:@"order_no"];
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/pay/notify_url") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -489,7 +620,22 @@
  */
 - (void)rechargeOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param
 {
-    
+    DLog(@"获取个人账户微信充值订单编号");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/pay/recharge_order") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -502,7 +648,23 @@
  */
 - (void)rechargeNotifyUrlRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread recharge_no:(NSString *)recharge_no
 {
-    
+    DLog(@"个人账户微信充值成功后回调接口");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:recharge_no forKey:@"recharge_no"];
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/pay/recharge_notify_url") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -518,6 +680,27 @@
  */
 - (void)rechargeCardRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread client_id:(NSString *)client_id card_no:(NSString *)card_no card_password:(NSString *)card_password
 {
+    DLog(@"卡密充值");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:client_id forKey:@"client_id"];
+    [paramters setObject:card_no forKey:@"card_no"];
+    [paramters setObject:card_password forKey:@"card_password"];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/pay/recharge_card") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 @end

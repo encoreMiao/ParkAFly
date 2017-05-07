@@ -19,6 +19,10 @@
 		005074501EBB2DF100A6E8B1 /* NSString+ImageExtName.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050744F1EBB2DF100A6E8B1 /* NSString+ImageExtName.m */; };
 		005074531EBB33BE00A6E8B1 /* BAFChargePageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074521EBB33BE00A6E8B1 /* BAFChargePageInfo.m */; };
 		005074561EBC211000A6E8B1 /* BAFClientPatrInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074551EBC211000A6E8B1 /* BAFClientPatrInfo.m */; };
+		005074591EBD5E1500A6E8B1 /* BAFCityInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074581EBD5E1500A6E8B1 /* BAFCityInfo.m */; };
+		0050745C1EBD628E00A6E8B1 /* BAFTcCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050745B1EBD628E00A6E8B1 /* BAFTcCardInfo.m */; };
+		0050745F1EBE9A9500A6E8B1 /* BAFCommentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050745E1EBE9A9500A6E8B1 /* BAFCommentInfo.m */; };
+		005074621EBE9E3D00A6E8B1 /* BAFCouponInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 005074611EBE9E3D00A6E8B1 /* BAFCouponInfo.m */; };
 		005E85C61E97924600115CAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 005E85C51E97924600115CAD /* main.m */; };
 		005E85C91E97924600115CAD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 005E85C81E97924600115CAD /* AppDelegate.m */; };
 		005E85CC1E97924600115CAD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005E85CB1E97924600115CAD /* ViewController.m */; };
@@ -92,6 +96,14 @@
 		005074521EBB33BE00A6E8B1 /* BAFChargePageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFChargePageInfo.m; sourceTree = "<group>"; };
 		005074541EBC211000A6E8B1 /* BAFClientPatrInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFClientPatrInfo.h; sourceTree = "<group>"; };
 		005074551EBC211000A6E8B1 /* BAFClientPatrInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFClientPatrInfo.m; sourceTree = "<group>"; };
+		005074571EBD5E1500A6E8B1 /* BAFCityInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFCityInfo.h; sourceTree = "<group>"; };
+		005074581EBD5E1500A6E8B1 /* BAFCityInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFCityInfo.m; sourceTree = "<group>"; };
+		0050745A1EBD628E00A6E8B1 /* BAFTcCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFTcCardInfo.h; sourceTree = "<group>"; };
+		0050745B1EBD628E00A6E8B1 /* BAFTcCardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFTcCardInfo.m; sourceTree = "<group>"; };
+		0050745D1EBE9A9500A6E8B1 /* BAFCommentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFCommentInfo.h; sourceTree = "<group>"; };
+		0050745E1EBE9A9500A6E8B1 /* BAFCommentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFCommentInfo.m; sourceTree = "<group>"; };
+		005074601EBE9E3D00A6E8B1 /* BAFCouponInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFCouponInfo.h; sourceTree = "<group>"; };
+		005074611EBE9E3D00A6E8B1 /* BAFCouponInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFCouponInfo.m; sourceTree = "<group>"; };
 		005E85C11E97924600115CAD /* BAFParking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAFParking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		005E85C51E97924600115CAD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		005E85C71E97924600115CAD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -419,6 +431,14 @@
 				005074521EBB33BE00A6E8B1 /* BAFChargePageInfo.m */,
 				005074541EBC211000A6E8B1 /* BAFClientPatrInfo.h */,
 				005074551EBC211000A6E8B1 /* BAFClientPatrInfo.m */,
+				005074571EBD5E1500A6E8B1 /* BAFCityInfo.h */,
+				005074581EBD5E1500A6E8B1 /* BAFCityInfo.m */,
+				0050745A1EBD628E00A6E8B1 /* BAFTcCardInfo.h */,
+				0050745B1EBD628E00A6E8B1 /* BAFTcCardInfo.m */,
+				0050745D1EBE9A9500A6E8B1 /* BAFCommentInfo.h */,
+				0050745E1EBE9A9500A6E8B1 /* BAFCommentInfo.m */,
+				005074601EBE9E3D00A6E8B1 /* BAFCouponInfo.h */,
+				005074611EBE9E3D00A6E8B1 /* BAFCouponInfo.m */,
 			);
 			path = ModelDataLayer;
 			sourceTree = "<group>";
@@ -695,6 +715,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				005E85CC1E97924600115CAD /* ViewController.m in Sources */,
+				0050745F1EBE9A9500A6E8B1 /* BAFCommentInfo.m in Sources */,
 				00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */,
 				00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
@@ -711,10 +732,13 @@
 				0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */,
 				0022A2271EB0279F00A920D6 /* NSString+Null.m in Sources */,
 				0050744B1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m in Sources */,
+				005074591EBD5E1500A6E8B1 /* BAFCityInfo.m in Sources */,
+				005074621EBE9E3D00A6E8B1 /* BAFCouponInfo.m in Sources */,
 				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
+				0050745C1EBD628E00A6E8B1 /* BAFTcCardInfo.m in Sources */,
 				00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */,
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,

@@ -27,7 +27,26 @@
  */
 - (void)createCommentRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param
 {
+    DLog(@"发表评论");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/comment/create_comment") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        //  1.order_id,park_id,contact_phone 三个字段缺一不可;2.手机号格式错误;3.评分、标签、评语至少有一个不为空;
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -41,7 +60,27 @@
  */
 - (void)viewCommentRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread order_id:(NSString *)order_id
 {
+    DLog(@"查看订单的评论");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:order_id forKey:@"order_id"];
+    
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/comment/view_comment") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+//        1.缺少参数:order_id;2.当前订单没有评论;
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -53,7 +92,27 @@
  */
 - (void)commentListRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread order_id:(NSString *)order_id
 {
+    DLog(@"订单的评论列表");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:order_id forKey:@"order_id"];
+    
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/comment/comment_list") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        //        1.缺少参数:order_id;2.当前订单没有评论;
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -64,15 +123,23 @@
  */
 - (void)commentListRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread
 {
+    DLog(@"评论标签");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/comment/comment_tag") parameters:nil headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
-
-
-
-
-
-
-
 
 
 
@@ -121,7 +188,25 @@
  */
 - (void)addOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param
 {
+    DLog(@"创建订单");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/order/add") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -143,7 +228,25 @@
  */
 - (void)editOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param
 {
+    DLog(@"修改订单");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/order/edit") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -153,9 +256,28 @@
  
  @param order_id order_id
  */
-- (void)cancelOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread order_id:(NSString *)order_id
+- (void)cancelOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread :(NSString *)order_id
 {
+    DLog(@"取消订单");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:order_id forKey:@"order_id"];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/order/cancel") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -170,19 +292,51 @@
  */
 - (void)orderFeeRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread order_id:(NSString *)order_id
 {
-    
+    DLog(@"订单费用");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:order_id forKey:@"order_id"];
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/order/order_fee") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
 
 /**
  api/order/detail
- 功能:订单详情
+ 功能:订单详情 get
  @param order_id order_id
  */
 - (void)orderDetailRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread order_id:(NSString *)order_id
 {
-    
+    DLog(@"订单详情");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:order_id forKey:@"order_id"];
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/order/detail") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -194,7 +348,26 @@
  */
 - (void)latestOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread client_id:(NSString *)client_id
 {
+    DLog(@"主界面最新订单");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:client_id forKey:@"client_id"];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/order/latest_order") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
@@ -211,12 +384,29 @@
  */
 - (void)orderListRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread client_id:(NSString *)client_id order_status:(NSString *)order_status
 {
-    
+    DLog(@"订单列表");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
+    [paramters setObject:client_id forKey:@"client_id"];
+    [paramters setObject:order_status forKey:@"order_status"];
+    //GET请求
+    [self getRequestWithUrl:REQURL(@"api/order/order_list") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    }failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 
 
 /**
- pi/order/order_payment_set
+ api/order/order_payment_set
  功能:设置支付明细
  
  @param param
@@ -233,6 +423,24 @@
  */
 - (void)orderPaymentSetWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param
 {
+    DLog(@"设置支付明细");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
+                                  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     
+    //设置请求体
+    NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/order/order_payment_set") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
 }
 @end

@@ -31,6 +31,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     kRequestNumberIndexPersonalAccount,//账户充值页面
     kRequestNumberIndexClientPatr,//账户余额交易记录
+    
+    kRequestNumberIndexFeedBack,//用户反馈
+    kRequestNumberIndexCityList,//城市列表
+    
+    kRequestNumberIndexTcCard,//个人腾讯权益卡账号列表
+    kRequestNumberIndexCheckTcCard,//支付页面计算腾讯权益卡的费用
 };
 
 
@@ -100,9 +106,23 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
 //    [personCenterReq personalAccountRequestWithNumberIndex:kRequestNumberIndexPersonalAccount delegte:self client_id:@"7296"];
     
-    [personCenterReq clientPatrRequestWithNumberIndex:kRequestNumberIndexClientPatr delegte:self client_id:@"7296"];
+//    [personCenterReq clientPatrRequestWithNumberIndex:kRequestNumberIndexClientPatr delegte:self client_id:@"7296"];
+//    [personCenterReq feedBackRequestWithNumberIndex:kRequestNumberIndexFeedBack delegte:self client_id:@"7296" content:@"反馈啦啦啦啦啦啦啦啦啦"];
     
+//    [personCenterReq cityListRequestWithNumberIndex:kRequestNumberIndexCityList delegte:self];
     
+//    [personCenterReq tcCardRequestWithNumberIndex:kRequestNumberIndexTcCard delegte:self phone:@"18511833913"];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         @"18511833913",@"phone",
+                         @"",@"card_no",
+                         @"7296",@"client_id",
+                         @"",@"first_day_price",
+                         @"",@"day_price",
+                         @"",@"park_day",
+                         @"",@"park_fee",
+                         nil];
+    [personCenterReq checkTcCardRequestWithNumberIndex:kRequestNumberIndexCheckTcCard delegte:self param:dic];
 }
 
 #pragma mark - TableviewDelegate
@@ -251,6 +271,58 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             //账户余额交易记录
             //data对应一个列表 BAFClientPatrInfo
+            
+        }else{
+            //
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexFeedBack) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //意见反馈
+            //1.缺少参数 client_id;2.缺少参数 content;3.提交失败;
+            
+        }else{
+            //
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexCityList) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //城市列表
+            //
+            
+        }else{
+            //
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexTcCard) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //个人腾讯权益卡账号列表
+            //1.缺少参数 phone;2.没有权益卡账号;
+            
+        }else{
+            //
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexCheckTcCard) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //支付页面-计算腾讯权益卡的费用
+            //1.不存在或者已经失效;
             
         }else{
             //
