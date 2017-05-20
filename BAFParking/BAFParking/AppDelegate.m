@@ -9,15 +9,40 @@
 #import "AppDelegate.h"
 #import "DCIntrospect.h"
 
-@interface AppDelegate ()
+#import "BAFCenterViewController.h"
+#import "BAFLeftViewController.h"
+#import "MMDrawerController.h"
 
+#import "BAFBaseNavigationViewController.h"
+
+@interface AppDelegate ()
+@property (nonatomic, strong) MMDrawerController *drawerController;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //视图内省
     [[DCIntrospect sharedIntrospector] start];
+    
+    //抽屉框
+    BAFLeftViewController *leftDrawerVC = [[BAFLeftViewController alloc]init];
+    BAFCenterViewController *centerVC = [[BAFCenterViewController alloc]init];
+    
+    BAFBaseNavigationViewController *leftNav = [[BAFBaseNavigationViewController alloc]initWithRootViewController:leftDrawerVC];
+    BAFBaseNavigationViewController *centerNav = [[BAFBaseNavigationViewController alloc]initWithRootViewController:centerVC];
+    
+    self.drawerController = [[MMDrawerController alloc]initWithCenterViewController:centerNav leftDrawerViewController:leftNav];
+    [self.drawerController setShowsShadow:NO];
+    [self.drawerController setRestorationIdentifier:@"MMDrawer"];
+    [self.drawerController setMaximumRightDrawerWidth:200.0];
+    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+    
+    [self.window setRootViewController:self.drawerController];
+    
     return YES;
 }
 

@@ -16,6 +16,8 @@
 
 #import "NSString+ImageExtName.h"
 
+#import "YLProgressBar.h"
+
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexMsgCode,
     kRequestNumberIndexLogin,
@@ -41,9 +43,25 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 
 @interface ViewController ()<IUICallbackInterface,UITableViewDelegate,UITableViewDataSource>
+{
+    NSTimer *progressTimer;
+    float duritionSecond;
+    UIImageView *view ;
+}
+@property (nonatomic, strong) YLProgressBar *progressView;
+
 @property (nonatomic,weak) IBOutlet UITableView *mainTableView;
 @property (nonatomic,strong) NSMutableDictionary *dataSourceDic;
 @property (nonatomic,strong) NSArray *sortedArr;
+
+
+//响铃按钮
+@property (nonatomic, strong) UIButton      *ringBtn;
+@property (nonatomic, strong) UIView        *animationBack;
+@property (nonatomic, strong) UIImageView   *animationImageViews;
+@property (nonatomic, strong) UILabel       *ringing;
+
+
 @end
 
 @implementation ViewController
@@ -51,17 +69,209 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+//    [self ringBtnViewConfig];
+//    [self ringBtnSizeConfig:CGRectMake(20, 100, 200, 50)];
+    
+    
+//    UILabel *l1 = [[UILabel alloc]initWithFrame:CGRectMake(20, 100, 200, 500)];
+//    l1.text = @"08984938048394";
+//    l1.font = [UIFont fontWithName:@"DIN-Regular" size:22];
+//    
+//    UILabel *l2 = [[UILabel alloc]initWithFrame:CGRectMake(20, 200, 200, 500)];
+//    l2.text = @"08984938048394";
+//    l2.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:22];
+//    [self.view addSubview:l1];
+//    [self.view addSubview:l2];
+    
+    //只有行进中的面板有该进度条
+    self.progressView = [[YLProgressBar alloc] initWithFrame:CGRectMake(0,
+                                                                        300,
+                                                                        300,
+                                                                        10)];
+    _progressView.progressTintColor = [UIColor redColor];
+    _progressView.trackTintColor = [UIColor grayColor];
+    _progressView.type = YLProgressBarTypeFlat;
+    _progressView.stripesOrientation = YLProgressBarStripesOrientationVertical;
+    _progressView.hideStripes = YES;
+    _progressView.progressBarInset = 0;
+    _progressView.hideGloss = YES;
+    _progressView.uniformTintColor = YES;
+    [_progressView setProgress:0.1 animated:YES];
+    _progressView.cornerRadius = 3;
+    
+//    _progressView.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
+//    _progressView.indicatorTextLabel.textColor = [UIColor blackColor];
+    [self.view addSubview:self.progressView];
+    
+    
+    
+    duritionSecond = 0 ;
+    
+
+    
+    view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 15, 15)];
+    view.image = [self roundImageWithColor:[UIColor yellowColor] andRect:view.frame];
+    view.alpha = 0.5;
+    
+    view.center = self.progressView.center;
+    CGPoint cc = view.center;
+    cc.y = self.progressView.center.y;
+    view.center = cc;
+    
+    
+    [self.view addSubview:view];
+    
+    
+    if (!progressTimer) {
+        progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(schedulUpdateProgress) userInfo:nil repeats:YES];
+        [progressTimer fire];
+    }
 }
+
+
+- (UIImage *)roundImageWithColor:(UIColor *)color andRect:(CGRect)rect{
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);//否则会有锯齿不清楚
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextSetLineWidth(context, 0.5);//线宽度
+    CGContextAddArc(context, rect.size.width/2, rect.size.height/2, rect.size.height/2, 0,2*M_PI, 0);
+    CGContextDrawPath(context, kCGPathFill);//绘制填充
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+- (void)createImgView{
+    view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
+    view.image = [self roundImageWithColor:[UIColor yellowColor] andRect:view.frame];
+    view.alpha = 0.5;
+}
+
+
+- (void)schedulUpdateProgress {
+    
+        [self.progressView setProgress:duritionSecond animated:YES];
+    NSLog(@"%@",NSStringFromCGRect(self.progressView.innerRect));
+        CGRect viewR = view.frame;
+        viewR.origin.x = self.progressView.innerRect.size.width-view.frame.size.width/2;
+        view.frame = viewR;
+    duritionSecond += 0.01;
+}
+
+
+- (UIImage *)imageWithColor:(UIColor *)color andRect:(CGRect)rect{
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);//否则会有锯齿不清楚
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextSetLineWidth(context, 0.5);//线宽度
+    CGContextAddArc(context, rect.size.width/2, rect.size.height/2, rect.size.height/4, 0,2*M_PI, 0);
+    CGContextDrawPath(context, kCGPathFill);//绘制填充
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+- (void)ringBtnViewConfig
+{
+    self.ringBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_ringBtn setTitle:NSLocalizedString(@"bell_find_bike", nil) forState:UIControlStateNormal];
+    [_ringBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];//88 92 100
+    [_ringBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
+    [_ringBtn setBackgroundColor:[UIColor whiteColor]];//ff ff ff
+    _ringBtn.layer.cornerRadius = 3.0f;
+    _ringBtn.layer.borderWidth = 1.0f;
+    _ringBtn.clipsToBounds = YES;
+    _ringBtn.layer.borderColor = [[UIColor grayColor]CGColor];
+//    _ringBtn.tag = ReservatTypeRing;
+    [_ringBtn addTarget:self action:@selector(startRingBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_ringBtn];
+    
+    
+    self.animationBack = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.animationBack setBackgroundColor:[UIColor whiteColor]];//244 246 249
+    
+    NSArray *frames = @[[UIImage imageNamed:@"alarm_1"],
+                        [UIImage imageNamed:@"alarm_2"],
+                        [UIImage imageNamed:@"alarm_3"]];
+    self.animationImageViews = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.animationImageViews.image = [UIImage imageNamed:@"alarm_1"];
+    self.animationImageViews.animationImages = frames;
+    self.animationImageViews.animationDuration = .4*frames.count;
+    [self.animationImageViews sizeToFit];
+    [self.animationBack addSubview:self.animationImageViews];
+    
+    _ringing = [[UILabel alloc] initWithFrame:CGRectZero];
+    _ringing.textAlignment = NSTextAlignmentLeft;
+    _ringing.baselineAdjustment = NSTextAlignmentCenter;
+    _ringing.backgroundColor = [UIColor clearColor];
+    _ringing.textColor = [UIColor blackColor];// 153 155 161
+    _ringing.font = [UIFont systemFontOfSize:13];
+    _ringing.text = NSLocalizedString(@"red_ring", nil);
+    [self.animationBack addSubview:_ringing];
+    [_ringing sizeToFit];
+}
+
+- (void)ringBtnSizeConfig:(CGRect)btnRectSize{
+    self.ringBtn.frame = btnRectSize;
+    self.animationBack.frame = self.ringBtn.bounds;
+    
+    //条件筛选按钮处
+    NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    paragraphStyle.maximumLineHeight = btnRectSize.size.height;
+    
+    NSDictionary*attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:13.0f],NSForegroundColorAttributeName:[UIColor blackColor],NSParagraphStyleAttributeName:paragraphStyle};//// 153 155 161
+    
+    //图片长宽
+    CGSize sizeImg = CGSizeMake(14.0f, 14.0f);
+    //文本长宽
+    CGSize sizeBtnLbl =  [self.ringing.text boundingRectWithSize:btnRectSize.size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
+    
+    self.ringing.frame = CGRectMake(btnRectSize.size.width/2-sizeBtnLbl.width/2-3-7, btnRectSize.size.height/2-sizeBtnLbl.height/2, sizeBtnLbl.width, sizeBtnLbl.height);
+    self.animationImageViews.frame = CGRectMake(self.ringing.frame.size.width+self.ringing.frame.origin.x+5, btnRectSize.size.height/2-sizeImg.height/2, sizeImg.width, sizeImg.height);
+}
+
+
+
+- (void)startRingBtn {
+    [self.ringBtn addSubview:self.animationBack];
+    [UIView animateWithDuration:.25 animations:^{
+        self.animationBack.alpha = 1;
+    } completion:^(BOOL finished) {
+        [self.animationImageViews startAnimating];
+        self.ringBtn.enabled = NO;
+    }];
+    [self performSelector:@selector(stopRingBtn) withObject:nil afterDelay:10];
+}
+- (void)stopRingBtn {
+    self.ringBtn.enabled = YES;
+    [UIView animateWithDuration:.25 animations:^{
+        self.animationBack.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.animationImageViews stopAnimating];
+        [self.animationBack removeFromSuperview];
+    }];
+}
+
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self requestMethod];
+//    [self requestMethod];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 
 #pragma mark - NetworkRequest

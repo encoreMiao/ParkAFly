@@ -18,5 +18,6 @@
 #import "DeviceMacro.h"
 #import "BAFGlobalMananger.h"
 #import "BAFServerManager.h"
+#import "MJExtension.h"
 
 #endif
