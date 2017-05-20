@@ -36,10 +36,10 @@
     self.drawerController = [[MMDrawerController alloc]initWithCenterViewController:centerNav leftDrawerViewController:leftNav];
     [self.drawerController setShowsShadow:NO];
     [self.drawerController setRestorationIdentifier:@"MMDrawer"];
-    [self.drawerController setMaximumRightDrawerWidth:200.0];
-    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.drawerController setMaximumRightDrawerWidth:250.0];
+    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    
+    self.drawerController.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionModeNavigationBarOnly;
     
     [self.window setRootViewController:self.drawerController];
     

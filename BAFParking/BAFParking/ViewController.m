@@ -16,7 +16,6 @@
 
 #import "NSString+ImageExtName.h"
 
-#import "YLProgressBar.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexMsgCode,
@@ -48,7 +47,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     float duritionSecond;
     UIImageView *view ;
 }
-@property (nonatomic, strong) YLProgressBar *progressView;
 
 @property (nonatomic,weak) IBOutlet UITableView *mainTableView;
 @property (nonatomic,strong) NSMutableDictionary *dataSourceDic;
@@ -69,65 +67,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-//    [self ringBtnViewConfig];
-//    [self ringBtnSizeConfig:CGRectMake(20, 100, 200, 50)];
-    
-    
-//    UILabel *l1 = [[UILabel alloc]initWithFrame:CGRectMake(20, 100, 200, 500)];
-//    l1.text = @"08984938048394";
-//    l1.font = [UIFont fontWithName:@"DIN-Regular" size:22];
-//    
-//    UILabel *l2 = [[UILabel alloc]initWithFrame:CGRectMake(20, 200, 200, 500)];
-//    l2.text = @"08984938048394";
-//    l2.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:22];
-//    [self.view addSubview:l1];
-//    [self.view addSubview:l2];
-    
-    //只有行进中的面板有该进度条
-    self.progressView = [[YLProgressBar alloc] initWithFrame:CGRectMake(0,
-                                                                        300,
-                                                                        300,
-                                                                        10)];
-    _progressView.progressTintColor = [UIColor redColor];
-    _progressView.trackTintColor = [UIColor grayColor];
-    _progressView.type = YLProgressBarTypeFlat;
-    _progressView.stripesOrientation = YLProgressBarStripesOrientationVertical;
-    _progressView.hideStripes = YES;
-    _progressView.progressBarInset = 0;
-    _progressView.hideGloss = YES;
-    _progressView.uniformTintColor = YES;
-    [_progressView setProgress:0.1 animated:YES];
-    _progressView.cornerRadius = 3;
-    
-//    _progressView.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
-//    _progressView.indicatorTextLabel.textColor = [UIColor blackColor];
-    [self.view addSubview:self.progressView];
-    
-    
-    
-    duritionSecond = 0 ;
-    
-
-    
-    view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 15, 15)];
-    view.image = [self roundImageWithColor:[UIColor yellowColor] andRect:view.frame];
-    view.alpha = 0.5;
-    
-    view.center = self.progressView.center;
-    CGPoint cc = view.center;
-    cc.y = self.progressView.center.y;
-    view.center = cc;
-    
-    
-    [self.view addSubview:view];
-    
-    
-    if (!progressTimer) {
-        progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(schedulUpdateProgress) userInfo:nil repeats:YES];
-        [progressTimer fire];
-    }
 }
 
 
@@ -148,18 +87,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     view.image = [self roundImageWithColor:[UIColor yellowColor] andRect:view.frame];
     view.alpha = 0.5;
 }
-
-
-- (void)schedulUpdateProgress {
-    
-        [self.progressView setProgress:duritionSecond animated:YES];
-    NSLog(@"%@",NSStringFromCGRect(self.progressView.innerRect));
-        CGRect viewR = view.frame;
-        viewR.origin.x = self.progressView.innerRect.size.width-view.frame.size.width/2;
-        view.frame = viewR;
-    duritionSecond += 0.01;
-}
-
 
 - (UIImage *)imageWithColor:(UIColor *)color andRect:(CGRect)rect{
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);//否则会有锯齿不清楚

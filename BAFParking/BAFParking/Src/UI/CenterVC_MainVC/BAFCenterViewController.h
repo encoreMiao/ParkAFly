@@ -1,5 +1,5 @@
 //
-//  BAFLeftViewController.h
+//  BAFCenterViewController.h
 //  BAFParking
 //
 //  Created by mengmeng on 2017/5/8.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFBaseViewController.h"
 
-@interface BAFLeftViewController : UIViewController
+@interface BAFCenterViewController : BAFBaseViewController
 
 @end

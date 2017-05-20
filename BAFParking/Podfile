@@ -5,4 +5,7 @@ target ‘BAFParking’ do
  pod 'DCIntrospect-ARC', '~> 0.0.8'
  pod 'SAMKeychain', '~> 1.5.2'
  pod 'MMDrawerController', '~> 0.6.0'
+ pod 'IQKeyboardManager', '~> 4.0.9'
+ pod 'MBProgressHUD', '~> 1.0.0'
+ pod 'SDWebImage', '~> 4.0.0'
 end
