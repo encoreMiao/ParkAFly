@@ -42,7 +42,7 @@
 - (void)setNavigationBackButtonWithImage:(UIImage *)image method:(SEL)method{
     [self.backButton setImage:image forState:UIControlStateNormal];
     [self.backButton addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.backButton]];
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.backButton]];
 }
 
 - (void)setNavigationRightButtonWithText:(NSString *)text method:(SEL)method{

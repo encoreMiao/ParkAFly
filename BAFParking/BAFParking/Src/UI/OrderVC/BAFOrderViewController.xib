@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BAFOrderViewController">
+            <connections>
+                <outlet property="footerView" destination="f0V-99-sJp" id="6gf-MH-XMu"/>
+                <outlet property="mainTableView" destination="d23-fR-NxD" id="idz-kF-zxC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d23-fR-NxD">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="2yv-Go-pE8"/>
+                        <outlet property="delegate" destination="-1" id="3eP-tw-Jse"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="d23-fR-NxD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="18h-Cz-DQC"/>
+                <constraint firstItem="d23-fR-NxD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U0t-C4-4wY"/>
+                <constraint firstAttribute="bottom" secondItem="d23-fR-NxD" secondAttribute="bottom" id="x2d-da-foA"/>
+                <constraint firstAttribute="trailing" secondItem="d23-fR-NxD" secondAttribute="trailing" id="xGb-eU-pwy"/>
+            </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="f0V-99-sJp" customClass="OrderFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="426" height="174"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXn-zd-7Va">
+                    <rect key="frame" x="20" y="87" width="100" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="gnc-Eq-f9T"/>
+                        <constraint firstAttribute="width" constant="100" id="kiX-vi-hkA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNz-JP-210">
+                    <rect key="frame" x="20" y="107" width="386" height="43"/>
+                    <string key="text">1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。
+2.如有疑问，请致电3008138666联系客服。</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-y4-kac">
+                    <rect key="frame" x="20" y="29" width="386" height="42"/>
+                    <color key="backgroundColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="nlN-Kg-cw6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="下一步">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="nextStepAction:" destination="f0V-99-sJp" eventType="touchUpInside" id="35i-7s-mYz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nNz-JP-210" secondAttribute="trailing" constant="20" id="6gA-W4-Kbg"/>
+                <constraint firstItem="b7l-y4-kac" firstAttribute="top" secondItem="f0V-99-sJp" secondAttribute="top" constant="30" id="Hhi-AS-7eF"/>
+                <constraint firstItem="nNz-JP-210" firstAttribute="leading" secondItem="f0V-99-sJp" secondAttribute="leading" constant="20" id="L6A-0b-V5k"/>
+                <constraint firstItem="nNz-JP-210" firstAttribute="top" secondItem="XXn-zd-7Va" secondAttribute="bottom" id="OG9-Ey-HDr"/>
+                <constraint firstItem="b7l-y4-kac" firstAttribute="leading" secondItem="f0V-99-sJp" secondAttribute="leading" constant="20" id="PuY-OW-dGS"/>
+                <constraint firstItem="XXn-zd-7Va" firstAttribute="leading" secondItem="f0V-99-sJp" secondAttribute="leading" constant="20" id="QQU-K4-raH"/>
+                <constraint firstItem="XXn-zd-7Va" firstAttribute="top" secondItem="b7l-y4-kac" secondAttribute="bottom" constant="15" id="V0E-7E-gCA"/>
+                <constraint firstAttribute="trailing" secondItem="b7l-y4-kac" secondAttribute="trailing" constant="20" id="YYz-Sq-Hgg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="481" y="-187"/>
+        </view>
+    </objects>
+</document>

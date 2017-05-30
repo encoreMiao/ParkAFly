@@ -19,5 +19,6 @@
 #import "BAFGlobalMananger.h"
 #import "BAFServerManager.h"
 #import "MJExtension.h"
+#import "UIColor+HexColor.h"
 
 #endif

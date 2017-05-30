@@ -11,6 +11,7 @@
 #import "DYMRollingBannerVC.h"
 #import "BAFCenterOrderView.h"
 #import "BAFLoginViewController.h"
+#import "BAFOrderViewController.h"
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate>
 @property (nonatomic, weak) IBOutlet UIButton *showPersonalCenterButton;
@@ -93,32 +94,30 @@
 {
     //nav显示订单列表？还是价格说明？
     DLog(@"nav显示订单列表？还是价格说明？");
+    BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
+    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 - (IBAction)showOrderListNotFromNav:(id)sender
 {
-    //显示订单列表
     DLog(@"显示订单列表");
 }
 
 - (IBAction)orderParkCar:(id)sender
 {
-    //预约停车
     DLog(@"预约停车");
-    BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
-    [self.navigationController pushViewController:loginVC animated:YES];
+    BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
+    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 - (IBAction)parkingIntroduction:(id)sender
 {
-    //车场介绍
     DLog(@"车场介绍");
 }
 
 #pragma mark - BAFCenterOrderViewDelegate
 - (void)showOrderDetail:(id)sender
 {
-    //查看正在进行的订单详细信息
     DLog(@"查看正在进行的订单详细信息");
 }
 @end

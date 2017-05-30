@@ -22,6 +22,25 @@
 		0001CDF11ED08135000889CE /* BAFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0001CDEF1ED08135000889CE /* BAFLoginViewController.m */; };
 		0001CDF21ED08135000889CE /* BAFLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0001CDF01ED08135000889CE /* BAFLoginViewController.xib */; };
 		0001CDF61ED08959000889CE /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 0001CDF51ED08959000889CE /* UIImage+Color.m */; };
+		0020933B1EDBDBDE00C26176 /* BAFOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093391EDBDBDE00C26176 /* BAFOrderViewController.m */; };
+		0020933C1EDBDBDE00C26176 /* BAFOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0020933A1EDBDBDE00C26176 /* BAFOrderViewController.xib */; };
+		002093411EDBE6FC00C26176 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0020933F1EDBE6FB00C26176 /* OrderTableViewCell.m */; };
+		002093421EDBE6FC00C26176 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002093401EDBE6FB00C26176 /* OrderTableViewCell.xib */; };
+		002093461EDBE80C00C26176 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093451EDBE80C00C26176 /* UIColor+HexColor.m */; };
+		002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093481EDBF89A00C26176 /* OrderFooterView.m */; };
+		0020934D1EDBFBA600C26176 /* BAFOrderServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0020934B1EDBFBA600C26176 /* BAFOrderServiceViewController.m */; };
+		0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0020934C1EDBFBA600C26176 /* BAFOrderServiceViewController.xib */; };
+		002093511EDC29DC00C26176 /* OrderServiceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093501EDC29DC00C26176 /* OrderServiceHeaderView.m */; };
+		002093551EDC343100C26176 /* OrderServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093531EDC343100C26176 /* OrderServiceTableViewCell.m */; };
+		002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002093541EDC343100C26176 /* OrderServiceTableViewCell.xib */; };
+		0020935A1EDC4B1700C26176 /* BAFOrderConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093581EDC4B1700C26176 /* BAFOrderConfirmViewController.m */; };
+		0020935B1EDC4B1700C26176 /* BAFOrderConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002093591EDC4B1700C26176 /* BAFOrderConfirmViewController.xib */; };
+		0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0020935D1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m */; };
+		002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0020935E1EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib */; };
+		002093641EDC501600C26176 /* ServiceConfirmTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093621EDC501600C26176 /* ServiceConfirmTableViewCell.m */; };
+		002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002093631EDC501600C26176 /* ServiceConfirmTableViewCell.xib */; };
+		002093691EDD2CE300C26176 /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002093671EDD2CE300C26176 /* SuccessViewController.m */; };
+		0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002093681EDD2CE300C26176 /* SuccessViewController.xib */; };
 		00214B201ECFD0D500FF6FDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00214B1F1ECFD0D500FF6FDE /* Assets.xcassets */; };
 		00214B381ECFDAC100FF6FDE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00214B221ECFDAC100FF6FDE /* Info.plist */; };
 		00214B391ECFDAC100FF6FDE /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 00214B251ECFDAC100FF6FDE /* MJExtensionConst.m */; };
@@ -124,6 +143,36 @@
 		0001CDF01ED08135000889CE /* BAFLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BAFLoginViewController.xib; sourceTree = "<group>"; };
 		0001CDF41ED08959000889CE /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		0001CDF51ED08959000889CE /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		002093381EDBDBDE00C26176 /* BAFOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFOrderViewController.h; sourceTree = "<group>"; };
+		002093391EDBDBDE00C26176 /* BAFOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFOrderViewController.m; sourceTree = "<group>"; };
+		0020933A1EDBDBDE00C26176 /* BAFOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BAFOrderViewController.xib; sourceTree = "<group>"; };
+		0020933E1EDBE6FB00C26176 /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
+		0020933F1EDBE6FB00C26176 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
+		002093401EDBE6FB00C26176 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
+		002093441EDBE80C00C26176 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
+		002093451EDBE80C00C26176 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
+		002093471EDBF89A00C26176 /* OrderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFooterView.h; sourceTree = "<group>"; };
+		002093481EDBF89A00C26176 /* OrderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFooterView.m; sourceTree = "<group>"; };
+		0020934A1EDBFBA600C26176 /* BAFOrderServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFOrderServiceViewController.h; sourceTree = "<group>"; };
+		0020934B1EDBFBA600C26176 /* BAFOrderServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFOrderServiceViewController.m; sourceTree = "<group>"; };
+		0020934C1EDBFBA600C26176 /* BAFOrderServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BAFOrderServiceViewController.xib; sourceTree = "<group>"; };
+		0020934F1EDC29DC00C26176 /* OrderServiceHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderServiceHeaderView.h; sourceTree = "<group>"; };
+		002093501EDC29DC00C26176 /* OrderServiceHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderServiceHeaderView.m; sourceTree = "<group>"; };
+		002093521EDC343100C26176 /* OrderServiceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderServiceTableViewCell.h; sourceTree = "<group>"; };
+		002093531EDC343100C26176 /* OrderServiceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderServiceTableViewCell.m; sourceTree = "<group>"; };
+		002093541EDC343100C26176 /* OrderServiceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderServiceTableViewCell.xib; sourceTree = "<group>"; };
+		002093571EDC4B1700C26176 /* BAFOrderConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFOrderConfirmViewController.h; sourceTree = "<group>"; };
+		002093581EDC4B1700C26176 /* BAFOrderConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFOrderConfirmViewController.m; sourceTree = "<group>"; };
+		002093591EDC4B1700C26176 /* BAFOrderConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BAFOrderConfirmViewController.xib; sourceTree = "<group>"; };
+		0020935C1EDC4FEC00C26176 /* OrderConfirmTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderConfirmTableViewCell.h; sourceTree = "<group>"; };
+		0020935D1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderConfirmTableViewCell.m; sourceTree = "<group>"; };
+		0020935E1EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderConfirmTableViewCell.xib; sourceTree = "<group>"; };
+		002093611EDC501600C26176 /* ServiceConfirmTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceConfirmTableViewCell.h; sourceTree = "<group>"; };
+		002093621EDC501600C26176 /* ServiceConfirmTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceConfirmTableViewCell.m; sourceTree = "<group>"; };
+		002093631EDC501600C26176 /* ServiceConfirmTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceConfirmTableViewCell.xib; sourceTree = "<group>"; };
+		002093661EDD2CE300C26176 /* SuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
+		002093671EDD2CE300C26176 /* SuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
+		002093681EDD2CE300C26176 /* SuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessViewController.xib; sourceTree = "<group>"; };
 		00214B1F1ECFD0D500FF6FDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00214B221ECFDAC100FF6FDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00214B231ECFDAC100FF6FDE /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
@@ -343,6 +392,58 @@
 			path = UIImageCategory;
 			sourceTree = "<group>";
 		};
+		002093371EDBDBBE00C26176 /* OrderVC */ = {
+			isa = PBXGroup;
+			children = (
+				0020933D1EDBE6E300C26176 /* view */,
+				002093381EDBDBDE00C26176 /* BAFOrderViewController.h */,
+				002093391EDBDBDE00C26176 /* BAFOrderViewController.m */,
+				0020933A1EDBDBDE00C26176 /* BAFOrderViewController.xib */,
+				0020934A1EDBFBA600C26176 /* BAFOrderServiceViewController.h */,
+				0020934B1EDBFBA600C26176 /* BAFOrderServiceViewController.m */,
+				0020934C1EDBFBA600C26176 /* BAFOrderServiceViewController.xib */,
+				002093571EDC4B1700C26176 /* BAFOrderConfirmViewController.h */,
+				002093581EDC4B1700C26176 /* BAFOrderConfirmViewController.m */,
+				002093591EDC4B1700C26176 /* BAFOrderConfirmViewController.xib */,
+				002093661EDD2CE300C26176 /* SuccessViewController.h */,
+				002093671EDD2CE300C26176 /* SuccessViewController.m */,
+				002093681EDD2CE300C26176 /* SuccessViewController.xib */,
+			);
+			path = OrderVC;
+			sourceTree = "<group>";
+		};
+		0020933D1EDBE6E300C26176 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				0020933E1EDBE6FB00C26176 /* OrderTableViewCell.h */,
+				0020933F1EDBE6FB00C26176 /* OrderTableViewCell.m */,
+				002093401EDBE6FB00C26176 /* OrderTableViewCell.xib */,
+				002093521EDC343100C26176 /* OrderServiceTableViewCell.h */,
+				002093531EDC343100C26176 /* OrderServiceTableViewCell.m */,
+				002093541EDC343100C26176 /* OrderServiceTableViewCell.xib */,
+				002093471EDBF89A00C26176 /* OrderFooterView.h */,
+				002093481EDBF89A00C26176 /* OrderFooterView.m */,
+				0020934F1EDC29DC00C26176 /* OrderServiceHeaderView.h */,
+				002093501EDC29DC00C26176 /* OrderServiceHeaderView.m */,
+				0020935C1EDC4FEC00C26176 /* OrderConfirmTableViewCell.h */,
+				0020935D1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m */,
+				0020935E1EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib */,
+				002093611EDC501600C26176 /* ServiceConfirmTableViewCell.h */,
+				002093621EDC501600C26176 /* ServiceConfirmTableViewCell.m */,
+				002093631EDC501600C26176 /* ServiceConfirmTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		002093431EDBE7E800C26176 /* UIColorCategory */ = {
+			isa = PBXGroup;
+			children = (
+				002093441EDBE80C00C26176 /* UIColor+HexColor.h */,
+				002093451EDBE80C00C26176 /* UIColor+HexColor.m */,
+			);
+			path = UIColorCategory;
+			sourceTree = "<group>";
+		};
 		00214B211ECFDAC100FF6FDE /* MJExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +496,7 @@
 		0022A2201EB026CC00A920D6 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				002093431EDBE7E800C26176 /* UIColorCategory */,
 				0001CDF31ED08942000889CE /* UIImageCategory */,
 				007A7A131EB7194C0070406B /* NSDictionaryCategory */,
 				0022A2211EB026CC00A920D6 /* NSStringCategory */,
@@ -712,6 +814,7 @@
 		00EC0F851EBF39DA00CDDEA8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				002093371EDBDBBE00C26176 /* OrderVC */,
 				0001CDED1ED08110000889CE /* LoginVC */,
 				0001CDC81ED05130000889CE /* CenterVC_MainVC */,
 				00214B471ECFEE3E00FF6FDE /* LeftVC_PersonalVC */,
@@ -856,11 +959,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
+				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
+				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
+				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
+				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
+				0020935B1EDC4B1700C26176 /* BAFOrderConfirmViewController.xib in Resources */,
 				0001CDCD1ED05130000889CE /* BAFCenterViewController.xib in Resources */,
 				00214B381ECFDAC100FF6FDE /* Info.plist in Resources */,
 				005E85D41E97924600115CAD /* LaunchScreen.storyboard in Resources */,
 				0001CDF21ED08135000889CE /* BAFLoginViewController.xib in Resources */,
+				0020933C1EDBDBDE00C26176 /* BAFOrderViewController.xib in Resources */,
+				002093421EDBE6FC00C26176 /* OrderTableViewCell.xib in Resources */,
 				00214B201ECFD0D500FF6FDE /* Assets.xcassets in Resources */,
 				005E85CF1E97924600115CAD /* Main.storyboard in Resources */,
 				0001CDD21ED05158000889CE /* BAFLeftViewController.xib in Resources */,
@@ -947,21 +1058,26 @@
 				0001CDE71ED060DF000889CE /* DYMBannerVC.m in Sources */,
 				007A79FC1EB6C4C50070406B /* DevelopEnvironment.m in Sources */,
 				0001CDDD1ED05179000889CE /* PersonalCenterTableViewCell.m in Sources */,
+				002093691EDD2CE300C26176 /* SuccessViewController.m in Sources */,
 				007A7A161EB719670070406B /* NSMutableDictionary+Valuation.m in Sources */,
 				007A7A0C1EB6DC1C0070406B /* SHNetNotificationCenter.m in Sources */,
 				00214B401ECFDAC100FF6FDE /* NSObject+MJKeyValue.m in Sources */,
+				002093461EDBE80C00C26176 /* UIColor+HexColor.m in Sources */,
 				005E85C91E97924600115CAD /* AppDelegate.m in Sources */,
 				007A7A111EB6DE950070406B /* SHApplicationManagerCenter.m in Sources */,
 				0022A2241EB0273500A920D6 /* NSString+URL.m in Sources */,
 				00214B421ECFDAC100FF6FDE /* NSString+MJExtension.m in Sources */,
 				00D13ED81EB4C75A00B0D766 /* BAFUserInfo.m in Sources */,
 				00214B521ECFF78900FF6FDE /* PersonalCenterCellShowInfo.m in Sources */,
+				0020934D1EDBFBA600C26176 /* BAFOrderServiceViewController.m in Sources */,
 				005E85C61E97924600115CAD /* main.m in Sources */,
 				00214B391ECFDAC100FF6FDE /* MJExtensionConst.m in Sources */,
+				0020935A1EDC4B1700C26176 /* BAFOrderConfirmViewController.m in Sources */,
 				005074481EBB097000A6E8B1 /* HRLParkRequest.m in Sources */,
 				0001CDEC1ED06C1A000889CE /* BAFCenterOrderView.m in Sources */,
 				007A79F91EB6C41F0070406B /* BaseEnvironment.m in Sources */,
 				0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */,
+				002093411EDBE6FC00C26176 /* OrderTableViewCell.m in Sources */,
 				0022A2271EB0279F00A920D6 /* NSString+Null.m in Sources */,
 				00214B3D1ECFDAC100FF6FDE /* MJPropertyType.m in Sources */,
 				00214B451ECFE1CB00FF6FDE /* BAFBaseViewController.m in Sources */,
@@ -971,11 +1087,15 @@
 				00A2D5231EC05C7000B8F8BD /* BAFBaseNavigationViewController.m in Sources */,
 				005074621EBE9E3D00A6E8B1 /* BAFCouponInfo.m in Sources */,
 				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
+				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				0001CDE81ED060DF000889CE /* DYMRollingBannerVC.m in Sources */,
 				0001CDE61ED060DF000889CE /* DYMBannerPool.m in Sources */,
+				0020933B1EDBDBDE00C26176 /* BAFOrderViewController.m in Sources */,
 				00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */,
+				002093551EDC343100C26176 /* OrderServiceTableViewCell.m in Sources */,
 				0001CDD11ED05158000889CE /* BAFLeftViewController.m in Sources */,
+				002093511EDC29DC00C26176 /* OrderServiceHeaderView.m in Sources */,
 				0001CDDC1ED05179000889CE /* PersonalCenterHeaderView.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
 				00214B3A1ECFDAC100FF6FDE /* MJFoundation.m in Sources */,
@@ -983,6 +1103,7 @@
 				0001CDDB1ED05179000889CE /* PersonalCenterFooterView.m in Sources */,
 				00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */,
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
+				002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */,
 				00214B411ECFDAC100FF6FDE /* NSObject+MJProperty.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
 				007A7A051EB6C7500070406B /* BAFServerManager.m in Sources */,
@@ -991,6 +1112,7 @@
 				00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */,
 				0022A22D1EB0339A00A920D6 /* NLRequestMessageManager.m in Sources */,
 				005074501EBB2DF100A6E8B1 /* NSString+ImageExtName.m in Sources */,
+				002093641EDC501600C26176 /* ServiceConfirmTableViewCell.m in Sources */,
 				007A79FF1EB6C5490070406B /* DistributedEnvironment.m in Sources */,
 				00214B3F1ECFDAC100FF6FDE /* NSObject+MJCoding.m in Sources */,
 				0001CDF61ED08959000889CE /* UIImage+Color.m in Sources */,

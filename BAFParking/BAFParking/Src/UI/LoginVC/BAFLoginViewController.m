@@ -27,19 +27,16 @@
     self.navigationController.navigationBar.translucent = NO;
     
     [self setNavigationTitle:@"登录"];
-//    self.navigationItem.hidesBackButton = YES;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
-    [self setNavigationRightButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(rightButtonMehotd:)];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)backMethod:(id)sender
 {
-    
+    [self.navigationController  popToRootViewControllerAnimated:YES];
 }
 
 - (void)rightButtonMehotd:(id)sender{
