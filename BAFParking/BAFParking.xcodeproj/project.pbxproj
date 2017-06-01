@@ -88,6 +88,7 @@
 		007A7A161EB719670070406B /* NSMutableDictionary+Valuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A151EB719670070406B /* NSMutableDictionary+Valuation.m */; };
 		007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A181EB7245B0070406B /* NSString+HashMD5.m */; };
 		007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A7A1D1EB736D70070406B /* HRLogicManager.m */; };
+		0093D3AA1EE052A00035987C /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 0093D3A91EE052A00035987C /* UIView+Toast.m */; };
 		00A2D5231EC05C7000B8F8BD /* BAFBaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A2D5221EC05C7000B8F8BD /* BAFBaseNavigationViewController.m */; };
 		00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C8546A1EAF785600EAD557 /* NLReqestMessage.m */; };
 		00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C8558C1EBAF63200157DA8 /* HRLPersonalCenterRequest.m */; };
@@ -274,6 +275,8 @@
 		007A7A1B1EB736C70070406B /* HRLogicManagerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLogicManagerInterface.h; sourceTree = "<group>"; };
 		007A7A1C1EB736D70070406B /* HRLogicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLogicManager.h; sourceTree = "<group>"; };
 		007A7A1D1EB736D70070406B /* HRLogicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLogicManager.m; sourceTree = "<group>"; };
+		0093D3A81EE052A00035987C /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		0093D3A91EE052A00035987C /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		00A2D5211EC05C7000B8F8BD /* BAFBaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFBaseNavigationViewController.h; sourceTree = "<group>"; };
 		00A2D5221EC05C7000B8F8BD /* BAFBaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFBaseNavigationViewController.m; sourceTree = "<group>"; };
 		00C854351EA742C500EAD557 /* BAF-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BAF-Prefix.pch"; sourceTree = "<group>"; };
@@ -645,6 +648,15 @@
 			path = NSDictionaryCategory;
 			sourceTree = "<group>";
 		};
+		0093D3A71EE052A00035987C /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				0093D3A81EE052A00035987C /* UIView+Toast.h */,
+				0093D3A91EE052A00035987C /* UIView+Toast.m */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
 		00A2D5201EC05C4D00B8F8BD /* BaseVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,6 +838,7 @@
 		00EC0F861EC00BC300CDDEA8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				0093D3A71EE052A00035987C /* Toast */,
 				0001CDDF1ED060DF000889CE /* DYMRollingBanner */,
 				00214B211ECFDAC100FF6FDE /* MJExtension */,
 			);
@@ -1047,6 +1060,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0093D3AA1EE052A00035987C /* UIView+Toast.m in Sources */,
 				005E85CC1E97924600115CAD /* ViewController.m in Sources */,
 				00214B3E1ECFDAC100FF6FDE /* NSObject+MJClass.m in Sources */,
 				0050745F1EBE9A9500A6E8B1 /* BAFCommentInfo.m in Sources */,

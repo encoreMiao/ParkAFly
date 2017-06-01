@@ -55,7 +55,7 @@
 #define RIGHT(view) (view.frame.origin.x + view.frame.size.width)
 
 
-
+#define BAFAppdelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
 //***************************程序中的通知定义*******************************************//
 #define NotifyUserInfoChange  @"NotifyUserInfoChange"  //用户信息更改

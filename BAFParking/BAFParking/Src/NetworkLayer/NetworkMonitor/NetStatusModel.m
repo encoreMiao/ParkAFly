@@ -38,5 +38,21 @@
     [manager startMonitoring];
 }
 
+- (BOOL)checkNetwork
+{
+    switch ([[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus]) {
+        case AFNetworkReachabilityStatusUnknown:
+        case AFNetworkReachabilityStatusNotReachable:
+            return NO;
+            break;
+        case AFNetworkReachabilityStatusReachableViaWWAN:
+        case AFNetworkReachabilityStatusReachableViaWiFi:
+            return NO;
+            break;
+        default:
+            break;
+    }
+}
+
 
 @end

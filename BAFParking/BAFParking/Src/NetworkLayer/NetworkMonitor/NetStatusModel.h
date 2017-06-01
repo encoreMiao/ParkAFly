@@ -13,5 +13,5 @@
 + (id)shareInstance;
 //设置网络状态监听
 - (void)setNetworkStatusMonitor;
-
+- (BOOL)checkNetwork;
 @end

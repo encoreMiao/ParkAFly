@@ -8,8 +8,14 @@
 
 #import "BAFBaseViewController.h"
 #import "UIImage+Color.h"
+#import "MBProgressHUD.h"
+#import "UIView+Toast.h"
+#import "AppDelegate.h"
 
 @interface BAFBaseViewController ()
+{
+    MBProgressHUD* tipsView;
+}
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *rightButton;
@@ -92,6 +98,38 @@
         _rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _rightButton;
+}
+
+#pragma mark-显示提示语
+- (void)showTipsInWindow:(NSString*)msg {
+    if ((![msg isEqualToString:@""])||(msg != nil)) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            tipsView=[MBProgressHUD showHUDAddedTo:[BAFAppdelegate window] animated:YES];
+            tipsView.mode =MBProgressHUDModeText;
+            tipsView.label.text = msg;
+            [tipsView setYOffset: [BAFAppdelegate window].center.y/2];
+            tipsView.removeFromSuperViewOnHide = YES;
+            [tipsView hideAnimated:YES afterDelay:2.5];
+        });
+    }
+}
+
+-(void)showTipsMsgWith:(NSString *)msg {
+    [self showTipsInView:[BAFAppdelegate window] message:msg];
+}
+
+-(void)showTipsMsgWith:(NSString *)msg offset:(CGFloat)offset{
+    [self showTipsInView:[BAFAppdelegate window] message:msg offset:offset];
+}
+
+- (void)showTipsInView:(UIView*)view message:(NSString*)msg {
+    [self showTipsInView:view message:msg offset:100];
+}
+- (void)showTipsInView:(UIView*)view message:(NSString*)msg offset:(CGFloat)offset {
+    if ((![msg isEqualToString:@""])||(msg != nil)) {
+        CSToastStyle *toastStyle = [CSToastManager sharedStyle];
+        [self.view makeToast:msg duration:2.5 position:@(offset) style:toastStyle];
+    }
 }
 
 @end

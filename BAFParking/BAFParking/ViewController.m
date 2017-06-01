@@ -204,9 +204,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - NetworkRequest
 - (void)requestMethod
 {
-//    id <HRLLoginInterface> loginReq = [[HRLogicManager sharedInstance] getLoginReqest];
-//    [loginReq msgCodeRequestWithNumberIndex:kRequestNumberIndexMsgCode delegte:self phone:@"18511833913"];
-//    [loginReq loginRequestWithNumberIndex:kRequestNumberIndexLogin delegte:self phone:@"18511833913" msgCode:@"436845"];
     
     
     

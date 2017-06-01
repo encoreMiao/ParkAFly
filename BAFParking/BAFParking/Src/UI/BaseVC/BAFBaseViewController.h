@@ -14,4 +14,10 @@
 - (void)setNavigationRightButtonWithText:(NSString *)text method:(SEL)method;
 - (void)setNavigationRightButtonWithImage:(UIImage *)image method:(SEL)method;
 - (void)setNavigationTitle:(NSString *)title;
+
+- (void)showTipsInWindow:(NSString*)msg;
+-(void)showTipsMsgWith:(NSString *)msg;
+-(void)showTipsMsgWith:(NSString *)msg offset:(CGFloat)offset;
+- (void)showTipsInView:(UIView*)view message:(NSString*)msg;
+- (void)showTipsInView:(UIView*)view message:(NSString*)msg offset:(CGFloat)offset;
 @end
