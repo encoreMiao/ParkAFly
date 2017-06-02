@@ -12,25 +12,24 @@
 #import "HRLogicManager.h"
 #import "HRLLoginInterface.h"
 #import "NetStatusModel.h"
-
+#import "NSString+Null.h"
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexMsgCode,
     kRequestNumberIndexLogin,
 };
 
-
-@interface BAFLoginViewController ()<IUICallbackInterface>
+@interface BAFLoginViewController ()<IUICallbackInterface,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField *codeTF;
 @end
-
 
 @implementation BAFLoginViewController
 #pragma mark - lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;//点击背景收回键盘
+    [self.phoneTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,10 +65,40 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 }
 
 - (IBAction)getCode:(id)sender {
-    //if ([[NetStatusModel shareInstance] checkNetwork]) {
+    if ([[NetStatusModel shareInstance] checkNetwork]) {
         [self showTipsInView:self.view message:@"当前无网络，请稍后再试" offset:self.view.center.x+100];
         return;
-    //}
+    }
+    [self verifyCode];
+}
+
+- (void)verifyCode
+{
+    NSUInteger phoneLength = [self.phoneTF.text length];
+//    NSUInteger passCodeLength = [self.codeTF.text length];
+    if (phoneLength<11) {
+        NSString *info = @"请输入正确的手机号码";
+        [self showTipsInView:self.view message:info offset:self.view.center.x+100];
+    }
+//    else if (passCodeLength==0) {
+//        NSString *info = @"请输入密码";
+//        [self showTipsInView:self.view message:info offset:self.view.center.x+100];
+//    }
+    else
+    {
+        [self loginRequestWithPhoneNumber:self.phoneTF.text codeNumber:self.codeTF.text];
+    }
+}
+
+#pragma mark - UIControlEventEditingChangedMethods
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField == self.phoneTF) {
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }
+    
 }
 
 
