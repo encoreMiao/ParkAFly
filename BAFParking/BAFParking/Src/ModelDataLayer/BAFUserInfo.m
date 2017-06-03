@@ -9,5 +9,5 @@
 #import "BAFUserInfo.h"
 
 @implementation BAFUserInfo
-
+MJExtensionCodingImplementation
 @end

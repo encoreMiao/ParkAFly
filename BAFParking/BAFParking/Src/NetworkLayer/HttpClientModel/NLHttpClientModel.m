@@ -76,10 +76,10 @@ BOOL isOpenHttpsSSL()
     }
     
     // 加上这行代码，https ssl 验证。
-    if(openHttpsSSL)
-    {
-        [manager setSecurityPolicy:[self customSecurityPolicy]];
-    }
+//    if(openHttpsSSL)
+//    {
+//        [manager setSecurityPolicy:[self customSecurityPolicy]];
+//    }
     
     NSURLSessionDataTask *task = [manager GET:msg.url parameters:msg.parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         //

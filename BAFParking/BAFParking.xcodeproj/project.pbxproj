@@ -98,6 +98,7 @@
 		00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F31EB4BDEC00A4FF73 /* LLBaseRequest.m */; };
 		00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F61EB4BE6900A4FF73 /* LLErrorOfRequest.m */; };
 		3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */; };
+		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,6 +301,8 @@
 		00E3B2FA1EB4C2A400A4FF73 /* IUCallBackInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUCallBackInterface.h; sourceTree = "<group>"; };
 		3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAFParking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.release.xcconfig"; sourceTree = "<group>"; };
+		8DB4F88E1EE297F9006ACDEA /* BAFUserModelManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFUserModelManger.h; sourceTree = "<group>"; };
+		8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFUserModelManger.m; sourceTree = "<group>"; };
 		F3CE4BA856D06DE9C2D3CF10 /* Pods-BAFParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -734,6 +737,7 @@
 		00D13ED51EB4C72700B0D766 /* ModelDataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				8DB4F88D1EE297F9006ACDEA /* ModalManager */,
 				00214B501ECFF78900FF6FDE /* PersonalCenterCellShowInfo.h */,
 				00214B511ECFF78900FF6FDE /* PersonalCenterCellShowInfo.m */,
 				00D13ED61EB4C75A00B0D766 /* BAFUserInfo.h */,
@@ -852,6 +856,15 @@
 				3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8DB4F88D1EE297F9006ACDEA /* ModalManager */ = {
+			isa = PBXGroup;
+			children = (
+				8DB4F88E1EE297F9006ACDEA /* BAFUserModelManger.h */,
+				8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */,
+			);
+			path = ModalManager;
 			sourceTree = "<group>";
 		};
 		E94D90F6DF24A447D3C41167 /* Frameworks */ = {
@@ -1119,6 +1132,7 @@
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
 				002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */,
 				00214B411ECFDAC100FF6FDE /* NSObject+MJProperty.m in Sources */,
+				8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
 				007A7A051EB6C7500070406B /* BAFServerManager.m in Sources */,
 				005074561EBC211000A6E8B1 /* BAFClientPatrInfo.m in Sources */,

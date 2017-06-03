@@ -8,31 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BAFUserInfo : NSObject
-//"client": {
-//    "clientid": "1961",
-//    "ctel": "18911633129",
-//    "cname": "吕测试",
-//    "csex": "1", //用户性别(0.未知，1.男，2 女)
-//    "carnum": "京 A12349", //车牌号
-//    "createtime": "1459561755",
-//    "wechat_id": "oJmLFt5lIEEi-tStIFO6ACgeGB88",
-//    "status": "0",
-//    "avatar": "", //头像地址
-//    "caddr": "1", //常驻城市 id
-//    "ctype": "1",
-//    "password": "96e79218965eb72c92a549dd5a330112",
-//    "cardid": null,
-//    "did": null,
-//    "account": "32800",//账户余额以分为单位
-//    "brand": "", //品牌
-//    "color": "", //颜色
-//    "cityname": "北京"
-//    "level_id": "2", //会员等级:1.普通会员;2.金牌会员;3.钻石会员
-//    "starttime": "2017-04-12 00:00:00", //开始时间
-//    "endtime": "2017-04-13 23:59:59", //结束时间
-//},
-
+@interface BAFUserInfo : NSObject <NSCoding>
 @property (nonatomic, strong) NSString *clientid;
 @property (nonatomic, strong) NSString *ctel;
 @property (nonatomic, strong) NSString *cname;
@@ -87,3 +63,27 @@
 //    token = YmxnbXJLUTY1bHJ2UzByTFRkQ0REaDByTlNXL0lZK1JqZEFrL3BzZkpDMkdDNkd0ZHZTVFpiNTM4QjgwODI2bmpGWXpYZWZSaDhjbm1ReFoxQUNWQ2V2UE1CcDhqREJqRmQyQ0ZpMnUwZ2M9;
 //};
 //message = ok;
+
+//"client": {
+//    "clientid": "1961",
+//    "ctel": "18911633129",
+//    "cname": "吕测试",
+//    "csex": "1", //用户性别(0.未知，1.男，2 女)
+//    "carnum": "京 A12349", //车牌号
+//    "createtime": "1459561755",
+//    "wechat_id": "oJmLFt5lIEEi-tStIFO6ACgeGB88",
+//    "status": "0",
+//    "avatar": "", //头像地址
+//    "caddr": "1", //常驻城市 id
+//    "ctype": "1",
+//    "password": "96e79218965eb72c92a549dd5a330112",
+//    "cardid": null,
+//    "did": null,
+//    "account": "32800",//账户余额以分为单位
+//    "brand": "", //品牌
+//    "color": "", //颜色
+//    "cityname": "北京"
+//    "level_id": "2", //会员等级:1.普通会员;2.金牌会员;3.钻石会员
+//    "starttime": "2017-04-12 00:00:00", //开始时间
+//    "endtime": "2017-04-13 23:59:59", //结束时间
+//},
