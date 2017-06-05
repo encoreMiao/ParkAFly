@@ -8,7 +8,7 @@
 
 #import "OrderTableViewCell.h"
 
-@interface OrderTableViewCell()
+@interface OrderTableViewCell()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *orderTypeImageView;
 @property (weak, nonatomic) IBOutlet UITextField *orderTF;
 @end
@@ -17,6 +17,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.orderTF.delegate = self;
+    [self.orderTF addTarget:self action:@selector(orderCellClicked:) forControlEvents:UIControlEventTouchDown];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -25,6 +28,7 @@
 
 - (void)setType:(OrderTableViewCellType)type
 {
+    _type = type;
     switch (type) {
         case kOrderTableViewCellTypeGoTime:
             self.orderTypeImageView.image = [UIImage imageNamed:@"list_ip_time1"];
@@ -50,6 +54,19 @@
             self.orderTypeImageView.image = [UIImage imageNamed:@"list_ip_tongx"];
             self.orderTF.placeholder = @"请选择通行人数";
             break;
+    }
+}
+
+#pragma mark - textfieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return NO;
+}
+
+- (void)orderCellClicked:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(orderCellClickedDelegate:)]) {
+        [self.delegate orderCellClickedDelegate:self];
     }
 }
 

@@ -14,7 +14,7 @@
 
 #define OrderTableViewCellIdentifier    @"OrderTableViewCellIdentifier"
 
-@interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate>
+@interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet OrderFooterView *footerView;
 @property (nonatomic, strong) IBOutlet UITableView  *mainTableView;
 @end
@@ -119,6 +119,9 @@
     OrderTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderTableViewCellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderTableViewCell" owner:nil options:nil] firstObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
+        
     }
     NSUInteger section = indexPath.section;
     NSUInteger row = indexPath.row;
@@ -158,4 +161,40 @@
     [self.navigationController pushViewController:orderServiceVC animated:YES];
 }
 
+#pragma mark - OrderTableViewCellDelegate
+- (void)orderCellClickedDelegate:(OrderTableViewCell *)cell
+{
+    switch (cell.type) {
+        case kOrderTableViewCellTypeGoTime:
+        {
+            NSLog(@"gotime");
+        }
+            break;
+        case kOrderTableViewCellTypeGoParkTerminal:
+        {
+            NSLog(@"goparkterminal");
+        }
+            break;
+        case kOrderTableViewCellTypePark:
+        {
+            NSLog(@"park");
+        }
+            break;
+        case kOrderTableViewCellTypeBackTime:
+        {
+            NSLog(@"backtime");
+        }
+            break;
+        case kOrderTableViewCellTypeBackTerminal:
+        {
+            NSLog(@"backtermianl");
+        }
+            break;
+        case kOrderTableViewCellTypeCompany:
+        {
+            NSLog(@"typecompany");
+        }
+            break;
+    }
+}
 @end
