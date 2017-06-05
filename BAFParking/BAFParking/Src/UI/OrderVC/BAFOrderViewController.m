@@ -10,6 +10,7 @@
 #import "OrderTableViewCell.h"
 #import "OrderFooterView.h"
 #import "BAFOrderServiceViewController.h"
+#import "PopViewController.h"
 
 #define OrderTableViewCellIdentifier    @"OrderTableViewCellIdentifier"
 
@@ -38,11 +39,24 @@
     
     [self setNavigationTitle:@"预约停车"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
+    [self setNavigationRightButtonWithText:@"城市" method:@selector(rightBtnClicked:)];
 }
 
 - (void)backMethod:(id)sender
 {
     [self.navigationController  popToRootViewControllerAnimated:YES];
+}
+
+- (void)rightBtnClicked:(id)sender
+{
+    PopViewController *popView = [[PopViewController alloc] init];
+    popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    self.definesPresentationContext = YES;
+//    webView.myWebView.mj_h = screenHeight;
+    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
+    [self presentViewController:popView animated:NO completion:nil];
+
 }
 
 #pragma mark - UITableViewDelegate

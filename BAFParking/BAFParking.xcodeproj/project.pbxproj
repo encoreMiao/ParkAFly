@@ -98,6 +98,8 @@
 		00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F31EB4BDEC00A4FF73 /* LLBaseRequest.m */; };
 		00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F61EB4BE6900A4FF73 /* LLErrorOfRequest.m */; };
 		3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */; };
+		8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F21EE42DCD0066289C /* BAFWebViewController.m */; };
+		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
 /* End PBXBuildFile section */
 
@@ -301,6 +303,10 @@
 		00E3B2FA1EB4C2A400A4FF73 /* IUCallBackInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUCallBackInterface.h; sourceTree = "<group>"; };
 		3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAFParking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.release.xcconfig"; sourceTree = "<group>"; };
+		8D6058F11EE42DCD0066289C /* BAFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFWebViewController.h; sourceTree = "<group>"; };
+		8D6058F21EE42DCD0066289C /* BAFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFWebViewController.m; sourceTree = "<group>"; };
+		8D6058F41EE438C30066289C /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
+		8D6058F51EE438C30066289C /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
 		8DB4F88E1EE297F9006ACDEA /* BAFUserModelManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFUserModelManger.h; sourceTree = "<group>"; };
 		8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFUserModelManger.m; sourceTree = "<group>"; };
 		F3CE4BA856D06DE9C2D3CF10 /* Pods-BAFParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.debug.xcconfig"; sourceTree = "<group>"; };
@@ -414,6 +420,8 @@
 				002093661EDD2CE300C26176 /* SuccessViewController.h */,
 				002093671EDD2CE300C26176 /* SuccessViewController.m */,
 				002093681EDD2CE300C26176 /* SuccessViewController.xib */,
+				8D6058F41EE438C30066289C /* PopViewController.h */,
+				8D6058F51EE438C30066289C /* PopViewController.m */,
 			);
 			path = OrderVC;
 			sourceTree = "<group>";
@@ -830,6 +838,7 @@
 		00EC0F851EBF39DA00CDDEA8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8D6058F01EE42DAB0066289C /* webVC */,
 				002093371EDBDBBE00C26176 /* OrderVC */,
 				0001CDED1ED08110000889CE /* LoginVC */,
 				0001CDC81ED05130000889CE /* CenterVC_MainVC */,
@@ -856,6 +865,15 @@
 				3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8D6058F01EE42DAB0066289C /* webVC */ = {
+			isa = PBXGroup;
+			children = (
+				8D6058F11EE42DCD0066289C /* BAFWebViewController.h */,
+				8D6058F21EE42DCD0066289C /* BAFWebViewController.m */,
+			);
+			path = webVC;
 			sourceTree = "<group>";
 		};
 		8DB4F88D1EE297F9006ACDEA /* ModalManager */ = {
@@ -1079,6 +1097,7 @@
 				0050745F1EBE9A9500A6E8B1 /* BAFCommentInfo.m in Sources */,
 				00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */,
 				0001CDF11ED08135000889CE /* BAFLoginViewController.m in Sources */,
+				8D6058F71EE438C30066289C /* PopViewController.m in Sources */,
 				00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */,
 				0001CDCC1ED05130000889CE /* BAFCenterViewController.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
@@ -1114,6 +1133,7 @@
 				00A2D5231EC05C7000B8F8BD /* BAFBaseNavigationViewController.m in Sources */,
 				005074621EBE9E3D00A6E8B1 /* BAFCouponInfo.m in Sources */,
 				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
+				8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */,
 				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				0001CDE81ED060DF000889CE /* DYMRollingBannerVC.m in Sources */,

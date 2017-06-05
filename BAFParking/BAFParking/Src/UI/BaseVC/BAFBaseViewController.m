@@ -93,9 +93,10 @@
 - (UIButton *)rightButton{
     if(!_rightButton){
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_rightButton setFrame:CGRectMake(0, 0, 68, 44)];
-        _rightButton.contentEdgeInsets = UIEdgeInsetsMake(12, -5, 12, 58);
-        _rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_rightButton setFrame:CGRectMake(0, 0, 44, 44)];
+//        _rightButton.contentEdgeInsets = UIEdgeInsetsMake(12, -5, 12, 58);
+        [_rightButton setTitleColor:HexRGB(kBAFColorForTitle) forState:UIControlStateNormal];
+        _rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _rightButton;
 }

@@ -12,6 +12,7 @@
 #import "BAFCenterOrderView.h"
 #import "BAFLoginViewController.h"
 #import "BAFOrderViewController.h"
+#import "BAFWebViewController.h"
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate>
 @property (nonatomic, weak) IBOutlet UIButton *showPersonalCenterButton;
@@ -94,8 +95,13 @@
 {
     //nav显示订单列表？还是价格说明？
     DLog(@"nav显示订单列表？还是价格说明？");
-    BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
-    [self.navigationController pushViewController:loginVC animated:YES];
+//    BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
+//    [self.navigationController pushViewController:loginVC animated:YES];
+    
+    BAFWebViewController  *webview = [[BAFWebViewController alloc]init];
+    [self.navigationController pushViewController:webview animated:YES];
+    [webview loadTargetURL:[NSURL URLWithString:@"http://parknfly.cn/Wap/Index/app_price"] title:@"价格说明"];
+    
 }
 
 - (IBAction)showOrderListNotFromNav:(id)sender
