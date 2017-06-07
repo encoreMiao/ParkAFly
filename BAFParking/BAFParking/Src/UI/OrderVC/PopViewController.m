@@ -14,8 +14,11 @@
 @property (nonatomic, retain) UIView        *headerView;
 @property (nonatomic, retain) UILabel       *popTitleLabel;
 @property (nonatomic, retain) UIButton      *cancelButton;
-
 @property (nonatomic, retain) UILabel       *detailLabel;
+
+
+//时间选择
+@property (nonatomic, retain) UIDatePicker *datePicker;
 @end
 
 @implementation PopViewController
@@ -87,6 +90,12 @@
         {
             self.bgView.frame = CGRectMake(0, screenHeight-300, screenWidth, 300);
             self.popTitleLabel.text = @"请选择通行人数";
+            
+            [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 300-44)];
+            [self.bgView addSubview:self.datePicker];
+            
+            
+            
         }
             break;
         default:
@@ -202,6 +211,85 @@
         _detailLabel.font = [UIFont systemFontOfSize:kBAFFontSizeForDetailText];
     }
     return _detailLabel;
+}
+
+- (UIDatePicker *)datePicker
+{
+    if (!_datePicker) {
+        _datePicker = [[UIDatePicker alloc] init];
+        _datePicker.center = self.view.center;
+        [_datePicker addTarget:self
+                              action:@selector(datePickerDateChanged:)
+                    forControlEvents:UIControlEventValueChanged];
+        NSDate *todayDate = [NSDate date];
+        NSDate *threeMonthsFromToday = [self dateAfterMonths:todayDate gapMonth:3];
+        _datePicker.minimumDate = todayDate;
+        _datePicker.maximumDate = threeMonthsFromToday;
+    }
+    return _datePicker;
+}
+- (void)datePickerDateChanged:(UIDatePicker *)paramDatePicker {
+    if ([paramDatePicker isEqual:self.datePicker]) {
+        NSLog(@"Selected date = %@", _datePicker.date);
+    }
+}
+
+#pragma mark - pravitemethods
+- (NSDate *)dateAfterMonths:(NSDate *)currentDate gapMonth:(NSInteger)gapMonthCount {
+    //获取当年的月份，当月的总天数
+    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitCalendar fromDate:currentDate];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateStyle:NSDateFormatterFullStyle];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    //    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+    //    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    
+    NSString *dateStr = @"";
+    NSInteger endDay = 0;//天
+    NSDate *newDate = [NSDate date];//新的年&月
+    //判断是否是下一年
+    if (components.month+gapMonthCount > 12) {
+        //是下一年
+        dateStr = [NSString stringWithFormat:@"%zd-%zd-01",components.year+(components.month+gapMonthCount)/12,(components.month+gapMonthCount)%12];
+        newDate = [formatter dateFromString:dateStr];
+        //新月份的天数
+        NSInteger newDays = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:newDate].length;
+        if ([self isEndOfTheMonth:currentDate]) {//当前日期处于月末
+            endDay = newDays;
+        } else {
+            endDay = newDays < components.day?newDays:components.day;
+        }
+        dateStr = [NSString stringWithFormat:@"%zd-%zd-%zd",components.year+(components.month+gapMonthCount)/12,(components.month+gapMonthCount)%12,endDay];
+    } else {
+        //依然是当前年份
+        dateStr = [NSString stringWithFormat:@"%zd-%zd-01",components.year,components.month+gapMonthCount];
+        newDate = [formatter dateFromString:dateStr];
+        //新月份的天数
+        NSInteger newDays = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:newDate].length;
+        if ([self isEndOfTheMonth:currentDate]) {//当前日期处于月末
+            endDay = newDays;
+        } else {
+            endDay = newDays < components.day?newDays:components.day;
+        }
+        
+        dateStr = [NSString stringWithFormat:@"%zd-%zd-%zd",components.year,components.month+gapMonthCount,endDay];
+    }
+    
+    newDate = [formatter dateFromString:dateStr];
+    return newDate;
+}
+
+//判断是否是月末
+- (BOOL)isEndOfTheMonth:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    NSInteger daysInMonth = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date].length;
+    NSDateComponents *componets = [calendar components:NSCalendarUnitDay fromDate:date];
+    if (componets.day >= daysInMonth) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

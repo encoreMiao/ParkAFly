@@ -54,7 +54,8 @@
     popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
     self.definesPresentationContext = YES;
 //    webView.myWebView.mj_h = screenHeight;
-    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
+//    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
+    [popView configViewWithData:nil type:kPopViewControllerTypCompany];
     [self presentViewController:popView animated:NO completion:nil];
 
 }
