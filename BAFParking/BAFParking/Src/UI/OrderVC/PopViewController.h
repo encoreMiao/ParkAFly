@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class PopViewController;
 
 typedef NS_ENUM(NSInteger,PopViewControllerType){
     kPopViewControllerTypeTop,//服务说明
@@ -15,7 +16,12 @@ typedef NS_ENUM(NSInteger,PopViewControllerType){
     kPopViewControllerTypCompany,//通行人数
 };
 
+@protocol PopViewControllerDelegate <NSObject>
+- (void)popviewConfirmButtonDidClickedWithType:(PopViewControllerType)type popview:(PopViewController*)popview;
+@end
+
 
 @interface PopViewController : UIViewController
+@property (nonatomic, assign) id<PopViewControllerDelegate> delegate;
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type;
 @end

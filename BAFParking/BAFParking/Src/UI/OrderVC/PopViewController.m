@@ -9,16 +9,17 @@
 #import "PopViewController.h"
 
 @interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, assign) PopViewControllerType    type;
 @property (nonatomic, retain) UIView        *bgView;
 @property (nonatomic, retain) UITableView   *tableView;
 @property (nonatomic, retain) UIView        *headerView;
 @property (nonatomic, retain) UILabel       *popTitleLabel;
 @property (nonatomic, retain) UIButton      *cancelButton;
+@property (nonatomic, retain) UIButton      *confirmButton;
 @property (nonatomic, retain) UILabel       *detailLabel;
-
-
 //时间选择
-@property (nonatomic, retain) UIDatePicker *datePicker;
+@property (nonatomic, retain) UIDatePicker  *datePicker;
+@property (nonatomic, retain) NSDate        *selectedDate;
 @end
 
 @implementation PopViewController
@@ -44,6 +45,7 @@
     [self.view addSubview:self.bgView];
     [self.headerView addSubview:self.popTitleLabel];
     [self.popTitleLabel addSubview:self.cancelButton];
+    [self.popTitleLabel addSubview:self.confirmButton];
     
     [self.headerView addSubview:lineV];
     [self.bgView addSubview:self.headerView];
@@ -53,8 +55,7 @@
 
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type
 {
-    
-
+    _type = type;
     switch (type) {
         case kPopViewControllerTypeTop:
         {
@@ -93,145 +94,18 @@
             
             [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 300-44)];
             [self.bgView addSubview:self.datePicker];
-            
-            
-            
         }
             break;
         default:
             break;
     }
-    
-    
-    
-    
-    
+
     self.headerView.frame = CGRectMake(0, 0, screenWidth, 44);
     self.popTitleLabel.frame = self.headerView.frame;
     self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-64,0, 44, 44);
+    self.confirmButton.frame = CGRectMake(20,0, 44, 44);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
     self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
-}
-
-#pragma mark - privatemethods
-- (void)dismiss
-{
-    UINavigationController* navi = self.navigationController;
-    if([navi isKindOfClass:[UINavigationController class]]){
-        [navi popViewControllerAnimated:YES];
-    }else{
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    if (touch.view == self.view)
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
-
-#pragma mark - tableviewdelegate&datasource
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *identifier = @"";
-    return nil;
-}
-
-#pragma mark - setter&getter
-- (UIView*)bgView
-{
-    if (!_bgView) {
-        _bgView = [[UIView alloc]init];
-        _bgView.backgroundColor = [UIColor colorWithHex:0xffffff];
-    }
-    return _bgView;
-}
-
-- (UIView*)headerView
-{
-    if (!_headerView) {
-        _headerView = [[UIView alloc]init];
-        _headerView.backgroundColor = [UIColor colorWithHex:0xffffff];
-    }
-    return _headerView;
-}
-
-- (UITableView *)tableView
-{
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] init];
-        _tableView.backgroundColor = [UIColor colorWithHex:0xffffff];
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    }
-    return _tableView;
-}
-
-- (UIButton *)cancelButton
-{
-    if (!_cancelButton) {
-        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
-        [_cancelButton setBackgroundColor:[UIColor clearColor]];
-        [_cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _cancelButton;
-}
-
-- (UILabel *)popTitleLabel
-{
-    if (!_popTitleLabel) {
-        _popTitleLabel = [[UILabel alloc] init];
-        _popTitleLabel.userInteractionEnabled = YES;
-        _popTitleLabel.backgroundColor = [UIColor clearColor];
-        _popTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        _popTitleLabel.numberOfLines = 1;
-        _popTitleLabel.textAlignment = NSTextAlignmentCenter;
-        _popTitleLabel.textColor = HexRGB(kBAFColorForTitle);
-        _popTitleLabel.font = [UIFont systemFontOfSize:kBAFFontSizeForTitle];
-    }
-    return _popTitleLabel;
-}
-
-- (UILabel *)detailLabel
-{
-    if (!_detailLabel) {
-        _detailLabel = [[UILabel alloc] init];
-        _detailLabel.backgroundColor = [UIColor clearColor];
-        _detailLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        _detailLabel.numberOfLines = 0;
-        _detailLabel.textAlignment = NSTextAlignmentLeft;
-        _detailLabel.textColor = HexRGB(kBAFColorForTitle);
-        _detailLabel.font = [UIFont systemFontOfSize:kBAFFontSizeForDetailText];
-    }
-    return _detailLabel;
-}
-
-- (UIDatePicker *)datePicker
-{
-    if (!_datePicker) {
-        _datePicker = [[UIDatePicker alloc] init];
-        _datePicker.center = self.view.center;
-        [_datePicker addTarget:self
-                              action:@selector(datePickerDateChanged:)
-                    forControlEvents:UIControlEventValueChanged];
-        NSDate *todayDate = [NSDate date];
-        NSDate *threeMonthsFromToday = [self dateAfterMonths:todayDate gapMonth:3];
-        _datePicker.minimumDate = todayDate;
-        _datePicker.maximumDate = threeMonthsFromToday;
-    }
-    return _datePicker;
-}
-- (void)datePickerDateChanged:(UIDatePicker *)paramDatePicker {
-    if ([paramDatePicker isEqual:self.datePicker]) {
-        NSLog(@"Selected date = %@", _datePicker.date);
-    }
 }
 
 #pragma mark - pravitemethods
@@ -290,6 +164,151 @@
         return YES;
     }
     return NO;
+}
+#pragma mark - actions
+- (void)confirmAction
+{
+    NSLog(@"确认");
+    self.selectedDate = self.datePicker.date;
+    
+    if ([self.delegate respondsToSelector:@selector(popviewConfirmButtonDidClickedWithType:popview:)]) {
+        [self.delegate popviewConfirmButtonDidClickedWithType:self.type popview:self];
+    }
+}
+
+- (void)dismiss
+{
+    UINavigationController* navi = self.navigationController;
+    if([navi isKindOfClass:[UINavigationController class]]){
+        [navi popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    if (touch.view == self.view)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (void)datePickerDateChanged:(UIDatePicker *)paramDatePicker {
+    if ([paramDatePicker isEqual:self.datePicker]) {
+        NSLog(@"Selected date = %@", _datePicker.date);
+    }
+}
+
+#pragma mark - tableviewdelegate&datasource
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *identifier = @"";
+    return nil;
+}
+
+#pragma mark - setter&getter
+- (UIView*)bgView
+{
+    if (!_bgView) {
+        _bgView = [[UIView alloc]init];
+        _bgView.backgroundColor = [UIColor colorWithHex:0xffffff];
+    }
+    return _bgView;
+}
+
+- (UIView*)headerView
+{
+    if (!_headerView) {
+        _headerView = [[UIView alloc]init];
+        _headerView.backgroundColor = [UIColor colorWithHex:0xffffff];
+    }
+    return _headerView;
+}
+
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.backgroundColor = [UIColor colorWithHex:0xffffff];
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    }
+    return _tableView;
+}
+
+- (UIButton *)cancelButton
+{
+    if (!_cancelButton) {
+        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cancelButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
+        [_cancelButton setBackgroundColor:[UIColor clearColor]];
+        [_cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cancelButton;
+}
+
+- (UIButton *)confirmButton
+{
+    if (!_confirmButton) {
+        _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_confirmButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
+        _confirmButton.titleLabel.text = @"确认";
+        _confirmButton.titleLabel.textColor = HexRGB(0x3492e9);
+        [_confirmButton setBackgroundColor:[UIColor clearColor]];
+        [_confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _confirmButton;
+}
+
+- (UILabel *)popTitleLabel
+{
+    if (!_popTitleLabel) {
+        _popTitleLabel = [[UILabel alloc] init];
+        _popTitleLabel.userInteractionEnabled = YES;
+        _popTitleLabel.backgroundColor = [UIColor clearColor];
+        _popTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _popTitleLabel.numberOfLines = 1;
+        _popTitleLabel.textAlignment = NSTextAlignmentCenter;
+        _popTitleLabel.textColor = HexRGB(kBAFColorForTitle);
+        _popTitleLabel.font = [UIFont systemFontOfSize:kBAFFontSizeForTitle];
+    }
+    return _popTitleLabel;
+}
+
+- (UILabel *)detailLabel
+{
+    if (!_detailLabel) {
+        _detailLabel = [[UILabel alloc] init];
+        _detailLabel.backgroundColor = [UIColor clearColor];
+        _detailLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _detailLabel.numberOfLines = 0;
+        _detailLabel.textAlignment = NSTextAlignmentLeft;
+        _detailLabel.textColor = HexRGB(kBAFColorForTitle);
+        _detailLabel.font = [UIFont systemFontOfSize:kBAFFontSizeForDetailText];
+    }
+    return _detailLabel;
+}
+
+- (UIDatePicker *)datePicker
+{
+    if (!_datePicker) {
+        _datePicker = [[UIDatePicker alloc] init];
+        _datePicker.center = self.view.center;
+        [_datePicker addTarget:self
+                              action:@selector(datePickerDateChanged:)
+                    forControlEvents:UIControlEventValueChanged];
+        NSDate *todayDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
+        NSDate *threeMonthsFromToday = [self dateAfterMonths:todayDate gapMonth:3];
+        _datePicker.minimumDate = todayDate;
+        _datePicker.maximumDate = threeMonthsFromToday;
+        _datePicker.minuteInterval = 15;
+    }
+    return _datePicker;
 }
 
 @end
