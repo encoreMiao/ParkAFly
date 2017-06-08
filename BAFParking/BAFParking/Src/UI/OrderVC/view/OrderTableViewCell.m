@@ -26,6 +26,12 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setOrderTFText:(NSString *)tfstr
+{
+    [self.orderTF resignFirstResponder];
+    self.orderTF.text = tfstr;
+}
+
 - (void)setType:(OrderTableViewCellType)type
 {
     _type = type;

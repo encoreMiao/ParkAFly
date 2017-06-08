@@ -25,4 +25,5 @@ typedef NS_ENUM(NSInteger,OrderTableViewCellType){
 @interface OrderTableViewCell : UITableViewCell
 @property (nonatomic, assign) OrderTableViewCellType type;
 @property (nonatomic, assign) id<OrderTableViewCellDelegate> delegate;
+- (void)setOrderTFText:(NSString *)tfstr;
 @end

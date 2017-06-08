@@ -19,7 +19,6 @@
 @property (nonatomic, retain) UILabel       *detailLabel;
 //时间选择
 @property (nonatomic, retain) UIDatePicker  *datePicker;
-@property (nonatomic, retain) NSDate        *selectedDate;
 @end
 
 @implementation PopViewController
@@ -87,12 +86,19 @@
             self.popTitleLabel.text = @"费用明细";
         }
             break;
-        case kPopViewControllerTypCompany:
+        case kPopViewControllerTypeCompany:
         {
-            self.bgView.frame = CGRectMake(0, screenHeight-300, screenWidth, 300);
+            self.bgView.frame = CGRectMake(0, screenHeight-260, screenWidth, 260);
             self.popTitleLabel.text = @"请选择通行人数";
-            
-            [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 300-44)];
+            [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
+            [self.bgView addSubview:self.datePicker];
+        }
+            break;
+        case kPopViewControllerTypeTime:
+        {
+            self.bgView.frame = CGRectMake(0, screenHeight-260, screenWidth, 260);
+            self.popTitleLabel.text = @"请选择时间";
+            [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
             [self.bgView addSubview:self.datePicker];
         }
             break;
@@ -174,6 +180,8 @@
     if ([self.delegate respondsToSelector:@selector(popviewConfirmButtonDidClickedWithType:popview:)]) {
         [self.delegate popviewConfirmButtonDidClickedWithType:self.type popview:self];
     }
+    
+    [self dismiss];
 }
 
 - (void)dismiss
@@ -256,10 +264,9 @@
 {
     if (!_confirmButton) {
         _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_confirmButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
-        _confirmButton.titleLabel.text = @"确认";
-        _confirmButton.titleLabel.textColor = HexRGB(0x3492e9);
-        [_confirmButton setBackgroundColor:[UIColor clearColor]];
+        [_confirmButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_confirmButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
+        [_confirmButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
         [_confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _confirmButton;

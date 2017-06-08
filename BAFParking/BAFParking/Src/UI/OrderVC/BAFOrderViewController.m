@@ -14,14 +14,26 @@
 
 #define OrderTableViewCellIdentifier    @"OrderTableViewCellIdentifier"
 
-@interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate>
-@property (strong, nonatomic) IBOutlet OrderFooterView *footerView;
-@property (nonatomic, strong) IBOutlet UITableView  *mainTableView;
+#define OrderTableViewCellTypeGoTime            @"OrderTableViewCellTypeGoTime"
+#define OrderTableViewCellTypeGoParkTerminal    @"OrderTableViewCellTypeGoParkTerminal"
+#define OrderTableViewCellTypePark              @"OrderTableViewCellTypePark"
+#define OrderTableViewCellTypeBackTime          @"OrderTableViewCellTypeBackTime"
+#define OrderTableViewCellTypeBackTerminal      @"OrderTableViewCellTypeBackTerminal"
+#define OrderTableViewCellTypeCompany           @"OrderTableViewCellTypeCompany"
+
+
+@interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate,PopViewControllerDelegate>
+@property (strong, nonatomic) IBOutlet OrderFooterView  *footerView;
+@property (nonatomic, strong) IBOutlet UITableView      *mainTableView;
+@property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
 @end
 
 @implementation BAFOrderViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.dicDatasource = [NSMutableDictionary dictionary];
+    
     self.footerView.delegate = self;
     self.mainTableView.tableFooterView = self.footerView;
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
@@ -53,9 +65,10 @@
     popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
     self.definesPresentationContext = YES;
+    popView.delegate = self;
 //    webView.myWebView.mj_h = screenHeight;
 //    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
-    [popView configViewWithData:nil type:kPopViewControllerTypCompany];
+    [popView configViewWithData:nil type:kPopViewControllerTypeCompany];
     [self presentViewController:popView animated:NO completion:nil];
 
 }
@@ -129,6 +142,11 @@
     if (section == 0) {
         if (row == 0 ) {
             cell.type = kOrderTableViewCellTypeGoTime;
+            if ([_dicDatasource objectForKey:@"OrderTableViewCellTypeGoTime"]) {
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"MM-dd HH:mm"];
+                [cell setOrderTFText:[dateFormatter stringFromDate:[_dicDatasource objectForKey:@"OrderTableViewCellTypeGoTime"]]];
+            }
         }else if(row == 1){
             cell.type = kOrderTableViewCellTypeGoParkTerminal;
         }
@@ -155,6 +173,7 @@
         scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
     }
 }
+
 #pragma mark - OrderFooterViewDelegate
 - (void)nextStepButtonDelegate:(id)sender
 {
@@ -168,7 +187,14 @@
     switch (cell.type) {
         case kOrderTableViewCellTypeGoTime:
         {
-            NSLog(@"gotime");
+            //选择时间
+            PopViewController *popView = [[PopViewController alloc] init];
+            popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+            popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            self.definesPresentationContext = YES;
+            popView.delegate = self;
+            [popView configViewWithData:nil type:kPopViewControllerTypeTime];
+            [self presentViewController:popView animated:NO completion:nil];
         }
             break;
         case kOrderTableViewCellTypeGoParkTerminal:
@@ -197,5 +223,13 @@
         }
             break;
     }
+}
+#pragma mark - PopViewControllerDelegate
+- (void)popviewConfirmButtonDidClickedWithType:(PopViewControllerType)type popview:(PopViewController*)popview
+{
+    NSLog(@"%@",popview.selectedDate);
+    [_dicDatasource setObject:popview.selectedDate forKey:OrderTableViewCellTypeGoTime];
+    [self.mainTableView reloadData];
+    
 }
 @end
