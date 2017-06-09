@@ -11,9 +11,17 @@
 #import "OrderFooterView.h"
 #import "BAFOrderServiceViewController.h"
 #import "PopViewController.h"
+#import "IUCallBackInterface.h"
+#import "HRLogicManager.h"
+#import "HRLLoginInterface.h"
+#import "HRLPersonalCenterInterface.h"
+#import "BAFCityInfo.h"
 
-#define OrderTableViewCellIdentifier    @"OrderTableViewCellIdentifier"
+typedef NS_ENUM(NSInteger,RequestNumberIndex){
+    kRequestNumberIndexCityList,
+};
 
+#define OrderTableViewCellIdentifier            @"OrderTableViewCellIdentifier"
 #define OrderTableViewCellTypeGoTime            @"OrderTableViewCellTypeGoTime"
 #define OrderTableViewCellTypeGoParkTerminal    @"OrderTableViewCellTypeGoParkTerminal"
 #define OrderTableViewCellTypePark              @"OrderTableViewCellTypePark"
@@ -22,10 +30,13 @@
 #define OrderTableViewCellTypeCompany           @"OrderTableViewCellTypeCompany"
 
 
-@interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate,PopViewControllerDelegate>
+
+@interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate,PopViewControllerDelegate,IUICallbackInterface>
 @property (strong, nonatomic) IBOutlet OrderFooterView  *footerView;
 @property (nonatomic, strong) IBOutlet UITableView      *mainTableView;
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
+
+@property (nonatomic, strong) NSMutableArray        *cityArr;
 @end
 
 @implementation BAFOrderViewController
@@ -33,6 +44,7 @@
     [super viewDidLoad];
     
     self.dicDatasource = [NSMutableDictionary dictionary];
+    self.cityArr = [NSMutableArray array];
     
     self.footerView.delegate = self;
     self.mainTableView.tableFooterView = self.footerView;
@@ -51,7 +63,9 @@
     
     [self setNavigationTitle:@"预约停车"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
-    [self setNavigationRightButtonWithText:@"城市" method:@selector(rightBtnClicked:)];
+    [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+    
+    [self cityListRequest];
 }
 
 - (void)backMethod:(id)sender
@@ -66,9 +80,7 @@
     popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
     self.definesPresentationContext = YES;
     popView.delegate = self;
-//    webView.myWebView.mj_h = screenHeight;
-//    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
-    [popView configViewWithData:nil type:kPopViewControllerTypeCompany];
+    [popView configViewWithData:self.cityArr type:kPopViewControllerTypeSelecCity];
     [self presentViewController:popView animated:NO completion:nil];
 
 }
@@ -231,5 +243,36 @@
     [_dicDatasource setObject:popview.selectedDate forKey:OrderTableViewCellTypeGoTime];
     [self.mainTableView reloadData];
     
+}
+
+#pragma mark - Request
+- (void)cityListRequest
+{
+    id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    [personCenterReq cityListRequestWithNumberIndex:kRequestNumberIndexCityList delegte:self];
+}
+#pragma mark - REQUEST
+-(void)onJobComplete:(int)aRequestID Object:(id)obj
+{
+    if (aRequestID == kRequestNumberIndexCityList) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //城市列表
+            if (self.cityArr) {
+                [self.cityArr removeAllObjects];
+                self.cityArr = [BAFCityInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
+            }
+            
+        }else{
+            //
+        }
+    }
+}
+
+-(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
+{
+    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 @end

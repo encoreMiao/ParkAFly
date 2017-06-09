@@ -101,6 +101,8 @@
 		8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F21EE42DCD0066289C /* BAFWebViewController.m */; };
 		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
+		8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433431EE9E4EA009379ED /* PopTableViewCell.m */; };
+		8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -309,6 +311,9 @@
 		8D6058F51EE438C30066289C /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
 		8DB4F88E1EE297F9006ACDEA /* BAFUserModelManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFUserModelManger.h; sourceTree = "<group>"; };
 		8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFUserModelManger.m; sourceTree = "<group>"; };
+		8DE433421EE9E4EA009379ED /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
+		8DE433431EE9E4EA009379ED /* PopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopTableViewCell.m; sourceTree = "<group>"; };
+		8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopTableViewCell.xib; sourceTree = "<group>"; };
 		F3CE4BA856D06DE9C2D3CF10 /* Pods-BAFParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -445,6 +450,9 @@
 				002093611EDC501600C26176 /* ServiceConfirmTableViewCell.h */,
 				002093621EDC501600C26176 /* ServiceConfirmTableViewCell.m */,
 				002093631EDC501600C26176 /* ServiceConfirmTableViewCell.xib */,
+				8DE433421EE9E4EA009379ED /* PopTableViewCell.h */,
+				8DE433431EE9E4EA009379ED /* PopTableViewCell.m */,
+				8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1006,6 +1014,7 @@
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
+				8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
 				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
@@ -1154,6 +1163,7 @@
 				00214B411ECFDAC100FF6FDE /* NSObject+MJProperty.m in Sources */,
 				8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
+				8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */,
 				007A7A051EB6C7500070406B /* BAFServerManager.m in Sources */,
 				005074561EBC211000A6E8B1 /* BAFClientPatrInfo.m in Sources */,
 				007A7A021EB6C5CE0070406B /* EnvironmentFactory.m in Sources */,

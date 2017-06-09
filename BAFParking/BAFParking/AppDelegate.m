@@ -14,8 +14,13 @@
 #import "MMDrawerController.h"
 
 #import "BAFBaseNavigationViewController.h"
+#import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 
-@interface AppDelegate ()
+
+@interface AppDelegate ()<UIApplicationDelegate>
+{
+    BMKMapManager* _mapManager;
+}
 @property (nonatomic, strong) MMDrawerController *drawerController;
 @end
 
@@ -25,6 +30,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //视图内省
     [[DCIntrospect sharedIntrospector] start];
+    
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"GGtH5TSSSQgbZ2uPCa9ITh49RbhA28aN"  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
     
     //抽屉框
     BAFLeftViewController *leftDrawerVC = [[BAFLeftViewController alloc]init];

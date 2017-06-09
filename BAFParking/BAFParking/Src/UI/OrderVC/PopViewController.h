@@ -11,7 +11,7 @@
 
 typedef NS_ENUM(NSInteger,PopViewControllerType){
     kPopViewControllerTypeTop,//服务说明
-    kPopViewControllerTypeSelec,//选择
+    kPopViewControllerTypeSelecCity,//选择城市
     kPopViewControllerTypeTipsshow,//费用明细
     kPopViewControllerTypeCompany,//通行人数
     kPopViewControllerTypeTime,//选择时间

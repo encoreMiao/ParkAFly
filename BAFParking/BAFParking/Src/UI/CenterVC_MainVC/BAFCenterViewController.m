@@ -13,8 +13,11 @@
 #import "BAFLoginViewController.h"
 #import "BAFOrderViewController.h"
 #import "BAFWebViewController.h"
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>
 
-@interface BAFCenterViewController ()<BAFCenterOrderViewDelegate>
+@interface BAFCenterViewController ()<BAFCenterOrderViewDelegate,BMKLocationServiceDelegate>{
+    BMKLocationService *_locService;
+}
 @property (nonatomic, weak) IBOutlet UIButton *showPersonalCenterButton;
 @property (nonatomic, weak) IBOutlet UIButton *showOrderListButton;
 @property (nonatomic, weak) IBOutlet UIView *headerScrollerView;
@@ -29,11 +32,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
+    [self locationService];
+}
+
+-(void)locationService
+{
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    //启动LocationService
+    [_locService startUserLocationService];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    _locService.delegate = self;
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.navigationBar.translucent = YES;
 }
@@ -125,5 +138,31 @@
 - (void)showOrderDetail:(id)sender
 {
     DLog(@"查看正在进行的订单详细信息");
+}
+
+#pragma mark - BMKLocationServiceDelegate
+//实现相关delegate 处理位置信息更新
+//处理方向变更信息
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    //NSLog(@"heading is %@",userLocation.heading);
+}
+//处理位置坐标更新
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
+        if (array.count > 0) {
+            CLPlacemark *placemark = [array objectAtIndex:0];
+            if (placemark != nil) {
+                NSString *city = placemark.locality;
+                NSLog(@"当前城市名称------%@",city);
+                //找到了当前位置城市后就关闭服务
+                [_locService stopUserLocationService];
+            }
+        }
+        
+    }];
 }
 @end

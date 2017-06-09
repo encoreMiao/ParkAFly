@@ -424,18 +424,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     
-    if (aRequestID == kRequestNumberIndexCityList) {
-        if ([obj isKindOfClass:[NSDictionary class]]) {
-            obj = (NSDictionary *)obj;
-        }
-        if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            //城市列表
-            //
-            
-        }else{
-            //
-        }
-    }
+    
     
     if (aRequestID == kRequestNumberIndexTcCard) {
         if ([obj isKindOfClass:[NSDictionary class]]) {

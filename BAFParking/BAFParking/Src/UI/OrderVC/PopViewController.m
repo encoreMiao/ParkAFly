@@ -7,6 +7,9 @@
 //
 
 #import "PopViewController.h"
+#import "BAFCityInfo.h"
+
+
 
 @interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) PopViewControllerType    type;
@@ -19,11 +22,14 @@
 @property (nonatomic, retain) UILabel       *detailLabel;
 //时间选择
 @property (nonatomic, retain) UIDatePicker  *datePicker;
+@property (nonatomic, retain) NSMutableArray *arrDatasource;
 @end
 
 @implementation PopViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.arrDatasource = [NSMutableArray array];
     [self setupView];
 }
 
@@ -74,10 +80,16 @@
             
         }
             break;
-        case kPopViewControllerTypeSelec:
+        case kPopViewControllerTypeSelecCity:
         {
-            self.bgView.frame = CGRectMake(0, screenHeight-300, screenWidth, 300);
-            self.popTitleLabel.text = @"请选择航站楼";
+            CGFloat height = arr.count*40+44;
+            if (height>320) {
+                height = 320;
+            }
+            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
+            self.popTitleLabel.text = @"请选择城市";
+            self.tableView.hidden = NO;
+            self.detailLabel.hidden = YES;
         }
             break;
         case kPopViewControllerTypeTipsshow:
@@ -112,6 +124,81 @@
     self.confirmButton.frame = CGRectMake(20,0, 44, 44);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
     self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
+    
+    self.arrDatasource = [NSMutableArray arrayWithArray:arr];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - UITableViewDelegate
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"commonTableViewCell";
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    switch (self.type) {
+        case kPopViewControllerTypeTop:
+            return nil;
+            break;
+        case kPopViewControllerTypeSelecCity:
+            cell.textLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
+            break;
+        default:
+            return nil;
+            break;
+    }
+//    if (indexPath.row == 0) {
+//        if (self.addressArray.count > 0) {
+//            NSDictionary *address = [self.addressArray firstObject];
+//            int addressIndex = [address safeIntForKey:@"position"] - 1;
+//            if (addressIndex == 0) {
+//                [cell updateCellWith:address obj2:nil];
+//            }else {
+//                [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
+//            }
+//        }else {
+//            [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
+//        }
+//    }else if (indexPath.row == 1) {
+//        if (self.addressArray.count > 0) {
+//            NSDictionary *address = [self.addressArray lastObject];
+//            int addressIndex = (int)[address safeIntForKey:@"position"] - 1;
+//            if (addressIndex == 1) {
+//                [cell updateCellWith:address obj2:nil];
+//            }else {
+//                [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
+//            }
+//        }else {
+//            [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
+//        }
+//    }
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.arrDatasource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+//    SearchWithCommonAddressViewController *controller = [[SearchWithCommonAddressViewController alloc] init];
+//    controller.index = indexPath.row + 1;
+//    controller.cityName = [MBKSettingStore sharedInstance].locaCityName;
+//    //    controller.resultList = [NSMutableArray arrayWithArray:self.addressArray];
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - pravitemethods
@@ -212,13 +299,6 @@
     }
 }
 
-#pragma mark - tableviewdelegate&datasource
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *identifier = @"";
-    return nil;
-}
-
 #pragma mark - setter&getter
 - (UIView*)bgView
 {
@@ -244,6 +324,7 @@
         _tableView = [[UITableView alloc] init];
         _tableView.backgroundColor = [UIColor colorWithHex:0xffffff];
         _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     }
     return _tableView;
