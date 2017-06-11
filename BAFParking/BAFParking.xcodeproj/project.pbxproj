@@ -103,6 +103,14 @@
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
 		8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433431EE9E4EA009379ED /* PopTableViewCell.m */; };
 		8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */; };
+		8DE433491EEBC90A009379ED /* BAFParkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433481EEBC90A009379ED /* BAFParkInfo.m */; };
+		8DE4334E1EED00A9009379ED /* ParkListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4334C1EED00A9009379ED /* ParkListViewController.m */; };
+		8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE4334D1EED00A9009379ED /* ParkListViewController.xib */; };
+		8DE433541EED0121009379ED /* ParkListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433521EED0121009379ED /* ParkListTableViewCell.m */; };
+		8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE433531EED0121009379ED /* ParkListTableViewCell.xib */; };
+		8DE433581EED28E8009379ED /* BAFParkAir.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433571EED28E8009379ED /* BAFParkAir.m */; };
+		8DE4335B1EED28F4009379ED /* BAFParkCharge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4335A1EED28F4009379ED /* BAFParkCharge.m */; };
+		8DE4335E1EED5A42009379ED /* BAFParkServiceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -314,6 +322,20 @@
 		8DE433421EE9E4EA009379ED /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
 		8DE433431EE9E4EA009379ED /* PopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopTableViewCell.m; sourceTree = "<group>"; };
 		8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopTableViewCell.xib; sourceTree = "<group>"; };
+		8DE433471EEBC90A009379ED /* BAFParkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkInfo.h; sourceTree = "<group>"; };
+		8DE433481EEBC90A009379ED /* BAFParkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkInfo.m; sourceTree = "<group>"; };
+		8DE4334B1EED00A9009379ED /* ParkListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkListViewController.h; sourceTree = "<group>"; };
+		8DE4334C1EED00A9009379ED /* ParkListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkListViewController.m; sourceTree = "<group>"; };
+		8DE4334D1EED00A9009379ED /* ParkListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkListViewController.xib; sourceTree = "<group>"; };
+		8DE433511EED0121009379ED /* ParkListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkListTableViewCell.h; sourceTree = "<group>"; };
+		8DE433521EED0121009379ED /* ParkListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkListTableViewCell.m; sourceTree = "<group>"; };
+		8DE433531EED0121009379ED /* ParkListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkListTableViewCell.xib; sourceTree = "<group>"; };
+		8DE433561EED28E8009379ED /* BAFParkAir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkAir.h; sourceTree = "<group>"; };
+		8DE433571EED28E8009379ED /* BAFParkAir.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkAir.m; sourceTree = "<group>"; };
+		8DE433591EED28F4009379ED /* BAFParkCharge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkCharge.h; sourceTree = "<group>"; };
+		8DE4335A1EED28F4009379ED /* BAFParkCharge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkCharge.m; sourceTree = "<group>"; };
+		8DE4335C1EED5A42009379ED /* BAFParkServiceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkServiceInfo.h; sourceTree = "<group>"; };
+		8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkServiceInfo.m; sourceTree = "<group>"; };
 		F3CE4BA856D06DE9C2D3CF10 /* Pods-BAFParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -766,6 +788,14 @@
 				005074551EBC211000A6E8B1 /* BAFClientPatrInfo.m */,
 				005074571EBD5E1500A6E8B1 /* BAFCityInfo.h */,
 				005074581EBD5E1500A6E8B1 /* BAFCityInfo.m */,
+				8DE433471EEBC90A009379ED /* BAFParkInfo.h */,
+				8DE433481EEBC90A009379ED /* BAFParkInfo.m */,
+				8DE433561EED28E8009379ED /* BAFParkAir.h */,
+				8DE433571EED28E8009379ED /* BAFParkAir.m */,
+				8DE433591EED28F4009379ED /* BAFParkCharge.h */,
+				8DE4335A1EED28F4009379ED /* BAFParkCharge.m */,
+				8DE4335C1EED5A42009379ED /* BAFParkServiceInfo.h */,
+				8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */,
 				0050745A1EBD628E00A6E8B1 /* BAFTcCardInfo.h */,
 				0050745B1EBD628E00A6E8B1 /* BAFTcCardInfo.m */,
 				0050745D1EBE9A9500A6E8B1 /* BAFCommentInfo.h */,
@@ -846,6 +876,7 @@
 		00EC0F851EBF39DA00CDDEA8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8DE4334A1EED008D009379ED /* ParkListVC */,
 				8D6058F01EE42DAB0066289C /* webVC */,
 				002093371EDBDBBE00C26176 /* OrderVC */,
 				0001CDED1ED08110000889CE /* LoginVC */,
@@ -891,6 +922,27 @@
 				8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */,
 			);
 			path = ModalManager;
+			sourceTree = "<group>";
+		};
+		8DE4334A1EED008D009379ED /* ParkListVC */ = {
+			isa = PBXGroup;
+			children = (
+				8DE433501EED00FF009379ED /* view */,
+				8DE4334B1EED00A9009379ED /* ParkListViewController.h */,
+				8DE4334C1EED00A9009379ED /* ParkListViewController.m */,
+				8DE4334D1EED00A9009379ED /* ParkListViewController.xib */,
+			);
+			path = ParkListVC;
+			sourceTree = "<group>";
+		};
+		8DE433501EED00FF009379ED /* view */ = {
+			isa = PBXGroup;
+			children = (
+				8DE433511EED0121009379ED /* ParkListTableViewCell.h */,
+				8DE433521EED0121009379ED /* ParkListTableViewCell.m */,
+				8DE433531EED0121009379ED /* ParkListTableViewCell.xib */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		E94D90F6DF24A447D3C41167 /* Frameworks */ = {
@@ -1014,7 +1066,9 @@
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
+				8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */,
 				8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */,
+				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
 				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
@@ -1100,6 +1154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE433491EEBC90A009379ED /* BAFParkInfo.m in Sources */,
 				0093D3AA1EE052A00035987C /* UIView+Toast.m in Sources */,
 				005E85CC1E97924600115CAD /* ViewController.m in Sources */,
 				00214B3E1ECFDAC100FF6FDE /* NSObject+MJClass.m in Sources */,
@@ -1107,6 +1162,7 @@
 				00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */,
 				0001CDF11ED08135000889CE /* BAFLoginViewController.m in Sources */,
 				8D6058F71EE438C30066289C /* PopViewController.m in Sources */,
+				8DE4334E1EED00A9009379ED /* ParkListViewController.m in Sources */,
 				00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */,
 				0001CDCC1ED05130000889CE /* BAFCenterViewController.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
@@ -1116,6 +1172,7 @@
 				002093691EDD2CE300C26176 /* SuccessViewController.m in Sources */,
 				007A7A161EB719670070406B /* NSMutableDictionary+Valuation.m in Sources */,
 				007A7A0C1EB6DC1C0070406B /* SHNetNotificationCenter.m in Sources */,
+				8DE4335B1EED28F4009379ED /* BAFParkCharge.m in Sources */,
 				00214B401ECFDAC100FF6FDE /* NSObject+MJKeyValue.m in Sources */,
 				002093461EDBE80C00C26176 /* UIColor+HexColor.m in Sources */,
 				005E85C91E97924600115CAD /* AppDelegate.m in Sources */,
@@ -1156,10 +1213,12 @@
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
 				00214B3A1ECFDAC100FF6FDE /* MJFoundation.m in Sources */,
 				0050745C1EBD628E00A6E8B1 /* BAFTcCardInfo.m in Sources */,
+				8DE433581EED28E8009379ED /* BAFParkAir.m in Sources */,
 				0001CDDB1ED05179000889CE /* PersonalCenterFooterView.m in Sources */,
 				00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */,
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
 				002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */,
+				8DE433541EED0121009379ED /* ParkListTableViewCell.m in Sources */,
 				00214B411ECFDAC100FF6FDE /* NSObject+MJProperty.m in Sources */,
 				8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
@@ -1176,6 +1235,7 @@
 				0001CDF61ED08959000889CE /* UIImage+Color.m in Sources */,
 				005074531EBB33BE00A6E8B1 /* BAFChargePageInfo.m in Sources */,
 				00214B3B1ECFDAC100FF6FDE /* MJProperty.m in Sources */,
+				8DE4335E1EED5A42009379ED /* BAFParkServiceInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

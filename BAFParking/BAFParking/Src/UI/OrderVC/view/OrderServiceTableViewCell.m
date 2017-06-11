@@ -9,7 +9,6 @@
 #import "OrderServiceTableViewCell.h"
 
 @interface OrderServiceTableViewCell()
-@property (assign, nonatomic) BOOL show;
 @property (weak, nonatomic) IBOutlet UILabel *serviceTitle;
 @property (weak, nonatomic) IBOutlet UILabel *couponLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serviceNotitionLabel;
@@ -30,21 +29,25 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     switch (self.type) {
         case kOrderServiceTableViewCellTypeCommon:
             self.detailTextF.hidden = YES;
             self.couponLabel.hidden = NO;
             break;
         case kOrderServiceTableViewCellTypeCommonText:
-            self.detailTextF.hidden = NO;
+            if (_show) {
+                self.detailTextF.hidden = NO;
+            }else{
+                self.detailTextF.hidden = YES;
+            }
             self.couponLabel.hidden = NO;
             break;
         case kOrderServiceTableViewCellTypeDisclosure:
             self.detailTextF.hidden = YES;
             self.couponLabel.hidden = YES;
+            self.serviceTitle.text = @"更多服务";
+            self.serviceNotitionLabel.text = @"提供代加油、洗车服务等";
             [self.clickButton setImage:[UIImage imageNamed:@"list_ip_more"] forState:UIControlStateNormal];
-            [self setFrame:CGRectMake(0, 0, screenWidth, 64)];
             break;
         default:
             break;
@@ -53,43 +56,30 @@
 
 - (void)setType:(OrderServiceTableViewCellType)type
 {
-    switch (type) {
-        case kOrderServiceTableViewCellTypeCommon:
-            
-            self.detailTextF.hidden = YES;
-            self.couponLabel.hidden = NO;
-            break;
-        case kOrderServiceTableViewCellTypeCommonText:
-            self.serviceTitle.text = @"代驾代泊服务";
-            
-            self.detailTextF.hidden = NO;
-            self.couponLabel.hidden = NO;
-            break;
-        case kOrderServiceTableViewCellTypeDisclosure:
-            self.detailTextF.hidden = YES;
-            self.couponLabel.hidden = YES;
-            [self.clickButton setImage:[UIImage imageNamed:@"list_ip_more"] forState:UIControlStateNormal];
-            break;
-        default:
-            break;
+    _type = type;
+}
+
+- (void)setServiceInfo:(BAFParkServiceInfo *)serviceInfo
+{
+    _serviceInfo = serviceInfo;
+    self.serviceTitle.text = serviceInfo.title;
+    self.serviceNotitionLabel.text = serviceInfo.remark;
+}
+
+- (void)setShow:(BOOL)show
+{
+    _show = show;
+    if (_show) {
+        [self.clickButton setImage:[UIImage imageNamed:@"list_chb_item"] forState:UIControlStateNormal];
+    }
+    else{
+        [self.clickButton setImage:[UIImage imageNamed:@"list_chb2_item"] forState:UIControlStateNormal];
     }
 }
 
-- (BOOL)isShow
-{
-    return self.show;
-}
-
 - (IBAction)checkButtonClicked:(id)sender {
-    _show = !_show;
-    if (self.type == kOrderServiceTableViewCellTypeDisclosure) {
-        _show = NO;
-    }else{
-        if(_show){
-            [self.clickButton setImage:[UIImage imageNamed:@"list_chb_item"] forState:UIControlStateNormal];
-        }else{
-            [self.clickButton setImage:[UIImage imageNamed:@"list_chb2_item"] forState:UIControlStateNormal];
-        }
+    if ([self.delegate respondsToSelector:@selector(OrderServiceTableViewCellAction:)]) {
+        [self.delegate OrderServiceTableViewCellAction:self];
     }
 }
 @end

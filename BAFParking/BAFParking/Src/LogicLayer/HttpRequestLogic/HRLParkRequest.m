@@ -24,7 +24,7 @@
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     [paramters setObject:city_id forKey:@"city_id"];
     //GET请求
-    [self getRequestWithUrl:REQURL(@"api/park/park_listt") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+    [self getRequestWithUrl:REQURL(@"api/park/park_list") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
         NSLog(@"JSON = %@", responseObject);
         if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
             [workThread onJobComplete:numberIndex Object:(id)responseObject];

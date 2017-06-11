@@ -12,9 +12,12 @@
 typedef NS_ENUM(NSInteger,PopViewControllerType){
     kPopViewControllerTypeTop,//服务说明
     kPopViewControllerTypeSelecCity,//选择城市
-    kPopViewControllerTypeTipsshow,//费用明细
+    kPopViewControllerTypeGoTime,//选择泊车时间
+    kPopViewControllerTypeBackTime,//选择取车时间
+    kPopViewControllerTypeSelecGoTerminal,//选择出发航站楼
+    kPopViewControllerTypeSelecBackTerminal,//选择返程航站楼
     kPopViewControllerTypeCompany,//通行人数
-    kPopViewControllerTypeTime,//选择时间
+    kPopViewControllerTypeTipsshow,//费用明细
 };
 
 @protocol PopViewControllerDelegate <NSObject>
@@ -24,6 +27,7 @@ typedef NS_ENUM(NSInteger,PopViewControllerType){
 
 @interface PopViewController : UIViewController
 @property (nonatomic, retain) NSDate        *selectedDate;
+@property (nonatomic, retain) NSIndexPath   *selectedIndex;
 @property (nonatomic, assign) id<PopViewControllerDelegate> delegate;
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type;
 @end

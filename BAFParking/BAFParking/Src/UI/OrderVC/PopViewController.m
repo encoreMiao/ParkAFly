@@ -8,7 +8,7 @@
 
 #import "PopViewController.h"
 #import "BAFCityInfo.h"
-
+#import "BAFParkInfo.h"
 
 
 @interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -28,7 +28,6 @@
 @implementation PopViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.arrDatasource = [NSMutableArray array];
     [self setupView];
 }
@@ -61,6 +60,10 @@
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type
 {
     _type = type;
+    self.arrDatasource = [NSMutableArray arrayWithArray:arr];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
     switch (type) {
         case kPopViewControllerTypeTop:
         {
@@ -92,6 +95,24 @@
             self.detailLabel.hidden = YES;
         }
             break;
+        case kPopViewControllerTypeSelecGoTerminal:
+        case kPopViewControllerTypeSelecBackTerminal:
+        {
+            CGFloat height = arr.count*40+44;
+            if (height>320) {
+                height = 320;
+            }
+            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
+            if (type == kPopViewControllerTypeSelecGoTerminal) {
+                self.popTitleLabel.text = @"请选择出发航站楼";
+            }else{
+               self.popTitleLabel.text = @"请选择返程航站楼";
+            }
+
+            self.tableView.hidden = NO;
+            self.detailLabel.hidden = YES;
+        }
+            break;
         case kPopViewControllerTypeTipsshow:
         {
             self.bgView.frame = CGRectMake(0, screenHeight-300, screenWidth, 300);
@@ -100,13 +121,18 @@
             break;
         case kPopViewControllerTypeCompany:
         {
-            self.bgView.frame = CGRectMake(0, screenHeight-260, screenWidth, 260);
-            self.popTitleLabel.text = @"请选择通行人数";
-            [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
-            [self.bgView addSubview:self.datePicker];
+            CGFloat height = arr.count*40+44;
+            if (height>320) {
+                height = 320;
+            }
+            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
+            self.popTitleLabel.text = @"请选择同行人数";
+            self.tableView.hidden = NO;
+            self.detailLabel.hidden = YES;
         }
             break;
-        case kPopViewControllerTypeTime:
+        case kPopViewControllerTypeGoTime:
+        case kPopViewControllerTypeBackTime:
         {
             self.bgView.frame = CGRectMake(0, screenHeight-260, screenWidth, 260);
             self.popTitleLabel.text = @"请选择时间";
@@ -125,9 +151,6 @@
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
     self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
     
-    self.arrDatasource = [NSMutableArray arrayWithArray:arr];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
     [self.tableView reloadData];
 }
 
@@ -147,37 +170,39 @@
             break;
         case kPopViewControllerTypeSelecCity:
             cell.textLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
+        {
+            if (self.selectedIndex == indexPath) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
+            break;
+        case kPopViewControllerTypeSelecGoTerminal:
+        case kPopViewControllerTypeSelecBackTerminal:
+            cell.textLabel.text = ((BAFParkInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).map_title;
+        {
+            if (self.selectedIndex == indexPath) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
+            break;
+        case kPopViewControllerTypeCompany:
+            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
+        {
+            if (self.selectedIndex == indexPath) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
             break;
         default:
             return nil;
             break;
     }
-//    if (indexPath.row == 0) {
-//        if (self.addressArray.count > 0) {
-//            NSDictionary *address = [self.addressArray firstObject];
-//            int addressIndex = [address safeIntForKey:@"position"] - 1;
-//            if (addressIndex == 0) {
-//                [cell updateCellWith:address obj2:nil];
-//            }else {
-//                [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
-//            }
-//        }else {
-//            [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
-//        }
-//    }else if (indexPath.row == 1) {
-//        if (self.addressArray.count > 0) {
-//            NSDictionary *address = [self.addressArray lastObject];
-//            int addressIndex = (int)[address safeIntForKey:@"position"] - 1;
-//            if (addressIndex == 1) {
-//                [cell updateCellWith:address obj2:nil];
-//            }else {
-//                [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
-//            }
-//        }else {
-//            [cell updateCellWith:nil obj2:[self.unAdressArray objectAtIndex:indexPath.row]];
-//        }
-//    }
-    
     return cell;
 }
 
@@ -193,12 +218,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-//    SearchWithCommonAddressViewController *controller = [[SearchWithCommonAddressViewController alloc] init];
-//    controller.index = indexPath.row + 1;
-//    controller.cityName = [MBKSettingStore sharedInstance].locaCityName;
-//    //    controller.resultList = [NSMutableArray arrayWithArray:self.addressArray];
-//    [self.navigationController pushViewController:controller animated:YES];
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ((indexPath.row != self.selectedIndex.row)||!self.selectedIndex) {
+        NSIndexPath *oldIndex = self.selectedIndex;
+        self.selectedIndex = indexPath;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:self.selectedIndex, oldIndex, nil] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 #pragma mark - pravitemethods
@@ -262,13 +287,51 @@
 - (void)confirmAction
 {
     NSLog(@"确认");
-    self.selectedDate = self.datePicker.date;
+    
+    switch (self.type) {
+        case kPopViewControllerTypeGoTime:
+        case kPopViewControllerTypeBackTime:
+        {
+            self.selectedDate = self.datePicker.date;
+        }
+            break;
+        case kPopViewControllerTypeSelecCity:
+        {
+            if (!self.selectedIndex) {
+                CSToastStyle *toastStyle = [CSToastManager sharedStyle];
+                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择城市" duration:2.5 position:@(100) style:toastStyle];
+                return;
+            }
+        }
+            break;
+        case kPopViewControllerTypeSelecGoTerminal:
+        case kPopViewControllerTypeSelecBackTerminal:
+        {
+            if (!self.selectedIndex) {
+                CSToastStyle *toastStyle = [CSToastManager sharedStyle];
+                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择停车场" duration:2.5 position:@(100) style:toastStyle];
+                return;
+            }
+        }
+            break;
+        case kPopViewControllerTypeCompany:
+        {
+            if (!self.selectedIndex) {
+                CSToastStyle *toastStyle = [CSToastManager sharedStyle];
+                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择同行人数" duration:2.5 position:@(100) style:toastStyle];
+                return;
+            }
+        }
+            break;
+        default:
+            break;
+    }
     
     if ([self.delegate respondsToSelector:@selector(popviewConfirmButtonDidClickedWithType:popview:)]) {
         [self.delegate popviewConfirmButtonDidClickedWithType:self.type popview:self];
     }
-    
     [self dismiss];
+    
 }
 
 - (void)dismiss

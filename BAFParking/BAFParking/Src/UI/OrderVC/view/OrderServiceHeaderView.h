@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFUserInfo.h"
 
 @interface OrderServiceHeaderView : UIView
+@property (nonatomic, strong) BAFUserInfo *userInfo;
 @end

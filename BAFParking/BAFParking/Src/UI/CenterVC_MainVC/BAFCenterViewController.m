@@ -14,6 +14,7 @@
 #import "BAFOrderViewController.h"
 #import "BAFWebViewController.h"
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
+#import "ParkListViewController.h"
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate,BMKLocationServiceDelegate>{
     BMKLocationService *_locService;
@@ -132,6 +133,10 @@
 - (IBAction)parkingIntroduction:(id)sender
 {
     DLog(@"车场介绍");
+    //跳转到停车场选择
+    ParkListViewController  *parklistVC = [[ParkListViewController alloc]init];
+    parklistVC.type = kParkListViewControllerTypeShow;
+    [self.navigationController pushViewController:parklistVC animated:YES];
 }
 
 #pragma mark - BAFCenterOrderViewDelegate

@@ -61,4 +61,10 @@
 #define NotifyUserInfoChange  @"NotifyUserInfoChange"  //用户信息更改
 #define NotifyUserLoginOK     @"NotifyUserLoginOK"     //用户登陆成功
 #define NotifyUserLogout      @"NotifyUserLogout"      //用户登陆失败
+
+
+#define OrderDefaults   @"OrderDefaults" //预约的内容
+
+
 #endif /* BAFDefine_h */
+

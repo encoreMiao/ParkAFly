@@ -20,6 +20,5 @@
 #import "BAFServerManager.h"
 #import "MJExtension.h"
 #import "UIColor+HexColor.h"
-
-
+#import "UIView+Toast.h"
 #endif

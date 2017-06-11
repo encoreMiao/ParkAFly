@@ -7,6 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFParkServiceInfo.h"
+@class OrderServiceTableViewCell;
+
+
+@protocol OrderServiceTableViewCellDelegate <NSObject>
+- (void)OrderServiceTableViewCellAction:(OrderServiceTableViewCell *)cell;
+@end
 
 typedef NS_ENUM(NSInteger,OrderServiceTableViewCellType){
     kOrderServiceTableViewCellTypeCommon,
@@ -15,6 +22,8 @@ typedef NS_ENUM(NSInteger,OrderServiceTableViewCellType){
 };
 
 @interface OrderServiceTableViewCell : UITableViewCell
+@property (nonatomic, strong) BAFParkServiceInfo    *serviceInfo;
 @property (nonatomic, assign) OrderServiceTableViewCellType type;
-- (BOOL)isShow;
+@property (nonatomic, assign) BOOL  show;
+@property (nonatomic, assign) id<OrderServiceTableViewCellDelegate> delegate;
 @end

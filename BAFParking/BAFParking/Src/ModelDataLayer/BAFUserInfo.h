@@ -12,7 +12,7 @@
 @property (nonatomic, strong) NSString *clientid;
 @property (nonatomic, strong) NSString *ctel;
 @property (nonatomic, strong) NSString *cname;
-@property (nonatomic, strong) NSString *csex;
+@property (nonatomic, strong) NSString *csex;//0.未知，1.男，2 女
 @property (nonatomic, strong) NSString *carnum;
 @property (nonatomic, strong) NSString *createtime;
 @property (nonatomic, strong) NSString *wechat_id;
