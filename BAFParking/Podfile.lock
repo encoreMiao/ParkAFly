@@ -14,9 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - BaiduMapKit (3.3.1)
+  - BaiduMapKit (3.3.2)
   - DCIntrospect-ARC (0.0.8)
-  - IQKeyboardManager (4.0.9)
+  - IQKeyboardManager (4.0.10)
   - MBProgressHUD (1.0.0)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
@@ -47,9 +47,9 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  BaiduMapKit: 9e8ff80bbcfb8f96b4a58b2844d728590dac90ca
+  BaiduMapKit: 5118390d63b375483bd64c963e8e32a40fd9ddb5
   DCIntrospect-ARC: 68a97cc2e99420b21bfcd66865b5376701f8e7f5
-  IQKeyboardManager: 322c7405df3eb5f7e50dede32ea937bf3d4364e0
+  IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
@@ -57,4 +57,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3bba01e79b7085e996313c8d9fc822c6c18787cc
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.2.0

@@ -95,6 +95,10 @@
 		00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13ED31EB4C60C00B0D766 /* BAFGlobalMananger.m */; };
 		00D13ED81EB4C75A00B0D766 /* BAFUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13ED71EB4C75A00B0D766 /* BAFUserInfo.m */; };
 		00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D13EDC1EB5927800B0D766 /* HRLLoginRequest.m */; };
+		00E0F8951EF020710095AA06 /* BAFMoreServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E0F8931EF020710095AA06 /* BAFMoreServicesViewController.m */; };
+		00E0F8961EF020710095AA06 /* BAFMoreServicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E0F8941EF020710095AA06 /* BAFMoreServicesViewController.xib */; };
+		00E0F89A1EF022220095AA06 /* MoreServicesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E0F8981EF022220095AA06 /* MoreServicesTableViewCell.m */; };
+		00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E0F8991EF022220095AA06 /* MoreServicesTableViewCell.xib */; };
 		00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F31EB4BDEC00A4FF73 /* LLBaseRequest.m */; };
 		00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F61EB4BE6900A4FF73 /* LLErrorOfRequest.m */; };
 		3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */; };
@@ -305,6 +309,12 @@
 		00D13EDA1EB5924700B0D766 /* HRLLoginInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLLoginInterface.h; sourceTree = "<group>"; };
 		00D13EDB1EB5927800B0D766 /* HRLLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLLoginRequest.h; sourceTree = "<group>"; };
 		00D13EDC1EB5927800B0D766 /* HRLLoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLLoginRequest.m; sourceTree = "<group>"; };
+		00E0F8921EF020710095AA06 /* BAFMoreServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFMoreServicesViewController.h; sourceTree = "<group>"; };
+		00E0F8931EF020710095AA06 /* BAFMoreServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFMoreServicesViewController.m; sourceTree = "<group>"; };
+		00E0F8941EF020710095AA06 /* BAFMoreServicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BAFMoreServicesViewController.xib; sourceTree = "<group>"; };
+		00E0F8971EF022220095AA06 /* MoreServicesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreServicesTableViewCell.h; sourceTree = "<group>"; };
+		00E0F8981EF022220095AA06 /* MoreServicesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreServicesTableViewCell.m; sourceTree = "<group>"; };
+		00E0F8991EF022220095AA06 /* MoreServicesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreServicesTableViewCell.xib; sourceTree = "<group>"; };
 		00E3B2F21EB4BDEC00A4FF73 /* LLBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLBaseRequest.h; sourceTree = "<group>"; };
 		00E3B2F31EB4BDEC00A4FF73 /* LLBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLBaseRequest.m; sourceTree = "<group>"; };
 		00E3B2F51EB4BE6900A4FF73 /* LLErrorOfRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLErrorOfRequest.h; sourceTree = "<group>"; };
@@ -441,6 +451,9 @@
 				0020934A1EDBFBA600C26176 /* BAFOrderServiceViewController.h */,
 				0020934B1EDBFBA600C26176 /* BAFOrderServiceViewController.m */,
 				0020934C1EDBFBA600C26176 /* BAFOrderServiceViewController.xib */,
+				00E0F8921EF020710095AA06 /* BAFMoreServicesViewController.h */,
+				00E0F8931EF020710095AA06 /* BAFMoreServicesViewController.m */,
+				00E0F8941EF020710095AA06 /* BAFMoreServicesViewController.xib */,
 				002093571EDC4B1700C26176 /* BAFOrderConfirmViewController.h */,
 				002093581EDC4B1700C26176 /* BAFOrderConfirmViewController.m */,
 				002093591EDC4B1700C26176 /* BAFOrderConfirmViewController.xib */,
@@ -462,6 +475,9 @@
 				002093521EDC343100C26176 /* OrderServiceTableViewCell.h */,
 				002093531EDC343100C26176 /* OrderServiceTableViewCell.m */,
 				002093541EDC343100C26176 /* OrderServiceTableViewCell.xib */,
+				00E0F8971EF022220095AA06 /* MoreServicesTableViewCell.h */,
+				00E0F8981EF022220095AA06 /* MoreServicesTableViewCell.m */,
+				00E0F8991EF022220095AA06 /* MoreServicesTableViewCell.xib */,
 				002093471EDBF89A00C26176 /* OrderFooterView.h */,
 				002093481EDBF89A00C26176 /* OrderFooterView.m */,
 				0020934F1EDC29DC00C26176 /* OrderServiceHeaderView.h */,
@@ -1071,6 +1087,7 @@
 				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
+				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
 				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
 				0020935B1EDC4B1700C26176 /* BAFOrderConfirmViewController.xib in Resources */,
 				0001CDCD1ED05130000889CE /* BAFCenterViewController.xib in Resources */,
@@ -1082,6 +1099,7 @@
 				00214B201ECFD0D500FF6FDE /* Assets.xcassets in Resources */,
 				005E85CF1E97924600115CAD /* Main.storyboard in Resources */,
 				0001CDD21ED05158000889CE /* BAFLeftViewController.xib in Resources */,
+				00E0F8961EF020710095AA06 /* BAFMoreServicesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1114,7 +1132,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E1363593991716C25DB63853 /* [CP] Copy Pods Resources */ = {
@@ -1166,6 +1184,7 @@
 				00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */,
 				0001CDCC1ED05130000889CE /* BAFCenterViewController.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
+				00E0F89A1EF022220095AA06 /* MoreServicesTableViewCell.m in Sources */,
 				0001CDE71ED060DF000889CE /* DYMBannerVC.m in Sources */,
 				007A79FC1EB6C4C50070406B /* DevelopEnvironment.m in Sources */,
 				0001CDDD1ED05179000889CE /* PersonalCenterTableViewCell.m in Sources */,
@@ -1186,6 +1205,7 @@
 				00214B391ECFDAC100FF6FDE /* MJExtensionConst.m in Sources */,
 				0020935A1EDC4B1700C26176 /* BAFOrderConfirmViewController.m in Sources */,
 				005074481EBB097000A6E8B1 /* HRLParkRequest.m in Sources */,
+				00E0F8951EF020710095AA06 /* BAFMoreServicesViewController.m in Sources */,
 				0001CDEC1ED06C1A000889CE /* BAFCenterOrderView.m in Sources */,
 				007A79F91EB6C41F0070406B /* BaseEnvironment.m in Sources */,
 				0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */,

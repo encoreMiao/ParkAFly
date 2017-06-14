@@ -17,6 +17,7 @@
 #import "HRLParkInterface.h"
 #import "HRLogicManager.h"
 #import "BAFParkServiceInfo.h"
+#import "BAFMoreServicesViewController.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexParkService,
@@ -107,7 +108,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 1) {
+        BAFMoreServicesViewController *moreServiceVC = [[BAFMoreServicesViewController alloc]init];
+        [self.navigationController pushViewController:moreServiceVC animated:YES];
+        moreServiceVC.more_serviceDic = self.more_serviceDic;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
