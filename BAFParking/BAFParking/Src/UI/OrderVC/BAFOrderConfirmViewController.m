@@ -57,7 +57,9 @@
 - (IBAction)submitOrder:(id)sender {
     NSLog(@"提交预约");
     SuccessViewController *successVC = [[SuccessViewController alloc]init];
-    successVC.type = kSuccessViewControllerTypeFailure;
+//    successVC.type = kSuccessViewControllerTypeFailure;
+    successVC.type = kSuccessViewControllerTypeSuccess;
+//    successVC.type = kSuccessViewControllerTypePay;
     [self.navigationController pushViewController:successVC animated:YES];
 }
 

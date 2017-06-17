@@ -10,6 +10,14 @@
 #import "PersonalCenterTableViewCell.h"
 #import "PersonalCenterHeaderView.h"
 #import "PersonalCenterFooterView.h"
+#import "OrderListViewController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "PersonalAccountViewController.h"
+#import "CompanyAccountViewController.h"
+#import "RightsViewController.h"
+#import "CouponViewController.h"
+#import "ShareViewController.h"
+#import "FeedBackViewController.h"
 
 @interface BAFLeftViewController ()
 <UITableViewDelegate, UITableViewDataSource,PersonalCenterFooterViewDelegate,PersonalCenterHeaderViewDelegate>
@@ -79,6 +87,41 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 55.0f;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIViewController *vc ;
+    switch (indexPath.row) {
+        case 0:
+            vc = [[PersonalAccountViewController alloc]init];
+            break;
+        case 1:
+            vc = [[CompanyAccountViewController alloc]init];
+            break;
+        case 2:
+            vc = [[RightsViewController alloc]init];
+            break;
+        case 3:
+            vc = [[CouponViewController alloc]init];
+            break;
+        case 4:
+            vc = [[OrderListViewController alloc]init];
+            break;
+        case 5:
+            vc = [[ShareViewController alloc]init];
+            break;
+        case 6:
+            vc = [[FeedBackViewController alloc]init];
+            break;
+    }
+    UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+    [nav pushViewController:vc animated:NO];
+    //当我们push成功之后，关闭我们的抽屉
+    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        //设置打开抽屉模式为MMOpenDrawerGestureModeNone，也就是没有任何效果。
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    }];
 }
 
 #pragma mark - PersonalCenterFooterViewTapDelegate

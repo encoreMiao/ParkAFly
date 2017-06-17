@@ -15,6 +15,7 @@
 #import "BAFWebViewController.h"
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "ParkListViewController.h"
+#import "OrderListViewController.h"
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate,BMKLocationServiceDelegate>{
     BMKLocationService *_locService;
@@ -121,6 +122,8 @@
 - (IBAction)showOrderListNotFromNav:(id)sender
 {
     DLog(@"显示订单列表");
+    OrderListViewController  *orderlistVC = [[OrderListViewController alloc]init];
+    [self.navigationController pushViewController:orderlistVC animated:YES];
 }
 
 - (IBAction)orderParkCar:(id)sender

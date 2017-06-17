@@ -102,6 +102,25 @@
 		00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F31EB4BDEC00A4FF73 /* LLBaseRequest.m */; };
 		00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F61EB4BE6900A4FF73 /* LLErrorOfRequest.m */; };
 		3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */; };
+		8D575E331EF4F2BD0061474D /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E311EF4F2BD0061474D /* OrderListViewController.m */; };
+		8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E321EF4F2BD0061474D /* OrderListViewController.xib */; };
+		8D575E381EF4F65D0061474D /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E361EF4F65D0061474D /* ShareViewController.m */; };
+		8D575E391EF4F65D0061474D /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E371EF4F65D0061474D /* ShareViewController.xib */; };
+		8D575E3D1EF4F6780061474D /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E3B1EF4F6780061474D /* FeedBackViewController.m */; };
+		8D575E3E1EF4F6780061474D /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E3C1EF4F6780061474D /* FeedBackViewController.xib */; };
+		8D575E421EF4F6A70061474D /* CouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E401EF4F6A70061474D /* CouponViewController.m */; };
+		8D575E431EF4F6A70061474D /* CouponViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E411EF4F6A70061474D /* CouponViewController.xib */; };
+		8D575E471EF4F6F30061474D /* PersonalAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E451EF4F6F30061474D /* PersonalAccountViewController.m */; };
+		8D575E481EF4F6F30061474D /* PersonalAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E461EF4F6F30061474D /* PersonalAccountViewController.xib */; };
+		8D575E4C1EF4F70B0061474D /* CompanyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E4A1EF4F70B0061474D /* CompanyAccountViewController.m */; };
+		8D575E4D1EF4F70B0061474D /* CompanyAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E4B1EF4F70B0061474D /* CompanyAccountViewController.xib */; };
+		8D575E511EF4F72B0061474D /* RightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E4F1EF4F72B0061474D /* RightsViewController.m */; };
+		8D575E521EF4F72B0061474D /* RightsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E501EF4F72B0061474D /* RightsViewController.xib */; };
+		8D575E561EF504EE0061474D /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E551EF504EE0061474D /* GCPlaceholderTextView.m */; };
+		8D575E5A1EF511120061474D /* RightsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E581EF511120061474D /* RightsTableViewCell.m */; };
+		8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E591EF511120061474D /* RightsTableViewCell.xib */; };
+		8D575E5F1EF516A20061474D /* CombineNewRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E5D1EF516A20061474D /* CombineNewRightsViewController.m */; };
+		8D575E601EF516A20061474D /* CombineNewRightsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E5E1EF516A20061474D /* CombineNewRightsViewController.xib */; };
 		8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F21EE42DCD0066289C /* BAFWebViewController.m */; };
 		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
@@ -323,6 +342,35 @@
 		00E3B2FA1EB4C2A400A4FF73 /* IUCallBackInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUCallBackInterface.h; sourceTree = "<group>"; };
 		3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAFParking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.release.xcconfig"; sourceTree = "<group>"; };
+		8D575E301EF4F2BD0061474D /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
+		8D575E311EF4F2BD0061474D /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
+		8D575E321EF4F2BD0061474D /* OrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListViewController.xib; sourceTree = "<group>"; };
+		8D575E351EF4F65D0061474D /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		8D575E361EF4F65D0061474D /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		8D575E371EF4F65D0061474D /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		8D575E3A1EF4F6780061474D /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
+		8D575E3B1EF4F6780061474D /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		8D575E3C1EF4F6780061474D /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
+		8D575E3F1EF4F6A70061474D /* CouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponViewController.h; sourceTree = "<group>"; };
+		8D575E401EF4F6A70061474D /* CouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponViewController.m; sourceTree = "<group>"; };
+		8D575E411EF4F6A70061474D /* CouponViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponViewController.xib; sourceTree = "<group>"; };
+		8D575E441EF4F6F30061474D /* PersonalAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalAccountViewController.h; sourceTree = "<group>"; };
+		8D575E451EF4F6F30061474D /* PersonalAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalAccountViewController.m; sourceTree = "<group>"; };
+		8D575E461EF4F6F30061474D /* PersonalAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalAccountViewController.xib; sourceTree = "<group>"; };
+		8D575E491EF4F70B0061474D /* CompanyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyAccountViewController.h; sourceTree = "<group>"; };
+		8D575E4A1EF4F70B0061474D /* CompanyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyAccountViewController.m; sourceTree = "<group>"; };
+		8D575E4B1EF4F70B0061474D /* CompanyAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompanyAccountViewController.xib; sourceTree = "<group>"; };
+		8D575E4E1EF4F72B0061474D /* RightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightsViewController.h; sourceTree = "<group>"; };
+		8D575E4F1EF4F72B0061474D /* RightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightsViewController.m; sourceTree = "<group>"; };
+		8D575E501EF4F72B0061474D /* RightsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightsViewController.xib; sourceTree = "<group>"; };
+		8D575E541EF504EE0061474D /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		8D575E551EF504EE0061474D /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
+		8D575E571EF511120061474D /* RightsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightsTableViewCell.h; sourceTree = "<group>"; };
+		8D575E581EF511120061474D /* RightsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightsTableViewCell.m; sourceTree = "<group>"; };
+		8D575E591EF511120061474D /* RightsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightsTableViewCell.xib; sourceTree = "<group>"; };
+		8D575E5C1EF516A10061474D /* CombineNewRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombineNewRightsViewController.h; sourceTree = "<group>"; };
+		8D575E5D1EF516A20061474D /* CombineNewRightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombineNewRightsViewController.m; sourceTree = "<group>"; };
+		8D575E5E1EF516A20061474D /* CombineNewRightsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CombineNewRightsViewController.xib; sourceTree = "<group>"; };
 		8D6058F11EE42DCD0066289C /* BAFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFWebViewController.h; sourceTree = "<group>"; };
 		8D6058F21EE42DCD0066289C /* BAFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFWebViewController.m; sourceTree = "<group>"; };
 		8D6058F41EE438C30066289C /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
@@ -396,6 +444,9 @@
 				0001CDD81ED05179000889CE /* PersonalCenterTableViewCell.h */,
 				0001CDD91ED05179000889CE /* PersonalCenterTableViewCell.m */,
 				0001CDDA1ED05179000889CE /* PersonalCenterTableViewCell.xib */,
+				8D575E571EF511120061474D /* RightsTableViewCell.h */,
+				8D575E581EF511120061474D /* RightsTableViewCell.m */,
+				8D575E591EF511120061474D /* RightsTableViewCell.xib */,
 			);
 			path = PersonalView;
 			sourceTree = "<group>";
@@ -462,6 +513,9 @@
 				002093681EDD2CE300C26176 /* SuccessViewController.xib */,
 				8D6058F41EE438C30066289C /* PopViewController.h */,
 				8D6058F51EE438C30066289C /* PopViewController.m */,
+				8D575E301EF4F2BD0061474D /* OrderListViewController.h */,
+				8D575E311EF4F2BD0061474D /* OrderListViewController.m */,
+				8D575E321EF4F2BD0061474D /* OrderListViewController.xib */,
 			);
 			path = OrderVC;
 			sourceTree = "<group>";
@@ -540,6 +594,27 @@
 				0001CDCE1ED05158000889CE /* BAFLeftViewController.h */,
 				0001CDCF1ED05158000889CE /* BAFLeftViewController.m */,
 				0001CDD01ED05158000889CE /* BAFLeftViewController.xib */,
+				8D575E441EF4F6F30061474D /* PersonalAccountViewController.h */,
+				8D575E451EF4F6F30061474D /* PersonalAccountViewController.m */,
+				8D575E461EF4F6F30061474D /* PersonalAccountViewController.xib */,
+				8D575E491EF4F70B0061474D /* CompanyAccountViewController.h */,
+				8D575E4A1EF4F70B0061474D /* CompanyAccountViewController.m */,
+				8D575E4B1EF4F70B0061474D /* CompanyAccountViewController.xib */,
+				8D575E4E1EF4F72B0061474D /* RightsViewController.h */,
+				8D575E4F1EF4F72B0061474D /* RightsViewController.m */,
+				8D575E501EF4F72B0061474D /* RightsViewController.xib */,
+				8D575E5C1EF516A10061474D /* CombineNewRightsViewController.h */,
+				8D575E5D1EF516A20061474D /* CombineNewRightsViewController.m */,
+				8D575E5E1EF516A20061474D /* CombineNewRightsViewController.xib */,
+				8D575E3F1EF4F6A70061474D /* CouponViewController.h */,
+				8D575E401EF4F6A70061474D /* CouponViewController.m */,
+				8D575E411EF4F6A70061474D /* CouponViewController.xib */,
+				8D575E351EF4F65D0061474D /* ShareViewController.h */,
+				8D575E361EF4F65D0061474D /* ShareViewController.m */,
+				8D575E371EF4F65D0061474D /* ShareViewController.xib */,
+				8D575E3A1EF4F6780061474D /* FeedBackViewController.h */,
+				8D575E3B1EF4F6780061474D /* FeedBackViewController.m */,
+				8D575E3C1EF4F6780061474D /* FeedBackViewController.xib */,
 			);
 			path = LeftVC_PersonalVC;
 			sourceTree = "<group>";
@@ -906,6 +981,7 @@
 		00EC0F861EC00BC300CDDEA8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8D575E531EF504EE0061474D /* HPGrowingTextView */,
 				0093D3A71EE052A00035987C /* Toast */,
 				0001CDDF1ED060DF000889CE /* DYMRollingBanner */,
 				00214B211ECFDAC100FF6FDE /* MJExtension */,
@@ -920,6 +996,15 @@
 				3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8D575E531EF504EE0061474D /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				8D575E541EF504EE0061474D /* GCPlaceholderTextView.h */,
+				8D575E551EF504EE0061474D /* GCPlaceholderTextView.m */,
+			);
+			path = HPGrowingTextView;
 			sourceTree = "<group>";
 		};
 		8D6058F01EE42DAB0066289C /* webVC */ = {
@@ -1084,22 +1169,31 @@
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
 				8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */,
 				8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */,
+				8D575E521EF4F72B0061474D /* RightsViewController.xib in Resources */,
 				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
+				8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
+				8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */,
 				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
 				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
 				0020935B1EDC4B1700C26176 /* BAFOrderConfirmViewController.xib in Resources */,
 				0001CDCD1ED05130000889CE /* BAFCenterViewController.xib in Resources */,
+				8D575E4D1EF4F70B0061474D /* CompanyAccountViewController.xib in Resources */,
 				00214B381ECFDAC100FF6FDE /* Info.plist in Resources */,
+				8D575E431EF4F6A70061474D /* CouponViewController.xib in Resources */,
 				005E85D41E97924600115CAD /* LaunchScreen.storyboard in Resources */,
 				0001CDF21ED08135000889CE /* BAFLoginViewController.xib in Resources */,
 				0020933C1EDBDBDE00C26176 /* BAFOrderViewController.xib in Resources */,
 				002093421EDBE6FC00C26176 /* OrderTableViewCell.xib in Resources */,
+				8D575E601EF516A20061474D /* CombineNewRightsViewController.xib in Resources */,
 				00214B201ECFD0D500FF6FDE /* Assets.xcassets in Resources */,
 				005E85CF1E97924600115CAD /* Main.storyboard in Resources */,
+				8D575E391EF4F65D0061474D /* ShareViewController.xib in Resources */,
 				0001CDD21ED05158000889CE /* BAFLeftViewController.xib in Resources */,
 				00E0F8961EF020710095AA06 /* BAFMoreServicesViewController.xib in Resources */,
+				8D575E481EF4F6F30061474D /* PersonalAccountViewController.xib in Resources */,
+				8D575E3E1EF4F6780061474D /* FeedBackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1132,7 +1226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E1363593991716C25DB63853 /* [CP] Copy Pods Resources */ = {
@@ -1176,6 +1270,7 @@
 				0093D3AA1EE052A00035987C /* UIView+Toast.m in Sources */,
 				005E85CC1E97924600115CAD /* ViewController.m in Sources */,
 				00214B3E1ECFDAC100FF6FDE /* NSObject+MJClass.m in Sources */,
+				8D575E421EF4F6A70061474D /* CouponViewController.m in Sources */,
 				0050745F1EBE9A9500A6E8B1 /* BAFCommentInfo.m in Sources */,
 				00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */,
 				0001CDF11ED08135000889CE /* BAFLoginViewController.m in Sources */,
@@ -1185,14 +1280,17 @@
 				0001CDCC1ED05130000889CE /* BAFCenterViewController.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
 				00E0F89A1EF022220095AA06 /* MoreServicesTableViewCell.m in Sources */,
+				8D575E331EF4F2BD0061474D /* OrderListViewController.m in Sources */,
 				0001CDE71ED060DF000889CE /* DYMBannerVC.m in Sources */,
 				007A79FC1EB6C4C50070406B /* DevelopEnvironment.m in Sources */,
 				0001CDDD1ED05179000889CE /* PersonalCenterTableViewCell.m in Sources */,
 				002093691EDD2CE300C26176 /* SuccessViewController.m in Sources */,
+				8D575E381EF4F65D0061474D /* ShareViewController.m in Sources */,
 				007A7A161EB719670070406B /* NSMutableDictionary+Valuation.m in Sources */,
 				007A7A0C1EB6DC1C0070406B /* SHNetNotificationCenter.m in Sources */,
 				8DE4335B1EED28F4009379ED /* BAFParkCharge.m in Sources */,
 				00214B401ECFDAC100FF6FDE /* NSObject+MJKeyValue.m in Sources */,
+				8D575E4C1EF4F70B0061474D /* CompanyAccountViewController.m in Sources */,
 				002093461EDBE80C00C26176 /* UIColor+HexColor.m in Sources */,
 				005E85C91E97924600115CAD /* AppDelegate.m in Sources */,
 				007A7A111EB6DE950070406B /* SHApplicationManagerCenter.m in Sources */,
@@ -1218,11 +1316,15 @@
 				005074591EBD5E1500A6E8B1 /* BAFCityInfo.m in Sources */,
 				00A2D5231EC05C7000B8F8BD /* BAFBaseNavigationViewController.m in Sources */,
 				005074621EBE9E3D00A6E8B1 /* BAFCouponInfo.m in Sources */,
+				8D575E3D1EF4F6780061474D /* FeedBackViewController.m in Sources */,
+				8D575E5A1EF511120061474D /* RightsTableViewCell.m in Sources */,
 				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
 				8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */,
+				8D575E511EF4F72B0061474D /* RightsViewController.m in Sources */,
 				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				0001CDE81ED060DF000889CE /* DYMRollingBannerVC.m in Sources */,
+				8D575E5F1EF516A20061474D /* CombineNewRightsViewController.m in Sources */,
 				0001CDE61ED060DF000889CE /* DYMBannerPool.m in Sources */,
 				0020933B1EDBDBDE00C26176 /* BAFOrderViewController.m in Sources */,
 				00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */,
@@ -1240,6 +1342,7 @@
 				002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */,
 				8DE433541EED0121009379ED /* ParkListTableViewCell.m in Sources */,
 				00214B411ECFDAC100FF6FDE /* NSObject+MJProperty.m in Sources */,
+				8D575E471EF4F6F30061474D /* PersonalAccountViewController.m in Sources */,
 				8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
 				8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */,
@@ -1252,6 +1355,7 @@
 				002093641EDC501600C26176 /* ServiceConfirmTableViewCell.m in Sources */,
 				007A79FF1EB6C5490070406B /* DistributedEnvironment.m in Sources */,
 				00214B3F1ECFDAC100FF6FDE /* NSObject+MJCoding.m in Sources */,
+				8D575E561EF504EE0061474D /* GCPlaceholderTextView.m in Sources */,
 				0001CDF61ED08959000889CE /* UIImage+Color.m in Sources */,
 				005074531EBB33BE00A6E8B1 /* BAFChargePageInfo.m in Sources */,
 				00214B3B1ECFDAC100FF6FDE /* MJProperty.m in Sources */,

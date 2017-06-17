@@ -13,6 +13,7 @@
 @property (nonatomic, strong) IBOutlet UIView *successView;
 @property (nonatomic, strong) IBOutlet UIView *failureView;
 @property (nonatomic, strong) IBOutlet UIView *payView;
+
 @property (nonatomic, strong) IBOutlet UIView *buttonView;
 @end
 
@@ -20,6 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+- (IBAction)contactClicked:(id)sender {
+    [self callPhoneNumber:@"4008138666"];
+}
+- (IBAction)checkOrder:(id)sender {
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -29,35 +35,9 @@
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationRightButtonWithText:@"完成" method:@selector(rightBtnClicked:)];
-}
-
-- (void)backMethod:(id)sender
-{
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
-        }
-    }
-}
-
-- (void)rightBtnClicked:(id)sender
-{
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
-        }
-    }
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)setType:(SuccessViewControllerType)type
-{
-    _type  =  type;
-    switch (type) {
+    
+    
+    switch (self.type) {
         case kSuccessViewControllerTypePay:
         {
             [self setNavigationTitle:@"现金支付"];
@@ -94,6 +74,47 @@
         default:
             break;
     }
+}
+
+- (void)backMethod:(id)sender
+{
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
+            [self.navigationController popToViewController:tempVC animated:YES];
+        }
+    }
+}
+
+- (void)rightBtnClicked:(id)sender
+{
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
+            [self.navigationController popToViewController:tempVC animated:YES];
+        }
+    }
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)setType:(SuccessViewControllerType)type
+{
+    _type  =  type;
+}
+
+
+- (void)callPhoneNumber:(NSString *)phoneNumber {
+    UIWebView*callWebview =[[UIWebView alloc] init];
+    NSURL *telURL =[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phoneNumber]];// 貌似tel:// 或者 tel: 都行
+    [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:callWebview];
+}
+- (void)callPhoneNumberWithOutAlert:(NSString *)phoneNumber{
+    NSURL * telUrl = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phoneNumber]];
+    [[UIApplication sharedApplication] openURL:telUrl];
 }
 
 @end

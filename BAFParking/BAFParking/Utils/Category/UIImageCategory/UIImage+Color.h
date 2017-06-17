@@ -10,4 +10,5 @@
 
 @interface UIImage (Color)
 + (UIImage *)imageWithColor:(UIColor *)color;//根据颜色生成纯色图片
++ (UIImage *)createImageWithColor:(UIColor *)color;
 @end
