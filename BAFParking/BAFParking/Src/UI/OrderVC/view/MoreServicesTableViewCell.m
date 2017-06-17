@@ -70,8 +70,8 @@
 }
 
 - (IBAction)checkButtonClicked:(id)sender {
-//    if ([self.delegate respondsToSelector:@selector(OrderServiceTableViewCellAction:)]) {
-//        [self.delegate OrderServiceTableViewCellAction:self];
-//    }
+    if ([self.delegate respondsToSelector:@selector(moreServiceTableViewCellAction:)]) {
+        [self.delegate moreServiceTableViewCellAction:self];
+    }
 }
 @end

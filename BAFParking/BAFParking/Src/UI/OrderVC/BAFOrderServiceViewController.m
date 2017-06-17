@@ -18,6 +18,7 @@
 #import "HRLogicManager.h"
 #import "BAFParkServiceInfo.h"
 #import "BAFMoreServicesViewController.h"
+#import "PopViewController.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexParkService,
@@ -68,6 +69,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationTitle:@"预约停车"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
+    [self setNavigationRightButtonWithText:@"说明" method:@selector(rightBtnClicked:)];
     
     self.serviceHeaderView.userInfo = self.userInfo;
     
@@ -96,6 +98,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     BAFOrderConfirmViewController *orderConfirmVC = [[BAFOrderConfirmViewController alloc]init];
     [self.navigationController pushViewController:orderConfirmVC animated:YES];
+}
+
+- (void)rightBtnClicked:(id)sender
+{
+    PopViewController *popView = [[PopViewController alloc] init];
+    popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    self.definesPresentationContext = YES;
+    //    popView.delegate = self;
+    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
+    [self presentViewController:popView animated:NO completion:nil];
 }
 
 #pragma mark - request

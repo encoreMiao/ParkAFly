@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuccessViewController">
             <connections>
+                <outlet property="buttonView" destination="PAp-gD-qn7" id="rFI-2i-ddt"/>
+                <outlet property="failureView" destination="9gM-3T-rOP" id="aLQ-h5-eVT"/>
+                <outlet property="payView" destination="vU8-uZ-ePJ" id="0u4-yZ-zk7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -42,7 +45,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tij_finish_ic" translatesAutoresizingMaskIntoConstraints="NO" id="JLt-0L-68M">
-                            <rect key="frame" x="165.5" y="20" width="44" height="44"/>
+                            <rect key="frame" x="166" y="20" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="99c-lu-1xL"/>
                                 <constraint firstAttribute="width" constant="44" id="zRV-d3-NmC"/>
@@ -58,14 +61,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbu-6T-6KC">
-                            <rect key="frame" x="0.0" y="134" width="375" height="0.5"/>
+                            <rect key="frame" x="0.0" y="134" width="375" height="1"/>
                             <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="VTd-Fb-gxy"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示：请将待支付金额到现场交给客户经理结算。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j51-zc-bb6">
-                            <rect key="frame" x="20" y="134.5" width="335" height="55.5"/>
+                            <rect key="frame" x="20" y="135" width="335" height="55"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -142,7 +145,7 @@
                 <constraint firstItem="EbD-Ex-4lK" firstAttribute="leading" secondItem="PAp-gD-qn7" secondAttribute="leading" constant="20" id="u5B-XR-NdD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="257" y="-357"/>
+            <point key="canvasLocation" x="-11" y="-131"/>
         </view>
     </objects>
     <resources>

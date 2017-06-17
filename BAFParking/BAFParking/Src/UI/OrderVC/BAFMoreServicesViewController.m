@@ -12,9 +12,10 @@
 #import "MoreServicesTableViewCell.h"
 #import "BAFParkServiceInfo.h"
 
+
 #define MoreServicesTableViewCellIdentifier  @"MoreServicesTableViewCellIdentifier"
 
-@interface BAFMoreServicesViewController ()<OrderFooterViewDelegate,UITableViewDelegate, UITableViewDataSource>
+@interface BAFMoreServicesViewController ()<OrderFooterViewDelegate,UITableViewDelegate, UITableViewDataSource,MoreServicesTableViewCellDelegate>
 @property (nonatomic, strong) IBOutlet OrderFooterView *footerView;
 @property (nonatomic, strong) IBOutlet UITableView  *mainTableView;
 @end
@@ -45,6 +46,8 @@
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
 }
 
+
+
 - (void)backMethod:(id)sender
 {
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
@@ -56,7 +59,12 @@
 
 - (void)nextStepButtonDelegate:(id)sender
 {
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
+    NSLog(@"%@",mutDic);
     
+    
+    
+    [[NSUserDefaults standardUserDefaults]setObject:mutDic forKey:OrderDefaults];
 }
 
 #pragma mark - UITableViewDelegate
@@ -105,7 +113,7 @@
     MoreServicesTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:MoreServicesTableViewCellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"MoreServicesTableViewCell" owner:nil options:nil] firstObject];
-//        cell.delegate = self;
+        cell.delegate = self;
     }
     NSUInteger section = indexPath.section;
 
@@ -128,5 +136,10 @@
 {
     _more_serviceDic = [more_serviceDic copy];
     [self.mainTableView reloadData];
+}
+
+- (void)moreServiceTableViewCellAction:(MoreServicesTableViewCell *)tableviewCell
+{
+    [tableviewCell setShow:!tableviewCell.show];
 }
 @end

@@ -10,6 +10,7 @@
 #import "OrderConfirmTableViewCell.h"
 #import "ServiceConfirmTableViewCell.h"
 #import "BAFOrderServiceViewController.h"
+#import "SuccessViewController.h"
 
 #define OrderConfirmTableViewCellIdentifier @"OrderConfirmTableViewCellIdentifier"
 #define ServiceConfirmTableViewCellIdentifier   @"ServiceConfirmTableViewCellIdentifier"
@@ -52,6 +53,12 @@
             [self.navigationController popToViewController:tempVC animated:YES];
         }
     }
+}
+- (IBAction)submitOrder:(id)sender {
+    NSLog(@"提交预约");
+    SuccessViewController *successVC = [[SuccessViewController alloc]init];
+    successVC.type = kSuccessViewControllerTypeFailure;
+    [self.navigationController pushViewController:successVC animated:YES];
 }
 
 #pragma mark - UITableViewDelegate

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFBaseViewController.h"
 
 typedef NS_ENUM(NSInteger,SuccessViewControllerType){
     kSuccessViewControllerTypeSuccess,
@@ -15,6 +16,6 @@ typedef NS_ENUM(NSInteger,SuccessViewControllerType){
 };
 
 
-@interface SuccessViewController : UIViewController
-
+@interface SuccessViewController : BAFBaseViewController    
+@property (nonatomic, assign) SuccessViewControllerType type;
 @end
