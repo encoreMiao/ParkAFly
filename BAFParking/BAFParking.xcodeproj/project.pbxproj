@@ -139,6 +139,8 @@
 		8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E891EF6BA0A0061474D /* SettingTableViewCell.xib */; };
 		8D575E8F1EF6C8EF0061474D /* CouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E8D1EF6C8EF0061474D /* CouponTableViewCell.m */; };
 		8D575E901EF6C8EF0061474D /* CouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E8E1EF6C8EF0061474D /* CouponTableViewCell.xib */; };
+		8D575E941EF6CFFC0061474D /* PersonalEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E921EF6CFFC0061474D /* PersonalEditViewController.m */; };
+		8D575E951EF6CFFC0061474D /* PersonalEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E931EF6CFFC0061474D /* PersonalEditViewController.xib */; };
 		8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F21EE42DCD0066289C /* BAFWebViewController.m */; };
 		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
@@ -416,6 +418,9 @@
 		8D575E8C1EF6C8EF0061474D /* CouponTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponTableViewCell.h; sourceTree = "<group>"; };
 		8D575E8D1EF6C8EF0061474D /* CouponTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponTableViewCell.m; sourceTree = "<group>"; };
 		8D575E8E1EF6C8EF0061474D /* CouponTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponTableViewCell.xib; sourceTree = "<group>"; };
+		8D575E911EF6CFFC0061474D /* PersonalEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalEditViewController.h; sourceTree = "<group>"; };
+		8D575E921EF6CFFC0061474D /* PersonalEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalEditViewController.m; sourceTree = "<group>"; };
+		8D575E931EF6CFFC0061474D /* PersonalEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalEditViewController.xib; sourceTree = "<group>"; };
 		8D6058F11EE42DCD0066289C /* BAFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFWebViewController.h; sourceTree = "<group>"; };
 		8D6058F21EE42DCD0066289C /* BAFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFWebViewController.m; sourceTree = "<group>"; };
 		8D6058F41EE438C30066289C /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
@@ -687,6 +692,9 @@
 				8D575E821EF6B9CD0061474D /* SettingViewController.h */,
 				8D575E831EF6B9CD0061474D /* SettingViewController.m */,
 				8D575E841EF6B9CD0061474D /* SettingViewController.xib */,
+				8D575E911EF6CFFC0061474D /* PersonalEditViewController.h */,
+				8D575E921EF6CFFC0061474D /* PersonalEditViewController.m */,
+				8D575E931EF6CFFC0061474D /* PersonalEditViewController.xib */,
 			);
 			path = LeftVC_PersonalVC;
 			sourceTree = "<group>";
@@ -1252,6 +1260,7 @@
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
 				8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */,
 				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
+				8D575E951EF6CFFC0061474D /* PersonalEditViewController.xib in Resources */,
 				8D575E651EF66F8B0061474D /* OrderListTableViewCell.xib in Resources */,
 				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
 				8D575E7C1EF6B2410061474D /* AccountDetailViewController.xib in Resources */,
@@ -1443,6 +1452,7 @@
 				005074501EBB2DF100A6E8B1 /* NSString+ImageExtName.m in Sources */,
 				002093641EDC501600C26176 /* ServiceConfirmTableViewCell.m in Sources */,
 				007A79FF1EB6C5490070406B /* DistributedEnvironment.m in Sources */,
+				8D575E941EF6CFFC0061474D /* PersonalEditViewController.m in Sources */,
 				00214B3F1ECFDAC100FF6FDE /* NSObject+MJCoding.m in Sources */,
 				8D575E641EF66F8B0061474D /* OrderListTableViewCell.m in Sources */,
 				8D575E561EF504EE0061474D /* GCPlaceholderTextView.m in Sources */,

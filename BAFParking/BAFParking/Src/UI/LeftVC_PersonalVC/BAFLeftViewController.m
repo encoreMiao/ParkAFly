@@ -19,6 +19,7 @@
 #import "ShareViewController.h"
 #import "FeedBackViewController.h"
 #import "SettingViewController.h"
+#import "PersonalEditViewController.h"
 
 @interface BAFLeftViewController ()
 <UITableViewDelegate, UITableViewDataSource,PersonalCenterFooterViewDelegate,PersonalCenterHeaderViewDelegate>
@@ -139,7 +140,12 @@
 #pragma mark - PersonalCenterHeaderViewDelegate
 - (void)PersonalCenterHeaderViewDidTapWithGesture:(UITapGestureRecognizer*)gesture
 {
-    DLog(@"header手势方法被调用");
+    UIViewController *vc = [[PersonalEditViewController alloc]init];
+    UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+    [nav pushViewController:vc animated:NO];
+    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    }];
 }
 
 @end
