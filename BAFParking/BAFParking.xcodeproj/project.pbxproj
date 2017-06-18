@@ -121,6 +121,24 @@
 		8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E591EF511120061474D /* RightsTableViewCell.xib */; };
 		8D575E5F1EF516A20061474D /* CombineNewRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E5D1EF516A20061474D /* CombineNewRightsViewController.m */; };
 		8D575E601EF516A20061474D /* CombineNewRightsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E5E1EF516A20061474D /* CombineNewRightsViewController.xib */; };
+		8D575E641EF66F8B0061474D /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E621EF66F8B0061474D /* OrderListTableViewCell.m */; };
+		8D575E651EF66F8B0061474D /* OrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E631EF66F8B0061474D /* OrderListTableViewCell.xib */; };
+		8D575E691EF68A1C0061474D /* WechatCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E671EF68A1C0061474D /* WechatCollectionViewCell.m */; };
+		8D575E6A1EF68A1C0061474D /* WechatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E681EF68A1C0061474D /* WechatCollectionViewCell.xib */; };
+		8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E6C1EF68A340061474D /* CardRechargeCollectionViewCell.m */; };
+		8D575E6F1EF68A340061474D /* CardRechargeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E6D1EF68A340061474D /* CardRechargeCollectionViewCell.xib */; };
+		8D575E761EF69E850061474D /* ChargeFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E741EF69E850061474D /* ChargeFooterCollectionReusableView.m */; };
+		8D575E771EF69E850061474D /* ChargeFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E751EF69E850061474D /* ChargeFooterCollectionReusableView.xib */; };
+		8D575E7B1EF6B2410061474D /* AccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E791EF6B2410061474D /* AccountDetailViewController.m */; };
+		8D575E7C1EF6B2410061474D /* AccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E7A1EF6B2410061474D /* AccountDetailViewController.xib */; };
+		8D575E801EF6B48C0061474D /* AccountDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E7E1EF6B48C0061474D /* AccountDetailTableViewCell.m */; };
+		8D575E811EF6B48C0061474D /* AccountDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E7F1EF6B48C0061474D /* AccountDetailTableViewCell.xib */; };
+		8D575E851EF6B9CD0061474D /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E831EF6B9CD0061474D /* SettingViewController.m */; };
+		8D575E861EF6B9CD0061474D /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E841EF6B9CD0061474D /* SettingViewController.xib */; };
+		8D575E8A1EF6BA0A0061474D /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E881EF6BA0A0061474D /* SettingTableViewCell.m */; };
+		8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E891EF6BA0A0061474D /* SettingTableViewCell.xib */; };
+		8D575E8F1EF6C8EF0061474D /* CouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E8D1EF6C8EF0061474D /* CouponTableViewCell.m */; };
+		8D575E901EF6C8EF0061474D /* CouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E8E1EF6C8EF0061474D /* CouponTableViewCell.xib */; };
 		8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F21EE42DCD0066289C /* BAFWebViewController.m */; };
 		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
@@ -371,6 +389,33 @@
 		8D575E5C1EF516A10061474D /* CombineNewRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombineNewRightsViewController.h; sourceTree = "<group>"; };
 		8D575E5D1EF516A20061474D /* CombineNewRightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombineNewRightsViewController.m; sourceTree = "<group>"; };
 		8D575E5E1EF516A20061474D /* CombineNewRightsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CombineNewRightsViewController.xib; sourceTree = "<group>"; };
+		8D575E611EF66F8B0061474D /* OrderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListTableViewCell.h; sourceTree = "<group>"; };
+		8D575E621EF66F8B0061474D /* OrderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListTableViewCell.m; sourceTree = "<group>"; };
+		8D575E631EF66F8B0061474D /* OrderListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListTableViewCell.xib; sourceTree = "<group>"; };
+		8D575E661EF68A1C0061474D /* WechatCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatCollectionViewCell.h; sourceTree = "<group>"; };
+		8D575E671EF68A1C0061474D /* WechatCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WechatCollectionViewCell.m; sourceTree = "<group>"; };
+		8D575E681EF68A1C0061474D /* WechatCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WechatCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D575E6B1EF68A340061474D /* CardRechargeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardRechargeCollectionViewCell.h; sourceTree = "<group>"; };
+		8D575E6C1EF68A340061474D /* CardRechargeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardRechargeCollectionViewCell.m; sourceTree = "<group>"; };
+		8D575E6D1EF68A340061474D /* CardRechargeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardRechargeCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D575E731EF69E850061474D /* ChargeFooterCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChargeFooterCollectionReusableView.h; sourceTree = "<group>"; };
+		8D575E741EF69E850061474D /* ChargeFooterCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChargeFooterCollectionReusableView.m; sourceTree = "<group>"; };
+		8D575E751EF69E850061474D /* ChargeFooterCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChargeFooterCollectionReusableView.xib; sourceTree = "<group>"; };
+		8D575E781EF6B2410061474D /* AccountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDetailViewController.h; sourceTree = "<group>"; };
+		8D575E791EF6B2410061474D /* AccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailViewController.m; sourceTree = "<group>"; };
+		8D575E7A1EF6B2410061474D /* AccountDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountDetailViewController.xib; sourceTree = "<group>"; };
+		8D575E7D1EF6B48C0061474D /* AccountDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDetailTableViewCell.h; sourceTree = "<group>"; };
+		8D575E7E1EF6B48C0061474D /* AccountDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailTableViewCell.m; sourceTree = "<group>"; };
+		8D575E7F1EF6B48C0061474D /* AccountDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountDetailTableViewCell.xib; sourceTree = "<group>"; };
+		8D575E821EF6B9CD0061474D /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		8D575E831EF6B9CD0061474D /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		8D575E841EF6B9CD0061474D /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		8D575E871EF6BA0A0061474D /* SettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewCell.h; sourceTree = "<group>"; };
+		8D575E881EF6BA0A0061474D /* SettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
+		8D575E891EF6BA0A0061474D /* SettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
+		8D575E8C1EF6C8EF0061474D /* CouponTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponTableViewCell.h; sourceTree = "<group>"; };
+		8D575E8D1EF6C8EF0061474D /* CouponTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponTableViewCell.m; sourceTree = "<group>"; };
+		8D575E8E1EF6C8EF0061474D /* CouponTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponTableViewCell.xib; sourceTree = "<group>"; };
 		8D6058F11EE42DCD0066289C /* BAFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFWebViewController.h; sourceTree = "<group>"; };
 		8D6058F21EE42DCD0066289C /* BAFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFWebViewController.m; sourceTree = "<group>"; };
 		8D6058F41EE438C30066289C /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
@@ -447,6 +492,24 @@
 				8D575E571EF511120061474D /* RightsTableViewCell.h */,
 				8D575E581EF511120061474D /* RightsTableViewCell.m */,
 				8D575E591EF511120061474D /* RightsTableViewCell.xib */,
+				8D575E661EF68A1C0061474D /* WechatCollectionViewCell.h */,
+				8D575E671EF68A1C0061474D /* WechatCollectionViewCell.m */,
+				8D575E681EF68A1C0061474D /* WechatCollectionViewCell.xib */,
+				8D575E6B1EF68A340061474D /* CardRechargeCollectionViewCell.h */,
+				8D575E6C1EF68A340061474D /* CardRechargeCollectionViewCell.m */,
+				8D575E6D1EF68A340061474D /* CardRechargeCollectionViewCell.xib */,
+				8D575E731EF69E850061474D /* ChargeFooterCollectionReusableView.h */,
+				8D575E741EF69E850061474D /* ChargeFooterCollectionReusableView.m */,
+				8D575E751EF69E850061474D /* ChargeFooterCollectionReusableView.xib */,
+				8D575E7D1EF6B48C0061474D /* AccountDetailTableViewCell.h */,
+				8D575E7E1EF6B48C0061474D /* AccountDetailTableViewCell.m */,
+				8D575E7F1EF6B48C0061474D /* AccountDetailTableViewCell.xib */,
+				8D575E871EF6BA0A0061474D /* SettingTableViewCell.h */,
+				8D575E881EF6BA0A0061474D /* SettingTableViewCell.m */,
+				8D575E891EF6BA0A0061474D /* SettingTableViewCell.xib */,
+				8D575E8C1EF6C8EF0061474D /* CouponTableViewCell.h */,
+				8D575E8D1EF6C8EF0061474D /* CouponTableViewCell.m */,
+				8D575E8E1EF6C8EF0061474D /* CouponTableViewCell.xib */,
 			);
 			path = PersonalView;
 			sourceTree = "<group>";
@@ -545,6 +608,9 @@
 				8DE433421EE9E4EA009379ED /* PopTableViewCell.h */,
 				8DE433431EE9E4EA009379ED /* PopTableViewCell.m */,
 				8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */,
+				8D575E611EF66F8B0061474D /* OrderListTableViewCell.h */,
+				8D575E621EF66F8B0061474D /* OrderListTableViewCell.m */,
+				8D575E631EF66F8B0061474D /* OrderListTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -597,6 +663,9 @@
 				8D575E441EF4F6F30061474D /* PersonalAccountViewController.h */,
 				8D575E451EF4F6F30061474D /* PersonalAccountViewController.m */,
 				8D575E461EF4F6F30061474D /* PersonalAccountViewController.xib */,
+				8D575E781EF6B2410061474D /* AccountDetailViewController.h */,
+				8D575E791EF6B2410061474D /* AccountDetailViewController.m */,
+				8D575E7A1EF6B2410061474D /* AccountDetailViewController.xib */,
 				8D575E491EF4F70B0061474D /* CompanyAccountViewController.h */,
 				8D575E4A1EF4F70B0061474D /* CompanyAccountViewController.m */,
 				8D575E4B1EF4F70B0061474D /* CompanyAccountViewController.xib */,
@@ -615,6 +684,9 @@
 				8D575E3A1EF4F6780061474D /* FeedBackViewController.h */,
 				8D575E3B1EF4F6780061474D /* FeedBackViewController.m */,
 				8D575E3C1EF4F6780061474D /* FeedBackViewController.xib */,
+				8D575E821EF6B9CD0061474D /* SettingViewController.h */,
+				8D575E831EF6B9CD0061474D /* SettingViewController.m */,
+				8D575E841EF6B9CD0061474D /* SettingViewController.xib */,
 			);
 			path = LeftVC_PersonalVC;
 			sourceTree = "<group>";
@@ -1166,19 +1238,26 @@
 			files = (
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
+				8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */,
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
+				8D575E861EF6B9CD0061474D /* SettingViewController.xib in Resources */,
 				8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */,
 				8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */,
 				8D575E521EF4F72B0061474D /* RightsViewController.xib in Resources */,
+				8D575E811EF6B48C0061474D /* AccountDetailTableViewCell.xib in Resources */,
+				8D575E771EF69E850061474D /* ChargeFooterCollectionReusableView.xib in Resources */,
 				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
 				8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */,
 				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
+				8D575E651EF66F8B0061474D /* OrderListTableViewCell.xib in Resources */,
 				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
+				8D575E7C1EF6B2410061474D /* AccountDetailViewController.xib in Resources */,
 				0020935B1EDC4B1700C26176 /* BAFOrderConfirmViewController.xib in Resources */,
 				0001CDCD1ED05130000889CE /* BAFCenterViewController.xib in Resources */,
+				8D575E6A1EF68A1C0061474D /* WechatCollectionViewCell.xib in Resources */,
 				8D575E4D1EF4F70B0061474D /* CompanyAccountViewController.xib in Resources */,
 				00214B381ECFDAC100FF6FDE /* Info.plist in Resources */,
 				8D575E431EF4F6A70061474D /* CouponViewController.xib in Resources */,
@@ -1189,10 +1268,12 @@
 				8D575E601EF516A20061474D /* CombineNewRightsViewController.xib in Resources */,
 				00214B201ECFD0D500FF6FDE /* Assets.xcassets in Resources */,
 				005E85CF1E97924600115CAD /* Main.storyboard in Resources */,
+				8D575E901EF6C8EF0061474D /* CouponTableViewCell.xib in Resources */,
 				8D575E391EF4F65D0061474D /* ShareViewController.xib in Resources */,
 				0001CDD21ED05158000889CE /* BAFLeftViewController.xib in Resources */,
 				00E0F8961EF020710095AA06 /* BAFMoreServicesViewController.xib in Resources */,
 				8D575E481EF4F6F30061474D /* PersonalAccountViewController.xib in Resources */,
+				8D575E6F1EF68A340061474D /* CardRechargeCollectionViewCell.xib in Resources */,
 				8D575E3E1EF4F6780061474D /* FeedBackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1294,6 +1375,8 @@
 				002093461EDBE80C00C26176 /* UIColor+HexColor.m in Sources */,
 				005E85C91E97924600115CAD /* AppDelegate.m in Sources */,
 				007A7A111EB6DE950070406B /* SHApplicationManagerCenter.m in Sources */,
+				8D575E8F1EF6C8EF0061474D /* CouponTableViewCell.m in Sources */,
+				8D575E851EF6B9CD0061474D /* SettingViewController.m in Sources */,
 				0022A2241EB0273500A920D6 /* NSString+URL.m in Sources */,
 				00214B421ECFDAC100FF6FDE /* NSString+MJExtension.m in Sources */,
 				00D13ED81EB4C75A00B0D766 /* BAFUserInfo.m in Sources */,
@@ -1310,6 +1393,7 @@
 				002093411EDBE6FC00C26176 /* OrderTableViewCell.m in Sources */,
 				0022A2271EB0279F00A920D6 /* NSString+Null.m in Sources */,
 				00214B3D1ECFDAC100FF6FDE /* MJPropertyType.m in Sources */,
+				8D575E761EF69E850061474D /* ChargeFooterCollectionReusableView.m in Sources */,
 				00214B451ECFE1CB00FF6FDE /* BAFBaseViewController.m in Sources */,
 				0050744B1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m in Sources */,
 				00214B3C1ECFDAC100FF6FDE /* MJPropertyKey.m in Sources */,
@@ -1322,6 +1406,7 @@
 				8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */,
 				8D575E511EF4F72B0061474D /* RightsViewController.m in Sources */,
 				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
+				8D575E691EF68A1C0061474D /* WechatCollectionViewCell.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				0001CDE81ED060DF000889CE /* DYMRollingBannerVC.m in Sources */,
 				8D575E5F1EF516A20061474D /* CombineNewRightsViewController.m in Sources */,
@@ -1332,9 +1417,12 @@
 				0001CDD11ED05158000889CE /* BAFLeftViewController.m in Sources */,
 				002093511EDC29DC00C26176 /* OrderServiceHeaderView.m in Sources */,
 				0001CDDC1ED05179000889CE /* PersonalCenterHeaderView.m in Sources */,
+				8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
+				8D575E801EF6B48C0061474D /* AccountDetailTableViewCell.m in Sources */,
 				00214B3A1ECFDAC100FF6FDE /* MJFoundation.m in Sources */,
 				0050745C1EBD628E00A6E8B1 /* BAFTcCardInfo.m in Sources */,
+				8D575E8A1EF6BA0A0061474D /* SettingTableViewCell.m in Sources */,
 				8DE433581EED28E8009379ED /* BAFParkAir.m in Sources */,
 				0001CDDB1ED05179000889CE /* PersonalCenterFooterView.m in Sources */,
 				00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */,
@@ -1348,6 +1436,7 @@
 				8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */,
 				007A7A051EB6C7500070406B /* BAFServerManager.m in Sources */,
 				005074561EBC211000A6E8B1 /* BAFClientPatrInfo.m in Sources */,
+				8D575E7B1EF6B2410061474D /* AccountDetailViewController.m in Sources */,
 				007A7A021EB6C5CE0070406B /* EnvironmentFactory.m in Sources */,
 				00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */,
 				0022A22D1EB0339A00A920D6 /* NLRequestMessageManager.m in Sources */,
@@ -1355,6 +1444,7 @@
 				002093641EDC501600C26176 /* ServiceConfirmTableViewCell.m in Sources */,
 				007A79FF1EB6C5490070406B /* DistributedEnvironment.m in Sources */,
 				00214B3F1ECFDAC100FF6FDE /* NSObject+MJCoding.m in Sources */,
+				8D575E641EF66F8B0061474D /* OrderListTableViewCell.m in Sources */,
 				8D575E561EF504EE0061474D /* GCPlaceholderTextView.m in Sources */,
 				0001CDF61ED08959000889CE /* UIImage+Color.m in Sources */,
 				005074531EBB33BE00A6E8B1 /* BAFChargePageInfo.m in Sources */,

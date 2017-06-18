@@ -8,6 +8,12 @@
 
 #import "BAFBaseViewController.h"
 
-@interface CouponViewController : BAFBaseViewController
+typedef NS_ENUM(NSInteger,CouponViewControllerType){
+    kCouponViewControllerTypeCommon,
+    kCouponViewControllerTypeUse,
+};
 
+
+@interface CouponViewController : BAFBaseViewController
+@property (nonatomic, assign) CouponViewControllerType type;
 @end

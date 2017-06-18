@@ -18,6 +18,7 @@
 #import "CouponViewController.h"
 #import "ShareViewController.h"
 #import "FeedBackViewController.h"
+#import "SettingViewController.h"
 
 @interface BAFLeftViewController ()
 <UITableViewDelegate, UITableViewDataSource,PersonalCenterFooterViewDelegate,PersonalCenterHeaderViewDelegate>
@@ -127,7 +128,12 @@
 #pragma mark - PersonalCenterFooterViewTapDelegate
 - (void)personalCenterFooterViewDidTapWithGesture:(UITapGestureRecognizer*)gesture
 {
-    DLog(@"footer手势方法被调用");
+    UIViewController *vc = [[SettingViewController alloc]init];
+    UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+    [nav pushViewController:vc animated:NO];
+    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    }];
 }
 
 #pragma mark - PersonalCenterHeaderViewDelegate

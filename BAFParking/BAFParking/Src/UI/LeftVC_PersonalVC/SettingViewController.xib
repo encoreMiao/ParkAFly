@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingViewController">
+            <connections>
+                <outlet property="mytableview" destination="ILJ-Ox-POX" id="R8l-O0-BL4"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1V-l1-bIB">
+                    <rect key="frame" x="20" y="575" width="335" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="3iT-Hz-E26"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="退出登录">
+                        <color key="titleColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前版本：v2.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZN-vr-pmz">
+                    <rect key="frame" x="20" y="548" width="335" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ILJ-Ox-POX">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="538"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="rxi-Hs-007"/>
+                        <outlet property="delegate" destination="-1" id="3cb-aB-zmK"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="6ZN-vr-pmz" firstAttribute="top" secondItem="ILJ-Ox-POX" secondAttribute="bottom" constant="10" id="0mk-M6-z9T"/>
+                <constraint firstAttribute="trailing" secondItem="6ZN-vr-pmz" secondAttribute="trailing" constant="20" id="4bR-mc-VQV"/>
+                <constraint firstAttribute="bottom" secondItem="O1V-l1-bIB" secondAttribute="bottom" constant="50" id="FeR-yk-xif"/>
+                <constraint firstItem="O1V-l1-bIB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="PHT-J9-8P9"/>
+                <constraint firstItem="ILJ-Ox-POX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SEd-M4-XmF"/>
+                <constraint firstAttribute="trailing" secondItem="ILJ-Ox-POX" secondAttribute="trailing" id="VvI-sU-11M"/>
+                <constraint firstAttribute="trailing" secondItem="O1V-l1-bIB" secondAttribute="trailing" constant="20" id="tIy-YU-GxJ"/>
+                <constraint firstItem="ILJ-Ox-POX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wyR-OH-iG0"/>
+                <constraint firstItem="6ZN-vr-pmz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="zW7-N5-y0N"/>
+                <constraint firstItem="O1V-l1-bIB" firstAttribute="top" secondItem="6ZN-vr-pmz" secondAttribute="bottom" constant="10" id="zuS-iz-uQJ"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

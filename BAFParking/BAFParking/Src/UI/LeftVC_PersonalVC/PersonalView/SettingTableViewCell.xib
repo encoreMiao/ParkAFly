@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SettingTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftbar_info_more" translatesAutoresizingMaskIntoConstraints="NO" id="ddk-uL-cyP">
+                        <rect key="frame" x="285" y="0.0" width="15" height="43.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="fv8-b5-E7L"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户协议" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rho-97-Vto">
+                        <rect key="frame" x="20" y="0.0" width="265" height="43.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ddk-uL-cyP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FXk-lt-ooS"/>
+                    <constraint firstAttribute="trailing" secondItem="ddk-uL-cyP" secondAttribute="trailing" constant="20" id="K7E-LH-gWH"/>
+                    <constraint firstItem="ddk-uL-cyP" firstAttribute="leading" secondItem="rho-97-Vto" secondAttribute="trailing" id="RnY-B6-HEP"/>
+                    <constraint firstItem="rho-97-Vto" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="UKU-Be-upx"/>
+                    <constraint firstItem="rho-97-Vto" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="cfn-p4-Hqb"/>
+                    <constraint firstAttribute="bottom" secondItem="ddk-uL-cyP" secondAttribute="bottom" id="jBY-vc-0Bn"/>
+                    <constraint firstAttribute="bottom" secondItem="rho-97-Vto" secondAttribute="bottom" id="llr-dZ-a1e"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="settingLabel" destination="rho-97-Vto" id="eWT-lK-hhg"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="leftbar_info_more" width="5" height="9"/>
+    </resources>
+</document>
