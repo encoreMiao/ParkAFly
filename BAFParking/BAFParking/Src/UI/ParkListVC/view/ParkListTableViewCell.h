@@ -29,5 +29,7 @@ typedef NS_ENUM(NSInteger, ParkListTableViewCellType) {
 
 @interface ParkListTableViewCell : UITableViewCell
 @property (nonatomic, assign) id<ParkListTableViewCellDelegate> delegate;
+@property (nonatomic, strong) BAFParkInfo *parkinfo;
 - (void)setParkinfo:(BAFParkInfo *)parkinfo withtype:(ParkListTableViewCellType)type;
+- (void)setCitySelected:(BOOL)selected;
 @end

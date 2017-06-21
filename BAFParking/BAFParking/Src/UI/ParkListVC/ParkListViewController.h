@@ -11,9 +11,11 @@
 typedef NS_ENUM(NSInteger, ParkListViewControllerType)
 {
     kParkListViewControllerTypeShow,//主页进来的，显示立即预约
-    kParkListViewControllerTypeSelect,//预约页面进来的，显示选择或者已选择
+    kParkListViewControllerTypeSelect,//预约页面进来的，显示选择或者已选择（会从预约界面带来cityid）
 };
 
 @interface ParkListViewController : BAFBaseViewController
 @property (nonatomic, assign) ParkListViewControllerType type;
+//@property (nonatomic, retain) NSString *cityTitleid;
+@property (nonatomic, retain) NSMutableDictionary *dicDatasource;
 @end

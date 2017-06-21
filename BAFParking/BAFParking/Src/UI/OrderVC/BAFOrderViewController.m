@@ -29,20 +29,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 #define OrderTableViewCellIdentifier            @"OrderTableViewCellIdentifier"
 
-//预约内容&id组合
-#define OrderParamTypeGoTime            @"plan_park_time"
-#define OrderParamTypeTime              @"plan_pick_time"
-#define OrderParamTypePark              @"park_id"
-#define OrderParamTypeTerminal          @"leave_terminal_id"
-#define OrderParamTypeBackTerminal      @"back_terminal_id"
-#define OrderParamTypeCompany           @"leave_passenger_number"
-#define OrderParamTypeCity              @"city_id"
-
-
 @interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate,PopViewControllerDelegate,IUICallbackInterface>
+{
+    NSString *_chargeRemark;
+}
 @property (strong, nonatomic) IBOutlet OrderFooterView  *footerView;
 @property (nonatomic, strong) IBOutlet UITableView      *mainTableView;
-@property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
 @property (nonatomic, strong) NSMutableArray<BAFCityInfo *>       *cityArr;
 @property (nonatomic, strong) NSMutableArray<BAFParkAir *>        *parkAirArr;
 @property (nonatomic, strong) NSMutableArray<BAFParkInfo *>       *parkArr;
@@ -57,6 +49,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.cityArr = [NSMutableArray array];
     self.parkAirArr = [NSMutableArray array];
     self.parkArr = [NSMutableArray array];
+    _chargeRemark = @"";
     self.footerView.delegate = self;
     self.mainTableView.tableFooterView = self.footerView;
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
@@ -74,10 +67,23 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     [self setNavigationTitle:@"预约停车"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
-    [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+    
     
     [self cityListRequest];
-    [self parkAirRequestWithCityId:@"1"];//城市默认北京
+    if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+        [self.mainTableView reloadData];
+    }
+
+    if ([_dicDatasource objectForKey:OrderParamTypeCity]) {
+        NSString *cityid = [_dicDatasource objectForKey:OrderParamTypeCity];
+        NSArray *tempCityId = [cityid componentsSeparatedByString:@"&"];
+        [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
+        [self parkAirRequestWithCityId:tempCityId[1]];
+    }else{
+        [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+        [self parkAirRequestWithCityId:@"1"];//城市默认北京
+        [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", @"北京",@"1"] forKey:OrderParamTypeCity];
+    }
 }
 
 - (void)backMethod:(id)sender
@@ -124,7 +130,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont systemFontOfSize:14.0f];
         label.textColor = [UIColor colorWithHex:0x585c64];
-        label.text = @"该车场收费标准为首日60元/天，之后25元/天";
+        label.text = _chargeRemark;
         [sectionFooterView addSubview:label];
     }else if(section == 2){
         [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 10)];
@@ -219,7 +225,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
     }
 }
-
 #pragma mark - OrderFooterViewDelegate
 - (void)nextStepButtonDelegate:(id)sender
 {
@@ -287,6 +292,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 //跳转到停车场选择
                 ParkListViewController  *parklistVC = [[ParkListViewController alloc]init];
                 parklistVC.type = kParkListViewControllerTypeSelect;
+                parklistVC.dicDatasource = _dicDatasource;
                 [self.navigationController pushViewController:parklistVC animated:YES];
             }
         }
@@ -308,7 +314,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - PopViewControllerDelegate
 - (void)popviewConfirmButtonDidClickedWithType:(PopViewControllerType)type popview:(PopViewController*)popview
 {
-#warning 还差一个停车场停车场停车场
     switch (type) {
         case kPopViewControllerTypeGoTime:
         {
@@ -327,17 +332,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             BAFCityInfo *currentCity = ((BAFCityInfo *)[self.cityArr objectAtIndex:popview.selectedIndex.row]);
             DLog(@"当前选择城市%@",currentCity.title);
             [self setNavigationRightButtonWithText:currentCity.title method:@selector(rightBtnClicked:)];
-            [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentCity.title,currentCity.id] forKey:OrderParamTypeCity];
-            [self parkAirRequestWithCityId:currentCity.id];
-            
             [_dicDatasource removeAllObjects];
             [self.mainTableView reloadData];
+            [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentCity.title,currentCity.id] forKey:OrderParamTypeCity];
+            [self parkAirRequestWithCityId:currentCity.id];
         }
             break;
         case kPopViewControllerTypeSelecGoTerminal:
         case kPopViewControllerTypeSelecBackTerminal:
         {
-            //要改，是航站楼，不是停车场，不是停车场不是停车场
             BAFParkAir *currentPark = ((BAFParkAir *)[self.parkAirArr objectAtIndex:popview.selectedIndex.row]);
             if (type == kPopViewControllerTypeSelecGoTerminal) {
                  [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentPark.title,currentPark.id] forKey:OrderParamTypeTerminal];
@@ -432,9 +435,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             
             if (self.parkArr) {
                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",self.parkArr[0].map_title,self.parkArr[0].map_id] forKey:OrderParamTypePark];
+                _chargeRemark = self.parkArr[0].map_charge.remark;
                 [self.mainTableView reloadData];
             }
-            
         }else{
             
         }

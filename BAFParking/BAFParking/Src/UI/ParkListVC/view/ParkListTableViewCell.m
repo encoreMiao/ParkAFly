@@ -8,9 +8,9 @@
 
 #import "ParkListTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "UIImage+Color.h"
 
 @interface ParkListTableViewCell()
-@property (nonatomic, retain) BAFParkInfo *parkinfo;
 @property (nonatomic, assign) ParkListTableViewCellType type;
 
 @property (weak, nonatomic) IBOutlet UIImageView *parkImageView;
@@ -25,12 +25,39 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    [self.selectButton setTitle:@"选择" forState:UIControlStateNormal];
+    [self.selectButton setTitle:@"已选择" forState:UIControlStateSelected];
+    [self.selectButton setTitleColor:[UIColor colorWithHex:kBAFCommonColor] forState:UIControlStateNormal];
+    [self.selectButton setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateSelected];
+    [self.selectButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0xffffff]] forState:UIControlStateNormal];
+    [self.selectButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:kBAFCommonColor]] forState:UIControlStateSelected];
+    self.selectButton.clipsToBounds = YES;
+    self.selectButton.layer.cornerRadius = 3.0f;
+    self.selectButton.layer.borderWidth = 1.0f;
+    self.selectButton.layer.borderColor = ((UIColor *)[UIColor colorWithHex:kBAFCommonColor]).CGColor;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
-    // Configure the view for the selected state
+- (void)setCitySelected:(BOOL)selected
+{
+    switch (_type) {
+        case kParkListTableViewCellTypeShow:
+        {
+
+        }
+            break;
+        case kParkListTableViewCellTypeSelect:
+        {
+            self.selectButton.selected = selected;
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)setParkinfo:(BAFParkInfo *)parkinfo withtype:(ParkListTableViewCellType)type
@@ -44,12 +71,27 @@
     switch (type) {
         case kParkListTableViewCellTypeShow:
         {
-             [self.selectButton setTitle:@"立即预约" forState:UIControlStateNormal];
+            [self.selectButton setTitle:@"立即预约" forState:UIControlStateNormal];
+            [self.selectButton setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateNormal];
+            [self.selectButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:kBAFCommonColor]] forState:UIControlStateNormal];
+            self.selectButton.clipsToBounds = YES;
+            self.selectButton.layer.cornerRadius = 3.0f;
+            self.selectButton.layer.borderWidth = 1.0f;
+            self.selectButton.layer.borderColor = ((UIColor *)[UIColor clearColor]).CGColor;
         }
             break;
         case kParkListTableViewCellTypeSelect:
         {
-            [self.selectButton setTitle:@"已选择" forState:UIControlStateNormal];
+            [self.selectButton setTitle:@"选择" forState:UIControlStateNormal];
+            [self.selectButton setTitle:@"已选择" forState:UIControlStateSelected];
+            [self.selectButton setTitleColor:[UIColor colorWithHex:kBAFCommonColor] forState:UIControlStateNormal];
+            [self.selectButton setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateSelected];
+            [self.selectButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0xffffff]] forState:UIControlStateNormal];
+            [self.selectButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:kBAFCommonColor]] forState:UIControlStateSelected];
+            self.selectButton.clipsToBounds = YES;
+            self.selectButton.layer.cornerRadius = 3.0f;
+            self.selectButton.layer.borderWidth = 1.0f;
+            self.selectButton.layer.borderColor = ((UIColor *)[UIColor colorWithHex:kBAFCommonColor]).CGColor;
         }
             break;
         default:
@@ -58,7 +100,6 @@
     
 }
 - (IBAction)selectButtonClicked:(id)sender {
-    //
     switch (self.type) {
         case kParkListTableViewCellTypeSelect:
             if ([self.delegate respondsToSelector:@selector(ParkListTableViewCellActionDelegate:actionType:)]) {
