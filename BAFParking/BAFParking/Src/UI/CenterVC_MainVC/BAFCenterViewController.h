@@ -10,5 +10,4 @@
 #import "BAFBaseViewController.h"
 
 @interface BAFCenterViewController : BAFBaseViewController
-
 @end

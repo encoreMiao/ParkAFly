@@ -12,6 +12,16 @@
 @interface BAFCenterOrderView()
 @property (nonatomic, weak) IBOutlet UIView *goingView;
 @property (nonatomic, weak) IBOutlet UIView *noneView;
+@property (nonatomic, weak) IBOutlet UILabel *plan_park_timeL;
+@property (nonatomic, weak) IBOutlet UILabel *car_license_noL;
+@property (nonatomic, weak) IBOutlet UILabel *park_nameL;
+
+//哪个代表当前状态？？？
+@property (nonatomic, weak) IBOutlet UIImageView *orderSuccessIV;
+@property (nonatomic, weak) IBOutlet UIImageView *parkFinishedIV;
+@property (nonatomic, weak) IBOutlet UIImageView *waitToGetCarIV;
+@property (nonatomic, weak) IBOutlet UIImageView *getCarSuccessIV;
+
 @end
 
 
@@ -32,7 +42,6 @@
     if (self) {
 //        [self addGestureOnBGView];
     }
-    DLog(@"initWithFrame");
     return self;
 }
 
@@ -43,7 +52,6 @@
     if (self) {
 //        [self addGestureOnBGView];
     }
-    DLog(@"initWithCoder");
     return self;
 }
 
@@ -64,6 +72,17 @@
         }
             break;
     }
+}
+
+- (void)setOrderDic:(NSDictionary *)orderDic
+{
+    _orderDic = orderDic;
+    if (self.type == kBAFCenterOrderViewTypeGoing) {
+        self.plan_park_timeL.text = [NSString stringWithFormat:@"预约泊车时间:%@",[orderDic objectForKey:@"plan_park_time"]];
+        self.car_license_noL.text = [orderDic objectForKey:@"car_license_no"];
+        self.park_nameL.text = [orderDic objectForKey:@"park_name"];
+    }
+    
 }
 
 - (IBAction)showOrderDetail:(id)sender

@@ -20,6 +20,7 @@
     
     self.orderTF.delegate = self;
     [self.orderTF addTarget:self action:@selector(orderCellClicked:) forControlEvents:UIControlEventTouchDown];
+    self.orderTF.userInteractionEnabled = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

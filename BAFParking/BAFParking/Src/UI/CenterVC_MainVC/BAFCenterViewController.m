@@ -16,17 +16,23 @@
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "ParkListViewController.h"
 #import "OrderListViewController.h"
+#import "BAFUserModelManger.h"
+#import "HRLOrderRequest.h"
+#import "HRLOrderInterface.h"
+#import "HRLogicManager.h"
 
+typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
+{
+    kRequestNumberLatestOrder,
+};
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate,BMKLocationServiceDelegate>{
     BMKLocationService *_locService;
 }
-@property (nonatomic, weak) IBOutlet UIButton *showPersonalCenterButton;
-@property (nonatomic, weak) IBOutlet UIButton *showOrderListButton;
-@property (nonatomic, weak) IBOutlet UIView *headerScrollerView;
-
+@property (nonatomic, weak) IBOutlet UIButton           *showPersonalCenterButton;
+@property (nonatomic, weak) IBOutlet UIButton           *showOrderListButton;
+@property (nonatomic, weak) IBOutlet UIView             *headerScrollerView;
 @property (nonatomic, weak) IBOutlet BAFCenterOrderView *orderView;
-
 @end
 
 
@@ -38,12 +44,10 @@
     [self locationService];
 }
 
--(void)locationService
+- (void)locationService
 {
-    //初始化BMKLocationService
-    _locService = [[BMKLocationService alloc]init];
-    //启动LocationService
-    [_locService startUserLocationService];
+    _locService = [[BMKLocationService alloc]init];//初始化BMKLocationService
+    [_locService startUserLocationService];//启动LocationService
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -52,6 +56,12 @@
     _locService.delegate = self;
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.navigationBar.translucent = YES;
+    
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    self.orderView.type = kBAFCenterOrderViewTypeNone;
+    if (userInfo.clientid) {
+        [self latestOrderWithClientId:userInfo.clientid];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,9 +78,6 @@
     [self setupScrollView];
     [self.headerScrollerView bringSubviewToFront:self.showPersonalCenterButton];
     [self.headerScrollerView bringSubviewToFront:self.showOrderListButton];
-    
-    self.orderView.delegate = self;
-    [self.orderView setType:kBAFCenterOrderViewTypeGoing];
 }
 
 - (void)setupScrollView
@@ -81,15 +88,11 @@
     _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
                                        ,[UIImage imageNamed:@"home_banner4"]
                                        ];
-    
-    // Start auto rolling (optional, default does not auto roll)
     _rollingBannerVC.rollingInterval = 3;
     [_rollingBannerVC startRolling];
-    // Add a handler when a tap event occours (optional, default do noting)
     [_rollingBannerVC addBannerTapHandler:^(NSInteger whichIndex) {
         NSLog(@"banner tapped, index = %@", @(whichIndex));
     }];
-    
     
     [self addChildViewController:_rollingBannerVC];
     [self.headerScrollerView addSubview:_rollingBannerVC.view];
@@ -98,40 +101,46 @@
 
 #pragma mark - Button Handlers
 - (void)leftDrawerButtonPress:(id)sender{
-    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
-}
-
-- (IBAction)showPersonalCenter:(id)sender
-{
-    //nav显示个人中心
-    DLog(@"显示个人中心");
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    if (userInfo.clientid) {
+        [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    }else{
+        BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
 }
 
 - (IBAction)showOrderList:(id)sender
 {
-    //nav显示订单列表？还是价格说明？
-    DLog(@"nav显示订单列表？还是价格说明？");
-//    BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
-//    [self.navigationController pushViewController:loginVC animated:YES];
-    
     BAFWebViewController  *webview = [[BAFWebViewController alloc]init];
     [self.navigationController pushViewController:webview animated:YES];
     [webview loadTargetURL:[NSURL URLWithString:@"http://parknfly.cn/Wap/Index/app_price"] title:@"价格说明"];
-    
 }
 
 - (IBAction)showOrderListNotFromNav:(id)sender
 {
     DLog(@"显示订单列表");
-    OrderListViewController  *orderlistVC = [[OrderListViewController alloc]init];
-    [self.navigationController pushViewController:orderlistVC animated:YES];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    if (userInfo.clientid) {
+        OrderListViewController  *orderlistVC = [[OrderListViewController alloc]init];
+        [self.navigationController pushViewController:orderlistVC animated:YES];
+    }else{
+        BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
 }
 
 - (IBAction)orderParkCar:(id)sender
 {
     DLog(@"预约停车");
-    BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
-    [self.navigationController pushViewController:orderVC animated:YES];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    if (userInfo.clientid) {
+        BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
+        [self.navigationController pushViewController:orderVC animated:YES];
+    }else{
+        BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
 }
 
 - (IBAction)parkingIntroduction:(id)sender
@@ -147,6 +156,32 @@
 - (void)showOrderDetail:(id)sender
 {
     DLog(@"查看正在进行的订单详细信息");
+}
+
+#pragma mark - Request
+- (void)latestOrderWithClientId:(NSString *)clientId
+{
+    id <HRLOrderInterface> loginReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [loginReq latestOrderRequestWithNumberIndex:kRequestNumberLatestOrder delegte:self client_id:clientId];
+}
+
+-(void)onJobComplete:(int)aRequestID Object:(id)obj
+{
+    if(aRequestID ==  kRequestNumberLatestOrder){
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]==200) {
+            self.orderView.delegate = self;
+            [self.orderView setType:kBAFCenterOrderViewTypeGoing];
+            self.orderView.orderDic = [obj objectForKey:@"data"];
+        }
+    }
+}
+
+-(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
+{
+    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 
 #pragma mark - BMKLocationServiceDelegate

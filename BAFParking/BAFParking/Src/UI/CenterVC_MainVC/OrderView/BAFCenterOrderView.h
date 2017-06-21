@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger,BAFCenterOrderViewType)
 @end
 
 @interface BAFCenterOrderView : UIView
-@property (nonatomic, assign) BAFCenterOrderViewType type;
+@property (nonatomic, assign) BAFCenterOrderViewType        type;
+@property (nonatomic, assign) NSDictionary                  *orderDic;
 @property (nonatomic, weak) id <BAFCenterOrderViewDelegate> delegate;
 @end

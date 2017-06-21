@@ -31,7 +31,6 @@
                             <state key="normal" image="home_btn_Personal"/>
                             <connections>
                                 <action selector="showLeftVC:" destination="-1" eventType="touchUpInside" id="I6g-ZN-8Bn"/>
-                                <action selector="showPersonalCenter:" destination="-1" eventType="touchUpInside" id="rUT-mN-jN9"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRl-LX-vFK">
@@ -361,8 +360,15 @@
                         <constraint firstAttribute="trailing" secondItem="FC7-nF-Th3" secondAttribute="trailing" id="xBD-HW-8Pe"/>
                     </constraints>
                     <connections>
+                        <outlet property="car_license_noL" destination="a9f-pK-tA9" id="v5E-3P-uuW"/>
+                        <outlet property="getCarSuccessIV" destination="LNQ-6d-Ete" id="lfl-gK-qji"/>
                         <outlet property="goingView" destination="Ln6-T2-Zht" id="9vI-hs-sbF"/>
                         <outlet property="noneView" destination="FC7-nF-Th3" id="bk8-Ug-eht"/>
+                        <outlet property="orderSuccessIV" destination="BS0-2Q-rcR" id="aCH-Ws-V51"/>
+                        <outlet property="parkFinishedIV" destination="qOo-95-KV9" id="w57-Cg-fP5"/>
+                        <outlet property="park_nameL" destination="VZL-Ih-gDU" id="HV7-3W-ecS"/>
+                        <outlet property="plan_park_timeL" destination="I9J-Hy-l3L" id="Cmk-tv-rLp"/>
+                        <outlet property="waitToGetCarIV" destination="Tpj-RC-Zxx" id="yMV-dF-Yu5"/>
                     </connections>
                 </view>
             </subviews>

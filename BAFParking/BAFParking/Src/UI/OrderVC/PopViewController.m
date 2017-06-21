@@ -8,7 +8,7 @@
 
 #import "PopViewController.h"
 #import "BAFCityInfo.h"
-#import "BAFParkInfo.h"
+#import "BAFParkAir.h"
 
 
 @interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -180,7 +180,7 @@
             break;
         case kPopViewControllerTypeSelecGoTerminal:
         case kPopViewControllerTypeSelecBackTerminal:
-            cell.textLabel.text = ((BAFParkInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).map_title;
+            cell.textLabel.text = ((BAFParkAir *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
         {
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;

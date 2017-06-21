@@ -25,9 +25,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSInteger   countDownSeconds;
     NSTimer     *timer;
 }
-@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
-@property (weak, nonatomic) IBOutlet UITextField *codeTF;
+@property (weak, nonatomic) IBOutlet UIButton       *codeBtn;
+@property (weak, nonatomic) IBOutlet UITextField    *phoneTF;
+@property (weak, nonatomic) IBOutlet UITextField    *codeTF;
 @end
 
 @implementation BAFLoginViewController
@@ -46,6 +46,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     [self setNavigationTitle:@"登录"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.phoneTF resignFirstResponder];
+    [self.codeTF resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -126,7 +133,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             textField.text = [textField.text substringToIndex:11];
         }
     }
-    
 }
 
 #pragma mark - REQUEST

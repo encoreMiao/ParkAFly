@@ -18,27 +18,24 @@
 #import "HRLPersonalCenterInterface.h"
 #import "BAFCityInfo.h"
 #import "BAFParkInfo.h"
+#import "BAFParkAir.h"
 #import "ParkListViewController.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCityList,
-    kRequestNumberIndexParkList,
+    kRequestNumberIndexGetAir,
+    kRequestNumberIndexGetParkByAid,
 };
 
 #define OrderTableViewCellIdentifier            @"OrderTableViewCellIdentifier"
 
-
 //预约内容&id组合
 #define OrderParamTypeGoTime            @"plan_park_time"
 #define OrderParamTypeTime              @"plan_pick_time"
-
 #define OrderParamTypePark              @"park_id"
-
 #define OrderParamTypeTerminal          @"leave_terminal_id"
 #define OrderParamTypeBackTerminal      @"back_terminal_id"
-
 #define OrderParamTypeCompany           @"leave_passenger_number"
-
 #define OrderParamTypeCity              @"city_id"
 
 
@@ -46,10 +43,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (strong, nonatomic) IBOutlet OrderFooterView  *footerView;
 @property (nonatomic, strong) IBOutlet UITableView      *mainTableView;
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
-
-@property (nonatomic, strong) NSMutableArray<BAFCityInfo *>        *cityArr;
-@property (nonatomic, strong) NSMutableArray<BAFParkInfo *>        *parkArr;
+@property (nonatomic, strong) NSMutableArray<BAFCityInfo *>       *cityArr;
+@property (nonatomic, strong) NSMutableArray<BAFParkAir *>        *parkAirArr;
+@property (nonatomic, strong) NSMutableArray<BAFParkInfo *>       *parkArr;
 @end
+
 
 @implementation BAFOrderViewController
 - (void)viewDidLoad {
@@ -57,8 +55,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     self.dicDatasource = [NSMutableDictionary dictionary];
     self.cityArr = [NSMutableArray array];
+    self.parkAirArr = [NSMutableArray array];
     self.parkArr = [NSMutableArray array];
-    
     self.footerView.delegate = self;
     self.mainTableView.tableFooterView = self.footerView;
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
@@ -79,7 +77,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
     
     [self cityListRequest];
-    [self parkListRequestWithCityId:@"1"];//城市默认北京
+    [self parkAirRequestWithCityId:@"1"];//城市默认北京
 }
 
 - (void)backMethod:(id)sender
@@ -158,7 +156,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     OrderTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderTableViewCellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderTableViewCell" owner:nil options:nil] firstObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         
     }
@@ -180,6 +178,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }else if (section == 1){
         cell.type = kOrderTableViewCellTypePark;
+        if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+            [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypePark]];
+        }
     }else if (section == 2){
         if (row == 0) {
             cell.type = kOrderTableViewCellTypeBackTime;
@@ -201,6 +202,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -264,9 +271,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             self.definesPresentationContext = YES;
             popView.delegate = self;
             if (cell.type == kOrderTableViewCellTypeGoParkTerminal) {
-                [popView configViewWithData:self.parkArr type:kPopViewControllerTypeSelecGoTerminal];
+                [popView configViewWithData:self.parkAirArr type:kPopViewControllerTypeSelecGoTerminal];
             }else{
-                [popView configViewWithData:self.parkArr type:kPopViewControllerTypeSelecBackTerminal];
+                [popView configViewWithData:self.parkAirArr type:kPopViewControllerTypeSelecBackTerminal];
             }
             [self presentViewController:popView animated:NO completion:nil];
         }
@@ -321,7 +328,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             DLog(@"当前选择城市%@",currentCity.title);
             [self setNavigationRightButtonWithText:currentCity.title method:@selector(rightBtnClicked:)];
             [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentCity.title,currentCity.id] forKey:OrderParamTypeCity];
-            [self parkListRequestWithCityId:currentCity.id];
+            [self parkAirRequestWithCityId:currentCity.id];
             
             [_dicDatasource removeAllObjects];
             [self.mainTableView reloadData];
@@ -331,13 +338,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         case kPopViewControllerTypeSelecBackTerminal:
         {
             //要改，是航站楼，不是停车场，不是停车场不是停车场
-            BAFParkInfo *currentPark = ((BAFParkInfo *)[self.parkArr objectAtIndex:popview.selectedIndex.row]);
+            BAFParkAir *currentPark = ((BAFParkAir *)[self.parkAirArr objectAtIndex:popview.selectedIndex.row]);
             if (type == kPopViewControllerTypeSelecGoTerminal) {
-                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentPark.map_title,currentPark.map_id] forKey:OrderParamTypeTerminal];
+                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentPark.title,currentPark.id] forKey:OrderParamTypeTerminal];
             }else{
-                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentPark.map_title,currentPark.map_id] forKey:OrderParamTypeBackTerminal];
+                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentPark.title,currentPark.id] forKey:OrderParamTypeBackTerminal];
             }
-            [self.mainTableView reloadData];
+            if (type == kPopViewControllerTypeSelecBackTerminal) {
+                [self.mainTableView reloadData];
+            }else{
+                [self getParkByAid:currentPark.id];
+            }
         }
             break;
         case kPopViewControllerTypeCompany:
@@ -359,10 +370,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [personCenterReq cityListRequestWithNumberIndex:kRequestNumberIndexCityList delegte:self];
 }
 
-- (void)parkListRequestWithCityId:(NSString *)cityid
+- (void)parkAirRequestWithCityId:(NSString *)cityid
+{
+//    id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
+//    [parkReq parkListRequestWithNumberIndex:kRequestNumberIndexParkList delegte:self city_id:cityid];
+    id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
+    [parkReq getAirByCidRequestWithNumberIndex:kRequestNumberIndexGetAir delegte:self city_id:cityid];
+}
+
+- (void)getParkByAid:(NSString *)parkid
 {
     id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
-    [parkReq parkListRequestWithNumberIndex:kRequestNumberIndexParkList delegte:self city_id:cityid];
+    [parkReq getParkByAidRequestWithNumberIndex:kRequestNumberIndexGetParkByAid delegte:self air_id:parkid];
 }
 
 #pragma mark - REQUEST
@@ -385,7 +404,22 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     
     
-    if (aRequestID == kRequestNumberIndexParkList) {
+    if (aRequestID == kRequestNumberIndexGetAir) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //停车场列表
+            if (self.parkAirArr) {
+                [self.parkAirArr removeAllObjects];
+            }
+            self.parkAirArr = [BAFParkAir mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
+        }else{
+            
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexGetParkByAid) {
         if ([obj isKindOfClass:[NSDictionary class]]) {
             obj = (NSDictionary *)obj;
         }
@@ -395,10 +429,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 [self.parkArr removeAllObjects];
             }
             self.parkArr = [BAFParkInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
+            
+            if (self.parkArr) {
+                [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",self.parkArr[0].map_title,self.parkArr[0].map_id] forKey:OrderParamTypePark];
+                [self.mainTableView reloadData];
+            }
+            
         }else{
             
         }
     }
+    
+    
 }
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message

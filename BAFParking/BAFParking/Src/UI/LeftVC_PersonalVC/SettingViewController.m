@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "SettingTableViewCell.h"
 #import "BAFCenterViewController.h"
+#import "BAFUserModelManger.h"
 
 #define SettingTableViewCellIdentifier  @"SettingTableViewCellIdentifier"
 
@@ -39,6 +40,14 @@
 
 - (void)backMethod:(id)sender
 {
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
+            [self.navigationController popToViewController:tempVC animated:YES];
+        }
+    }
+}
+- (IBAction)quitMethod:(id)sender {
+    [[BAFUserModelManger sharedInstance] removeUserInfo];
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
         if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
             [self.navigationController popToViewController:tempVC animated:YES];

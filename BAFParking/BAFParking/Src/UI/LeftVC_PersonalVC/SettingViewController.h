@@ -9,5 +9,4 @@
 #import "BAFBaseViewController.h"
 
 @interface SettingViewController : BAFBaseViewController
-
 @end
