@@ -239,4 +239,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 
+//车牌号验证
++ (BOOL)checkCarID:(NSString *)carID;
+{
+    if (carID.length!=7) {
+        return NO;
+    }
+    NSString *carRegex = @"^[\u4e00-\u9fa5]{1}[a-hj-zA-HJ-Z]{1}[a-hj-zA-HJ-Z_0-9]{4}[a-hj-zA-HJ-Z_0-9_\u4e00-\u9fa5]$";
+    NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
+    return [carTest evaluateWithObject:carID];
+    
+    return YES;
+}
+
 @end

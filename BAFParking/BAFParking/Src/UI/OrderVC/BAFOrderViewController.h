@@ -17,5 +17,6 @@
 #define OrderParamTypeCity              @"city_id"
 
 @interface BAFOrderViewController : BAFBaseViewController
+@property (nonatomic, strong) NSString                  *cityid;
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
 @end

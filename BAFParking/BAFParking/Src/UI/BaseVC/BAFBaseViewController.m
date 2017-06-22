@@ -56,6 +56,12 @@
     [_rightButton addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightButton]];
 }
+
+- (NSString *)rightButtonText
+{
+    return self.rightButton.titleLabel.text;
+}
+
 - (void)setNavigationRightButtonWithImage:(UIImage *)image method:(SEL)method{
     [self.rightButton setImage:image forState:UIControlStateNormal];
     [_rightButton addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];

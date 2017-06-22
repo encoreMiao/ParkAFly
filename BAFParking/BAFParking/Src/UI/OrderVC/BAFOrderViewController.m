@@ -45,10 +45,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dicDatasource = [NSMutableDictionary dictionary];
-    self.cityArr = [NSMutableArray array];
-    self.parkAirArr = [NSMutableArray array];
-    self.parkArr = [NSMutableArray array];
+    _dicDatasource = [NSMutableDictionary dictionary];
+    _cityArr = [NSMutableArray array];
+    _parkAirArr = [NSMutableArray array];
+    _parkArr = [NSMutableArray array];
     _chargeRemark = @"";
     self.footerView.delegate = self;
     self.mainTableView.tableFooterView = self.footerView;
@@ -74,6 +74,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self.mainTableView reloadData];
     }
 
+    if (self.cityid) {
+        [_dicDatasource setObject:self.cityid forKey:OrderParamTypeCity];
+        self.cityid = nil;
+    }
     if ([_dicDatasource objectForKey:OrderParamTypeCity]) {
         NSString *cityid = [_dicDatasource objectForKey:OrderParamTypeCity];
         NSArray *tempCityId = [cityid componentsSeparatedByString:@"&"];
@@ -228,13 +232,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - OrderFooterViewDelegate
 - (void)nextStepButtonDelegate:(id)sender
 {
-//    if (![_dicDatasource objectForKey:OrderTableViewCellTypeGoTime]) {
-//        [self showTipsInView:self.view message:@"请先选择出发时间" offset:self.view.center.x+100];
-//    }else if(![_dicDatasource objectForKey:OrderTableViewCellTypeGoParkTerminal]) {
-//        [self showTipsInView:self.view message:@"请先选择出发航站楼" offset:self.view.center.x+100];
-//    }else if(![_dicDatasource objectForKey:OrderTableViewCellTypePark]) {
-//        [self showTipsInView:self.view message:@"请先选择停车场" offset:self.view.center.x+100];
-//    }else{
+    if (![_dicDatasource objectForKey:OrderParamTypeGoTime]) {
+        [self showTipsInView:self.view message:@"请先选择出发时间" offset:self.view.center.x+100];
+    }else if(![_dicDatasource objectForKey:OrderParamTypeTerminal]) {
+        [self showTipsInView:self.view message:@"请先选择出发航站楼" offset:self.view.center.x+100];
+    }else if(![_dicDatasource objectForKey:OrderParamTypePark]) {
+        [self showTipsInView:self.view message:@"请先选择停车场" offset:self.view.center.x+100];
+    }else{
         if ([[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]) {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:OrderDefaults];
         }
@@ -242,7 +246,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [[NSUserDefaults standardUserDefaults]synchronize];
         BAFOrderServiceViewController *orderServiceVC = [[BAFOrderServiceViewController alloc]init];
         [self.navigationController pushViewController:orderServiceVC animated:YES];
-//    }
+    }
 }
 
 #pragma mark - OrderTableViewCellDelegate

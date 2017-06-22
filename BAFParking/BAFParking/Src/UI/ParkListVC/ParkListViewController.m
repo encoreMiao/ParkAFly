@@ -20,6 +20,7 @@
 
 #define  ParkListTableViewCelldentifier     @"ParkListTableViewCelldentifier"
 
+
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCityList,
     kRequestNumberIndexParkList,
@@ -49,14 +50,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self cityListRequest];
     
-    if (self.type == kParkListViewControllerTypeSelect && self.dicDatasource) {
+   
+    if (self.dicDatasource) {
         NSArray *tempCityId = [[self.dicDatasource objectForKey:OrderParamTypeCity] componentsSeparatedByString:@"&"];
-        [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
+        if (self.type == kParkListViewControllerTypeShow) {
+            [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
+        }
         [self parkListRequestWithCityId:tempCityId[1]];
     }else{
-        [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+        if (self.type == kParkListViewControllerTypeShow) {
+            [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+        }
         [self parkListRequestWithCityId:@"1"];//城市默认北京
     }
+    
 }
 
 - (void)backMethod:(id)sender
@@ -143,21 +150,22 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         case kParkListTableViewCellActionTypeOrder:
         {
             cell.selected = YES;
-            if ([_dicDatasource objectForKey:OrderParamTypePark]) {
-                [_dicDatasource removeObjectForKey:OrderParamTypePark];
-            }
-            NSString *str = [NSString stringWithFormat:@"%@&%@",cell.parkinfo.map_title,cell.parkinfo.map_id];
-            [_dicDatasource setObject:str forKey:OrderParamTypePark];
-            
+            NSString *str = [NSString stringWithFormat:@"%@&%@",self.rightButtonText,cell.parkinfo.map_city];
             BAFOrderViewController *orderServiceVC = [[BAFOrderViewController alloc]init];
-            orderServiceVC.dicDatasource = _dicDatasource;
+            orderServiceVC.cityid = str;
             [self.navigationController pushViewController:orderServiceVC animated:YES];
         }
             break;
         case kParkListTableViewCellActionTypeSelect:
         {
+            if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+                [_dicDatasource removeObjectForKey:OrderParamTypePark];
+            }
+            NSString *str = [NSString stringWithFormat:@"%@&%@",cell.parkinfo.map_title,cell.parkinfo.map_id];
+            [_dicDatasource setObject:str forKey:OrderParamTypePark];
             for (UIViewController *tempVC in self.navigationController.viewControllers) {
                 if ([tempVC isKindOfClass:[BAFOrderViewController class]]) {
+                    ((BAFOrderViewController *)tempVC).dicDatasource = _dicDatasource;
                     [self.navigationController popToViewController:tempVC animated:YES];
                 }
             }

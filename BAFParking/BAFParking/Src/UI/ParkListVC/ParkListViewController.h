@@ -16,6 +16,5 @@ typedef NS_ENUM(NSInteger, ParkListViewControllerType)
 
 @interface ParkListViewController : BAFBaseViewController
 @property (nonatomic, assign) ParkListViewControllerType type;
-//@property (nonatomic, retain) NSString *cityTitleid;
 @property (nonatomic, retain) NSMutableDictionary *dicDatasource;
 @end
