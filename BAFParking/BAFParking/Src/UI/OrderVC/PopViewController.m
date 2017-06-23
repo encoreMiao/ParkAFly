@@ -28,6 +28,7 @@
 @implementation PopViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.view.alpha = 0;
     self.arrDatasource = [NSMutableArray array];
     [self setupView];
 }
@@ -55,6 +56,19 @@
     [self.bgView addSubview:self.headerView];
     [self.bgView addSubview:self.tableView];
     [self.bgView addSubview:self.detailLabel];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.view.alpha = 0.5;
+//        
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+    
 }
 
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type

@@ -116,7 +116,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self.dicDatasource setObject:self.serviceHeaderView.licenseTF.text forKey:OrderParamTypeCar_license_no];
     [self.dicDatasource setObject:[NSString stringWithFormat:@"%d",self.serviceHeaderView.sexInt] forKey:OrderParamTypeContact_gender];
     
-    
     BAFOrderConfirmViewController *orderConfirmVC = [[BAFOrderConfirmViewController alloc]init];
     [self.navigationController pushViewController:orderConfirmVC animated:YES];
 }
