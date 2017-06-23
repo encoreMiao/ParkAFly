@@ -9,12 +9,6 @@
 #import "OrderServiceHeaderView.h"
 
 @interface OrderServiceHeaderView()
-@property (weak, nonatomic) IBOutlet UITextField    *nameTF;
-@property (weak, nonatomic) IBOutlet UITextField    *phoneTF;
-@property (weak, nonatomic) IBOutlet UITextField    *licenseTF;
-@property (weak, nonatomic) IBOutlet UIButton       *maleButton;
-@property (weak, nonatomic) IBOutlet UIButton       *femaleButton;
-
 @end
 
 @implementation OrderServiceHeaderView
@@ -51,9 +45,11 @@
     [button setImage:[UIImage imageNamed:@"list_rb_gender"] forState:UIControlStateNormal];
     
     if (button == self.maleButton) {
-        self.userInfo.csex = @"1";
+//        self.userInfo.csex = @"1";
+        self.sexInt = 1;
     }else{
-        self.userInfo.csex = @"2";
+//        self.userInfo.csex = @"2";
+        self.sexInt = 2;
     }
 }
 @end

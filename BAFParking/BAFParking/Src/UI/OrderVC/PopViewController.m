@@ -336,12 +336,20 @@
 
 - (void)dismiss
 {
-    UINavigationController* navi = self.navigationController;
-    if([navi isKindOfClass:[UINavigationController class]]){
-        [navi popViewControllerAnimated:YES];
-    }else{
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bgView.frame = CGRectMake(0, screenHeight, CGRectGetWidth(self.bgView.frame), CGRectGetHeight(self.bgView.frame));
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.alpha = 0;
+        } completion:^(BOOL finished) {
+            UINavigationController* navi = self.navigationController;
+            if([navi isKindOfClass:[UINavigationController class]]){
+                [navi popViewControllerAnimated:YES];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {

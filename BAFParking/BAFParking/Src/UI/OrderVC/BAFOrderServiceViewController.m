@@ -26,9 +26,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 #define OrderServiceTableViewCellIdentifier @"OrderServiceTableViewCellIdentifier"
 
-#define OrderParamTypeService             @"service" //收费项 id=>备注，如汽油 6=>92#
-
-
 @interface BAFOrderServiceViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderServiceTableViewCellDelegate>
 @property (nonatomic, strong) IBOutlet OrderFooterView *footerView;
 @property (nonatomic, strong) IBOutlet UITableView  *mainTableView;
@@ -70,9 +67,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationTitle:@"预约停车"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationRightButtonWithText:@"说明" method:@selector(rightBtnClicked:)];
-    
     self.serviceHeaderView.userInfo = self.userInfo;
     
+//    if ([self.dicDatasource objectForKey:OrderParamTypePark]) {
+//        NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"];
+//        [self parkListRequestWithParkid:arr[1]];
+//    }
     [self parkListRequestWithParkid:@"20"];
 }
 
@@ -96,6 +96,27 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)nextStepButtonDelegate:(id)sender;
 {
+    if ([self.serviceHeaderView.nameTF.text length]<=0) {
+        [self showTipsInView:self.view message:@"请输入姓名" offset:self.view.center.x+100];
+        return;
+    }
+    
+    if ([self.serviceHeaderView.phoneTF.text length]<=0) {
+        [self showTipsInView:self.view message:@"请输入手机号码" offset:self.view.center.x+100];
+        return;
+    }
+
+    if (![self checkCarID:self.serviceHeaderView.licenseTF.text]) {
+        [self showTipsInView:self.view message:@"请输入正确车牌号码" offset:self.view.center.x+100];
+        return;
+    }
+    
+    [self.dicDatasource setObject:self.serviceHeaderView.nameTF.text forKey:OrderParamTypeContact_name];
+    [self.dicDatasource setObject:self.serviceHeaderView.phoneTF.text forKey:OrderParamTypeContact_phone];
+    [self.dicDatasource setObject:self.serviceHeaderView.licenseTF.text forKey:OrderParamTypeCar_license_no];
+    [self.dicDatasource setObject:[NSString stringWithFormat:@"%d",self.serviceHeaderView.sexInt] forKey:OrderParamTypeContact_gender];
+    
+    
     BAFOrderConfirmViewController *orderConfirmVC = [[BAFOrderConfirmViewController alloc]init];
     [self.navigationController pushViewController:orderConfirmVC animated:YES];
 }
@@ -106,7 +127,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
     self.definesPresentationContext = YES;
-    //    popView.delegate = self;
     [popView configViewWithData:nil type:kPopViewControllerTypeTop];
     [self presentViewController:popView animated:NO completion:nil];
 }
@@ -240,7 +260,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 }
 
 //车牌号验证
-+ (BOOL)checkCarID:(NSString *)carID;
+- (BOOL)checkCarID:(NSString *)carID;
 {
     if (carID.length!=7) {
         return NO;

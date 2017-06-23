@@ -10,5 +10,11 @@
 #import "BAFUserInfo.h"
 
 @interface OrderServiceHeaderView : UIView
+@property (weak, nonatomic) IBOutlet UITextField    *nameTF;
+@property (weak, nonatomic) IBOutlet UITextField    *phoneTF;
+@property (weak, nonatomic) IBOutlet UITextField    *licenseTF;
+@property (weak, nonatomic) IBOutlet UIButton       *maleButton;
+@property (weak, nonatomic) IBOutlet UIButton       *femaleButton;
+@property (assign, nonatomic) int sexInt;
 @property (nonatomic, strong) BAFUserInfo *userInfo;
 @end
