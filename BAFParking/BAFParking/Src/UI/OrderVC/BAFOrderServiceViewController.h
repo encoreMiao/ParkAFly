@@ -12,6 +12,7 @@
 #define OrderParamTypeContact_gender    @"contact_gender"
 #define OrderParamTypeContact_phone     @"contact_phone"
 #define OrderParamTypeCar_license_no    @"car_license_no"
+
 #define OrderParamTypeBack_flight_no    @"back_flight_no"
 #define OrderParamTypePetrol            @"petrol"
 #define OrderParamTypeService           @"service"//收费项 id=>备注，如汽油 6=>92#

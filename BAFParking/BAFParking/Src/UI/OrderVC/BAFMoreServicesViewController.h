@@ -9,5 +9,6 @@
 #import "BAFBaseViewController.h"
 
 @interface BAFMoreServicesViewController : BAFBaseViewController
-@property (nonatomic, copy) NSMutableDictionary *more_serviceDic;
+@property (nonatomic, copy)     NSMutableDictionary *more_serviceDic;
+@property (nonatomic, retain)   NSMutableDictionary *service_description;
 @end

@@ -18,6 +18,8 @@
 @interface BAFMoreServicesViewController ()<OrderFooterViewDelegate,UITableViewDelegate, UITableViewDataSource,MoreServicesTableViewCellDelegate>
 @property (nonatomic, strong) IBOutlet OrderFooterView *footerView;
 @property (nonatomic, strong) IBOutlet UITableView  *mainTableView;
+
+@property (nonatomic, strong) NSMutableDictionary *dicDatasource;
 @end
 
 @implementation BAFMoreServicesViewController
@@ -25,11 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
+    self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -46,8 +48,6 @@
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
 }
 
-
-
 - (void)backMethod:(id)sender
 {
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
@@ -59,12 +59,29 @@
 
 - (void)nextStepButtonDelegate:(id)sender
 {
-    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
-    NSLog(@"%@",mutDic);
+    NSString *str = @"";
+    if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+        NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+        NSString *str = nil;
+        if ([self.more_serviceDic.allKeys containsObject:@"204"]) {
+            NSDictionary *dic = [self.more_serviceDic objectForKey:@"204"];
+            str = [NSString stringWithFormat:@"%@=>%@",[dic objectForKey:@"charge_id"],[dic objectForKey:@"remark"]];
+        }
+        if (str&&[arr containsObject:str]) {
+            if (![self.dicDatasource objectForKey:OrderParamTypePetrol]) {
+                [self showTipsInView:self.view message:@"请选择汽油型号" offset:self.view.center.x+100];
+                return;
+            }
+        }
+    }
+    [[NSUserDefaults standardUserDefaults]setObject:self.dicDatasource forKey:OrderDefaults];
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
-    
-    
-    [[NSUserDefaults standardUserDefaults]setObject:mutDic forKey:OrderDefaults];
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:[BAFOrderServiceViewController class]]) {
+            [self.navigationController popToViewController:tempVC animated:YES];
+        }
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -120,15 +137,30 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     BAFParkServiceInfo *serviceInfo;
     serviceInfo = [BAFParkServiceInfo mj_objectWithKeyValues:[self.more_serviceDic objectForKey:[self.more_serviceDic.allKeys objectAtIndex:indexPath.section]]];
+    NSString *description;
+    NSString *str = [NSString stringWithFormat:@"%@=>%@",serviceInfo.charge_id,serviceInfo.remark];
     if ([[self.more_serviceDic.allKeys objectAtIndex:indexPath.section] isEqualToString:@"204"]) {
         //代加油
         cell.type = kMoreServicesTableViewCellType204;
+        description = [self.service_description objectForKey:@"fuel_description"];
+        if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+            NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+            if ([arr containsObject:str]) {
+                [cell setShow:YES];
+            }
+        }
 //        [cell setShow:self.isTextServiceShow];
     }else{
         cell.type = KMoreServicesTableViewCellType205;
-//        [cell setShow:self.isCommonServiceShow];
+        if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+            NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+            if ([arr containsObject:str]) {
+                [cell setShow:YES];
+            }
+        }
+        description = [self.service_description objectForKey:@"car_wash_description"];
     }
-    cell.serviceInfo = serviceInfo;
+    [cell setServiceInfo:serviceInfo andDescription:description];
     return cell;
 }
 
@@ -138,8 +170,62 @@
     [self.mainTableView reloadData];
 }
 
+- (void)fuelSelectedAction:(MoreServicesTableViewCell *)tableviewCell
+{
+    if (tableviewCell.show) {
+        if (tableviewCell.type == kMoreServicesTableViewCellType204) {
+            [self.dicDatasource setObject:tableviewCell.fuelStr forKey:OrderParamTypePetrol];
+            
+            NSString *str = [NSString stringWithFormat:@"%@=>%@",tableviewCell.serviceInfo.charge_id,tableviewCell.serviceInfo.remark];
+            if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+                NSMutableArray *arr = [NSMutableArray arrayWithArray:[[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"]];
+                if (![arr containsObject:str]) {
+                    [arr addObject:str];
+                }
+                str = [arr componentsJoinedByString:@"&"];
+                [self.dicDatasource setObject:str forKey:OrderParamTypeService];
+            }else{
+                [self.dicDatasource setObject:str forKey:OrderParamTypeService];
+            }
+        }
+    }
+}
+
 - (void)moreServiceTableViewCellAction:(MoreServicesTableViewCell *)tableviewCell
 {
     [tableviewCell setShow:!tableviewCell.show];
+    NSString *str = [NSString stringWithFormat:@"%@=>%@",tableviewCell.serviceInfo.charge_id,tableviewCell.serviceInfo.remark];
+    if (tableviewCell.show) {
+        if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+            NSMutableArray *arr = [NSMutableArray arrayWithArray:[[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"]];
+            if (![arr containsObject:str]) {
+                [arr addObject:str];
+            }
+            str = [arr componentsJoinedByString:@"&"];
+            [self.dicDatasource setObject:str forKey:OrderParamTypeService];
+        }else{
+            [self.dicDatasource setObject:str forKey:OrderParamTypeService];
+        }
+    }
+    else{
+        if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+            NSMutableArray *arr = [NSMutableArray arrayWithArray:[[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"]];
+            if ([arr containsObject:str]) {
+                [arr removeObject:str];
+            }
+            if (arr.count>0) {
+                NSString *str = [arr componentsJoinedByString:@"&"];
+                [self.dicDatasource setObject:str forKey:OrderParamTypeService];
+            }
+            else{
+                [self.dicDatasource removeObjectForKey:OrderParamTypeService];
+            }
+        }
+        if (tableviewCell.type == kMoreServicesTableViewCellType204) {
+            if ([self.dicDatasource objectForKey:OrderParamTypePetrol]) {
+                [self.dicDatasource removeObjectForKey:OrderParamTypePetrol];
+            }
+        }
+    }
 }
 @end

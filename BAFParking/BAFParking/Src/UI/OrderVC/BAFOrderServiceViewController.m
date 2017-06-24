@@ -32,8 +32,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (nonatomic, strong) IBOutlet OrderServiceHeaderView *serviceHeaderView;
 @property (nonatomic, strong) BAFUserInfo *userInfo;
 
-@property (nonatomic, copy) NSMutableDictionary *single_serviceDic;
-@property (nonatomic, copy) NSMutableDictionary *more_serviceDic;
+@property (nonatomic, copy)     NSMutableDictionary *single_serviceDic;
+@property (nonatomic, copy)     NSMutableDictionary *more_serviceDic;
+@property (nonatomic, copy)     NSMutableDictionary *service_description;
 
 @property (nonatomic, assign) BOOL isTextServiceShow;
 @property (nonatomic, assign) BOOL isCommonServiceShow;
@@ -43,11 +44,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @end
 
 @implementation BAFOrderServiceViewController
-
+#pragma mark - lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
+//    self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
     self.isTextServiceShow = NO;
     self.isCommonServiceShow = NO;
     self.isMoreServiceSelected = NO;
@@ -62,6 +62,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
+    
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationTitle:@"预约停车"];
@@ -85,6 +87,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
 }
 
+#pragma mark - actions
 - (void)backMethod:(id)sender
 {
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
@@ -144,6 +147,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         BAFMoreServicesViewController *moreServiceVC = [[BAFMoreServicesViewController alloc]init];
         [self.navigationController pushViewController:moreServiceVC animated:YES];
         moreServiceVC.more_serviceDic = self.more_serviceDic;
+        moreServiceVC.service_description = self.service_description;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -203,7 +207,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (section == 0) {
         return self.single_serviceDic.count;
     }else{
-//        return self.more_serviceDic.count;
         return 1;
     }
 }
@@ -235,7 +238,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     return cell;
 }
-#pragma mark - REQUEST
+#pragma mark - requestdelegate
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
 {
     if (aRequestID == kRequestNumberIndexParkService) {
@@ -246,6 +249,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             //停车场服务列表
             self.more_serviceDic = [[obj objectForKey:@"data"] objectForKey:@"more_service"];
             self.single_serviceDic = [[obj objectForKey:@"data"] objectForKey:@"single_service"];
+            self.service_description = [[obj objectForKey:@"data"] objectForKey:@"service_description"];
             [self.mainTableView reloadData];
         }else{
             

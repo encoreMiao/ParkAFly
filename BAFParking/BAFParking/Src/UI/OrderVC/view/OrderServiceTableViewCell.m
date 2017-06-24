@@ -64,6 +64,7 @@
     _serviceInfo = serviceInfo;
     self.serviceTitle.text = serviceInfo.title;
     self.serviceNotitionLabel.text = serviceInfo.remark;
+    self.couponLabel.text = [NSString stringWithFormat:@"%d元",serviceInfo.strike_price.integerValue/100];
 }
 
 - (void)setShow:(BOOL)show
