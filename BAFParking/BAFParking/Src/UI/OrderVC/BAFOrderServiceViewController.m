@@ -140,24 +140,23 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSMutableArray *mutArr = [NSMutableArray array];
     if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
         mutArr = [NSMutableArray arrayWithArray:[[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"]];
-//        if (self.singleSelectedStr) {
-//            if (![mutArr containsObject:self.singleSelectedStr]) {
-//                [mutArr addObject:self.singleSelectedStr];
-//            }
-//        }
+        for (NSString *key in self.single_serviceDic) {
+            NSDictionary *singleService = [self.single_serviceDic objectForKey:key];
+            NSString *str = [NSString stringWithFormat:@"%@=>%@=>%@=>%@",[singleService objectForKey:@"charge_id"],[singleService objectForKey:@"remark"],[singleService objectForKey:@"title"],[singleService objectForKey:@"strike_price"]];
+            if ([mutArr containsObject:str]) {
+                [mutArr removeObject:str];
+            }
+            
+        }
     }
-//    else{
-//        if (self.singleSelectedStr) {
-//            mutArr = [NSMutableArray arrayWithObjects:self.singleSelectedStr, nil];
-//        }
-//    }
     
-    
-    
-    
+    if (self.singleSelectedStr) {
+        [mutArr addObject:self.singleSelectedStr];
+    }
     if (mutArr.count>0) {
         [self.dicDatasource setObject:[mutArr componentsJoinedByString:@"&"] forKey:OrderParamTypeService];
     }
+    
     
     if (self.isTextServiceShow) {
         if (self.textServiceIndexPath) {
@@ -250,11 +249,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.isTextServiceShow = NO;
         self.isCommonServiceShow = !cell.show;
     }
-    
-    if (self.singleSelectedStr == nil) {
-        
-    }
-    
+
+
     self.singleSelectedStr = str;
     if (!self.isTextServiceShow&&!self.isCommonServiceShow) {
         self.textServiceIndexPath = nil;
@@ -265,7 +261,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             self.textServiceIndexPath = nil;
         }
     }
-    
     [self.mainTableView reloadData];
 }
 
