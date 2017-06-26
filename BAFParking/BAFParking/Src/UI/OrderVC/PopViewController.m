@@ -131,6 +131,7 @@
         {
             self.bgView.frame = CGRectMake(0, screenHeight-300, screenWidth, 300);
             self.popTitleLabel.text = @"费用明细";
+//            ....
         }
             break;
         case kPopViewControllerTypeCompany:
@@ -153,7 +154,7 @@
             [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
             [self.bgView addSubview:self.datePicker];
         }
-            break;
+            break;;
         default:
             break;
     }

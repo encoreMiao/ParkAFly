@@ -15,6 +15,7 @@
 #import "HRLOrderInterface.h"
 #import "HRLogicManager.h"
 #import "BAFUserModelManger.h"
+#import "PopViewController.h"
 
 #define OrderConfirmTableViewCellIdentifier @"OrderConfirmTableViewCellIdentifier"
 #define ServiceConfirmTableViewCellIdentifier   @"ServiceConfirmTableViewCellIdentifier"
@@ -84,14 +85,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 }
 - (IBAction)detailfeeAction:(id)sender {
     NSLog(@"明细");
+    PopViewController *popView = [[PopViewController alloc] init];
+    popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    self.definesPresentationContext = YES;
+    [popView configViewWithData:[self configTotoalfee] type:kPopViewControllerTypeTipsshow];
+    [self presentViewController:popView animated:NO completion:nil];
 }
 - (IBAction)submitOrder:(id)sender {
     NSLog(@"提交预约");
     [self addOrderRequest];
 }
 
-- (void)configTotoalfee
+- (NSArray *)configTotoalfee
 {
+    NSMutableArray *mutArr = [NSMutableArray array];
     NSInteger totalFee = 0;
     NSInteger firstdayfee = [[self.orderDic objectForKey:OrderParamTypeParkFeeFirstDay] integerValue];
     NSInteger dayfee = [[self.orderDic objectForKey:OrderParamTypeParkFeeDay] integerValue];
@@ -113,6 +121,28 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     self.feeLabel.text = [NSString stringWithFormat:@"预计费用：¥%ld元",totalFee/100];
+    
+    [mutArr addObject:[NSArray arrayWithObjects:@"预计费用",[NSString stringWithFormat:@"¥%ld元",totalFee/100], nil]];
+    
+    if (days>0) {
+        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld元",(firstdayfee + dayfee*days)/100], nil]];
+    }else{
+        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld元",firstdayfee/100], nil]];
+    }
+    
+    if ([self.orderDic objectForKey:OrderParamTypeService]) {
+        NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+        self.serviceArr = [NSMutableArray arrayWithArray:arr];
+        for (NSString *str in self.serviceArr) {
+            NSArray *detailArr = [str componentsSeparatedByString:@"=>"];
+            totalFee += [detailArr[3] integerValue];
+            
+            [mutArr addObject:[NSArray arrayWithObjects:detailArr[2],[NSString stringWithFormat:@"¥%ld元",[detailArr[3] integerValue]/100], nil]];
+        }
+    }
+    
+    
+    return mutArr;
 }
 
 #pragma mark - UITableViewDelegate
@@ -339,15 +369,22 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"];
         [mutDic setObject:arr[1] forKey:@"park_id"];
     }
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     if ([self.orderDic objectForKey:OrderParamTypeGoTime]) {
-        [mutDic setObject:[self.orderDic objectForKey:OrderParamTypeGoTime]  forKey:@"plan_park_time"];
+        NSString *str = [self.orderDic objectForKey:OrderParamTypeGoTime];
+        NSString* dateString = [formatter stringFromDate:(NSDate *)str];
+        [mutDic setObject:dateString  forKey:@"plan_park_time"];
     }
     if ([self.orderDic objectForKey:OrderParamTypeTerminal]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeTerminal] componentsSeparatedByString:@"&"];
         [mutDic setObject:arr[1] forKey:@"leave_terminal_id"];
     }
     if ([self.orderDic objectForKey:OrderParamTypeTime]) {
-        [mutDic setObject:[self.orderDic objectForKey:OrderParamTypeTime]  forKey:@"plan_pick_time"];
+        NSString *str = [self.orderDic objectForKey:OrderParamTypeTime];
+        NSString* dateString = [formatter stringFromDate:(NSDate *)str];
+        [mutDic setObject:dateString  forKey:@"plan_pick_time"];
     }
     if ([self.orderDic objectForKey:OrderParamTypeBackTerminal]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeBackTerminal] componentsSeparatedByString:@"&"];
@@ -390,6 +427,16 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [mutDic setObject:[NSString stringWithFormat:@"%ld",days] forKey:@"park_day"];
     }
     
+    
+    if ([self.orderDic objectForKey:OrderParamTypeService]) {
+        NSMutableArray *mutArr = [NSMutableArray array];
+        NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+        for (NSString *serviceStr in arr) {
+            NSArray *serviceArr = [serviceStr componentsSeparatedByString:@"=>"];
+            [mutArr addObject:[NSString stringWithFormat:@"%@=>%@",serviceArr[0],serviceArr[1]]];
+        }
+        [mutDic setObject:mutArr forKey:OrderParamTypeService];
+    }
     
     [orderReq addOrderRequestWithNumberIndex:kRequestNumberIndexAddOrder delegte:self param:mutDic];
 }

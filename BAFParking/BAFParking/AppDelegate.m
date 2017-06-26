@@ -53,7 +53,7 @@
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     self.drawerController.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionModeNavigationBarOnly;
     
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+//    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [self.window setRootViewController:self.drawerController];
     
     return YES;
