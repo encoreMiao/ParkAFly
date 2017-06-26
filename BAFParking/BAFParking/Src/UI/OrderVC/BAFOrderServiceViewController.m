@@ -37,8 +37,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (nonatomic, copy)     NSMutableDictionary *service_description;
 
 @property (nonatomic, assign) BOOL isTextServiceShow;
+@property (nonatomic, strong) NSIndexPath *textServiceIndexPath;
 @property (nonatomic, assign) BOOL isCommonServiceShow;
 @property (nonatomic, assign) BOOL isMoreServiceSelected;
+@property (nonatomic, strong) NSString *singleSelectedStr;
 
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
 @end
@@ -49,10 +51,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [super viewDidLoad];
 //    self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
     self.isTextServiceShow = NO;
+    self.textServiceIndexPath = nil;
     self.isCommonServiceShow = NO;
     self.isMoreServiceSelected = NO;
+    self.singleSelectedStr = nil;
+    
     self.userInfo = [[BAFUserModelManger sharedInstance] userInfo];
     [self setupView];
+    self.serviceHeaderView.userInfo = self.userInfo;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,7 +75,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationTitle:@"预约停车"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationRightButtonWithText:@"说明" method:@selector(rightBtnClicked:)];
-    self.serviceHeaderView.userInfo = self.userInfo;
+    
     
 //    if ([self.dicDatasource objectForKey:OrderParamTypePark]) {
 //        NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"];
@@ -103,7 +109,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self showTipsInView:self.view message:@"请输入姓名" offset:self.view.center.x+100];
         return;
     }
-    
     if ([self.serviceHeaderView.phoneTF.text length]<=0) {
         [self showTipsInView:self.view message:@"请输入手机号码" offset:self.view.center.x+100];
         return;
@@ -113,14 +118,59 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self showTipsInView:self.view message:@"请输入正确车牌号码" offset:self.view.center.x+100];
         return;
     }
-    
     [self.dicDatasource setObject:self.serviceHeaderView.nameTF.text forKey:OrderParamTypeContact_name];
     [self.dicDatasource setObject:self.serviceHeaderView.phoneTF.text forKey:OrderParamTypeContact_phone];
     [self.dicDatasource setObject:self.serviceHeaderView.licenseTF.text forKey:OrderParamTypeCar_license_no];
     [self.dicDatasource setObject:[NSString stringWithFormat:@"%d",self.serviceHeaderView.sexInt] forKey:OrderParamTypeContact_gender];
     
+    
+    [self configServiceOrder];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:OrderDefaults];
+    }
+    [[NSUserDefaults standardUserDefaults]setObject:self.dicDatasource forKey:OrderDefaults];
     BAFOrderConfirmViewController *orderConfirmVC = [[BAFOrderConfirmViewController alloc]init];
+//    orderConfirmVC.single_serviceDic = self.single_serviceDic;
+//    orderConfirmVC.more_serviceDic = self.more_serviceDic;
     [self.navigationController pushViewController:orderConfirmVC animated:YES];
+}
+
+- (void)configServiceOrder
+{
+    NSMutableArray *mutArr = [NSMutableArray array];
+    if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+        mutArr = [NSMutableArray arrayWithArray:[[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"]];
+//        if (self.singleSelectedStr) {
+//            if (![mutArr containsObject:self.singleSelectedStr]) {
+//                [mutArr addObject:self.singleSelectedStr];
+//            }
+//        }
+    }
+//    else{
+//        if (self.singleSelectedStr) {
+//            mutArr = [NSMutableArray arrayWithObjects:self.singleSelectedStr, nil];
+//        }
+//    }
+    
+    
+    
+    
+    if (mutArr.count>0) {
+        [self.dicDatasource setObject:[mutArr componentsJoinedByString:@"&"] forKey:OrderParamTypeService];
+    }
+    
+    if (self.isTextServiceShow) {
+        if (self.textServiceIndexPath) {
+            OrderServiceTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:self.textServiceIndexPath];
+            if (cell.parkflyno) {
+                [self.dicDatasource setObject:cell.parkflyno forKey:OrderParamTypeBack_flight_no];
+            }
+        }
+    }else{
+        if ([self.dicDatasource objectForKey:OrderParamTypeBack_flight_no]) {
+            [self.dicDatasource removeObjectForKey:OrderParamTypeBack_flight_no];
+        }
+    }
 }
 
 - (void)rightBtnClicked:(id)sender
@@ -144,6 +194,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
+        [self configServiceOrder];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:OrderDefaults];
+        }
+        [[NSUserDefaults standardUserDefaults]setObject:self.dicDatasource forKey:OrderDefaults];
+        
         BAFMoreServicesViewController *moreServiceVC = [[BAFMoreServicesViewController alloc]init];
         [self.navigationController pushViewController:moreServiceVC animated:YES];
         moreServiceVC.more_serviceDic = self.more_serviceDic;
@@ -185,6 +241,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark -  OrderServiceTableViewCellDelegate
 - (void)OrderServiceTableViewCellAction:(OrderServiceTableViewCell *)cell
 {
+    NSString *str = [NSString stringWithFormat:@"%@=>%@=>%@=>%@",cell.serviceInfo.charge_id,cell.serviceInfo.remark,cell.serviceInfo.title,cell.serviceInfo.strike_price];
     NSIndexPath *indexpath = [self.mainTableView indexPathForCell:cell];
     if ([[self.single_serviceDic.allKeys objectAtIndex:indexpath.row] isEqualToString:@"202"]) {
         self.isTextServiceShow = !cell.show;
@@ -193,7 +250,23 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.isTextServiceShow = NO;
         self.isCommonServiceShow = !cell.show;
     }
-     [self.mainTableView reloadData];
+    
+    if (self.singleSelectedStr == nil) {
+        
+    }
+    
+    self.singleSelectedStr = str;
+    if (!self.isTextServiceShow&&!self.isCommonServiceShow) {
+        self.textServiceIndexPath = nil;
+    }else {
+        if (self.isTextServiceShow) {
+            self.textServiceIndexPath = indexpath;
+        }else{
+            self.textServiceIndexPath = nil;
+        }
+    }
+    
+    [self.mainTableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -226,6 +299,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[self.single_serviceDic.allKeys objectAtIndex:indexPath.row] isEqualToString:@"202"]) {
             cell.type = kOrderServiceTableViewCellTypeCommonText;
             [cell setShow:self.isTextServiceShow];
+            if ([self.dicDatasource objectForKey:OrderParamTypeBack_flight_no]) {
+                [cell setParkflyno:[self.dicDatasource objectForKey:OrderParamTypeBack_flight_no]];
+            }
         }else{
             cell.type = kOrderServiceTableViewCellTypeCommon;
             [cell setShow:self.isCommonServiceShow];
@@ -238,6 +314,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     return cell;
 }
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat sectionHeaderHeight = 30;
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
+}
+
 #pragma mark - requestdelegate
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
 {

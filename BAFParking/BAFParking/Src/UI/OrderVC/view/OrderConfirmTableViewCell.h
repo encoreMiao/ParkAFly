@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderConfirmTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *confirmContentLabel;
 @end

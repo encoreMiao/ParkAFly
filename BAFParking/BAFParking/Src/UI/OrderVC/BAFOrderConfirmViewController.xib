@@ -11,7 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BAFOrderConfirmViewController">
             <connections>
+                <outlet property="feeLabel" destination="mbV-5M-BiD" id="pFq-8J-6mD"/>
                 <outlet property="headerText" destination="uVA-gg-v5F" id="6Lh-OB-Waz"/>
+                <outlet property="headerlabel" destination="uVA-gg-v5F" id="fcW-rk-AAD"/>
                 <outlet property="mainHeaderView" destination="KlP-qX-lWm" id="A9k-17-1tp"/>
                 <outlet property="mainTableVIEW" destination="wdc-Rl-9oj" id="i1t-mD-nUk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -33,7 +35,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68m-hW-C0e">
                     <rect key="frame" x="0.0" y="605" width="375" height="62"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计费用：Y130" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbV-5M-BiD">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计费用：¥130" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbV-5M-BiD">
                             <rect key="frame" x="20" y="0.0" width="140" height="62"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="140" id="aMg-cT-GNx"/>
@@ -47,6 +49,9 @@
                             <state key="normal" title="明细">
                                 <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="detailfeeAction:" destination="-1" eventType="touchUpInside" id="uA7-kp-sOW"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-BA-SGm">
                             <rect key="frame" x="235" y="0.0" width="140" height="62"/>

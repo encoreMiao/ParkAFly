@@ -15,7 +15,7 @@
 
 #import "BAFBaseNavigationViewController.h"
 #import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
-
+#import <IQKeyboardManager.h>
 
 @interface AppDelegate ()<UIApplicationDelegate>
 {
@@ -53,6 +53,7 @@
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     self.drawerController.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionModeNavigationBarOnly;
     
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [self.window setRootViewController:self.drawerController];
     
     return YES;

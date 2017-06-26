@@ -59,13 +59,12 @@
 
 - (void)nextStepButtonDelegate:(id)sender
 {
-    NSString *str = @"";
     if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
         NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
         NSString *str = nil;
         if ([self.more_serviceDic.allKeys containsObject:@"204"]) {
             NSDictionary *dic = [self.more_serviceDic objectForKey:@"204"];
-            str = [NSString stringWithFormat:@"%@=>%@",[dic objectForKey:@"charge_id"],[dic objectForKey:@"remark"]];
+            str = [NSString stringWithFormat:@"%@=>%@=>%@=>%@",[dic objectForKey:@"charge_id"],[dic objectForKey:@"remark"],[dic objectForKey:@"title"],[dic objectForKey:@"strike_price"]];
         }
         if (str&&[arr containsObject:str]) {
             if (![self.dicDatasource objectForKey:OrderParamTypePetrol]) {
@@ -138,7 +137,7 @@
     BAFParkServiceInfo *serviceInfo;
     serviceInfo = [BAFParkServiceInfo mj_objectWithKeyValues:[self.more_serviceDic objectForKey:[self.more_serviceDic.allKeys objectAtIndex:indexPath.section]]];
     NSString *description;
-    NSString *str = [NSString stringWithFormat:@"%@=>%@",serviceInfo.charge_id,serviceInfo.remark];
+    NSString *str = [NSString stringWithFormat:@"%@=>%@=>%@=>%@",serviceInfo.charge_id,serviceInfo.remark,serviceInfo.title,serviceInfo.strike_price];
     if ([[self.more_serviceDic.allKeys objectAtIndex:indexPath.section] isEqualToString:@"204"]) {
         //代加油
         cell.type = kMoreServicesTableViewCellType204;
@@ -176,7 +175,7 @@
         if (tableviewCell.type == kMoreServicesTableViewCellType204) {
             [self.dicDatasource setObject:tableviewCell.fuelStr forKey:OrderParamTypePetrol];
             
-            NSString *str = [NSString stringWithFormat:@"%@=>%@",tableviewCell.serviceInfo.charge_id,tableviewCell.serviceInfo.remark];
+            NSString *str = [NSString stringWithFormat:@"%@=>%@=>%@=>%@",tableviewCell.serviceInfo.charge_id,tableviewCell.serviceInfo.remark,tableviewCell.serviceInfo.title,tableviewCell.serviceInfo.strike_price];
             if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
                 NSMutableArray *arr = [NSMutableArray arrayWithArray:[[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"]];
                 if (![arr containsObject:str]) {
@@ -194,7 +193,7 @@
 - (void)moreServiceTableViewCellAction:(MoreServicesTableViewCell *)tableviewCell
 {
     [tableviewCell setShow:!tableviewCell.show];
-    NSString *str = [NSString stringWithFormat:@"%@=>%@",tableviewCell.serviceInfo.charge_id,tableviewCell.serviceInfo.remark];
+    NSString *str = [NSString stringWithFormat:@"%@=>%@=>%@=>%@",tableviewCell.serviceInfo.charge_id,tableviewCell.serviceInfo.remark,tableviewCell.serviceInfo.title,tableviewCell.serviceInfo.strike_price];
     if (tableviewCell.show) {
         if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
             NSMutableArray *arr = [NSMutableArray arrayWithArray:[[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"]];

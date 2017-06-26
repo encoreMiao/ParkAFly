@@ -239,6 +239,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else if(![_dicDatasource objectForKey:OrderParamTypePark]) {
         [self showTipsInView:self.view message:@"请先选择停车场" offset:self.view.center.x+100];
     }else{
+        int days = -1;
+        if ([_dicDatasource objectForKey:OrderParamTypeTime]) {
+            NSDate *gotime = [_dicDatasource objectForKey:OrderParamTypeGoTime];
+            NSDate *backtime = [_dicDatasource objectForKey:OrderParamTypeTime];
+            NSComparisonResult result = [gotime compare:backtime];
+            if (result != NSOrderedAscending) {
+                 [self showTipsInView:self.view message:@"取车时间不能小于泊车时间" offset:self.view.center.x+100];
+                return;
+            }
+            NSTimeInterval time = [backtime timeIntervalSinceDate:gotime];
+            //开始时间和结束时间的中间相差的时间
+            days = ((int)time)/(3600*24);  //一天是24小时*3600秒
+        }
+        [_dicDatasource setObject:[NSString stringWithFormat:@"%d",days] forKey:OrderParamTypePark_day];
+        
         if ([[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]) {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:OrderDefaults];
         }
@@ -440,6 +455,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if (self.parkArr) {
                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",self.parkArr[0].map_title,self.parkArr[0].map_id] forKey:OrderParamTypePark];
                 _chargeRemark = self.parkArr[0].map_charge.remark;
+                [_dicDatasource setObject:self.parkArr[0].map_charge.first_day_price forKey:OrderParamTypeParkFeeFirstDay];
+                [_dicDatasource setObject:self.parkArr[0].map_charge.market_price forKey:OrderParamTypeParkFeeDay];
+                [_dicDatasource setObject:self.parkArr[0].map_address forKey:OrderParamTypeParkLocation];
+                
+                
                 [self.mainTableView reloadData];
             }
         }else{

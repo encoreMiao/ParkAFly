@@ -16,6 +16,10 @@
 #define OrderParamTypeCompany           @"leave_passenger_number"
 #define OrderParamTypeCity              @"city_id"
 
+#define OrderParamTypeParkLocation            @"OrderParamTypeParkLocation"//map_address
+#define OrderParamTypeParkFeeFirstDay         @"OrderParamTypeParkFeeFirstDay"//map_charge=>first_day_price
+#define OrderParamTypeParkFeeDay              @"OrderParamTypeParkFeeDay"//map_charge=>market_price
+
 @interface BAFOrderViewController : BAFBaseViewController
 @property (nonatomic, strong) NSString                  *cityid;
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;

@@ -26,4 +26,5 @@ typedef NS_ENUM(NSInteger,OrderServiceTableViewCellType){
 @property (nonatomic, assign) OrderServiceTableViewCellType type;
 @property (nonatomic, assign) BOOL  show;
 @property (nonatomic, assign) id<OrderServiceTableViewCellDelegate> delegate;
+@property (nonatomic, strong) NSString *parkflyno;
 @end

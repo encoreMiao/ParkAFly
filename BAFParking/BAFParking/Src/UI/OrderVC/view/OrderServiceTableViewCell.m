@@ -64,7 +64,7 @@
     _serviceInfo = serviceInfo;
     self.serviceTitle.text = serviceInfo.title;
     self.serviceNotitionLabel.text = serviceInfo.remark;
-    self.couponLabel.text = [NSString stringWithFormat:@"%d元",serviceInfo.strike_price.integerValue/100];
+    self.couponLabel.text = [NSString stringWithFormat:@"%ld元",serviceInfo.strike_price.integerValue/100];
 }
 
 - (void)setShow:(BOOL)show
@@ -82,5 +82,19 @@
     if ([self.delegate respondsToSelector:@selector(OrderServiceTableViewCellAction:)]) {
         [self.delegate OrderServiceTableViewCellAction:self];
     }
+}
+
+- (NSString *)parkflyno
+{
+    if (self.detailTextF.hidden == NO && self.detailTextF.text.length !=0) {
+        return self.detailTextF.text;
+    }
+    return nil;
+}
+
+- (void)setParkflyno:(NSString *)parkflyno
+{
+    self.detailTextF.text = parkflyno;
+    [self.detailTextF resignFirstResponder];
 }
 @end

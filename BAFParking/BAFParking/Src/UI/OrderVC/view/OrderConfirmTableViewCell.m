@@ -9,7 +9,6 @@
 #import "OrderConfirmTableViewCell.h"
 
 @interface OrderConfirmTableViewCell()
-@property (weak, nonatomic) IBOutlet UILabel *confirmContentLabel;
 @end
 
 @implementation OrderConfirmTableViewCell
