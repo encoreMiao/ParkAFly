@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)getCodeRequestWithPhoneNumber:(NSString *)phoneNumber
 {
     id <HRLLoginInterface> loginReq = [[HRLogicManager sharedInstance] getLoginReqest];
-    [loginReq msgCodeRequestWithNumberIndex:kRequestNumberIndexMsgCode delegte:self phone:@"18511833913"];
+    [loginReq msgCodeRequestWithNumberIndex:kRequestNumberIndexMsgCode delegte:self phone:phoneNumber];
 }
 
 - (IBAction)getCode:(id)sender {
