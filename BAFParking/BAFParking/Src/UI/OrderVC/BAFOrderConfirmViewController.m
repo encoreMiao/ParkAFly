@@ -245,6 +245,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 totalStr = [NSString stringWithFormat:@"停车场：%@",str];
             }
             if (indexPath.row == 1) {
+//                FB694B
                 totalStr = [NSString stringWithFormat:@"位置：%@",[self.orderDic objectForKey:OrderParamTypeParkLocation]];
             }
             
@@ -454,13 +455,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             SuccessViewController *successVC = [[SuccessViewController alloc]init];
             successVC.type = kSuccessViewControllerTypeSuccess;
             [self.navigationController pushViewController:successVC animated:YES];
-
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
-//            SuccessViewController *successVC = [[SuccessViewController alloc]init];
-//            successVC.type = kSuccessViewControllerTypeFailure;
-//            //    successVC.type = kSuccessViewControllerTypePay;
-//            [self.navigationController pushViewController:successVC animated:YES];
+            SuccessViewController *successVC = [[SuccessViewController alloc]init];
+            successVC.type = kSuccessViewControllerTypeFailure;
+            [self.navigationController pushViewController:successVC animated:YES];
         }
     }
 }

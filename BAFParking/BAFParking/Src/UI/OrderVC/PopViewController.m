@@ -9,7 +9,7 @@
 #import "PopViewController.h"
 #import "BAFCityInfo.h"
 #import "BAFParkAir.h"
-
+#import "PopFeeShowTableViewCell.h"
 
 @interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) PopViewControllerType    type;
@@ -173,52 +173,92 @@
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"commonTableViewCell";
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
     switch (self.type) {
         case kPopViewControllerTypeTop:
             return nil;
             break;
         case kPopViewControllerTypeSelecCity:
-            cell.textLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
         {
+            static NSString *CellIdentifier = @"commonTableViewCell";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            cell.textLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }else{
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
+            return cell;
         }
             break;
         case kPopViewControllerTypeSelecGoTerminal:
         case kPopViewControllerTypeSelecBackTerminal:
-            cell.textLabel.text = ((BAFParkAir *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
         {
+            static NSString *CellIdentifier = @"commonTableViewCell";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            cell.textLabel.text = ((BAFParkAir *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
+
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }else{
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
+            return cell;
         }
             break;
         case kPopViewControllerTypeCompany:
-            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
         {
+            static NSString *CellIdentifier = @"commonTableViewCell";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }else{
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
+            return cell;
         }
             break;
+        case kPopViewControllerTypeTipsshow:
+        {
+            static NSString *PopFeeShowTableViewCellIdentifier = @"PopFeeShowTableViewCell";
+            PopFeeShowTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:PopFeeShowTableViewCellIdentifier];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"PopFeeShowTableViewCell" owner:nil options:nil] firstObject];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            NSArray *arr = [self.arrDatasource objectAtIndex:indexPath.row];
+            if (indexPath.row == 0) {
+                cell.topLine.hidden = YES;
+                cell.bottomLine.hidden = NO;
+                cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0xd5d5d5];
+            }else{
+                cell.topLine.hidden = YES;
+                cell.bottomLine.hidden = YES;
+                cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0x969696];
+            }
+            
+            cell.popfeetitleLabel.text = arr[0];
+            cell.popfeeMoneyLabel.text = arr[1];
+            return cell;
+        }
+            
         default:
             return nil;
             break;
     }
-    return cell;
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -233,11 +273,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ((indexPath.row != self.selectedIndex.row)||!self.selectedIndex) {
-        NSIndexPath *oldIndex = self.selectedIndex;
-        self.selectedIndex = indexPath;
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:self.selectedIndex, oldIndex, nil] withRowAnimation:UITableViewRowAnimationNone];
+
+    if (self.type != kPopViewControllerTypeTipsshow) {
+        if ((indexPath.row != self.selectedIndex.row)||!self.selectedIndex) {
+            NSIndexPath *oldIndex = self.selectedIndex;
+            self.selectedIndex = indexPath;
+            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:self.selectedIndex, oldIndex, nil] withRowAnimation:UITableViewRowAnimationNone];
+        }
     }
 }
 

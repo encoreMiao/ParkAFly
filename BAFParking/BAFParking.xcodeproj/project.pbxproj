@@ -143,6 +143,8 @@
 		8D575E951EF6CFFC0061474D /* PersonalEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E931EF6CFFC0061474D /* PersonalEditViewController.xib */; };
 		8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F21EE42DCD0066289C /* BAFWebViewController.m */; };
 		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
+		8DA526A91F02ABDA0063D61D /* PopFeeShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */; };
+		8DA526AA1F02ABDA0063D61D /* PopFeeShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
 		8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433431EE9E4EA009379ED /* PopTableViewCell.m */; };
 		8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */; };
@@ -425,6 +427,9 @@
 		8D6058F21EE42DCD0066289C /* BAFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFWebViewController.m; sourceTree = "<group>"; };
 		8D6058F41EE438C30066289C /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
 		8D6058F51EE438C30066289C /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
+		8DA526A61F02ABDA0063D61D /* PopFeeShowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopFeeShowTableViewCell.h; sourceTree = "<group>"; };
+		8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopFeeShowTableViewCell.m; sourceTree = "<group>"; };
+		8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopFeeShowTableViewCell.xib; sourceTree = "<group>"; };
 		8DB4F88E1EE297F9006ACDEA /* BAFUserModelManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFUserModelManger.h; sourceTree = "<group>"; };
 		8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFUserModelManger.m; sourceTree = "<group>"; };
 		8DE433421EE9E4EA009379ED /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
@@ -616,6 +621,9 @@
 				8D575E611EF66F8B0061474D /* OrderListTableViewCell.h */,
 				8D575E621EF66F8B0061474D /* OrderListTableViewCell.m */,
 				8D575E631EF66F8B0061474D /* OrderListTableViewCell.xib */,
+				8DA526A61F02ABDA0063D61D /* PopFeeShowTableViewCell.h */,
+				8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */,
+				8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1251,6 +1259,7 @@
 				8D575E861EF6B9CD0061474D /* SettingViewController.xib in Resources */,
 				8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */,
 				8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */,
+				8DA526AA1F02ABDA0063D61D /* PopFeeShowTableViewCell.xib in Resources */,
 				8D575E521EF4F72B0061474D /* RightsViewController.xib in Resources */,
 				8D575E811EF6B48C0061474D /* AccountDetailTableViewCell.xib in Resources */,
 				8D575E771EF69E850061474D /* ChargeFooterCollectionReusableView.xib in Resources */,
@@ -1385,6 +1394,7 @@
 				005E85C91E97924600115CAD /* AppDelegate.m in Sources */,
 				007A7A111EB6DE950070406B /* SHApplicationManagerCenter.m in Sources */,
 				8D575E8F1EF6C8EF0061474D /* CouponTableViewCell.m in Sources */,
+				8DA526A91F02ABDA0063D61D /* PopFeeShowTableViewCell.m in Sources */,
 				8D575E851EF6B9CD0061474D /* SettingViewController.m in Sources */,
 				0022A2241EB0273500A920D6 /* NSString+URL.m in Sources */,
 				00214B421ECFDAC100FF6FDE /* NSString+MJExtension.m in Sources */,
