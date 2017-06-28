@@ -15,6 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField    *licenseTF;
 @property (weak, nonatomic) IBOutlet UIButton       *maleButton;
 @property (weak, nonatomic) IBOutlet UIButton       *femaleButton;
-@property (assign, nonatomic) int sexInt;
+@property (assign, nonatomic) int sexInt; //0 未知 1男 2女
 @property (nonatomic, strong) BAFUserInfo *userInfo;
 @end

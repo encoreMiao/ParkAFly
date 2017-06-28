@@ -19,6 +19,7 @@
     self.phoneTF.text = userInfo.ctel;
     self.licenseTF.text = userInfo.carnum;
     
+    //0 未知 1男 2女
     if (userInfo.csex.integerValue == 0) {
         //未知
         [self.maleButton setImage:[UIImage imageNamed:@"list_rb_gender"] forState:UIControlStateNormal];

@@ -403,7 +403,22 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [mutDic setObject:[self.orderDic objectForKey:OrderParamTypeContact_name] forKey:@"contact_name"];
     }
     if ([self.orderDic objectForKey:OrderParamTypeContact_gender]) {
-        [mutDic setObject:[self.orderDic objectForKey:OrderParamTypeContact_gender] forKey:@"contact_gender"];
+//        联系人性别:unknown-未知，male- 男，female-女
+         //0 未知 1男 2女
+        NSInteger sexInt = [[self.orderDic objectForKey:OrderParamTypeContact_gender] integerValue];
+        NSString *sexStr = @"unknown";
+        switch (sexInt) {
+            case 0:
+                sexStr = @"unknown";
+                break;
+            case 1:
+                sexStr = @"male";
+                break;
+            case 2:
+                sexStr = @"female";
+                break;
+        }
+        [mutDic setObject:sexStr forKey:@"contact_gender"];
     }
     if ([self.orderDic objectForKey:OrderParamTypeContact_phone]) {
         [mutDic setObject:[self.orderDic objectForKey:OrderParamTypeContact_phone] forKey:@"contact_phone"];
