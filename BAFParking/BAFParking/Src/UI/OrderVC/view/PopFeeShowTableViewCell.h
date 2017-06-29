@@ -14,3 +14,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *popfeetitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *popfeeMoneyLabel;
 @end
+

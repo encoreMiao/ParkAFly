@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@class OrderListTableViewCell;
+
+@protocol OrderListTableViewCellDelegate <NSObject>
+- (void)orderBtnActionTag:(NSInteger)btnTag cell:(OrderListTableViewCell *)cell;
+@end
 
 @interface OrderListTableViewCell : UITableViewCell
-
+@property (nonatomic, assign) id<OrderListTableViewCellDelegate> delegate;
+@property (strong, nonatomic) NSDictionary *orderDic;
+@property (weak, nonatomic) IBOutlet UIButton *modifyButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @end
+
