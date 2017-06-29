@@ -87,6 +87,10 @@
                 <constraint firstAttribute="trailing" secondItem="b7l-y4-kac" secondAttribute="trailing" constant="20" id="YYz-Sq-Hgg"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="nextBtn" destination="b7l-y4-kac" id="gI3-yA-cOK"/>
+                <outlet property="tipsLabel" destination="nNz-JP-210" id="lAG-cL-Y4J"/>
+            </connections>
             <point key="canvasLocation" x="481" y="-187"/>
         </view>
     </objects>

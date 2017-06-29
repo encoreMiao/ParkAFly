@@ -8,10 +8,6 @@
 
 #import "OrderListTableViewCell.h"
 
-typedef NS_ENUM(NSInteger,OrderListTableViewCellType) {
-//    kOrderListTableViewCellType
-};
-
 @interface OrderListTableViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *carlicenseL;
 @property (weak, nonatomic) IBOutlet UIButton *orderstatus;
@@ -25,13 +21,14 @@ typedef NS_ENUM(NSInteger,OrderListTableViewCellType) {
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.orderstatus.tag = kOrderListTableViewCellTypeDetail;
+    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detailGesture)];
+    gesture.delegate = self;
+    [self addGestureRecognizer:gesture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)setOrderDic:(NSDictionary *)orderDic
@@ -55,6 +52,8 @@ typedef NS_ENUM(NSInteger,OrderListTableViewCellType) {
         [self.modifyButton setTitle:@"修改" forState:UIControlStateNormal];
         self.cancelButton.hidden = NO;
         [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        self.modifyButton.tag = kOrderListTableViewCellTypeModifyAll;
+        self.cancelButton.tag = kOrderListTableViewCellTypeCancel;
         
         [self.orderstatus setTitle:@"预约成功" forState:UIControlStateNormal];
     }
@@ -64,6 +63,8 @@ typedef NS_ENUM(NSInteger,OrderListTableViewCellType) {
         self.modifyButton.hidden = YES;
         self.cancelButton.hidden = NO;
         [self.cancelButton setTitle:@"修改" forState:UIControlStateNormal];
+        self.cancelButton.tag = kOrderListTableViewCellTypeModifyPart;
+        
         [self.orderstatus setTitle:@"停车完成" forState:UIControlStateNormal];
         
     }else if ([orderStatus isEqualToString:@"pick_appoint"]){
@@ -76,6 +77,7 @@ typedef NS_ENUM(NSInteger,OrderListTableViewCellType) {
         self.modifyButton.hidden = YES;
         self.cancelButton.hidden = YES;
         [self.cancelButton setTitle:@"查看评价" forState:UIControlStateNormal];
+        self.cancelButton.tag = kOrderListTableViewCellTypeCheckComment;
         
         [self.orderstatus setTitle:@"已完成" forState:UIControlStateNormal];
     }
@@ -84,6 +86,7 @@ typedef NS_ENUM(NSInteger,OrderListTableViewCellType) {
         self.modifyButton.hidden = YES;
         self.cancelButton.hidden = NO;
         [self.cancelButton setTitle:@"评价" forState:UIControlStateNormal];
+        self.cancelButton.tag = kOrderListTableViewCellTypeComment;
         
         [self.orderstatus setTitle:@"支付待确认" forState:UIControlStateNormal];
     }
@@ -92,20 +95,36 @@ typedef NS_ENUM(NSInteger,OrderListTableViewCellType) {
         self.modifyButton.hidden = YES;
         self.cancelButton.hidden = NO;
         [self.cancelButton setTitle:@"支付" forState:UIControlStateNormal];
+        self.cancelButton.tag = kOrderListTableViewCellTypePay;
         
         [self.orderstatus setTitle:@"待支付" forState:UIControlStateNormal];
        
     }
 }
 
-- (IBAction)modifyAction:(id)sender {
+- (IBAction)modifyAction:(UIButton *)sender {
     //修改
+    if ([self.delegate respondsToSelector:@selector(orderBtnActionTag:cell:)]) {
+        [self.delegate orderBtnActionTag:sender.tag cell:self];
+    }
 }
-- (IBAction)cancelAction:(id)sender {
+- (IBAction)cancelAction:(UIButton *)sender {
     //取消
-}
-- (IBAction)orderstatusAction:(id)sender {
-    //订单状态
+    if ([self.delegate respondsToSelector:@selector(orderBtnActionTag:cell:)]) {
+        [self.delegate orderBtnActionTag:sender.tag cell:self];
+    }
 }
 
+//订单状态
+- (IBAction)orderstatusAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(orderBtnActionTag:cell:)]) {
+        [self.delegate orderBtnActionTag:kOrderListTableViewCellTypeDetail cell:self];
+    }
+}
+
+- (void)detailGesture{
+    if ([self.delegate respondsToSelector:@selector(orderBtnActionTag:cell:)]) {
+        [self.delegate orderBtnActionTag:kOrderListTableViewCellTypeDetail cell:self];
+    }
+}
 @end

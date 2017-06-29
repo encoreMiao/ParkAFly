@@ -136,6 +136,7 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
     BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
     if (userInfo.clientid) {
         BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
+        orderVC.type = kBAFOrderViewControllerTypeOrder;
         [self.navigationController pushViewController:orderVC animated:YES];
     }else{
         BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];

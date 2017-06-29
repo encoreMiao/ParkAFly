@@ -20,7 +20,15 @@
 #define OrderParamTypeParkFeeFirstDay         @"OrderParamTypeParkFeeFirstDay"//map_charge=>first_day_price
 #define OrderParamTypeParkFeeDay              @"OrderParamTypeParkFeeDay"//map_charge=>market_price
 
+
+typedef NS_ENUM(NSInteger,BAFOrderViewControllerType){
+    kBAFOrderViewControllerTypeOrder,
+    kBAFOrderViewControllerTypeModifyAll,
+    kBAFOrderViewControllerTypeModifyPart,
+};
+
 @interface BAFOrderViewController : BAFBaseViewController
 @property (nonatomic, strong) NSString                  *cityid;
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
+@property (nonatomic, assign) BAFOrderViewControllerType type;
 @end

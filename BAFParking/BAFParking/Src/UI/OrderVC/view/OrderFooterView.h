@@ -14,5 +14,8 @@
 
 
 @interface OrderFooterView : UIView
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tipsLabel;
+
 @property (nonatomic, assign) id<OrderFooterViewDelegate> delegate;
 @end

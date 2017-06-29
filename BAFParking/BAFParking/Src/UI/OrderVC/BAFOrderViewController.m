@@ -69,6 +69,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     
     
+    if (self.type == kBAFOrderViewControllerTypeOrder) {
+        //预约
+        [self.footerView.nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+        self.footerView.tipsLabel.text = @"1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。\n2.如有疑问，请致电3008138666联系客服。";
+    }else{
+        //修改
+        [self.footerView.nextBtn setTitle:@"保存" forState:UIControlStateNormal];
+        self.footerView.tipsLabel.text = @"修改订单不支持更改出发航站楼和停车场，如需更改信息请取消订单后重新下单。";
+    }
+    
+    
+    
+    
+    
     [self cityListRequest];
     if ([_dicDatasource objectForKey:OrderParamTypePark]) {
         [self.mainTableView reloadData];
