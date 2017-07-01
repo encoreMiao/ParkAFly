@@ -31,4 +31,5 @@ typedef NS_ENUM(NSInteger,BAFOrderViewControllerType){
 @property (nonatomic, strong) NSString                  *cityid;
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
 @property (nonatomic, assign) BAFOrderViewControllerType type;
+@property (nonatomic, strong) NSDictionary              *orderDicForModify;
 @end

@@ -33,6 +33,7 @@
 
 - (void)setOrderDic:(NSDictionary *)orderDic
 {
+    _orderDic = orderDic;
     self.parkTime.text = [NSString stringWithFormat:@"%@",[orderDic objectForKey:@"plan_park_time"]];
     self.carlicenseL.text = [orderDic objectForKey:@"car_license_no"];
     self.parkL.text = [orderDic objectForKey:@"park_name"];

@@ -135,12 +135,8 @@
     self.contentL.text = [NSString stringWithFormat:@"%@     %@      %@",[mutDic objectForKey:OrderParamTypeContact_name],[mutDic objectForKey:OrderParamTypeContact_phone],[mutDic objectForKey:OrderParamTypeCar_license_no]];
     
     NSString *str;
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     if ([mutDic objectForKey:OrderParamTypeGoTime]) {
         str = [mutDic objectForKey:OrderParamTypeGoTime];
-        NSString* dateString = [formatter stringFromDate:(NSDate *)str];
-        str = dateString;
     }else{
         str = @"";
     }
@@ -148,8 +144,6 @@
     
     if ([mutDic objectForKey:OrderParamTypeTime]) {
         str = [mutDic objectForKey:OrderParamTypeTime];
-        NSString* dateString = [formatter stringFromDate:(NSDate *)str];
-        str = dateString;
     }else{
         str = @"";
     }

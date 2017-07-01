@@ -18,6 +18,7 @@
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexOrderList,
+    kRequestNumberIndexCancelOrder,
 };
 
 @interface OrderListViewController ()<UITableViewDataSource,UITableViewDelegate,OrderListTableViewCellDelegate>
@@ -28,6 +29,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (strong, nonatomic) UIView *buttonView;
 
 @property (strong, nonatomic) NSMutableArray *orderListArr;
+
+@property (strong, nonatomic) NSString *cancelOrderStr;
 @end
 
 
@@ -130,6 +133,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - OrderListTableViewCellDelegate
 - (void)orderBtnActionTag:(NSInteger)btnTag cell:(OrderListTableViewCell *)cell
 {
+    NSIndexPath *indexpath = [self.mytableview indexPathForCell:cell];
+    NSLog(@"%@",cell.orderDic);
     //修改时提交按钮为保存，泊车时间定位到当前时间两小时之后
     switch (btnTag) {
         case kOrderListTableViewCellTypeModifyAll:
@@ -137,6 +142,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             NSLog(@"实际未停车，锁定出发航站楼、停车场项，其他信息可修改(如需修改，需联系客服或重新下单)");
             BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
             orderVC.type = kBAFOrderViewControllerTypeModifyAll;
+            orderVC.orderDicForModify = cell.orderDic;
             [self.navigationController pushViewController:orderVC animated:YES];
         }
             break;
@@ -145,12 +151,16 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             NSLog(@"实际已停车，修改时锁定泊车时间、出发航站楼、停车场项，只能修改取车时间、返程航站楼，保存后提交");
             BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
             orderVC.type = kBAFOrderViewControllerTypeModifyPart;
+            orderVC.orderDicForModify = cell.orderDic;
             [self.navigationController pushViewController:orderVC animated:YES];
         }
             break;
         case kOrderListTableViewCellTypeCancel:
         {
             NSLog(@"未停车可取消");
+            self.cancelOrderStr = [cell.orderDic objectForKey:@"id"];
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"确定取消么" message:nil delegate:self cancelButtonTitle:@"不取消了" otherButtonTitles:@"确定取消",nil];
+            [alertView show];
         }
             break;
         case kOrderListTableViewCellTypePay:
@@ -178,6 +188,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1){
+        //确定取消
+        [self cancelOrderWithOrderid:self.cancelOrderStr];
+    }else if (buttonIndex == 0){
+        //不取消了
+    }
+}
 
 #pragma mark - request
 - (void)orderListRequestWithOrderstatus:(NSString *)ordrstatus
@@ -186,6 +204,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
     BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
     [orderReq orderListRequestWithNumberIndex:kRequestNumberIndexOrderList delegte:self client_id:userInfo.clientid order_status:ordrstatus];
+}
+
+- (void)cancelOrderWithOrderid:(NSString *)order_id
+{
+    id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [orderReq cancelOrderRequestWithNumberIndex:kRequestNumberIndexCancelOrder delegte:self order_id:order_id];
 }
 
 
@@ -203,6 +227,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else{
             [self.orderListArr removeAllObjects];
             [self.mytableview reloadData];
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexCancelOrder) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            [self orderListRequestWithOrderstatus:@"1"];
+            [self showTipsInView:self.view message:@"取消成功" offset:self.view.center.x+100];
+        }else{
+             [self showTipsInView:self.view message:@"取消失败" offset:self.view.center.x+100];
         }
     }
 }

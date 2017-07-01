@@ -252,10 +252,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if (indexPath.row == 2) {
                 if ([self.orderDic objectForKey:OrderParamTypeGoTime]) {
                     str = [self.orderDic objectForKey:OrderParamTypeGoTime];
-                    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-                    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-                    NSString* dateString = [formatter stringFromDate:(NSDate *)str];
-                    str = dateString;
                 }else{
                     str = @"";
                 }
@@ -277,10 +273,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if (indexPath.row == 0) {
                 if ([self.orderDic objectForKey:OrderParamTypeTime]) {
                     str = [self.orderDic objectForKey:OrderParamTypeTime];
-                    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-                    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-                    NSString* dateString = [formatter stringFromDate:(NSDate *)str];
-                    str = dateString;
                 }else{
                     str = @"";
                 }
@@ -371,12 +363,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [mutDic setObject:arr[1] forKey:@"park_id"];
     }
     
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     if ([self.orderDic objectForKey:OrderParamTypeGoTime]) {
         NSString *str = [self.orderDic objectForKey:OrderParamTypeGoTime];
-        NSString* dateString = [formatter stringFromDate:(NSDate *)str];
-        [mutDic setObject:dateString  forKey:@"plan_park_time"];
+        [mutDic setObject:str  forKey:@"plan_park_time"];
     }
     if ([self.orderDic objectForKey:OrderParamTypeTerminal]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeTerminal] componentsSeparatedByString:@"&"];
@@ -384,8 +373,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     if ([self.orderDic objectForKey:OrderParamTypeTime]) {
         NSString *str = [self.orderDic objectForKey:OrderParamTypeTime];
-        NSString* dateString = [formatter stringFromDate:(NSDate *)str];
-        [mutDic setObject:dateString  forKey:@"plan_pick_time"];
+        [mutDic setObject:str  forKey:@"plan_pick_time"];
     }
     if ([self.orderDic objectForKey:OrderParamTypeBackTerminal]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeBackTerminal] componentsSeparatedByString:@"&"];

@@ -256,7 +256,7 @@
  
  @param order_id order_id
  */
-- (void)cancelOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread :(NSString *)order_id
+- (void)cancelOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread order_id:(NSString *)order_id;
 {
     DLog(@"取消订单");
     //设置请求头

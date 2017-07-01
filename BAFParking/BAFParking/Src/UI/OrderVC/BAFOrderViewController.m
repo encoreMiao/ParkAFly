@@ -20,11 +20,13 @@
 #import "BAFParkInfo.h"
 #import "BAFParkAir.h"
 #import "ParkListViewController.h"
+#import "HRLOrderInterface.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCityList,
     kRequestNumberIndexGetAir,
     kRequestNumberIndexGetParkByAid,
+    kRequestNumberIndexEditOrder,
 };
 
 #define OrderTableViewCellIdentifier            @"OrderTableViewCellIdentifier"
@@ -32,12 +34,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate,PopViewControllerDelegate,IUICallbackInterface>
 {
     NSString *_chargeRemark;
+    
+    NSDate *_goDate;
+    NSDate *_backDate;
 }
 @property (strong, nonatomic) IBOutlet OrderFooterView  *footerView;
 @property (nonatomic, strong) IBOutlet UITableView      *mainTableView;
 @property (nonatomic, strong) NSMutableArray<BAFCityInfo *>       *cityArr;
 @property (nonatomic, strong) NSMutableArray<BAFParkAir *>        *parkAirArr;
 @property (nonatomic, strong) NSMutableArray<BAFParkInfo *>       *parkArr;
+
+
 @end
 
 
@@ -73,35 +80,39 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         //预约
         [self.footerView.nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
         self.footerView.tipsLabel.text = @"1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。\n2.如有疑问，请致电3008138666联系客服。";
+        
+        [self cityListRequest];
+        if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+            [self.mainTableView reloadData];
+        }
+        
+        if (self.cityid) {
+            [_dicDatasource setObject:self.cityid forKey:OrderParamTypeCity];
+            self.cityid = nil;
+        }
+        if ([_dicDatasource objectForKey:OrderParamTypeCity]) {
+            NSString *cityid = [_dicDatasource objectForKey:OrderParamTypeCity];
+            NSArray *tempCityId = [cityid componentsSeparatedByString:@"&"];
+            [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
+            [self parkAirRequestWithCityId:tempCityId[1]];
+        }else{
+            [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+            [self parkAirRequestWithCityId:@"1"];//城市默认北京
+            [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", @"北京",@"1"] forKey:OrderParamTypeCity];
+        }
+        
     }else{
         //修改
         [self.footerView.nextBtn setTitle:@"保存" forState:UIControlStateNormal];
         self.footerView.tipsLabel.text = @"修改订单不支持更改出发航站楼和停车场，如需更改信息请取消订单后重新下单。";
-    }
-    
-    
-    
-    
-    
-    [self cityListRequest];
-    if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+        
+        //根据cityid获取城市名称？？？
+        [self parkAirRequestWithCityId:[self.orderDicForModify objectForKey:@"city_id"]];//城市默认北京
+        
+        self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:self.orderDicForModify];
         [self.mainTableView reloadData];
     }
-
-    if (self.cityid) {
-        [_dicDatasource setObject:self.cityid forKey:OrderParamTypeCity];
-        self.cityid = nil;
-    }
-    if ([_dicDatasource objectForKey:OrderParamTypeCity]) {
-        NSString *cityid = [_dicDatasource objectForKey:OrderParamTypeCity];
-        NSArray *tempCityId = [cityid componentsSeparatedByString:@"&"];
-        [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
-        [self parkAirRequestWithCityId:tempCityId[1]];
-    }else{
-        [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
-        [self parkAirRequestWithCityId:@"1"];//城市默认北京
-        [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", @"北京",@"1"] forKey:OrderParamTypeCity];
-    }
+    
 }
 
 - (void)backMethod:(id)sender
@@ -111,13 +122,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)rightBtnClicked:(id)sender
 {
-    PopViewController *popView = [[PopViewController alloc] init];
-    popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    self.definesPresentationContext = YES;
-    popView.delegate = self;
-    [popView configViewWithData:self.cityArr type:kPopViewControllerTypeSelecCity];
-    [self presentViewController:popView animated:NO completion:nil];
+    if (self.type == kBAFOrderViewControllerTypeOrder) {
+        PopViewController *popView = [[PopViewController alloc] init];
+        popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        self.definesPresentationContext = YES;
+        popView.delegate = self;
+        [popView configViewWithData:self.cityArr type:kPopViewControllerTypeSelecCity];
+        [self presentViewController:popView animated:NO completion:nil];
+    }else{
+        //城市固定不能选择
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -191,32 +206,62 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             cell.type = kOrderTableViewCellTypeGoTime;
             if ([_dicDatasource objectForKey:OrderParamTypeGoTime]) {
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"MM-dd HH:mm"];
-                [cell setOrderTFText:[dateFormatter stringFromDate:[_dicDatasource objectForKey:OrderParamTypeGoTime]]];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                id strDate = [_dicDatasource objectForKey:OrderParamTypeGoTime];
+                if ([strDate isKindOfClass:[NSDate class]]) {
+                    [cell setOrderTFText:[dateFormatter stringFromDate:strDate]];
+                }
+                if ([strDate isKindOfClass:[NSString class]]) {
+                    [cell setOrderTFText:strDate];
+                }
             }
         }else if(row == 1){
             cell.type = kOrderTableViewCellTypeGoParkTerminal;
             if ([_dicDatasource objectForKey:OrderParamTypeTerminal]) {
-                [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypeTerminal]];
+                NSArray *arr = [[_dicDatasource objectForKey:OrderParamTypeTerminal] componentsSeparatedByString:@"&"];
+                if (arr.count>1) {
+                    [cell setOrderTFText:arr[0]];
+                }else{
+                    [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypeTerminal]];
+                }
             }
         }
     }else if (section == 1){
         cell.type = kOrderTableViewCellTypePark;
         if ([_dicDatasource objectForKey:OrderParamTypePark]) {
-            [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypePark]];
+            NSArray *arr = [[_dicDatasource objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"];
+            if (arr.count>1) {
+                [cell setOrderTFText:arr[0]];
+            }else{
+                [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypePark]];
+            }
+            
         }
     }else if (section == 2){
         if (row == 0) {
             cell.type = kOrderTableViewCellTypeBackTime;
             if ([_dicDatasource objectForKey:OrderParamTypeTime]) {
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"MM-dd HH:mm"];
-                [cell setOrderTFText:[dateFormatter stringFromDate:[_dicDatasource objectForKey:OrderParamTypeTime]]];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                id strDate = [_dicDatasource objectForKey:OrderParamTypeTime];
+                if ([strDate isKindOfClass:[NSDate class]]) {
+                    [cell setOrderTFText:[dateFormatter stringFromDate:strDate]];
+                }
+                if ([strDate isKindOfClass:[NSString class]]) {
+                    if (![strDate isEqualToString:@"0000-00-00 00:00:00"]) {
+                        [cell setOrderTFText:strDate];
+                    }
+                }
             }
         }else{
             cell.type = kOrderTableViewCellTypeBackTerminal;
-            if ([_dicDatasource objectForKey:OrderParamTypeBackTerminal]) {
-                [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypeBackTerminal]];
+            if ([_dicDatasource objectForKey:OrderParamTypeBackTerminal]&&![[_dicDatasource objectForKey:OrderParamTypeBackTerminal] isEqualToString:@"0"]) {
+                NSArray *arr = [[_dicDatasource objectForKey:OrderParamTypeBackTerminal] componentsSeparatedByString:@"&"];
+                if (arr.count>1) {
+                    [cell setOrderTFText:arr[0]];
+                }else{
+                    [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypeBackTerminal]];
+                }
             }
         }
     }else{
@@ -231,7 +276,23 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
+    if (self.type == kBAFOrderViewControllerTypeOrder) {
+        [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
+    }else if(self.type == kBAFOrderViewControllerTypeModifyAll){
+        if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
+            [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
+        }else{
+            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
+        }
+    }else if(self.type == kBAFOrderViewControllerTypeModifyPart){
+        if (indexPath.section != 1&&indexPath.section != 0) {
+            [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
+        }else{
+            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
+        }
+    }
+
+    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -246,36 +307,53 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - OrderFooterViewDelegate
 - (void)nextStepButtonDelegate:(id)sender
 {
-    if (![_dicDatasource objectForKey:OrderParamTypeGoTime]) {
-        [self showTipsInView:self.view message:@"请先选择出发时间" offset:self.view.center.x+100];
-    }else if(![_dicDatasource objectForKey:OrderParamTypeTerminal]) {
-        [self showTipsInView:self.view message:@"请先选择出发航站楼" offset:self.view.center.x+100];
-    }else if(![_dicDatasource objectForKey:OrderParamTypePark]) {
-        [self showTipsInView:self.view message:@"请先选择停车场" offset:self.view.center.x+100];
-    }else{
-        int days = -1;
-        if ([_dicDatasource objectForKey:OrderParamTypeTime]) {
-            NSDate *gotime = [_dicDatasource objectForKey:OrderParamTypeGoTime];
-            NSDate *backtime = [_dicDatasource objectForKey:OrderParamTypeTime];
-            NSComparisonResult result = [gotime compare:backtime];
-            if (result != NSOrderedAscending) {
-                 [self showTipsInView:self.view message:@"取车时间不能小于泊车时间" offset:self.view.center.x+100];
-                return;
+    if (self.type == kBAFOrderViewControllerTypeOrder) {
+        if (![_dicDatasource objectForKey:OrderParamTypeGoTime]) {
+            [self showTipsInView:self.view message:@"请先选择出发时间" offset:self.view.center.x+100];
+        }else if(![_dicDatasource objectForKey:OrderParamTypeTerminal]) {
+            [self showTipsInView:self.view message:@"请先选择出发航站楼" offset:self.view.center.x+100];
+        }else if(![_dicDatasource objectForKey:OrderParamTypePark]) {
+            [self showTipsInView:self.view message:@"请先选择停车场" offset:self.view.center.x+100];
+        }else{
+            int days = -1;
+            if ([_dicDatasource objectForKey:OrderParamTypeTime]) {
+                NSDate *gotime = [_dicDatasource objectForKey:OrderParamTypeGoTime];
+                NSDate *backtime = [_dicDatasource objectForKey:OrderParamTypeTime];
+                NSComparisonResult result = [gotime compare:backtime];
+                if (result != NSOrderedAscending) {
+                    [self showTipsInView:self.view message:@"取车时间不能小于泊车时间" offset:self.view.center.x+100];
+                    return;
+                }
+                NSTimeInterval time = [_backDate timeIntervalSinceDate:_goDate];
+                //开始时间和结束时间的中间相差的时间
+                days = ((int)time)/(3600*24);  //一天是24小时*3600秒
             }
-            NSTimeInterval time = [backtime timeIntervalSinceDate:gotime];
-            //开始时间和结束时间的中间相差的时间
-            days = ((int)time)/(3600*24);  //一天是24小时*3600秒
+            [_dicDatasource setObject:[NSString stringWithFormat:@"%d",days] forKey:OrderParamTypePark_day];
+            
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:OrderDefaults];
+            }
+            [[NSUserDefaults standardUserDefaults]setObject:self.dicDatasource  forKey:OrderDefaults];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            BAFOrderServiceViewController *orderServiceVC = [[BAFOrderServiceViewController alloc]init];
+            [self.navigationController pushViewController:orderServiceVC animated:YES];
         }
-        [_dicDatasource setObject:[NSString stringWithFormat:@"%d",days] forKey:OrderParamTypePark_day];
-        
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]) {
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:OrderDefaults];
+    }else{
+        id strDate = [_dicDatasource objectForKey:OrderParamTypeTime];
+        if ([strDate isKindOfClass:[NSString class]]) {
+            if (![strDate isEqualToString:@"0000-00-00 00:00:00"]) {
+                NSDate *gotime = [_dicDatasource objectForKey:OrderParamTypeGoTime];
+                NSDate *backtime = [_dicDatasource objectForKey:OrderParamTypeTime];
+                NSComparisonResult result = [gotime compare:backtime];
+                if (result != NSOrderedAscending) {
+                    [self showTipsInView:self.view message:@"取车时间不能小于泊车时间" offset:self.view.center.x+100];
+                    return;
+                }
+            }
         }
-        [[NSUserDefaults standardUserDefaults]setObject:self.dicDatasource  forKey:OrderDefaults];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        BAFOrderServiceViewController *orderServiceVC = [[BAFOrderServiceViewController alloc]init];
-        [self.navigationController pushViewController:orderServiceVC animated:YES];
+        [self editOrder];
     }
+    
 }
 
 #pragma mark - OrderTableViewCellDelegate
@@ -347,16 +425,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - PopViewControllerDelegate
 - (void)popviewConfirmButtonDidClickedWithType:(PopViewControllerType)type popview:(PopViewController*)popview
 {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     switch (type) {
         case kPopViewControllerTypeGoTime:
         {
-            [_dicDatasource setObject:popview.selectedDate forKey:OrderParamTypeGoTime];
+            _goDate = popview.selectedDate;
+            [_dicDatasource setObject:[dateFormatter stringFromDate:popview.selectedDate] forKey:OrderParamTypeGoTime];
             [self.mainTableView reloadData];
         }
             break;
         case kPopViewControllerTypeBackTime:
         {
-            [_dicDatasource setObject:popview.selectedDate forKey:OrderParamTypeTime];
+            _backDate = popview.selectedDate;
+            [_dicDatasource setObject:[dateFormatter stringFromDate:popview.selectedDate] forKey:OrderParamTypeTime];
             [self.mainTableView reloadData];
         }
             break;
@@ -408,8 +490,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)parkAirRequestWithCityId:(NSString *)cityid
 {
-//    id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
-//    [parkReq parkListRequestWithNumberIndex:kRequestNumberIndexParkList delegte:self city_id:cityid];
     id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
     [parkReq getAirByCidRequestWithNumberIndex:kRequestNumberIndexGetAir delegte:self city_id:cityid];
 }
@@ -418,6 +498,38 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
     [parkReq getParkByAidRequestWithNumberIndex:kRequestNumberIndexGetParkByAid delegte:self air_id:parkid];
+}
+
+- (void)editOrder
+{
+    id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionary];
+    
+
+    if ([self.dicDatasource objectForKey:OrderParamTypeGoTime]) {
+        NSString *str = [self.dicDatasource objectForKey:OrderParamTypeGoTime];
+        [mutDic setObject:str  forKey:@"plan_park_time"];
+    }
+    if ([self.dicDatasource objectForKey:OrderParamTypeTime]&&![[self.dicDatasource objectForKey:OrderParamTypeTime] isEqualToString:@"0000-00-00 00:00:00"]) {
+        NSString *str = [self.dicDatasource objectForKey:OrderParamTypeTime];
+        [mutDic setObject:str  forKey:@"plan_pick_time"];
+    }
+    if ([self.dicDatasource objectForKey:OrderParamTypeBackTerminal]&&![[_dicDatasource objectForKey:OrderParamTypeBackTerminal] isEqualToString:@"0"]) {
+        NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypeBackTerminal] componentsSeparatedByString:@"&"];
+        if (arr.count>1) {
+            [mutDic setObject:arr[1] forKey:@"back_terminal_id"];
+        }else{
+            [mutDic setObject:arr[0] forKey:@"back_terminal_id"];
+        }
+        
+    }
+    if ([self.dicDatasource objectForKey:OrderParamTypeCompany]) {
+        [mutDic setObject:[self.dicDatasource objectForKey:OrderParamTypeCompany] forKey:@"leave_passenger_number"];
+    }else{
+        [mutDic setObject:@"1" forKey:@"leave_passenger_number"];
+    }
+    [mutDic setObject:[self.orderDicForModify objectForKey:@"id"] forKey:@"order_id"];
+    [orderReq editOrderRequestWithNumberIndex:kRequestNumberIndexEditOrder delegte:self param:mutDic];
 }
 
 #pragma mark - REQUEST
@@ -445,7 +557,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            //停车场列表
+            //航站楼列表
             if (self.parkAirArr) {
                 [self.parkAirArr removeAllObjects];
             }
@@ -478,6 +590,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
         }else{
             
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexEditOrder) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //修改订单
+            
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
     }
     
