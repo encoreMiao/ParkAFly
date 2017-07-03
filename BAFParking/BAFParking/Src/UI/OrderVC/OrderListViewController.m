@@ -13,6 +13,8 @@
 #import "HRLogicManager.h"
 #import "BAFUserModelManger.h"
 #import "BAFOrderViewController.h"
+#import "CommentViewController.h"
+#import "PayOrderViewController.h"
 
 #define OrderListTableViewCellIdentifier   @"OrderListTableViewCellIdentifier"
 
@@ -171,16 +173,25 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         case kOrderListTableViewCellTypeComment:
         {
             NSLog(@"已完成订单评价：支付完成的订单可进行评价(线上支付完成的当时即可评价)");
+            CommentViewController  *vc = [[CommentViewController alloc]init];
+            vc.type = kCommentViewControllerTypeComment;
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case kOrderListTableViewCellTypeCheckComment:
         {
             NSLog(@"已完成订单查看评价。");
+            CommentViewController  *vc = [[CommentViewController alloc]init];
+            vc.type = kCommentViewControllerTypeCommentCheck;
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case kOrderListTableViewCellTypeDetail:
         {
             NSLog(@"查看订单详情");
+            PayOrderViewController  *vc = [[PayOrderViewController alloc]init];
+            vc.orderDic = cell.orderDic;
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         default:

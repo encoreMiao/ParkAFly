@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="KGk-i7-Jjw" customClass="PayOrderTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="398" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="398" height="63.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDu-et-bxb">
+                        <rect key="frame" x="28" y="20" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="Dck-jd-gOi"/>
+                            <constraint firstAttribute="height" constant="22" id="NLV-18-CCp"/>
+                        </constraints>
+                        <state key="normal" image="list_chb2_item"/>
+                        <connections>
+                            <action selector="selectBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kKz-FG-v6a"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="权益账户" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YG2-nv-L5d">
+                        <rect key="frame" x="60" y="8" width="61.5" height="47.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="61.5" id="ktf-2C-wWv"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_order_more" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-ep-Tvu">
+                        <rect key="frame" x="374" y="23" width="6" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="0hj-Gb-AFP"/>
+                            <constraint firstAttribute="width" constant="6" id="Ncq-J9-4ts"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRA-LR-L3s">
+                        <rect key="frame" x="121.5" y="8" width="247.5" height="47.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="GRA-LR-L3s" firstAttribute="leading" secondItem="YG2-nv-L5d" secondAttribute="trailing" id="05I-1v-58b"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="YG2-nv-L5d" secondAttribute="bottom" id="GLo-L7-ICq"/>
+                    <constraint firstItem="mDu-et-bxb" firstAttribute="centerY" secondItem="YG2-nv-L5d" secondAttribute="centerY" id="Kea-py-nC2"/>
+                    <constraint firstItem="GRA-LR-L3s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="OWd-oj-PyZ"/>
+                    <constraint firstItem="aAK-ep-Tvu" firstAttribute="leading" secondItem="GRA-LR-L3s" secondAttribute="trailing" constant="5" id="W4b-ti-M7D"/>
+                    <constraint firstItem="aAK-ep-Tvu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WTP-fT-xy4"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="GRA-LR-L3s" secondAttribute="bottom" id="eyM-GM-ayZ"/>
+                    <constraint firstItem="mDu-et-bxb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="lBn-Pe-fyF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="aAK-ep-Tvu" secondAttribute="trailing" constant="10" id="nKL-Hr-WQ4"/>
+                    <constraint firstItem="YG2-nv-L5d" firstAttribute="leading" secondItem="mDu-et-bxb" secondAttribute="trailing" constant="10" id="pc7-Ng-ntv"/>
+                    <constraint firstItem="YG2-nv-L5d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="xLg-nD-zos"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="detailImg" destination="aAK-ep-Tvu" id="R7t-a6-n0g"/>
+                <outlet property="moneyLabel" destination="GRA-LR-L3s" id="Rrz-is-Y8j"/>
+                <outlet property="selectBtn" destination="mDu-et-bxb" id="BuH-5G-moi"/>
+                <outlet property="titleLabel" destination="YG2-nv-L5d" id="rHh-a0-oQy"/>
+            </connections>
+            <point key="canvasLocation" x="-6" y="-49"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="list_chb2_item" width="26" height="26"/>
+        <image name="list_order_more" width="4" height="8"/>
+    </resources>
+</document>

@@ -10,4 +10,5 @@ target ‘BAFParking’ do
  pod 'SDWebImage', '~> 4.0.0'
  pod 'MBProgressHUD', '~> 1.0.0'
  pod 'BaiduMapKit'
+ pod 'WechatOpenSDK'
 end

@@ -102,6 +102,18 @@
 		00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F31EB4BDEC00A4FF73 /* LLBaseRequest.m */; };
 		00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F61EB4BE6900A4FF73 /* LLErrorOfRequest.m */; };
 		3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */; };
+		8D3498021F07C301009D723C /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498001F07C301009D723C /* CommentViewController.m */; };
+		8D3498031F07C301009D723C /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498011F07C301009D723C /* CommentViewController.xib */; };
+		8D3498071F08FC07009D723C /* CommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498051F08FC07009D723C /* CommentCollectionViewCell.m */; };
+		8D3498081F08FC07009D723C /* CommentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498061F08FC07009D723C /* CommentCollectionViewCell.xib */; };
+		8D34980C1F08FCF5009D723C /* CommetHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D34980A1F08FCF5009D723C /* CommetHeaderCollectionReusableView.m */; };
+		8D34980D1F08FCF5009D723C /* CommetHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D34980B1F08FCF5009D723C /* CommetHeaderCollectionReusableView.xib */; };
+		8D34981A1F091C3D009D723C /* CommentFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498191F091C3D009D723C /* CommentFooterCollectionReusableView.m */; };
+		8D34981D1F09223F009D723C /* CommentCheckCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D34981C1F09223F009D723C /* CommentCheckCollectionReusableView.m */; };
+		8D3498211F09FEC7009D723C /* PayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D34981F1F09FEC7009D723C /* PayOrderViewController.m */; };
+		8D3498221F09FEC7009D723C /* PayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498201F09FEC7009D723C /* PayOrderViewController.xib */; };
+		8D3498261F0A3460009D723C /* PayOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498241F0A3460009D723C /* PayOrderTableViewCell.m */; };
+		8D3498271F0A3460009D723C /* PayOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498251F0A3460009D723C /* PayOrderTableViewCell.xib */; };
 		8D575E331EF4F2BD0061474D /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E311EF4F2BD0061474D /* OrderListViewController.m */; };
 		8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E321EF4F2BD0061474D /* OrderListViewController.xib */; };
 		8D575E381EF4F65D0061474D /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E361EF4F65D0061474D /* ShareViewController.m */; };
@@ -364,6 +376,25 @@
 		00E3B2FA1EB4C2A400A4FF73 /* IUCallBackInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUCallBackInterface.h; sourceTree = "<group>"; };
 		3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAFParking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.release.xcconfig"; sourceTree = "<group>"; };
+		8D3497FF1F07C301009D723C /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		8D3498001F07C301009D723C /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		8D3498011F07C301009D723C /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
+		8D3498041F08FC07009D723C /* CommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCollectionViewCell.h; sourceTree = "<group>"; };
+		8D3498051F08FC07009D723C /* CommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCollectionViewCell.m; sourceTree = "<group>"; };
+		8D3498061F08FC07009D723C /* CommentCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D3498091F08FCF5009D723C /* CommetHeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommetHeaderCollectionReusableView.h; sourceTree = "<group>"; };
+		8D34980A1F08FCF5009D723C /* CommetHeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommetHeaderCollectionReusableView.m; sourceTree = "<group>"; };
+		8D34980B1F08FCF5009D723C /* CommetHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommetHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		8D3498181F091C3D009D723C /* CommentFooterCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFooterCollectionReusableView.h; sourceTree = "<group>"; };
+		8D3498191F091C3D009D723C /* CommentFooterCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFooterCollectionReusableView.m; sourceTree = "<group>"; };
+		8D34981B1F09223F009D723C /* CommentCheckCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCheckCollectionReusableView.h; sourceTree = "<group>"; };
+		8D34981C1F09223F009D723C /* CommentCheckCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCheckCollectionReusableView.m; sourceTree = "<group>"; };
+		8D34981E1F09FEC7009D723C /* PayOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOrderViewController.h; sourceTree = "<group>"; };
+		8D34981F1F09FEC7009D723C /* PayOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOrderViewController.m; sourceTree = "<group>"; };
+		8D3498201F09FEC7009D723C /* PayOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayOrderViewController.xib; sourceTree = "<group>"; };
+		8D3498231F0A3460009D723C /* PayOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOrderTableViewCell.h; sourceTree = "<group>"; };
+		8D3498241F0A3460009D723C /* PayOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOrderTableViewCell.m; sourceTree = "<group>"; };
+		8D3498251F0A3460009D723C /* PayOrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayOrderTableViewCell.xib; sourceTree = "<group>"; };
 		8D575E301EF4F2BD0061474D /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
 		8D575E311EF4F2BD0061474D /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
 		8D575E321EF4F2BD0061474D /* OrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListViewController.xib; sourceTree = "<group>"; };
@@ -589,6 +620,12 @@
 				8D575E301EF4F2BD0061474D /* OrderListViewController.h */,
 				8D575E311EF4F2BD0061474D /* OrderListViewController.m */,
 				8D575E321EF4F2BD0061474D /* OrderListViewController.xib */,
+				8D3497FF1F07C301009D723C /* CommentViewController.h */,
+				8D3498001F07C301009D723C /* CommentViewController.m */,
+				8D3498011F07C301009D723C /* CommentViewController.xib */,
+				8D34981E1F09FEC7009D723C /* PayOrderViewController.h */,
+				8D34981F1F09FEC7009D723C /* PayOrderViewController.m */,
+				8D3498201F09FEC7009D723C /* PayOrderViewController.xib */,
 			);
 			path = OrderVC;
 			sourceTree = "<group>";
@@ -624,6 +661,19 @@
 				8DA526A61F02ABDA0063D61D /* PopFeeShowTableViewCell.h */,
 				8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */,
 				8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */,
+				8D3498041F08FC07009D723C /* CommentCollectionViewCell.h */,
+				8D3498051F08FC07009D723C /* CommentCollectionViewCell.m */,
+				8D3498061F08FC07009D723C /* CommentCollectionViewCell.xib */,
+				8D3498091F08FCF5009D723C /* CommetHeaderCollectionReusableView.h */,
+				8D34980A1F08FCF5009D723C /* CommetHeaderCollectionReusableView.m */,
+				8D34980B1F08FCF5009D723C /* CommetHeaderCollectionReusableView.xib */,
+				8D3498181F091C3D009D723C /* CommentFooterCollectionReusableView.h */,
+				8D3498191F091C3D009D723C /* CommentFooterCollectionReusableView.m */,
+				8D34981B1F09223F009D723C /* CommentCheckCollectionReusableView.h */,
+				8D34981C1F09223F009D723C /* CommentCheckCollectionReusableView.m */,
+				8D3498231F0A3460009D723C /* PayOrderTableViewCell.h */,
+				8D3498241F0A3460009D723C /* PayOrderTableViewCell.m */,
+				8D3498251F0A3460009D723C /* PayOrderTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1254,10 +1304,13 @@
 			files = (
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
+				8D3498081F08FC07009D723C /* CommentCollectionViewCell.xib in Resources */,
 				8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */,
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
 				8D575E861EF6B9CD0061474D /* SettingViewController.xib in Resources */,
 				8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */,
+				8D34980D1F08FCF5009D723C /* CommetHeaderCollectionReusableView.xib in Resources */,
+				8D3498031F07C301009D723C /* CommentViewController.xib in Resources */,
 				8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */,
 				8DA526AA1F02ABDA0063D61D /* PopFeeShowTableViewCell.xib in Resources */,
 				8D575E521EF4F72B0061474D /* RightsViewController.xib in Resources */,
@@ -1276,6 +1329,7 @@
 				0020935B1EDC4B1700C26176 /* BAFOrderConfirmViewController.xib in Resources */,
 				0001CDCD1ED05130000889CE /* BAFCenterViewController.xib in Resources */,
 				8D575E6A1EF68A1C0061474D /* WechatCollectionViewCell.xib in Resources */,
+				8D3498271F0A3460009D723C /* PayOrderTableViewCell.xib in Resources */,
 				8D575E4D1EF4F70B0061474D /* CompanyAccountViewController.xib in Resources */,
 				00214B381ECFDAC100FF6FDE /* Info.plist in Resources */,
 				8D575E431EF4F6A70061474D /* CouponViewController.xib in Resources */,
@@ -1293,6 +1347,7 @@
 				8D575E481EF4F6F30061474D /* PersonalAccountViewController.xib in Resources */,
 				8D575E6F1EF68A340061474D /* CardRechargeCollectionViewCell.xib in Resources */,
 				8D575E3E1EF4F6780061474D /* FeedBackViewController.xib in Resources */,
+				8D3498221F09FEC7009D723C /* PayOrderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1430,7 @@
 				0001CDF11ED08135000889CE /* BAFLoginViewController.m in Sources */,
 				8D6058F71EE438C30066289C /* PopViewController.m in Sources */,
 				8DE4334E1EED00A9009379ED /* ParkListViewController.m in Sources */,
+				8D3498021F07C301009D723C /* CommentViewController.m in Sources */,
 				00C8558D1EBAF63200157DA8 /* HRLPersonalCenterRequest.m in Sources */,
 				0001CDCC1ED05130000889CE /* BAFCenterViewController.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
@@ -1410,6 +1466,7 @@
 				007A79F91EB6C41F0070406B /* BaseEnvironment.m in Sources */,
 				0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */,
 				002093411EDBE6FC00C26176 /* OrderTableViewCell.m in Sources */,
+				8D34981D1F09223F009D723C /* CommentCheckCollectionReusableView.m in Sources */,
 				0022A2271EB0279F00A920D6 /* NSString+Null.m in Sources */,
 				00214B3D1ECFDAC100FF6FDE /* MJPropertyType.m in Sources */,
 				8D575E761EF69E850061474D /* ChargeFooterCollectionReusableView.m in Sources */,
@@ -1423,10 +1480,12 @@
 				8D575E5A1EF511120061474D /* RightsTableViewCell.m in Sources */,
 				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
 				8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */,
+				8D34980C1F08FCF5009D723C /* CommetHeaderCollectionReusableView.m in Sources */,
 				8D575E511EF4F72B0061474D /* RightsViewController.m in Sources */,
 				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
 				8D575E691EF68A1C0061474D /* WechatCollectionViewCell.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
+				8D34981A1F091C3D009D723C /* CommentFooterCollectionReusableView.m in Sources */,
 				0001CDE81ED060DF000889CE /* DYMRollingBannerVC.m in Sources */,
 				8D575E5F1EF516A20061474D /* CombineNewRightsViewController.m in Sources */,
 				0001CDE61ED060DF000889CE /* DYMBannerPool.m in Sources */,
@@ -1435,6 +1494,7 @@
 				002093551EDC343100C26176 /* OrderServiceTableViewCell.m in Sources */,
 				0001CDD11ED05158000889CE /* BAFLeftViewController.m in Sources */,
 				002093511EDC29DC00C26176 /* OrderServiceHeaderView.m in Sources */,
+				8D3498071F08FC07009D723C /* CommentCollectionViewCell.m in Sources */,
 				0001CDDC1ED05179000889CE /* PersonalCenterHeaderView.m in Sources */,
 				8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
@@ -1448,8 +1508,10 @@
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
 				002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */,
 				8DE433541EED0121009379ED /* ParkListTableViewCell.m in Sources */,
+				8D3498211F09FEC7009D723C /* PayOrderViewController.m in Sources */,
 				00214B411ECFDAC100FF6FDE /* NSObject+MJProperty.m in Sources */,
 				8D575E471EF4F6F30061474D /* PersonalAccountViewController.m in Sources */,
+				8D3498261F0A3460009D723C /* PayOrderTableViewCell.m in Sources */,
 				8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */,
 				007A7A191EB7245B0070406B /* NSString+HashMD5.m in Sources */,
 				8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */,
@@ -1626,6 +1688,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BAFParking/BAF-Prefix.pch";
 				INFOPLIST_FILE = BAFParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BAFParking/Utils/Source/wexinSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boanfei.boanfei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1646,6 +1712,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BAFParking/BAF-Prefix.pch";
 				INFOPLIST_FILE = BAFParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BAFParking/Utils/Source/wexinSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boanfei.boanfei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

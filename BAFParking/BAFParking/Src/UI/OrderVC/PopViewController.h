@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger,PopViewControllerType){
     kPopViewControllerTypeSelecBackTerminal,//选择返程航站楼
     kPopViewControllerTypeCompany,//通行人数
     kPopViewControllerTypeTipsshow,//费用明细
+    kPopViewControllerTypeTcCard,//权益卡列表
 };
 
 @protocol PopViewControllerDelegate <NSObject>

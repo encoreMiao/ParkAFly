@@ -105,7 +105,12 @@
             vc = [[RightsViewController alloc]init];
             break;
         case 3:
+        {
             vc = [[CouponViewController alloc]init];
+            CouponViewController *couponVC = (CouponViewController *)vc;
+            couponVC.type = kCouponViewControllerTypeCommon;
+            vc = couponVC;
+        }
             break;
         case 4:
             vc = [[OrderListViewController alloc]init];

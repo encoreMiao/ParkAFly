@@ -10,6 +10,7 @@
 #import "BAFCityInfo.h"
 #import "BAFParkAir.h"
 #import "PopFeeShowTableViewCell.h"
+#import "BAFTcCardInfo.h"
 
 @interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) PopViewControllerType    type;
@@ -154,7 +155,19 @@
             [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
             [self.bgView addSubview:self.datePicker];
         }
-            break;;
+            break;
+        case kPopViewControllerTypeTcCard:
+        {
+            CGFloat height = arr.count*40+44;
+            if (height>320) {
+                height = 320;
+            }
+            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
+            self.popTitleLabel.text = @"请选择权益账户";
+            self.tableView.hidden = NO;
+            self.detailLabel.hidden = YES;
+        }
+            break;
         default:
             break;
     }
@@ -253,7 +266,25 @@
             cell.popfeeMoneyLabel.text = arr[1];
             return cell;
         }
+            break;
+        case kPopViewControllerTypeTcCard:
+        {
+            static NSString *CellIdentifier = @"commonTableViewCell";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            cell.textLabel.text = ((BAFTcCardInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).type_name;
             
+            if (self.selectedIndex == indexPath) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            return cell;
+        }
+            break;
         default:
             return nil;
             break;
@@ -376,6 +407,15 @@
             if (!self.selectedIndex) {
                 CSToastStyle *toastStyle = [CSToastManager sharedStyle];
                 [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择同行人数" duration:2.5 position:@(100) style:toastStyle];
+                return;
+            }
+        }
+            break;
+        case kPopViewControllerTypeTcCard:
+        {
+            if (!self.selectedIndex) {
+                CSToastStyle *toastStyle = [CSToastManager sharedStyle];
+                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择权益账户" duration:2.5 position:@(100) style:toastStyle];
                 return;
             }
         }
