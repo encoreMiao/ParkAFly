@@ -1,38 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="182" id="KGk-i7-Jjw" customClass="CouponTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="391" height="135"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="196" id="KGk-i7-Jjw" customClass="CouponTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="432" height="149"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="391" height="134.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="432" height="149"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftbar_youhuiq_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Pha-ht-SOi">
-                        <rect key="frame" x="20" y="8" width="351" height="119"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftbar_youhuiq_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Pha-ht-SOi">
+                        <rect key="frame" x="20" y="15" width="392" height="119"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="119" id="kb0-GN-u1A"/>
+                        </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEp-Hg-jJ1">
+                        <rect key="frame" x="154" y="35" width="250" height="49"/>
+                        <attributedString key="attributedText">
+                            <fragment content="201616161212">
+                                <attributes>
+                                    <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment>
+                                <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                <attributes>
+                                    <font key="NSFont" metaFont="system" size="17"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="博安飞">
+                                <attributes>
+                                    <font key="NSFont" size="17" name=".PingFangSC-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="7">
+                                <attributes>
+                                    <font key="NSFont" metaFont="system" size="17"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="天优惠券">
+                                <attributes>
+                                    <font key="NSFont" size="17" name=".PingFangSC-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期：2016.03.5 12:30 - 2016.03.12 11:59" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrs-oO-1XE">
+                        <rect key="frame" x="25" y="107" width="355" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="jPd-mO-46Q"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqI-MA-pcE">
+                        <rect key="frame" x="385" y="107" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="Ppx-dU-GN4"/>
+                            <constraint firstAttribute="height" constant="22" id="VJm-QL-c8K"/>
+                        </constraints>
+                        <state key="normal" title="Button" backgroundImage="list_youhuiq_explain"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-Rk-3Hs">
+                        <rect key="frame" x="49" y="42" width="105" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="9a2-Ik-EC8"/>
+                            <constraint firstAttribute="width" constant="105" id="aP3-l2-0Qg"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="¥">
+                                <attributes>
+                                    <color key="NSColor" red="0.98431372549019602" green="0.41176470588235292" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" size="21" name=".SFNSDisplay"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="659">
+                                <attributes>
+                                    <color key="NSColor" red="0.98431372549019602" green="0.41176470588235292" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" metaFont="system" size="43"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WN-09-eXF">
+                        <rect key="frame" x="25" y="58" width="19" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="19" id="VB1-Xy-WRt"/>
+                            <constraint firstAttribute="height" constant="19" id="ygX-gI-KYA"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="list_youhuiq_check2"/>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Pha-ht-SOi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="1ah-us-lgc"/>
-                    <constraint firstAttribute="trailing" secondItem="Pha-ht-SOi" secondAttribute="trailing" constant="20" id="2py-Ji-hPk"/>
-                    <constraint firstItem="Pha-ht-SOi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Vuq-Bz-tiG"/>
-                    <constraint firstAttribute="bottom" secondItem="Pha-ht-SOi" secondAttribute="bottom" constant="8" id="kGl-u7-PiW"/>
+                    <constraint firstItem="yrs-oO-1XE" firstAttribute="leading" secondItem="Pha-ht-SOi" secondAttribute="leading" constant="5" id="1R5-fM-kcf"/>
+                    <constraint firstItem="yrs-oO-1XE" firstAttribute="centerY" secondItem="sqI-MA-pcE" secondAttribute="centerY" id="3f0-Y5-Juy"/>
+                    <constraint firstAttribute="trailing" secondItem="Pha-ht-SOi" secondAttribute="trailing" constant="20" id="53z-m6-MeO"/>
+                    <constraint firstItem="2WN-09-eXF" firstAttribute="leading" secondItem="Pha-ht-SOi" secondAttribute="leading" constant="5" id="FUi-oz-RDQ"/>
+                    <constraint firstItem="oEp-Hg-jJ1" firstAttribute="centerY" secondItem="DYe-Rk-3Hs" secondAttribute="centerY" id="GTM-ma-Gcm"/>
+                    <constraint firstItem="yrs-oO-1XE" firstAttribute="top" secondItem="2WN-09-eXF" secondAttribute="bottom" constant="30" id="P7R-o2-WAn"/>
+                    <constraint firstItem="sqI-MA-pcE" firstAttribute="leading" secondItem="yrs-oO-1XE" secondAttribute="trailing" constant="5" id="QFF-FC-73k"/>
+                    <constraint firstItem="sqI-MA-pcE" firstAttribute="bottom" secondItem="Pha-ht-SOi" secondAttribute="bottom" constant="-5" id="R3C-e1-YyZ"/>
+                    <constraint firstItem="sqI-MA-pcE" firstAttribute="trailing" secondItem="Pha-ht-SOi" secondAttribute="trailing" constant="-5" id="Sd3-jB-qNC"/>
+                    <constraint firstItem="Pha-ht-SOi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ZBO-ZD-ENQ"/>
+                    <constraint firstItem="oEp-Hg-jJ1" firstAttribute="top" secondItem="Pha-ht-SOi" secondAttribute="top" constant="20" id="cAW-lb-gyo"/>
+                    <constraint firstItem="DYe-Rk-3Hs" firstAttribute="leading" secondItem="2WN-09-eXF" secondAttribute="trailing" constant="5" id="edr-dg-1Ux"/>
+                    <constraint firstItem="oEp-Hg-jJ1" firstAttribute="leading" secondItem="DYe-Rk-3Hs" secondAttribute="trailing" id="g8g-nd-4Ds"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="oEp-Hg-jJ1" secondAttribute="trailing" constant="20" id="hzs-n0-As6"/>
+                    <constraint firstItem="Pha-ht-SOi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="iJ8-aX-Z9R"/>
+                    <constraint firstItem="DYe-Rk-3Hs" firstAttribute="bottom" secondItem="2WN-09-eXF" secondAttribute="bottom" id="rQa-wY-Qr0"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-50.5" y="-10"/>
+            <connections>
+                <outlet property="bgImageView" destination="Pha-ht-SOi" id="Ptj-Xm-XI0"/>
+                <outlet property="couponDetailLabel" destination="oEp-Hg-jJ1" id="Eh4-8H-6Lp"/>
+                <outlet property="couponLabel" destination="DYe-Rk-3Hs" id="wEX-AJ-VKO"/>
+                <outlet property="detailBtn" destination="sqI-MA-pcE" id="rpe-2N-x9x"/>
+                <outlet property="selectButton" destination="2WN-09-eXF" id="ke4-Sf-xHX"/>
+                <outlet property="validateDateLabel" destination="yrs-oO-1XE" id="pbL-N3-HPf"/>
+            </connections>
+            <point key="canvasLocation" x="-30" y="-3.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="leftbar_youhuiq_bg" width="345" height="119"/>
+        <image name="list_youhuiq_check2" width="19" height="19"/>
+        <image name="list_youhuiq_explain" width="22" height="22"/>
     </resources>
 </document>

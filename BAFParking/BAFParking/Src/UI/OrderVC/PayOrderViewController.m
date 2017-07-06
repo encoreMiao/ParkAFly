@@ -146,6 +146,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (indexPath.row == 1) {
         CouponViewController  *vc = [[CouponViewController alloc]init];
         vc.type = kCouponViewControllerTypeUse;
+        vc.orderId = [self.orderDic objectForKey:@"id"];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
