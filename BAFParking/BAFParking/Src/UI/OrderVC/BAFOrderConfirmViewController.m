@@ -17,7 +17,7 @@
 #import "BAFUserModelManger.h"
 #import "PopViewController.h"
 
-#define OrderConfirmTableViewCellIdentifier @"OrderConfirmTableViewCellIdentifier"
+#define OrderConfirmTableViewCellIdentifier     @"OrderConfirmTableViewCellIdentifier"
 #define ServiceConfirmTableViewCellIdentifier   @"ServiceConfirmTableViewCellIdentifier"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
@@ -31,12 +31,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (weak, nonatomic) IBOutlet UILabel *headerText;
 @property (strong, nonatomic) NSMutableDictionary *orderDic;
 @property (strong, nonatomic) NSMutableArray *serviceArr;
-//@property (strong, nonatomic) NSMutableArray *parkArr;
-//@property (strong, nonatomic) NSMutableArray *pickArr;
 @property (nonatomic, strong) NSIndexPath *selectIndexpath;
-
 @property (nonatomic, strong) IBOutlet UILabel *feeLabel;
-//@property (nonatomic, strong) UIButton *detailFeeBtn;
 @end
 
 
@@ -62,7 +58,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated
