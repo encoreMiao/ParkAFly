@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PersonalEditViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderDetailViewController">
             <connections>
-                <outlet property="tableview" destination="h0H-3i-b70" id="P5U-b8-BYs"/>
+                <outlet property="myTableView" destination="jvP-xc-2oj" id="l8J-mQ-vnX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,21 +20,21 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h0H-3i-b70">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jvP-xc-2oj">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="N1H-XE-rQO"/>
-                        <outlet property="delegate" destination="-1" id="2AH-KE-wZK"/>
+                        <outlet property="dataSource" destination="-1" id="QOi-5x-ZtM"/>
+                        <outlet property="delegate" destination="-1" id="t5O-nS-i9I"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="h0H-3i-b70" secondAttribute="bottom" id="AlI-A8-9GG"/>
-                <constraint firstItem="h0H-3i-b70" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PwS-Gn-nSj"/>
-                <constraint firstAttribute="trailing" secondItem="h0H-3i-b70" secondAttribute="trailing" id="vez-5w-7L4"/>
-                <constraint firstItem="h0H-3i-b70" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xRW-F6-4We"/>
+                <constraint firstItem="jvP-xc-2oj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NIY-RM-nbI"/>
+                <constraint firstAttribute="bottom" secondItem="jvP-xc-2oj" secondAttribute="bottom" id="SBJ-ir-bFa"/>
+                <constraint firstAttribute="trailing" secondItem="jvP-xc-2oj" secondAttribute="trailing" id="wek-9K-YNF"/>
+                <constraint firstItem="jvP-xc-2oj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xjw-KQ-7Fg"/>
             </constraints>
         </view>
     </objects>

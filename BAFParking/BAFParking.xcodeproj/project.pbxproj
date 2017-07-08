@@ -158,6 +158,18 @@
 		8DA526A91F02ABDA0063D61D /* PopFeeShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */; };
 		8DA526AA1F02ABDA0063D61D /* PopFeeShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
+		8DBAE0A91F106E22003ACFAB /* PersonalEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0A71F106E22003ACFAB /* PersonalEditTableViewCell.m */; };
+		8DBAE0AA1F106E22003ACFAB /* PersonalEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0A81F106E22003ACFAB /* PersonalEditTableViewCell.xib */; };
+		8DBAE0AE1F108099003ACFAB /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0AC1F108099003ACFAB /* OrderDetailViewController.m */; };
+		8DBAE0AF1F108099003ACFAB /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0AD1F108099003ACFAB /* OrderDetailViewController.xib */; };
+		8DBAE0B31F1080B9003ACFAB /* ParkDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0B11F1080B9003ACFAB /* ParkDetailViewController.m */; };
+		8DBAE0B41F1080B9003ACFAB /* ParkDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0B21F1080B9003ACFAB /* ParkDetailViewController.xib */; };
+		8DBAE0B81F1081DA003ACFAB /* ParkDetail1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0B61F1081DA003ACFAB /* ParkDetail1TableViewCell.m */; };
+		8DBAE0B91F1081DA003ACFAB /* ParkDetail1TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0B71F1081DA003ACFAB /* ParkDetail1TableViewCell.xib */; };
+		8DBAE0BD1F108D30003ACFAB /* ParkDetail2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0BB1F108D30003ACFAB /* ParkDetail2TableViewCell.m */; };
+		8DBAE0BE1F108D30003ACFAB /* ParkDetail2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0BC1F108D30003ACFAB /* ParkDetail2TableViewCell.xib */; };
+		8DBAE0C21F108E56003ACFAB /* ParkCommetnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0C01F108E56003ACFAB /* ParkCommetnTableViewCell.m */; };
+		8DBAE0C31F108E56003ACFAB /* ParkCommetnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0C11F108E56003ACFAB /* ParkCommetnTableViewCell.xib */; };
 		8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433431EE9E4EA009379ED /* PopTableViewCell.m */; };
 		8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */; };
 		8DE433491EEBC90A009379ED /* BAFParkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433481EEBC90A009379ED /* BAFParkInfo.m */; };
@@ -463,6 +475,24 @@
 		8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopFeeShowTableViewCell.xib; sourceTree = "<group>"; };
 		8DB4F88E1EE297F9006ACDEA /* BAFUserModelManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFUserModelManger.h; sourceTree = "<group>"; };
 		8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFUserModelManger.m; sourceTree = "<group>"; };
+		8DBAE0A61F106E22003ACFAB /* PersonalEditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalEditTableViewCell.h; sourceTree = "<group>"; };
+		8DBAE0A71F106E22003ACFAB /* PersonalEditTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalEditTableViewCell.m; sourceTree = "<group>"; };
+		8DBAE0A81F106E22003ACFAB /* PersonalEditTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalEditTableViewCell.xib; sourceTree = "<group>"; };
+		8DBAE0AB1F108099003ACFAB /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		8DBAE0AC1F108099003ACFAB /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		8DBAE0AD1F108099003ACFAB /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
+		8DBAE0B01F1080B9003ACFAB /* ParkDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkDetailViewController.h; sourceTree = "<group>"; };
+		8DBAE0B11F1080B9003ACFAB /* ParkDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkDetailViewController.m; sourceTree = "<group>"; };
+		8DBAE0B21F1080B9003ACFAB /* ParkDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkDetailViewController.xib; sourceTree = "<group>"; };
+		8DBAE0B51F1081DA003ACFAB /* ParkDetail1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkDetail1TableViewCell.h; sourceTree = "<group>"; };
+		8DBAE0B61F1081DA003ACFAB /* ParkDetail1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkDetail1TableViewCell.m; sourceTree = "<group>"; };
+		8DBAE0B71F1081DA003ACFAB /* ParkDetail1TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkDetail1TableViewCell.xib; sourceTree = "<group>"; };
+		8DBAE0BA1F108D30003ACFAB /* ParkDetail2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkDetail2TableViewCell.h; sourceTree = "<group>"; };
+		8DBAE0BB1F108D30003ACFAB /* ParkDetail2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkDetail2TableViewCell.m; sourceTree = "<group>"; };
+		8DBAE0BC1F108D30003ACFAB /* ParkDetail2TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkDetail2TableViewCell.xib; sourceTree = "<group>"; };
+		8DBAE0BF1F108E56003ACFAB /* ParkCommetnTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkCommetnTableViewCell.h; sourceTree = "<group>"; };
+		8DBAE0C01F108E56003ACFAB /* ParkCommetnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkCommetnTableViewCell.m; sourceTree = "<group>"; };
+		8DBAE0C11F108E56003ACFAB /* ParkCommetnTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkCommetnTableViewCell.xib; sourceTree = "<group>"; };
 		8DE433421EE9E4EA009379ED /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
 		8DE433431EE9E4EA009379ED /* PopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopTableViewCell.m; sourceTree = "<group>"; };
 		8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopTableViewCell.xib; sourceTree = "<group>"; };
@@ -551,6 +581,9 @@
 				8D575E8C1EF6C8EF0061474D /* CouponTableViewCell.h */,
 				8D575E8D1EF6C8EF0061474D /* CouponTableViewCell.m */,
 				8D575E8E1EF6C8EF0061474D /* CouponTableViewCell.xib */,
+				8DBAE0A61F106E22003ACFAB /* PersonalEditTableViewCell.h */,
+				8DBAE0A71F106E22003ACFAB /* PersonalEditTableViewCell.m */,
+				8DBAE0A81F106E22003ACFAB /* PersonalEditTableViewCell.xib */,
 			);
 			path = PersonalView;
 			sourceTree = "<group>";
@@ -626,6 +659,9 @@
 				8D34981E1F09FEC7009D723C /* PayOrderViewController.h */,
 				8D34981F1F09FEC7009D723C /* PayOrderViewController.m */,
 				8D3498201F09FEC7009D723C /* PayOrderViewController.xib */,
+				8DBAE0AB1F108099003ACFAB /* OrderDetailViewController.h */,
+				8DBAE0AC1F108099003ACFAB /* OrderDetailViewController.m */,
+				8DBAE0AD1F108099003ACFAB /* OrderDetailViewController.xib */,
 			);
 			path = OrderVC;
 			sourceTree = "<group>";
@@ -1170,6 +1206,9 @@
 				8DE4334B1EED00A9009379ED /* ParkListViewController.h */,
 				8DE4334C1EED00A9009379ED /* ParkListViewController.m */,
 				8DE4334D1EED00A9009379ED /* ParkListViewController.xib */,
+				8DBAE0B01F1080B9003ACFAB /* ParkDetailViewController.h */,
+				8DBAE0B11F1080B9003ACFAB /* ParkDetailViewController.m */,
+				8DBAE0B21F1080B9003ACFAB /* ParkDetailViewController.xib */,
 			);
 			path = ParkListVC;
 			sourceTree = "<group>";
@@ -1180,6 +1219,15 @@
 				8DE433511EED0121009379ED /* ParkListTableViewCell.h */,
 				8DE433521EED0121009379ED /* ParkListTableViewCell.m */,
 				8DE433531EED0121009379ED /* ParkListTableViewCell.xib */,
+				8DBAE0B51F1081DA003ACFAB /* ParkDetail1TableViewCell.h */,
+				8DBAE0B61F1081DA003ACFAB /* ParkDetail1TableViewCell.m */,
+				8DBAE0B71F1081DA003ACFAB /* ParkDetail1TableViewCell.xib */,
+				8DBAE0BA1F108D30003ACFAB /* ParkDetail2TableViewCell.h */,
+				8DBAE0BB1F108D30003ACFAB /* ParkDetail2TableViewCell.m */,
+				8DBAE0BC1F108D30003ACFAB /* ParkDetail2TableViewCell.xib */,
+				8DBAE0BF1F108E56003ACFAB /* ParkCommetnTableViewCell.h */,
+				8DBAE0C01F108E56003ACFAB /* ParkCommetnTableViewCell.m */,
+				8DBAE0C11F108E56003ACFAB /* ParkCommetnTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1306,6 +1354,7 @@
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
 				8D3498081F08FC07009D723C /* CommentCollectionViewCell.xib in Resources */,
 				8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */,
+				8DBAE0B41F1080B9003ACFAB /* ParkDetailViewController.xib in Resources */,
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
 				8D575E861EF6B9CD0061474D /* SettingViewController.xib in Resources */,
 				8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */,
@@ -1319,9 +1368,12 @@
 				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */,
+				8DBAE0AA1F106E22003ACFAB /* PersonalEditTableViewCell.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
+				8DBAE0B91F1081DA003ACFAB /* ParkDetail1TableViewCell.xib in Resources */,
 				8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */,
 				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
+				8DBAE0BE1F108D30003ACFAB /* ParkDetail2TableViewCell.xib in Resources */,
 				8D575E951EF6CFFC0061474D /* PersonalEditViewController.xib in Resources */,
 				8D575E651EF66F8B0061474D /* OrderListTableViewCell.xib in Resources */,
 				002093561EDC343100C26176 /* OrderServiceTableViewCell.xib in Resources */,
@@ -1345,7 +1397,9 @@
 				0001CDD21ED05158000889CE /* BAFLeftViewController.xib in Resources */,
 				00E0F8961EF020710095AA06 /* BAFMoreServicesViewController.xib in Resources */,
 				8D575E481EF4F6F30061474D /* PersonalAccountViewController.xib in Resources */,
+				8DBAE0AF1F108099003ACFAB /* OrderDetailViewController.xib in Resources */,
 				8D575E6F1EF68A340061474D /* CardRechargeCollectionViewCell.xib in Resources */,
+				8DBAE0C31F108E56003ACFAB /* ParkCommetnTableViewCell.xib in Resources */,
 				8D575E3E1EF4F6780061474D /* FeedBackViewController.xib in Resources */,
 				8D3498221F09FEC7009D723C /* PayOrderViewController.xib in Resources */,
 			);
@@ -1380,7 +1434,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E1363593991716C25DB63853 /* [CP] Copy Pods Resources */ = {
@@ -1458,11 +1512,13 @@
 				00214B521ECFF78900FF6FDE /* PersonalCenterCellShowInfo.m in Sources */,
 				0020934D1EDBFBA600C26176 /* BAFOrderServiceViewController.m in Sources */,
 				005E85C61E97924600115CAD /* main.m in Sources */,
+				8DBAE0B81F1081DA003ACFAB /* ParkDetail1TableViewCell.m in Sources */,
 				00214B391ECFDAC100FF6FDE /* MJExtensionConst.m in Sources */,
 				0020935A1EDC4B1700C26176 /* BAFOrderConfirmViewController.m in Sources */,
 				005074481EBB097000A6E8B1 /* HRLParkRequest.m in Sources */,
 				00E0F8951EF020710095AA06 /* BAFMoreServicesViewController.m in Sources */,
 				0001CDEC1ED06C1A000889CE /* BAFCenterOrderView.m in Sources */,
+				8DBAE0A91F106E22003ACFAB /* PersonalEditTableViewCell.m in Sources */,
 				007A79F91EB6C41F0070406B /* BaseEnvironment.m in Sources */,
 				0022A2301EB03BE300A920D6 /* NLHttpClientModel.m in Sources */,
 				002093411EDBE6FC00C26176 /* OrderTableViewCell.m in Sources */,
@@ -1472,6 +1528,7 @@
 				8D575E761EF69E850061474D /* ChargeFooterCollectionReusableView.m in Sources */,
 				00214B451ECFE1CB00FF6FDE /* BAFBaseViewController.m in Sources */,
 				0050744B1EBB248B00A6E8B1 /* BAFEquityAccountInfo.m in Sources */,
+				8DBAE0B31F1080B9003ACFAB /* ParkDetailViewController.m in Sources */,
 				00214B3C1ECFDAC100FF6FDE /* MJPropertyKey.m in Sources */,
 				005074591EBD5E1500A6E8B1 /* BAFCityInfo.m in Sources */,
 				00A2D5231EC05C7000B8F8BD /* BAFBaseNavigationViewController.m in Sources */,
@@ -1479,9 +1536,11 @@
 				8D575E3D1EF4F6780061474D /* FeedBackViewController.m in Sources */,
 				8D575E5A1EF511120061474D /* RightsTableViewCell.m in Sources */,
 				007A7A1E1EB736D70070406B /* HRLogicManager.m in Sources */,
+				8DBAE0AE1F108099003ACFAB /* OrderDetailViewController.m in Sources */,
 				8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */,
 				8D34980C1F08FCF5009D723C /* CommetHeaderCollectionReusableView.m in Sources */,
 				8D575E511EF4F72B0061474D /* RightsViewController.m in Sources */,
+				8DBAE0BD1F108D30003ACFAB /* ParkDetail2TableViewCell.m in Sources */,
 				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
 				8D575E691EF68A1C0061474D /* WechatCollectionViewCell.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
@@ -1524,6 +1583,7 @@
 				005074501EBB2DF100A6E8B1 /* NSString+ImageExtName.m in Sources */,
 				002093641EDC501600C26176 /* ServiceConfirmTableViewCell.m in Sources */,
 				007A79FF1EB6C5490070406B /* DistributedEnvironment.m in Sources */,
+				8DBAE0C21F108E56003ACFAB /* ParkCommetnTableViewCell.m in Sources */,
 				8D575E941EF6CFFC0061474D /* PersonalEditViewController.m in Sources */,
 				00214B3F1ECFDAC100FF6FDE /* NSObject+MJCoding.m in Sources */,
 				8D575E641EF66F8B0061474D /* OrderListTableViewCell.m in Sources */,

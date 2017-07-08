@@ -36,6 +36,11 @@
     self.selectButton.layer.cornerRadius = 3.0f;
     self.selectButton.layer.borderWidth = 1.0f;
     self.selectButton.layer.borderColor = ((UIColor *)[UIColor colorWithHex:kBAFCommonColor]).CGColor;
+    
+    
+    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detailGesture)];
+    gesture.delegate = self;
+    [self addGestureRecognizer:gesture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -123,4 +128,9 @@
     }
 }
 
+- (void)detailGesture{
+    if ([self.delegate respondsToSelector:@selector(ParkListTableViewCellActionDelegate:actionType:)]) {
+        [self.delegate ParkListTableViewCellActionDelegate:self actionType:kParkListTableViewCellActionTypeDetails];
+    }
+}
 @end

@@ -16,6 +16,7 @@
 #import "BAFOrderViewController.h"
 #import "PopViewController.h"
 #import "BAFOrderViewController.h"
+#import "ParkDetailViewController.h"
 
 
 #define  ParkListTableViewCelldentifier     @"ParkListTableViewCelldentifier"
@@ -178,6 +179,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         case kParkListTableViewCellActionTypeDetails:
         {
             //跳到详情页
+            ParkDetailViewController *vc = [[ParkDetailViewController alloc]init];
+//            orderServiceVC.cityid = str;
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case kParkListTableViewCellActionTypeLocation:
