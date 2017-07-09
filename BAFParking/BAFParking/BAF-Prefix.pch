@@ -21,4 +21,11 @@
 #import "MJExtension.h"
 #import "UIColor+HexColor.h"
 #import "UIView+Toast.h"
+#import "HRLogicManager.h"
+#import "HRLPersonalCenterInterface.h"
+#import "HRLOrderInterface.h"
+#import "HRLParkInterface.h"
+#import "HRLLoginInterface.h"
+#import "BAFUserModelManger.h"
+
 #endif

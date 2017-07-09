@@ -15,4 +15,11 @@
     // Initialization code
 }
 
+- (IBAction)chargeAction:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(chargeActionDelegate:)]){
+        [self.delegate chargeActionDelegate:self];
+    }
+}
+
 @end

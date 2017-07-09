@@ -9,5 +9,5 @@
 #import "BAFBaseViewController.h"
 
 @interface ParkDetailViewController : BAFBaseViewController
-
+@property (nonatomic, strong) NSString *parkid;
 @end

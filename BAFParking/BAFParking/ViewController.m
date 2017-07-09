@@ -238,9 +238,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 //                         nil];
 //    [personCenterReq clientAvatarRequestWithNumberIndex:kRequestNumberIndexClientAvatar delegte:self param:dic];
     
-//    [personCenterReq personalAccountRequestWithNumberIndex:kRequestNumberIndexPersonalAccount delegte:self client_id:@"7296"];
-    
-//    [personCenterReq clientPatrRequestWithNumberIndex:kRequestNumberIndexClientPatr delegte:self client_id:@"7296"];
+
 //    [personCenterReq feedBackRequestWithNumberIndex:kRequestNumberIndexFeedBack delegte:self client_id:@"7296" content:@"反馈啦啦啦啦啦啦啦啦啦"];
     
 //    [personCenterReq cityListRequestWithNumberIndex:kRequestNumberIndexCityList delegte:self];
@@ -383,33 +381,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     
-    if (aRequestID == kRequestNumberIndexPersonalAccount) {
-        if ([obj isKindOfClass:[NSDictionary class]]) {
-            obj = (NSDictionary *)obj;
-        }
-        if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            //账户余额充值页面 BAFChargePageInfo
-            //data->activity BAFChargePageActivityInfo
-            //data->rechargelist BAFChargePageRechargeInfo
-            
-            
-        }else{
-            //
-        }
-    }
-    
-    if (aRequestID == kRequestNumberIndexClientPatr) {
-        if ([obj isKindOfClass:[NSDictionary class]]) {
-            obj = (NSDictionary *)obj;
-        }
-        if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            //账户余额交易记录
-            //data对应一个列表 BAFClientPatrInfo
-            
-        }else{
-            //
-        }
-    }
     
     if (aRequestID == kRequestNumberIndexFeedBack) {
         if ([obj isKindOfClass:[NSDictionary class]]) {

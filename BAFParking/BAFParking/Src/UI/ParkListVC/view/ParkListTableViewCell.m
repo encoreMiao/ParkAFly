@@ -71,7 +71,7 @@
     _type = type;
     [self.parkImageView sd_setImageWithURL:[NSURL URLWithString:parkinfo.map_pic]];
     self.locationLabel.text = parkinfo.map_address;
-    self.parkLabel.text = [NSString stringWithFormat:@"%@\n车位费：%@",parkinfo.map_title,parkinfo.map_charge.remark];
+    self.parkLabel.text = [NSString stringWithFormat:@"%@\n车位费：%@",parkinfo.map_title,parkinfo.map_charge.strike_price];
     
     switch (type) {
         case kParkListTableViewCellTypeShow:

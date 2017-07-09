@@ -114,6 +114,9 @@
 		8D3498221F09FEC7009D723C /* PayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498201F09FEC7009D723C /* PayOrderViewController.xib */; };
 		8D3498261F0A3460009D723C /* PayOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498241F0A3460009D723C /* PayOrderTableViewCell.m */; };
 		8D3498271F0A3460009D723C /* PayOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498251F0A3460009D723C /* PayOrderTableViewCell.xib */; };
+		8D56DD271F11FB19000E3D99 /* BAFParkCommentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD261F11FB19000E3D99 /* BAFParkCommentInfo.m */; };
+		8D56DD2B1F120AF6000E3D99 /* BAFChargeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD2A1F120AF6000E3D99 /* BAFChargeInfo.m */; };
+		8D56DD2D1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D56DD2C1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib */; };
 		8D575E331EF4F2BD0061474D /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E311EF4F2BD0061474D /* OrderListViewController.m */; };
 		8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E321EF4F2BD0061474D /* OrderListViewController.xib */; };
 		8D575E381EF4F65D0061474D /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E361EF4F65D0061474D /* ShareViewController.m */; };
@@ -140,7 +143,6 @@
 		8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E6C1EF68A340061474D /* CardRechargeCollectionViewCell.m */; };
 		8D575E6F1EF68A340061474D /* CardRechargeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E6D1EF68A340061474D /* CardRechargeCollectionViewCell.xib */; };
 		8D575E761EF69E850061474D /* ChargeFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E741EF69E850061474D /* ChargeFooterCollectionReusableView.m */; };
-		8D575E771EF69E850061474D /* ChargeFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E751EF69E850061474D /* ChargeFooterCollectionReusableView.xib */; };
 		8D575E7B1EF6B2410061474D /* AccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E791EF6B2410061474D /* AccountDetailViewController.m */; };
 		8D575E7C1EF6B2410061474D /* AccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E7A1EF6B2410061474D /* AccountDetailViewController.xib */; };
 		8D575E801EF6B48C0061474D /* AccountDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E7E1EF6B48C0061474D /* AccountDetailTableViewCell.m */; };
@@ -407,6 +409,11 @@
 		8D3498231F0A3460009D723C /* PayOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOrderTableViewCell.h; sourceTree = "<group>"; };
 		8D3498241F0A3460009D723C /* PayOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOrderTableViewCell.m; sourceTree = "<group>"; };
 		8D3498251F0A3460009D723C /* PayOrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayOrderTableViewCell.xib; sourceTree = "<group>"; };
+		8D56DD251F11FB19000E3D99 /* BAFParkCommentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkCommentInfo.h; sourceTree = "<group>"; };
+		8D56DD261F11FB19000E3D99 /* BAFParkCommentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkCommentInfo.m; sourceTree = "<group>"; };
+		8D56DD291F120AF6000E3D99 /* BAFChargeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFChargeInfo.h; sourceTree = "<group>"; };
+		8D56DD2A1F120AF6000E3D99 /* BAFChargeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFChargeInfo.m; sourceTree = "<group>"; };
+		8D56DD2C1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChargeFooterCollectionReusableView.xib; sourceTree = "<group>"; };
 		8D575E301EF4F2BD0061474D /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
 		8D575E311EF4F2BD0061474D /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
 		8D575E321EF4F2BD0061474D /* OrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListViewController.xib; sourceTree = "<group>"; };
@@ -447,7 +454,6 @@
 		8D575E6D1EF68A340061474D /* CardRechargeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardRechargeCollectionViewCell.xib; sourceTree = "<group>"; };
 		8D575E731EF69E850061474D /* ChargeFooterCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChargeFooterCollectionReusableView.h; sourceTree = "<group>"; };
 		8D575E741EF69E850061474D /* ChargeFooterCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChargeFooterCollectionReusableView.m; sourceTree = "<group>"; };
-		8D575E751EF69E850061474D /* ChargeFooterCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChargeFooterCollectionReusableView.xib; sourceTree = "<group>"; };
 		8D575E781EF6B2410061474D /* AccountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDetailViewController.h; sourceTree = "<group>"; };
 		8D575E791EF6B2410061474D /* AccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailViewController.m; sourceTree = "<group>"; };
 		8D575E7A1EF6B2410061474D /* AccountDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountDetailViewController.xib; sourceTree = "<group>"; };
@@ -571,7 +577,7 @@
 				8D575E6D1EF68A340061474D /* CardRechargeCollectionViewCell.xib */,
 				8D575E731EF69E850061474D /* ChargeFooterCollectionReusableView.h */,
 				8D575E741EF69E850061474D /* ChargeFooterCollectionReusableView.m */,
-				8D575E751EF69E850061474D /* ChargeFooterCollectionReusableView.xib */,
+				8D56DD2C1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib */,
 				8D575E7D1EF6B48C0061474D /* AccountDetailTableViewCell.h */,
 				8D575E7E1EF6B48C0061474D /* AccountDetailTableViewCell.m */,
 				8D575E7F1EF6B48C0061474D /* AccountDetailTableViewCell.xib */,
@@ -883,6 +889,7 @@
 				005E85D21E97924600115CAD /* LaunchScreen.storyboard */,
 				00214B1F1ECFD0D500FF6FDE /* Assets.xcassets */,
 				005E85D51E97924600115CAD /* Info.plist */,
+				8D56DD281F1209DF000E3D99 /* MVC */,
 				00E3B2F81EB4C0E500A4FF73 /* Config */,
 				00C854641EAF771300EAD557 /* Src */,
 				0022A21F1EB026CC00A920D6 /* Utils */,
@@ -1067,6 +1074,10 @@
 				0050745E1EBE9A9500A6E8B1 /* BAFCommentInfo.m */,
 				005074601EBE9E3D00A6E8B1 /* BAFCouponInfo.h */,
 				005074611EBE9E3D00A6E8B1 /* BAFCouponInfo.m */,
+				8D56DD251F11FB19000E3D99 /* BAFParkCommentInfo.h */,
+				8D56DD261F11FB19000E3D99 /* BAFParkCommentInfo.m */,
+				8D56DD291F120AF6000E3D99 /* BAFChargeInfo.h */,
+				8D56DD2A1F120AF6000E3D99 /* BAFChargeInfo.m */,
 			);
 			path = ModelDataLayer;
 			sourceTree = "<group>";
@@ -1170,6 +1181,13 @@
 				3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8D56DD281F1209DF000E3D99 /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MVC;
 			sourceTree = "<group>";
 		};
 		8D575E531EF504EE0061474D /* HPGrowingTextView */ = {
@@ -1356,6 +1374,7 @@
 				8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */,
 				8DBAE0B41F1080B9003ACFAB /* ParkDetailViewController.xib in Resources */,
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
+				8D56DD2D1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib in Resources */,
 				8D575E861EF6B9CD0061474D /* SettingViewController.xib in Resources */,
 				8DE433551EED0121009379ED /* ParkListTableViewCell.xib in Resources */,
 				8D34980D1F08FCF5009D723C /* CommetHeaderCollectionReusableView.xib in Resources */,
@@ -1364,7 +1383,6 @@
 				8DA526AA1F02ABDA0063D61D /* PopFeeShowTableViewCell.xib in Resources */,
 				8D575E521EF4F72B0061474D /* RightsViewController.xib in Resources */,
 				8D575E811EF6B48C0061474D /* AccountDetailTableViewCell.xib in Resources */,
-				8D575E771EF69E850061474D /* ChargeFooterCollectionReusableView.xib in Resources */,
 				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */,
@@ -1475,6 +1493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DE433491EEBC90A009379ED /* BAFParkInfo.m in Sources */,
+				8D56DD2B1F120AF6000E3D99 /* BAFChargeInfo.m in Sources */,
 				0093D3AA1EE052A00035987C /* UIView+Toast.m in Sources */,
 				005E85CC1E97924600115CAD /* ViewController.m in Sources */,
 				00214B3E1ECFDAC100FF6FDE /* NSObject+MJClass.m in Sources */,
@@ -1577,6 +1596,7 @@
 				007A7A051EB6C7500070406B /* BAFServerManager.m in Sources */,
 				005074561EBC211000A6E8B1 /* BAFClientPatrInfo.m in Sources */,
 				8D575E7B1EF6B2410061474D /* AccountDetailViewController.m in Sources */,
+				8D56DD271F11FB19000E3D99 /* BAFParkCommentInfo.m in Sources */,
 				007A7A021EB6C5CE0070406B /* EnvironmentFactory.m in Sources */,
 				00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */,
 				0022A22D1EB0339A00A920D6 /* NLRequestMessageManager.m in Sources */,

@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFChargeInfo.h"
+
 typedef NS_ENUM(NSInteger,WechatCollectionViewCellType)
 {
     kWechatCollectionViewCellTypeActivity,//活动
     kWechatCollectionViewCellTypeCommon,//正常
 };
 
-
 @interface WechatCollectionViewCell : UICollectionViewCell
 @property (nonatomic, assign) WechatCollectionViewCellType type;
+@property (nonatomic, strong) BAFChargeInfo *chargeInfo;
+
+- (void)setCollectionSelected:(BOOL)selected;
+
 @end

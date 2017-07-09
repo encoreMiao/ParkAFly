@@ -10,14 +10,23 @@
 #import "ParkDetail1TableViewCell.h"
 #import "ParkDetail2TableViewCell.h"
 #import "ParkCommetnTableViewCell.h"
+#import "HRLParkInterface.h"
+#import "HRLogicManager.h"
+#import "BAFParkCommentInfo.h"
 
 #define ParkDetail1TableViewCellIdentifier      @"ParkDetail1TableViewCellIdentifier"
 #define ParkDetail2TableViewCellIdentifier      @"ParkDetail2TableViewCellIdentifier"
 #define ParkCommetnTableViewCellIdentifier      @"ParkCommetnTableViewCellIdentifier"
 
+typedef NS_ENUM(NSInteger,RequestNumberIndex) {
+    kRequestNumberIndexParkDetail,
+    kRequestNumberIndexParkCommentList,//评论列表
+};
+
 @interface ParkDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) IBOutlet UIButton *footerBtn;
+@property (strong, nonatomic) NSMutableArray *parkCommentList;
 @end
 
 @implementation ParkDetailViewController
@@ -30,6 +39,14 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self parkDetailRequestWithParkId:self.parkid];
+    [self parkCommentListRequestWithParkId:self.parkid];
+    self.parkCommentList = [NSMutableArray array];
 }
 
 #pragma mark - UITableViewDelegate
@@ -164,6 +181,54 @@
 
 - (IBAction)footerCheckMoreAction:(id)sender {
     NSLog(@"查看更多");
+}
+
+
+- (void)parkDetailRequestWithParkId:(NSString *)parkId
+{
+    id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
+    [parkReq parkMapDetailRequestWithNumberIndex:kRequestNumberIndexParkDetail delegte:self park_id:parkId];
+}
+
+- (void)parkCommentListRequestWithParkId:(NSString *)parkId
+{
+    id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
+    [parkReq parkMapCommentListRequestWithNumberIndex:kRequestNumberIndexParkCommentList delegte:self park_id:parkId];
+}
+
+#pragma mark - REQUEST
+-(void)onJobComplete:(int)aRequestID Object:(id)obj
+{
+    if (aRequestID == kRequestNumberIndexParkDetail) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            
+        }else{
+            
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexParkCommentList) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            if (self.parkCommentList) {
+                [self.parkCommentList removeAllObjects];
+            }
+            self.parkCommentList = [BAFParkCommentInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
+            
+        }else{
+            
+        }
+    }
+}
+
+-(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
+{
+    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 
 

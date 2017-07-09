@@ -9,8 +9,16 @@
 #import "AccountDetailViewController.h"
 #import "PersonalAccountViewController.h"
 #import "AccountDetailTableViewCell.h"
+#import "HRLPersonalCenterInterface.h"
+#import "HRLogicManager.h"
+#import "BAFUserModelManger.h"
 
 #define AccountDetailTableViewCellIdentifier @"AccountDetailTableViewCellIdentifier"
+
+typedef NS_ENUM(NSInteger,RequestNumberIndex){
+    kRequestNumberIndexPersonalAccount,//账户充值页面
+    kRequestNumberIndexClientPatr,//账户余额交易记录
+};
 
 @interface AccountDetailViewController ()
 @property (nonatomic, weak) IBOutlet UITableView *mainTableView;
@@ -79,5 +87,40 @@
     //    }
     return cell;
 }
+
+
+- (void)clientDetailRequest
+{
+    //账户余额交易记录
+//    /api/client/client_patr
+    id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    [personCenterReq clientPatrRequestWithNumberIndex:kRequestNumberIndexClientPatr delegte:self client_id:userInfo.clientid];
+    
+}
+
+#pragma mark - REQUEST
+-(void)onJobComplete:(int)aRequestID Object:(id)obj
+{
+    if (aRequestID == kRequestNumberIndexClientPatr) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //账户余额交易记录
+            //data对应一个列表 BAFClientPatrInfo
+            
+        }else{
+            //
+        }
+    }
+
+}
+
+-(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
+{
+    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
+}
+
 
 @end

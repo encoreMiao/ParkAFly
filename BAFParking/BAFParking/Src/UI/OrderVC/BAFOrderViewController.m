@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexGetAir,
     kRequestNumberIndexGetParkByAid,
     kRequestNumberIndexEditOrder,
+    kRequestNumberIndexOrderDetail,
 };
 
 #define OrderTableViewCellIdentifier            @"OrderTableViewCellIdentifier"
@@ -108,6 +109,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         
         //根据cityid获取城市名称？？？
         [self parkAirRequestWithCityId:[self.orderDicForModify objectForKey:@"city_id"]];//城市默认北京
+        
+        [self orderDetailRequestWithOrdersid:[self.orderDicForModify objectForKey:@"id"]];
+        
         
         self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:self.orderDicForModify];
         [self.mainTableView reloadData];
@@ -500,6 +504,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [parkReq getParkByAidRequestWithNumberIndex:kRequestNumberIndexGetParkByAid delegte:self air_id:parkid];
 }
 
+#pragma mark - request
+- (void)orderDetailRequestWithOrdersid:(NSString *)order_id
+{
+    //订单详情
+    id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [orderReq orderDetailRequestWithNumberIndex:kRequestNumberIndexOrderDetail delegte:self order_id:order_id];
+}
+
 - (void)editOrder
 {
     id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
@@ -580,7 +592,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             
             if (self.parkArr) {
                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",self.parkArr[0].map_title,self.parkArr[0].map_id] forKey:OrderParamTypePark];
-                _chargeRemark = self.parkArr[0].map_charge.remark;
+//                _chargeRemark = self.parkArr[0].map_charge.remark;
+                _chargeRemark = [NSString stringWithFormat:@"该车场收费标准为：%@",self.parkArr[0].map_price];
                 [_dicDatasource setObject:self.parkArr[0].map_charge.first_day_price forKey:OrderParamTypeParkFeeFirstDay];
                 [_dicDatasource setObject:self.parkArr[0].map_charge.market_price forKey:OrderParamTypeParkFeeDay];
                 [_dicDatasource setObject:self.parkArr[0].map_address forKey:OrderParamTypeParkLocation];
@@ -599,6 +612,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             //修改订单
+            
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+        }
+    }
+    
+    
+    if (aRequestID == kRequestNumberIndexOrderDetail) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //订单详情
             
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];

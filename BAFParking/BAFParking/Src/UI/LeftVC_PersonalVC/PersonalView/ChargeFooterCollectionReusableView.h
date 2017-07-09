@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ChargeFooterCollectionReusableView;
+
+@protocol ChargeFooterCollectionReusableViewDelegate <NSObject>
+- (void)chargeActionDelegate:(ChargeFooterCollectionReusableView *)footerView;
+@end
 
 @interface ChargeFooterCollectionReusableView : UICollectionReusableView
-
+- (IBAction)chargeAction:(id)sender;
+@property (nonatomic, weak) id<ChargeFooterCollectionReusableViewDelegate> delegate;
 @end

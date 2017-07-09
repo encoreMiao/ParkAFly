@@ -180,7 +180,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         {
             //跳到详情页
             ParkDetailViewController *vc = [[ParkDetailViewController alloc]init];
-//            orderServiceVC.cityid = str;
+            vc.parkid = cell.parkinfo.map_id;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

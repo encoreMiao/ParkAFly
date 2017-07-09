@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="balanceTable" destination="SR0-Fi-fE8" id="51T-mK-X31"/>
                 <outlet property="cardChargeButton" destination="bVN-zL-0ld" id="fHM-wZ-wWO"/>
-                <outlet property="chargeButton" destination="8HV-J3-zW3" id="hOi-Gc-yqf"/>
                 <outlet property="headerView" destination="wmc-gm-rxG" id="DY7-Pc-huE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wechatChargeButton" destination="YOl-jA-3gC" id="0II-7a-CNJ"/>
@@ -25,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </view>
-        <view contentMode="scaleToFill" id="V7X-iX-LsX" customClass="ChargeFooterCollectionReusableView">
+        <view contentMode="scaleToFill" id="V7X-iX-LsX" customClass="UICollectionReusableView">
             <rect key="frame" x="0.0" y="0.0" width="528" height="240"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -39,9 +38,6 @@
                     <state key="normal" title="立即充值">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
-                    <connections>
-                        <action selector="chargeAction:" destination="-1" eventType="touchUpInside" id="YNK-YU-GLj"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9D-Yj-RFk">
                     <rect key="frame" x="20" y="87" width="488" height="100"/>
@@ -80,7 +76,7 @@ Cg
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.24330357142857142" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="p9D-Yj-RFk" firstAttribute="leading" secondItem="V7X-iX-LsX" secondAttribute="leading" constant="20" id="VXo-kc-jgv"/>
                 <constraint firstItem="p9D-Yj-RFk" firstAttribute="top" secondItem="8HV-J3-zW3" secondAttribute="bottom" constant="15" id="dqw-7s-UDg"/>
