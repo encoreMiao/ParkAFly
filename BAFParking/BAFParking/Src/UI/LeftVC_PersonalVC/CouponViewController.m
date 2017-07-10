@@ -12,22 +12,13 @@
 #import "HRLogicManager.h"
 #import "CouponTableViewCell.h"
 #import "BAFUserModelManger.h"
+#import "BAFCouponInfo.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCouponListRequest,
     kRequestNumberIndexPayCouponRequest,
+    kRequestNumberIndexBindCouponRequest,
 };
-
-//typedef NS_ENUM(NSInteger,CouponTableViewCellType){
-//    //查看优惠券
-//    kCouponTableViewCellTypeCommonCell1,//未使用
-//    kCouponTableViewCellTypeCommonCell2,//已使用
-//    kCouponTableViewCellTypeCommonCell3,//已过期
-//    
-//    //使用优惠券
-//    kCouponViewControllerTypeUseCell1,//可用
-//    kCouponViewControllerTypeUseCell2,//不可用
-//};
 
 #define CouponTableViewCellIdentifier   @"CouponTableViewCellIdentifier"
 
@@ -61,7 +52,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,20 +84,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         default:
             break;
     }
-    
-    
 }
 
 - (void)backMethod:(id)sender
 {
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
-- (IBAction)exchangeBtn:(id)sender {
-    
+
+- (IBAction)exchangeCouponBtn:(id)sender {
+    if (self.couponExchangeTF.text.length <=0) {
+        [self showTipsInView:self.view message:@"请输入电子码" offset:self.view.center.x+100];
+        return;
+    }
+    [self.couponExchangeTF resignFirstResponder];
+    [self bindCouponRequestWithCouponCode:self.couponExchangeTF.text];
 }
 
 #pragma mark - UITableViewDelegate
@@ -118,8 +108,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return self.couponArr.count;
-    return 3;
+    return self.couponArr.count;
+//    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -127,6 +117,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     CouponTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:CouponTableViewCellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"CouponTableViewCell" owner:nil options:nil] firstObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //        cell.delegate = self;
     }
     cell.type = self.cellType;
@@ -157,7 +148,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSLog(@"优惠券选择");
 //    if (indexPath.row == 0) {
 //        if (self.tcCard.count == 0) {
 //            [self showTipsInView:self.view message:@"当前未绑定权益卡" offset:self.view.center.x+100];
@@ -247,8 +238,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         default:
             break;
     }
-    
-    
 }
 
 #pragma mark - setter&getter
@@ -262,7 +251,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     return _buttonView;
 }
 
-#pragma mark - request
+#pragma mark - REQUEST
 - (void)couponRequestWithStatus:(NSString *)status
 {
 //    1.未使用;2.已使用;3. 已过期
@@ -277,7 +266,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
     [personReq getMyCouponRequestWithNumberIndex:kRequestNumberIndexPayCouponRequest delegte:self client_id:userInfo.clientid order_id:self.orderId];
 }
-#pragma mark - REQUEST
+
+- (void)bindCouponRequestWithCouponCode:(NSString *)coponCode
+{
+    id <HRLPersonalCenterInterface> personReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    [personReq bindCouponRequestWithNumberIndex:kRequestNumberIndexBindCouponRequest delegte:self client_id:userInfo.clientid coupon_code:coponCode];
+}
+
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
 {
     if (aRequestID == kRequestNumberIndexCouponListRequest) {
@@ -286,8 +282,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self.couponArr removeAllObjects];
-//            self.couponArr = [BAFTcCardInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
-            self.couponArr = [NSMutableArray arrayWithArray:[obj objectForKey:@"data"]];
+            self.couponArr = [NSMutableArray arrayWithArray:[BAFCouponInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]]];
         }else{
             [self.couponArr removeAllObjects];
             if ([[obj objectForKey:@"code"] integerValue] == 3) {
@@ -314,12 +309,32 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         [self.myTableview  reloadData];
     }
+    
+    if (aRequestID == kRequestNumberIndexBindCouponRequest) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            self.couponExchangeTF.text = @"";
+            switch (self.type) {
+                case kCouponViewControllerTypeCommon://查看优惠券
+                    [self segementSelect:self.unuseBtn];
+                    break;
+                case kCouponViewControllerTypeUse://使用优惠券
+                    [self segementSelect:self.useBtn];
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+        }
+    }
 }
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
 {
     [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
-
-
 @end

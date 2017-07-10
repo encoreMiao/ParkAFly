@@ -9,5 +9,5 @@
 #import "BAFBaseViewController.h"
 
 @interface OrderDetailViewController : BAFBaseViewController
-
+@property (nonatomic, strong) NSString *orderIdStr;
 @end

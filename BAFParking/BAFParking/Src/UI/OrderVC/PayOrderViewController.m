@@ -229,8 +229,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
     [orderReq orderFeeRequestWithNumberIndex:kRequestNumberIndexOrderFeeRequest delegte:self order_id:[self.orderDic objectForKey:@"id"]];
-    
 }
+
+- (void)orderPaymentSet
+{
+//    order/order_payment_set
+}
+
 #pragma mark - REQUEST
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
 {

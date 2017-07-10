@@ -117,6 +117,12 @@
 		8D56DD271F11FB19000E3D99 /* BAFParkCommentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD261F11FB19000E3D99 /* BAFParkCommentInfo.m */; };
 		8D56DD2B1F120AF6000E3D99 /* BAFChargeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD2A1F120AF6000E3D99 /* BAFChargeInfo.m */; };
 		8D56DD2D1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D56DD2C1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib */; };
+		8D56DD321F127217000E3D99 /* OrderDetail1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD301F127217000E3D99 /* OrderDetail1TableViewCell.m */; };
+		8D56DD331F127217000E3D99 /* OrderDetail1TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D56DD311F127217000E3D99 /* OrderDetail1TableViewCell.xib */; };
+		8D56DD371F127248000E3D99 /* OrderDetailImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD351F127248000E3D99 /* OrderDetailImageTableViewCell.m */; };
+		8D56DD381F127248000E3D99 /* OrderDetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D56DD361F127248000E3D99 /* OrderDetailImageTableViewCell.xib */; };
+		8D56DD3C1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD3A1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.m */; };
+		8D56DD3D1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D56DD3B1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.xib */; };
 		8D575E331EF4F2BD0061474D /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E311EF4F2BD0061474D /* OrderListViewController.m */; };
 		8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D575E321EF4F2BD0061474D /* OrderListViewController.xib */; };
 		8D575E381EF4F65D0061474D /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D575E361EF4F65D0061474D /* ShareViewController.m */; };
@@ -414,6 +420,15 @@
 		8D56DD291F120AF6000E3D99 /* BAFChargeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFChargeInfo.h; sourceTree = "<group>"; };
 		8D56DD2A1F120AF6000E3D99 /* BAFChargeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFChargeInfo.m; sourceTree = "<group>"; };
 		8D56DD2C1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChargeFooterCollectionReusableView.xib; sourceTree = "<group>"; };
+		8D56DD2F1F127217000E3D99 /* OrderDetail1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetail1TableViewCell.h; sourceTree = "<group>"; };
+		8D56DD301F127217000E3D99 /* OrderDetail1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetail1TableViewCell.m; sourceTree = "<group>"; };
+		8D56DD311F127217000E3D99 /* OrderDetail1TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetail1TableViewCell.xib; sourceTree = "<group>"; };
+		8D56DD341F127248000E3D99 /* OrderDetailImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailImageTableViewCell.h; sourceTree = "<group>"; };
+		8D56DD351F127248000E3D99 /* OrderDetailImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailImageTableViewCell.m; sourceTree = "<group>"; };
+		8D56DD361F127248000E3D99 /* OrderDetailImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailImageTableViewCell.xib; sourceTree = "<group>"; };
+		8D56DD391F1272B9000E3D99 /* OrderDetailStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailStatusTableViewCell.h; sourceTree = "<group>"; };
+		8D56DD3A1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailStatusTableViewCell.m; sourceTree = "<group>"; };
+		8D56DD3B1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailStatusTableViewCell.xib; sourceTree = "<group>"; };
 		8D575E301EF4F2BD0061474D /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
 		8D575E311EF4F2BD0061474D /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
 		8D575E321EF4F2BD0061474D /* OrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListViewController.xib; sourceTree = "<group>"; };
@@ -668,6 +683,7 @@
 				8DBAE0AB1F108099003ACFAB /* OrderDetailViewController.h */,
 				8DBAE0AC1F108099003ACFAB /* OrderDetailViewController.m */,
 				8DBAE0AD1F108099003ACFAB /* OrderDetailViewController.xib */,
+				8D56DD2E1F127197000E3D99 /* OrderDetailView */,
 			);
 			path = OrderVC;
 			sourceTree = "<group>";
@@ -1190,6 +1206,22 @@
 			path = MVC;
 			sourceTree = "<group>";
 		};
+		8D56DD2E1F127197000E3D99 /* OrderDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				8D56DD2F1F127217000E3D99 /* OrderDetail1TableViewCell.h */,
+				8D56DD301F127217000E3D99 /* OrderDetail1TableViewCell.m */,
+				8D56DD311F127217000E3D99 /* OrderDetail1TableViewCell.xib */,
+				8D56DD341F127248000E3D99 /* OrderDetailImageTableViewCell.h */,
+				8D56DD351F127248000E3D99 /* OrderDetailImageTableViewCell.m */,
+				8D56DD361F127248000E3D99 /* OrderDetailImageTableViewCell.xib */,
+				8D56DD391F1272B9000E3D99 /* OrderDetailStatusTableViewCell.h */,
+				8D56DD3A1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.m */,
+				8D56DD3B1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.xib */,
+			);
+			path = OrderDetailView;
+			sourceTree = "<group>";
+		};
 		8D575E531EF504EE0061474D /* HPGrowingTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1371,6 +1403,7 @@
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
 				8D3498081F08FC07009D723C /* CommentCollectionViewCell.xib in Resources */,
+				8D56DD381F127248000E3D99 /* OrderDetailImageTableViewCell.xib in Resources */,
 				8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */,
 				8DBAE0B41F1080B9003ACFAB /* ParkDetailViewController.xib in Resources */,
 				0020936A1EDD2CE300C26176 /* SuccessViewController.xib in Resources */,
@@ -1391,6 +1424,7 @@
 				8DBAE0B91F1081DA003ACFAB /* ParkDetail1TableViewCell.xib in Resources */,
 				8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */,
 				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
+				8D56DD331F127217000E3D99 /* OrderDetail1TableViewCell.xib in Resources */,
 				8DBAE0BE1F108D30003ACFAB /* ParkDetail2TableViewCell.xib in Resources */,
 				8D575E951EF6CFFC0061474D /* PersonalEditViewController.xib in Resources */,
 				8D575E651EF66F8B0061474D /* OrderListTableViewCell.xib in Resources */,
@@ -1400,6 +1434,7 @@
 				0001CDCD1ED05130000889CE /* BAFCenterViewController.xib in Resources */,
 				8D575E6A1EF68A1C0061474D /* WechatCollectionViewCell.xib in Resources */,
 				8D3498271F0A3460009D723C /* PayOrderTableViewCell.xib in Resources */,
+				8D56DD3D1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.xib in Resources */,
 				8D575E4D1EF4F70B0061474D /* CompanyAccountViewController.xib in Resources */,
 				00214B381ECFDAC100FF6FDE /* Info.plist in Resources */,
 				8D575E431EF4F6A70061474D /* CouponViewController.xib in Resources */,
@@ -1562,6 +1597,7 @@
 				8DBAE0BD1F108D30003ACFAB /* ParkDetail2TableViewCell.m in Sources */,
 				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
 				8D575E691EF68A1C0061474D /* WechatCollectionViewCell.m in Sources */,
+				8D56DD3C1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.m in Sources */,
 				007A7A0B1EB6DC1C0070406B /* NetStatusModel.m in Sources */,
 				8D34981A1F091C3D009D723C /* CommentFooterCollectionReusableView.m in Sources */,
 				0001CDE81ED060DF000889CE /* DYMRollingBannerVC.m in Sources */,
@@ -1571,11 +1607,13 @@
 				00C8546B1EAF785600EAD557 /* NLReqestMessage.m in Sources */,
 				002093551EDC343100C26176 /* OrderServiceTableViewCell.m in Sources */,
 				0001CDD11ED05158000889CE /* BAFLeftViewController.m in Sources */,
+				8D56DD371F127248000E3D99 /* OrderDetailImageTableViewCell.m in Sources */,
 				002093511EDC29DC00C26176 /* OrderServiceHeaderView.m in Sources */,
 				8D3498071F08FC07009D723C /* CommentCollectionViewCell.m in Sources */,
 				0001CDDC1ED05179000889CE /* PersonalCenterHeaderView.m in Sources */,
 				8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
+				8D56DD321F127217000E3D99 /* OrderDetail1TableViewCell.m in Sources */,
 				8D575E801EF6B48C0061474D /* AccountDetailTableViewCell.m in Sources */,
 				00214B3A1ECFDAC100FF6FDE /* MJFoundation.m in Sources */,
 				0050745C1EBD628E00A6E8B1 /* BAFTcCardInfo.m in Sources */,

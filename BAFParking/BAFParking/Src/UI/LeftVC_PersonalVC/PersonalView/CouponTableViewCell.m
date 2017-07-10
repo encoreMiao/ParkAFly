@@ -78,4 +78,15 @@
 //
 }
 
+- (void)setCouponInfo:(BAFCouponInfo *)couponInfo
+{
+    _couponInfo = couponInfo;
+    
+}
+
+- (IBAction)detailAction:(id)sender
+{
+    
+}
+
 @end

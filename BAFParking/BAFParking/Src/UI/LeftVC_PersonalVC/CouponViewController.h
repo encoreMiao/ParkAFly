@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger,CouponViewControllerType){
     kCouponViewControllerTypeUse,
 };
 
+
 @interface CouponViewController : BAFBaseViewController
 @property (nonatomic, assign) CouponViewControllerType type;
 @property (nonatomic, strong) NSString *orderId;
