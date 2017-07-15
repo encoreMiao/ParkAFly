@@ -100,8 +100,8 @@
     if(!_rightButton){
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_rightButton setFrame:CGRectMake(0, 0, 100, 44)];
-//        _rightButton.contentEdgeInsets = UIEdgeInsetsMake(12, -5, 12, 58);
-        [_rightButton setTitleColor:HexRGB(kBAFColorForTitle) forState:UIControlStateNormal];
+        [_rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.0f]];
+        [_rightButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
         _rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _rightButton;

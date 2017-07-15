@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -246,7 +246,7 @@
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Pc-6e-f1L">
                                     <rect key="frame" x="18" y="149" width="300" height="5"/>
-                                    <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="5" id="SGU-a7-FEt"/>
                                         <constraint firstAttribute="width" constant="300" id="ruq-uM-HZN"/>
@@ -362,13 +362,17 @@
                     <connections>
                         <outlet property="car_license_noL" destination="a9f-pK-tA9" id="v5E-3P-uuW"/>
                         <outlet property="getCarSuccessIV" destination="LNQ-6d-Ete" id="lfl-gK-qji"/>
+                        <outlet property="getCarSuccessL" destination="ZUl-tp-Obe" id="ewX-Bi-4Y8"/>
                         <outlet property="goingView" destination="Ln6-T2-Zht" id="9vI-hs-sbF"/>
                         <outlet property="noneView" destination="FC7-nF-Th3" id="bk8-Ug-eht"/>
                         <outlet property="orderSuccessIV" destination="BS0-2Q-rcR" id="aCH-Ws-V51"/>
+                        <outlet property="orderSuccessL" destination="wpM-cp-FPL" id="orc-l3-h8O"/>
                         <outlet property="parkFinishedIV" destination="qOo-95-KV9" id="w57-Cg-fP5"/>
+                        <outlet property="parkFinishedL" destination="OKC-4X-Sco" id="tVc-Dc-n4C"/>
                         <outlet property="park_nameL" destination="VZL-Ih-gDU" id="HV7-3W-ecS"/>
                         <outlet property="plan_park_timeL" destination="I9J-Hy-l3L" id="Cmk-tv-rLp"/>
                         <outlet property="waitToGetCarIV" destination="Tpj-RC-Zxx" id="yMV-dF-Yu5"/>
+                        <outlet property="waitToGetCarL" destination="BOa-Vf-uMY" id="YwQ-Ih-FAR"/>
                     </connections>
                 </view>
             </subviews>

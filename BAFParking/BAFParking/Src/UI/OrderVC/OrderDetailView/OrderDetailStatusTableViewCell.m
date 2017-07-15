@@ -9,7 +9,7 @@
 #import "OrderDetailStatusTableViewCell.h"
 
 @implementation OrderDetailStatusTableViewCell
-
+//65
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

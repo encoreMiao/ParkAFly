@@ -7,49 +7,52 @@
 //
 
 #import "OrderDetailViewController.h"
+#import "OrderDetailImageTableViewCell.h"
+#import "OrderDetail1TableViewCell.h"
+#import "OrderDetailStatusTableViewCell.h"
 
 @interface OrderDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
 @end
 
 @implementation OrderDetailViewController
-//- (void)viewDidLoad {
-//    [super viewDidLoad];
-////    self.orderDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
-////    self.serviceArr = [NSMutableArray array];
-////    if ([self.orderDic objectForKey:OrderParamTypeService]) {
-////        NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
-////        self.serviceArr = [NSMutableArray arrayWithArray:arr];
-////    }
-////    
-////    [self.mainHeaderView setFrame:CGRectMake(0, 0, screenWidth, 50)];
-////    self.mainTableVIEW.tableHeaderView = self.mainHeaderView;
-////    self.headerlabel.text = [NSString stringWithFormat:@"%@     %@      %@",[self.orderDic objectForKey:OrderParamTypeContact_name],[self.orderDic objectForKey:OrderParamTypeContact_phone],[self.orderDic objectForKey:OrderParamTypeCar_license_no]];
-////    self.mainTableVIEW.separatorStyle = UITableViewCellSeparatorStyleNone;
-////    self.mainTableVIEW.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
-////    
-////    [self configTotoalfee];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+//    self.orderDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
+//    self.serviceArr = [NSMutableArray array];
+//    if ([self.orderDic objectForKey:OrderParamTypeService]) {
+//        NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+//        self.serviceArr = [NSMutableArray arrayWithArray:arr];
+//    }
 //    
-//}
-//
-//- (void)didReceiveMemoryWarning {
-//    [super didReceiveMemoryWarning];
-//}
-//
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.hidden = NO;
-//    self.navigationController.navigationBar.translucent = NO;
+//    [self.mainHeaderView setFrame:CGRectMake(0, 0, screenWidth, 50)];
+//    self.mainTableVIEW.tableHeaderView = self.mainHeaderView;
+//    self.headerlabel.text = [NSString stringWithFormat:@"%@     %@      %@",[self.orderDic objectForKey:OrderParamTypeContact_name],[self.orderDic objectForKey:OrderParamTypeContact_phone],[self.orderDic objectForKey:OrderParamTypeCar_license_no]];
+//    self.mainTableVIEW.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.mainTableVIEW.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
 //    
-//    [self setNavigationTitle:@"订单详情"];
-//    [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
-//}
-//
-//- (void)backMethod:(id)sender
-//{
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
+//    [self configTotoalfee];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [self setNavigationTitle:@"订单详情"];
+    [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
+}
+
+- (void)backMethod:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 //- (IBAction)detailfeeAction:(id)sender {
 // 
 //    PopViewController *popView = [[PopViewController alloc] init];

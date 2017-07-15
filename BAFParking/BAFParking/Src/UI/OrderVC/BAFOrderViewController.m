@@ -35,7 +35,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @interface BAFOrderViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderTableViewCellDelegate,PopViewControllerDelegate,IUICallbackInterface>
 {
     NSString *_chargeRemark;
-    
     NSDate *_goDate;
     NSDate *_backDate;
 }
@@ -44,8 +43,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (nonatomic, strong) NSMutableArray<BAFCityInfo *>       *cityArr;
 @property (nonatomic, strong) NSMutableArray<BAFParkAir *>        *parkAirArr;
 @property (nonatomic, strong) NSMutableArray<BAFParkInfo *>       *parkArr;
-
-
 @end
 
 
@@ -61,6 +58,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.footerView.delegate = self;
     self.mainTableView.tableFooterView = self.footerView;
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    self.mainTableView.separatorColor = [UIColor colorWithHex:0xc9c9c9];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,9 +95,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
             [self parkAirRequestWithCityId:tempCityId[1]];
         }else{
-            [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
-            [self parkAirRequestWithCityId:@"1"];//城市默认北京
-            [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", @"北京",@"1"] forKey:OrderParamTypeCity];
+            BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+            if (userInfo.cityname) {
+                [self setNavigationRightButtonWithText:userInfo.cityname method:@selector(rightBtnClicked:)];
+                [self parkAirRequestWithCityId:userInfo.caddr];//城市默认北京
+                [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", userInfo.cityname,userInfo.caddr] forKey:OrderParamTypeCity];
+            }
+            else{
+                [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+                [self parkAirRequestWithCityId:@"1"];//城市默认北京
+                [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", @"北京",@"1"] forKey:OrderParamTypeCity];
+            }
         }
         
     }else{
@@ -153,24 +159,39 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else if (section == 2){
         return 10.0f;
     }
-    return 0;
+    return 0.5;
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *sectionFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [sectionFooterView setBackgroundColor:[UIColor colorWithHex:0xf5f5f5]];
+    UIView *linetop = [[UIView alloc]initWithFrame:CGRectZero];
+    [linetop setBackgroundColor:[UIColor colorWithHex:0xc9c9c9]];
+    UIView *linebottom = [[UIView alloc]initWithFrame:CGRectZero];
+    [linebottom setBackgroundColor:[UIColor colorWithHex:0xc9c9c9]];
+    [sectionFooterView addSubview:linetop];
+    [sectionFooterView addSubview:linebottom];
     if (section == 0) {
-        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 10)];
+        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 9.5)];
+        [linetop setFrame:CGRectMake(0, 0, screenWidth, 0.5)];
+        [linebottom setFrame:CGRectMake(0, 9, screenWidth, 0.5)];
     }else if(section == 1){
-        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 30)];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, screenWidth-24, 20)];
+        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 29.5)];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(12, 5, screenWidth-24, 20)];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont systemFontOfSize:14.0f];
         label.textColor = [UIColor colorWithHex:0x585c64];
         label.text = _chargeRemark;
         [sectionFooterView addSubview:label];
+        [linetop setFrame:CGRectMake(0, 0, screenWidth, 0.5)];
+        [linebottom setFrame:CGRectMake(0, 29, screenWidth, 0.5)];
     }else if(section == 2){
-        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 10)];
+        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 9.5)];
+        [linetop setFrame:CGRectMake(0, 0, screenWidth, 0.5)];
+        [linebottom setFrame:CGRectMake(0, 9, screenWidth, 0.5)];
+    }else{
+        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 0.5)];
+        [linetop setFrame:CGRectMake(0, 0, screenWidth, 0.5)];
     }
     return sectionFooterView;
 }

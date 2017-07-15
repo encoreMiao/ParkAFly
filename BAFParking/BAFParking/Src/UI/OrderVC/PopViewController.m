@@ -41,8 +41,8 @@
 
 - (void)setupView
 {
-    UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, 43.5, screenWidth, 0.5)];
-    lineV.backgroundColor = [UIColor grayColor];
+    UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, 43, screenWidth, 0.5)];
+    lineV.backgroundColor = [UIColor colorWithHex:0xc9c9c9];
     
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     gesture.delegate = self;
@@ -174,7 +174,7 @@
 
     self.headerView.frame = CGRectMake(0, 0, screenWidth, 44);
     self.popTitleLabel.frame = self.headerView.frame;
-    self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-64,0, 44, 44);
+    self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-50,7, 30, 30);
     self.confirmButton.frame = CGRectMake(20,0, 44, 44);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
     self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
@@ -197,6 +197,7 @@
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
             if (self.selectedIndex == indexPath) {
@@ -215,6 +216,7 @@
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = ((BAFParkAir *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
 
@@ -233,6 +235,7 @@
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
             if (self.selectedIndex == indexPath) {
@@ -250,6 +253,7 @@
             if (cell == nil) {
                 cell = [[[NSBundle mainBundle]loadNibNamed:@"PopFeeShowTableViewCell" owner:nil options:nil] firstObject];
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             NSArray *arr = [self.arrDatasource objectAtIndex:indexPath.row];
             if (indexPath.row == 0) {
@@ -274,6 +278,7 @@
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = ((BAFTcCardInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).type_name;
             
@@ -503,6 +508,8 @@
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cancelButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
+//        [_cancelButton setBackgroundImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
+        _cancelButton.imageView.contentMode = UIViewContentModeCenter;
         [_cancelButton setBackgroundColor:[UIColor clearColor]];
         [_cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -514,6 +521,7 @@
     if (!_confirmButton) {
         _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_confirmButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_confirmButton.titleLabel setFont:[UIFont systemFontOfSize:15.0f]];
         [_confirmButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
         [_confirmButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
         [_confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];

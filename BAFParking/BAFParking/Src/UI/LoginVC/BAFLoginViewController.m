@@ -173,6 +173,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             
             BAFUserInfo *userInfo = [BAFUserInfo mj_objectWithKeyValues:[[obj objectForKey:@"data"] objectForKey:@"client"]];
             [[BAFUserModelManger sharedInstance]saveUserInfo:userInfo];
+            //userInfo.caddr 和 userInfo.cityname
             
             NSString *token = [(NSDictionary *)obj objectForKey:@"token"];
             [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"token"];
@@ -192,7 +193,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
-
 
 
 - (void)onCountDownTimeAction:(id)sender
@@ -219,6 +219,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self.codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     [self.codeBtn setTitle:@"获取验证码" forState:UIControlStateDisabled];
     [self.codeBtn setEnabled:YES];
+}
+
+- (IBAction)boanfeiProtocal:(id)sender {
+    DLog(@"泊安飞服务协议");
+    
 }
 
 @end

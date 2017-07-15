@@ -20,14 +20,18 @@
 #import "HRLOrderRequest.h"
 #import "HRLOrderInterface.h"
 #import "HRLogicManager.h"
+#import "UIView+WebCache.h"
+#import "UIImageView+WebCache.h"
 
 typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 {
     kRequestNumberLatestOrder,
+    kRequestNumberAppPhoto,
 };
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate,BMKLocationServiceDelegate>{
     BMKLocationService *_locService;
+    DYMRollingBannerVC      *_rollingBannerVC;
 }
 @property (nonatomic, weak) IBOutlet UIButton           *showPersonalCenterButton;
 @property (nonatomic, weak) IBOutlet UIButton           *showOrderListButton;
@@ -62,6 +66,8 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
     if (userInfo.clientid) {
         [self latestOrderWithClientId:userInfo.clientid];
     }
+    
+    [self getADPhoto];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,17 +88,26 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 
 - (void)setupScrollView
 {
-    DYMRollingBannerVC      *_rollingBannerVC;
+    _rollingBannerVC;
     _rollingBannerVC = [DYMRollingBannerVC new];
     [_rollingBannerVC.view setFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(self.headerScrollerView.frame))];
-    _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
-                                       ,[UIImage imageNamed:@"home_banner4"]
-                                       ];
-    _rollingBannerVC.rollingInterval = 3;
-    [_rollingBannerVC startRolling];
+//    _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
+//                                       ,[UIImage imageNamed:@"home_banner4"]
+//                                       ];
+    
+    // Set the placeholder image (optional, the default place holder is nil)
+    _rollingBannerVC.placeHolderImage = [UIImage imageNamed:@"home_banner3"];
+    // Define the way how you load the image from a remote url
+    [_rollingBannerVC setRemoteImageLoadingBlock:^(UIImageView *imageView, NSString *imageUrlStr, UIImage *placeHolderImage) {
+        [imageView sd_cancelCurrentImageLoad];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrlStr] placeholderImage:placeHolderImage options:SDWebImageProgressiveDownload];
+    }];
+    // Add a handler when a tap event occours (optional, default do noting)
     [_rollingBannerVC addBannerTapHandler:^(NSInteger whichIndex) {
         NSLog(@"banner tapped, index = %@", @(whichIndex));
     }];
+    
+    _rollingBannerVC.rollingInterval = 3;
     
     [self addChildViewController:_rollingBannerVC];
     [self.headerScrollerView addSubview:_rollingBannerVC.view];
@@ -166,6 +181,12 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
     [loginReq latestOrderRequestWithNumberIndex:kRequestNumberLatestOrder delegte:self client_id:clientId];
 }
 
+- (void)getADPhoto
+{
+    id <HRLOrderInterface> loginReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [loginReq getappphotoRequestWithNumberIndex:kRequestNumberAppPhoto delegte:self];
+}
+
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
 {
     if(aRequestID ==  kRequestNumberLatestOrder){
@@ -176,6 +197,20 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
             self.orderView.delegate = self;
             [self.orderView setType:kBAFCenterOrderViewTypeGoing];
             self.orderView.orderDic = [obj objectForKey:@"data"];
+        }
+    }
+    
+    if (aRequestID == kRequestNumberAppPhoto) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]==200) {
+            NSMutableArray *mutArr = [NSMutableArray array];
+            for (id object in [obj objectForKey:@"data"]) {
+                [mutArr addObject:[object objectForKey:@"img_url"]];
+            }
+            _rollingBannerVC.rollingImages = mutArr;
+            [_rollingBannerVC startRolling];
         }
     }
 }

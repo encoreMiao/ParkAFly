@@ -17,7 +17,7 @@
 #import "PopViewController.h"
 #import "BAFOrderViewController.h"
 #import "ParkDetailViewController.h"
-
+#import "BAFLoginViewController.h"
 
 #define  ParkListTableViewCelldentifier     @"ParkListTableViewCelldentifier"
 
@@ -150,30 +150,45 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     switch (actionType) {
         case kParkListTableViewCellActionTypeOrder:
         {
-            cell.selected = YES;
-            NSString *str = [NSString stringWithFormat:@"%@&%@",self.rightButtonText,cell.parkinfo.map_city];
-            BAFOrderViewController *orderServiceVC = [[BAFOrderViewController alloc]init];
-            orderServiceVC.cityid = str;
-            [self.navigationController pushViewController:orderServiceVC animated:YES];
+            BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+            if (userInfo.clientid) {
+                cell.selected = YES;
+                NSString *str = [NSString stringWithFormat:@"%@&%@",self.rightButtonText,cell.parkinfo.map_city];
+                BAFOrderViewController *orderServiceVC = [[BAFOrderViewController alloc]init];
+                orderServiceVC.cityid = str;
+                [self.navigationController pushViewController:orderServiceVC animated:YES];
+            }else{
+                BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            }
         }
             break;
         case kParkListTableViewCellActionTypeSelect:
         {
-            if ([_dicDatasource objectForKey:OrderParamTypePark]) {
-                [_dicDatasource removeObjectForKey:OrderParamTypePark];
-            }
-            NSString *str = [NSString stringWithFormat:@"%@&%@",cell.parkinfo.map_title,cell.parkinfo.map_id];
-            [_dicDatasource setObject:str forKey:OrderParamTypePark];
-            [_dicDatasource setObject:cell.parkinfo.map_charge.first_day_price forKey:OrderParamTypeParkFeeFirstDay];
-            [_dicDatasource setObject:cell.parkinfo.map_charge.market_price forKey:OrderParamTypeParkFeeDay];
-            [_dicDatasource setObject:cell.parkinfo.map_address forKey:OrderParamTypeParkLocation];
-            
-            for (UIViewController *tempVC in self.navigationController.viewControllers) {
-                if ([tempVC isKindOfClass:[BAFOrderViewController class]]) {
-                    ((BAFOrderViewController *)tempVC).dicDatasource = _dicDatasource;
-                    [self.navigationController popToViewController:tempVC animated:YES];
+            BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+            if (userInfo.clientid) {
+                if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+                    [_dicDatasource removeObjectForKey:OrderParamTypePark];
                 }
+                NSString *str = [NSString stringWithFormat:@"%@&%@",cell.parkinfo.map_title,cell.parkinfo.map_id];
+                [_dicDatasource setObject:str forKey:OrderParamTypePark];
+                [_dicDatasource setObject:cell.parkinfo.map_charge.first_day_price forKey:OrderParamTypeParkFeeFirstDay];
+                [_dicDatasource setObject:cell.parkinfo.map_charge.market_price forKey:OrderParamTypeParkFeeDay];
+                [_dicDatasource setObject:cell.parkinfo.map_address forKey:OrderParamTypeParkLocation];
+                
+                for (UIViewController *tempVC in self.navigationController.viewControllers) {
+                    if ([tempVC isKindOfClass:[BAFOrderViewController class]]) {
+                        ((BAFOrderViewController *)tempVC).dicDatasource = _dicDatasource;
+                        [self.navigationController popToViewController:tempVC animated:YES];
+                    }
+                }
+            }else{
+                BAFLoginViewController  *loginVC = [[BAFLoginViewController alloc]init];
+                [self.navigationController pushViewController:loginVC animated:YES];
             }
+            
+            
+            
         }
             break;
         case kParkListTableViewCellActionTypeDetails:

@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderDetail1TableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *orderNoLabel;
+//哪个代表当前状态？？？
+@property (nonatomic, weak) IBOutlet UIImageView *orderSuccessIV;
+@property (nonatomic, weak) IBOutlet UIImageView *parkFinishedIV;
+@property (nonatomic, weak) IBOutlet UIImageView *waitToGetCarIV;
+@property (nonatomic, weak) IBOutlet UIImageView *getCarSuccessIV;
+@property (nonatomic, weak) IBOutlet UILabel *nameDetailLabel;
 @end

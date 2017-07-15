@@ -9,6 +9,26 @@
 #import "HRLOrderRequest.h"
 
 @implementation HRLOrderRequest
+
+- (void)getappphotoRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread
+{
+    DLog(@"获取首页轮播图");
+    //设置请求头
+    NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from", nil];
+
+    
+    //post数据请求
+    [self postRequestWithUrl:REQURL(@"api/login/app_photo") parameters:nil headerFields:headerFields body:nil object:workThread style:0 success:^(id operation, id responseObject) {
+        NSLog(@"JSON = %@", responseObject);
+        if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
+            [workThread onJobComplete:numberIndex Object:(id)responseObject];
+        }
+    } failure:^(id operation, NSError *error) {
+        if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
+            [workThread onJobTimeout:numberIndex Error:nil];
+        }
+    }];
+}
 /**
  api/comment/create_comment
  功能:发表评论

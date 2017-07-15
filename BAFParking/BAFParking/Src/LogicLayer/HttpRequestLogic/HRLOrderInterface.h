@@ -10,6 +10,8 @@
 
 @protocol HRLOrderInterface <NSObject>
 
+- (void)getappphotoRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread;
+
 /**
  api/comment/create_comment
  功能:发表评论
