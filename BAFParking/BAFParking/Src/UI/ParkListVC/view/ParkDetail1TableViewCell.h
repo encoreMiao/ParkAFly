@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFParkInfo.h"
 
 @interface ParkDetail1TableViewCell : UITableViewCell
-
+@property (nonatomic, retain) BAFParkInfo *parkDetailInfo;
+@property (nonatomic, retain) NSArray *parkCommentList;
 @end

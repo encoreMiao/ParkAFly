@@ -60,12 +60,12 @@
 - (void) sendLinkContent
 {
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"专访张小龙：产品之上的世界观";
-    message.description = @"微信的平台化发展方向是否真的会让这个原本简洁的产品变得臃肿？在国际化发展方向上，微信面临的问题真的是文化差异壁垒吗？腾讯高级副总裁、微信产品负责人张小龙给出了自己的回复。";
-    [message setThumbImage:[UIImage imageNamed:@"res2.png"]];
+    message.title = @"泊安飞，不一样的机场停车";
+    message.description = @"致力于为自驾往来机场的航空旅客提供更低价格，更多服务的机场停车服务商";
+    [message setThumbImage:[UIImage imageNamed:@"AppIcon"]];
     
     WXWebpageObject *ext = [WXWebpageObject object];
-    ext.webpageUrl = @"http://tech.qq.com/zt2012/tmtdecode/252.htm";
+    ext.webpageUrl = @"www.parknfly.cn";
     
     message.mediaObject = ext;
     

@@ -12,8 +12,6 @@
 @end
 
 
-
-
 @implementation PopFeeShowTableViewCell
 
 - (void)awakeFromNib {

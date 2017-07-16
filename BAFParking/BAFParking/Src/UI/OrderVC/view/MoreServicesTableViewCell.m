@@ -75,15 +75,16 @@
                         btn.selected = YES;
                     }
                 }
-                
                 [btn addTarget:self action:@selector(fuelbtnAction:) forControlEvents:UIControlEventTouchUpInside];
                 [self.buttonArr addObject:btn];
             }
+            self.serviceIcon.image = [UIImage imageNamed:@"list_item_jiay"];
         }
             break;
         case KMoreServicesTableViewCellType205:
             self.gastypeview.hidden = YES;
             self.notificationTopConstraint.constant -=30;
+            self.serviceIcon.image = [UIImage imageNamed:@"list_item_xic"];
             break;
         default:
             break;

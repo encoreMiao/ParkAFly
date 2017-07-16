@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ParkDetail2TableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *mapTaskLabel;
+@property (nonatomic, strong) NSString *mapTask;
 @end

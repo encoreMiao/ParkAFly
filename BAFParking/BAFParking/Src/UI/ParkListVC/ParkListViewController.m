@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.cityArr = [NSMutableArray array];
     self.parkArr = [NSMutableArray array];
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)viewWillAppear:(BOOL)animated

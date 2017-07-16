@@ -10,12 +10,15 @@
 #import "BAFCenterViewController.h"
 #import "BAFOrderViewController.h"
 #import "BAFOrderServiceViewController.h"
+#import "OrderDetailViewController.h"
 
 @interface SuccessViewController ()
 @property (nonatomic, strong) IBOutlet UIView *successView;
 @property (nonatomic, strong) IBOutlet UIView *failureView;
 @property (nonatomic, strong) IBOutlet UIView *payView;
 @property (nonatomic, strong) IBOutlet UIView *buttonView;
+@property (weak, nonatomic)   IBOutlet UIButton *contactBtn;
+@property (weak, nonatomic)   IBOutlet UIButton *checktBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *contentL;
 @property (weak, nonatomic) IBOutlet UILabel *parkTimeL;
@@ -28,13 +31,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.contactBtn.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+    self.contactBtn.layer.borderWidth = 0.5f;
+    self.checktBtn.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+    self.checktBtn.layer.borderWidth = 0.5f;
 }
 - (IBAction)contactClicked:(id)sender {
     [self callPhoneNumber:@"4008138666"];
 }
 
 - (IBAction)checkOrder:(id)sender {
-    
+    OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -43,6 +51,7 @@
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
+    self.navigationItem.hidesBackButton = YES;
     [self setNavigationRightButtonWithText:@"完成" method:@selector(rightBtnClicked:)];
     
     
@@ -186,6 +195,6 @@
             totalFee += [detailArr[3] integerValue];
         }
     }
-    self.feeL.text = [NSString stringWithFormat:@"¥%ld元",totalFee/100];
+    self.feeL.text = [NSString stringWithFormat:@"¥%ld",totalFee/100];
 }
 @end

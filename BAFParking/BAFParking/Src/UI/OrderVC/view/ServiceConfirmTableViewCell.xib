@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,13 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUz-y5-gqg">
                         <rect key="frame" x="20" y="0.0" width="193" height="43"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfw-VN-Eoo">
@@ -30,7 +30,7 @@
                             <constraint firstAttribute="width" constant="50" id="ENg-Tp-bPh"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.98431372549019602" green="0.41176470588235292" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Aa-PU-ARu">
@@ -39,23 +39,33 @@
                             <constraint firstAttribute="height" constant="22" id="137-XT-rN8"/>
                             <constraint firstAttribute="width" constant="22" id="oUI-dW-T1h"/>
                         </constraints>
-                        <state key="normal" backgroundImage="btn_close"/>
+                        <state key="normal" backgroundImage="pay_cancel"/>
                         <connections>
                             <action selector="cancelButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="L71-Ta-vEL"/>
                             <action selector="closeBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hCb-CI-7nz"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWK-Bq-vTG">
+                        <rect key="frame" x="20" y="43" width="300" height="0.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="aqF-4b-BQZ"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="5Aa-PU-ARu" secondAttribute="trailing" constant="20" id="2m5-Gp-ZOR"/>
                     <constraint firstItem="5Aa-PU-ARu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="2o1-RF-9Z9"/>
                     <constraint firstItem="rUz-y5-gqg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="6mJ-qx-wsU"/>
                     <constraint firstItem="5Aa-PU-ARu" firstAttribute="leading" secondItem="Kfw-VN-Eoo" secondAttribute="trailing" constant="15" id="Eh4-x7-SL0"/>
-                    <constraint firstAttribute="bottom" secondItem="rUz-y5-gqg" secondAttribute="bottom" id="IIz-Bd-qYR"/>
+                    <constraint firstItem="EWK-Bq-vTG" firstAttribute="top" secondItem="rUz-y5-gqg" secondAttribute="bottom" id="FM8-Ac-3xn"/>
                     <constraint firstItem="rUz-y5-gqg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LAm-hD-Jgs"/>
                     <constraint firstItem="Kfw-VN-Eoo" firstAttribute="leading" secondItem="rUz-y5-gqg" secondAttribute="trailing" id="TLh-fN-fqc"/>
                     <constraint firstItem="Kfw-VN-Eoo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Wes-si-zbi"/>
-                    <constraint firstAttribute="bottom" secondItem="Kfw-VN-Eoo" secondAttribute="bottom" id="vk6-Ie-xpb"/>
+                    <constraint firstItem="EWK-Bq-vTG" firstAttribute="top" secondItem="Kfw-VN-Eoo" secondAttribute="bottom" id="XZo-uf-DXb"/>
+                    <constraint firstItem="EWK-Bq-vTG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="fVe-Tf-X3e"/>
+                    <constraint firstAttribute="trailing" secondItem="EWK-Bq-vTG" secondAttribute="trailing" id="thw-eV-7c0"/>
+                    <constraint firstAttribute="bottom" secondItem="EWK-Bq-vTG" secondAttribute="bottom" id="w5S-bM-Myc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -65,6 +75,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="btn_close" width="44" height="44"/>
+        <image name="pay_cancel" width="22" height="22"/>
     </resources>
 </document>

@@ -21,6 +21,7 @@
 #import "BAFParkAir.h"
 #import "ParkListViewController.h"
 #import "HRLOrderInterface.h"
+#import "SuccessViewController.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCityList,
@@ -177,10 +178,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [linebottom setFrame:CGRectMake(0, 9, screenWidth, 0.5)];
     }else if(section == 1){
         [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 29.5)];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(12, 5, screenWidth-24, 20)];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, screenWidth-24, 20)];
         label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont systemFontOfSize:14.0f];
-        label.textColor = [UIColor colorWithHex:0x585c64];
+        label.font = [UIFont systemFontOfSize:13.0f];
+        label.textColor = [UIColor colorWithHex:0x969696];
         label.text = _chargeRemark;
         [sectionFooterView addSubview:label];
         [linetop setFrame:CGRectMake(0, 0, screenWidth, 0.5)];

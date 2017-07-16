@@ -26,7 +26,10 @@
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *order_id;
 @property (nonatomic, strong) NSString *park_id;
+@property (nonatomic, strong) NSString *score;
+@property (nonatomic, strong) NSString *contact_phone;
 @property (nonatomic, strong) NSString *manager_id;
+@property (nonatomic, strong) NSString *remark;
 @property (nonatomic, strong) NSString *tags;//星级、评分
 @property (nonatomic, strong) NSString *sort;
 @property (nonatomic, strong) NSString *is_show;

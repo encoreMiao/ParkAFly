@@ -112,17 +112,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.serviceArr = [NSMutableArray arrayWithArray:arr];
         for (NSString *str in self.serviceArr) {
             NSArray *detailArr = [str componentsSeparatedByString:@"=>"];
-            totalFee += [detailArr[3] integerValue];
+            if ([str containsString:@"自行往返航站楼"]) {
+                totalFee -= [detailArr[3] integerValue];
+            }else{
+                totalFee += [detailArr[3] integerValue];
+            }
         }
     }
-    self.feeLabel.text = [NSString stringWithFormat:@"预计费用：¥%ld元",totalFee/100];
+    self.feeLabel.text = [NSString stringWithFormat:@"预计费用：¥%ld",totalFee/100];
     
-    [mutArr addObject:[NSArray arrayWithObjects:@"预计费用",[NSString stringWithFormat:@"¥%ld元",totalFee/100], nil]];
+    [mutArr addObject:[NSArray arrayWithObjects:@"预计费用",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
     
     if (days>0) {
         [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld元",(firstdayfee + dayfee*days)/100], nil]];
     }else{
-        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld元",firstdayfee/100], nil]];
+        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld",firstdayfee/100], nil]];
     }
     
     if ([self.orderDic objectForKey:OrderParamTypeService]) {
@@ -130,13 +134,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.serviceArr = [NSMutableArray arrayWithArray:arr];
         for (NSString *str in self.serviceArr) {
             NSArray *detailArr = [str componentsSeparatedByString:@"=>"];
-            totalFee += [detailArr[3] integerValue];
-            
-            [mutArr addObject:[NSArray arrayWithObjects:detailArr[2],[NSString stringWithFormat:@"¥%ld元",[detailArr[3] integerValue]/100], nil]];
+            if ([str containsString:@"自行往返航站楼"]) {
+                totalFee -= [detailArr[3] integerValue];
+                [mutArr addObject:[NSArray arrayWithObjects:detailArr[2],[NSString stringWithFormat:@"-¥%ld",[detailArr[3] integerValue]/100], nil]];
+            }else{
+                totalFee += [detailArr[3] integerValue];
+                [mutArr addObject:[NSArray arrayWithObjects:detailArr[2],[NSString stringWithFormat:@"¥%ld",[detailArr[3] integerValue]/100], nil]];
+            }
         }
     }
-    
-    
     return mutArr;
 }
 
@@ -180,10 +186,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     UIView *sectionFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [sectionFooterView setBackgroundColor:[UIColor colorWithHex:0xf5f5f5]];
     [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 30)];
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, screenWidth-24, 30)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, screenWidth-24, 30)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:14.0f];
-    label.textColor = [UIColor colorWithHex:0x585c64];
+    label.font = [UIFont systemFontOfSize:15.0f];
+    label.textColor = [UIColor colorWithHex:0x323232];
     if (section == 0) {
         label.text = @"停车信息";
     }
@@ -227,43 +233,45 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         OrderConfirmTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderConfirmTableViewCellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderConfirmTableViewCell" owner:nil options:nil] firstObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         NSString *totalStr = @"";
         NSString *str = @"";
         if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                if ([self.orderDic objectForKey:OrderParamTypePark]) {
-                    str = [self.orderDic objectForKey:OrderParamTypePark];
-                }else{
-                    str = @"";
-                }
-                totalStr = [NSString stringWithFormat:@"停车场：%@",str];
-            }
             if (indexPath.row == 1) {
-//                FB694B
                 totalStr = [NSString stringWithFormat:@"位置：%@",[self.orderDic objectForKey:OrderParamTypeParkLocation]];
-            }
-            
-            if (indexPath.row == 2) {
-                if ([self.orderDic objectForKey:OrderParamTypeGoTime]) {
-                    str = [self.orderDic objectForKey:OrderParamTypeGoTime];
-                }else{
-                    str = @"";
+                NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+                [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[totalStr rangeOfString:totalStr]];
+                cell.confirmContentLabel.attributedText = mutStr;
+            }else{
+                if (indexPath.row == 0) {
+                    if ([self.orderDic objectForKey:OrderParamTypePark]) {
+                        str = [[[self.orderDic objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"] objectAtIndex:0];
+                    }else{
+                        str = @"";
+                    }
+                    totalStr = [NSString stringWithFormat:@"停车场：%@",str];
                 }
-                totalStr = [NSString stringWithFormat:@"停车时间：%@",str];
-            }
-            if (indexPath.row == 3){
-                if ([self.orderDic objectForKey:OrderParamTypeTerminal]) {
-                    str = [self.orderDic objectForKey:OrderParamTypeTerminal];
-                }else{
-                    str = @"";
+                if (indexPath.row == 2) {
+                    if ([self.orderDic objectForKey:OrderParamTypeGoTime]) {
+                        str = [self.orderDic objectForKey:OrderParamTypeGoTime];
+                    }else{
+                        str = @"";
+                    }
+                    totalStr = [NSString stringWithFormat:@"停车时间：%@",str];
                 }
-                totalStr = [NSString stringWithFormat:@"出发航站楼：%@",str];
+                if (indexPath.row == 3){
+                    if ([self.orderDic objectForKey:OrderParamTypeTerminal]) {
+                        str = [[[self.orderDic objectForKey:OrderParamTypeTerminal] componentsSeparatedByString:@"&"] objectAtIndex:0];
+                    }else{
+                        str = @"";
+                    }
+                    totalStr = [NSString stringWithFormat:@"出发航站楼：%@",str];
+                }
+                NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+                [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[totalStr rangeOfString:str]];
+                cell.confirmContentLabel.attributedText = mutStr;
             }
-            NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
-            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[totalStr rangeOfString:str]];
-            cell.confirmContentLabel.attributedText = mutStr;
-            
         }else{
             if (indexPath.row == 0) {
                 if ([self.orderDic objectForKey:OrderParamTypeTime]) {
@@ -275,7 +283,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
             if (indexPath.row == 1) {
                 if ([self.orderDic objectForKey:OrderParamTypeBackTerminal]) {
-                    str = [self.orderDic objectForKey:OrderParamTypeBackTerminal];
+                    str = [[[self.orderDic objectForKey:OrderParamTypeBackTerminal] componentsSeparatedByString:@"&"] objectAtIndex:0];
                 }else{
                     str = @"";
                 }
@@ -305,7 +313,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 }
             }
             NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
-            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[totalStr rangeOfString:str]];
+            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[totalStr rangeOfString:str]];
             cell.confirmContentLabel.attributedText = mutStr;
         }
         cell.confirmContentLabel.numberOfLines = 0;
@@ -314,6 +322,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         ServiceConfirmTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:ServiceConfirmTableViewCellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ServiceConfirmTableViewCell" owner:nil options:nil] firstObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
         }
         cell.serviceStr = [self.serviceArr objectAtIndex:indexPath.row];

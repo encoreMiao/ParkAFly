@@ -234,8 +234,29 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 10.0f;
-    }return 0;
+        return 9.5f;
+    }return 1.0f;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *sectionFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    [sectionFooterView setBackgroundColor:[UIColor colorWithHex:0xf5f5f5]];
+    UIView *linetop = [[UIView alloc]initWithFrame:CGRectZero];
+    [linetop setBackgroundColor:[UIColor colorWithHex:0xc9c9c9]];
+    UIView *linebottom = [[UIView alloc]initWithFrame:CGRectZero];
+    [linebottom setBackgroundColor:[UIColor colorWithHex:0xc9c9c9]];
+    [sectionFooterView addSubview:linetop];
+    [sectionFooterView addSubview:linebottom];
+    if (section == 0) {
+        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 9.5)];
+        [linetop setFrame:CGRectMake(0, 0, screenWidth, 0.5)];
+        [linebottom setFrame:CGRectMake(0, 9, screenWidth, 0.5)];
+    }else{
+        [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 1)];
+        [linetop setFrame:CGRectMake(0, 0.5, screenWidth, 0.5)];
+    }
+    return sectionFooterView;
 }
 #pragma mark -  OrderServiceTableViewCellDelegate
 - (void)OrderServiceTableViewCellAction:(OrderServiceTableViewCell *)cell
@@ -312,7 +333,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat sectionHeaderHeight = 30;
+    CGFloat sectionHeaderHeight = 10;
     if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
         scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {

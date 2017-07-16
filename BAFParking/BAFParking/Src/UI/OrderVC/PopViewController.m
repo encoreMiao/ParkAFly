@@ -26,34 +26,34 @@
 @property (nonatomic, retain) NSMutableArray *arrDatasource;
 @end
 
+
 @implementation PopViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.alpha = 0;
+    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
+    
     self.arrDatasource = [NSMutableArray array];
     [self setupView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setupView
 {
-    UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, 43, screenWidth, 0.5)];
-    lineV.backgroundColor = [UIColor colorWithHex:0xc9c9c9];
-    
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     gesture.delegate = self;
     [self.view addGestureRecognizer:gesture];
     
-    [self.view addSubview:self.bgView];
     [self.headerView addSubview:self.popTitleLabel];
+    UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, 43, screenWidth, 0.5)];
+    lineV.backgroundColor = [UIColor colorWithHex:0xc9c9c9];
+    [self.headerView addSubview:lineV];
     [self.popTitleLabel addSubview:self.cancelButton];
     [self.popTitleLabel addSubview:self.confirmButton];
     
-    [self.headerView addSubview:lineV];
+    [self.view addSubview:self.bgView];
     [self.bgView addSubview:self.headerView];
     [self.bgView addSubview:self.tableView];
     [self.bgView addSubview:self.detailLabel];
@@ -62,14 +62,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.view.alpha = 0.5;
-//        
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-    
 }
 
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type
@@ -79,32 +71,35 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    CGFloat height;
     switch (type) {
         case kPopViewControllerTypeTop:
         {
-            self.bgView.frame = CGRectMake(0, 20, screenWidth, 350);
+//            self.bgView.frame = CGRectMake(0, 20, screenWidth, 350);
+            height = 350;
             self.popTitleLabel.text = @"服务说明";
             NSString *str = @"默认提供停车场与航站楼之间往返的免费摆渡车服务，客户自驾车至停车场停车，乘坐车场摆渡车前往航站楼；返程时，在航站楼乘坐摆渡车回到停车场取车。\n ● 什么是代驾代泊服务\n指客户自驾车到航站楼，在约定地点将车辆交付给伯安飞专业司机代驾到停车场停放妥当；返程时由伯安飞司机在客户约定时间将车辆从停车场送往航站楼交还给客户。\n● 什么是自行往返航站楼\n指客户自驾车至停车场停车，自行车前往航站楼；返程时，自行回到停车场取车。客户不需要乘坐伯安飞摆渡车，自行往返停车场与航站楼。";
             NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
-            [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xf05b48],NSFontAttributeName:[UIFont systemFontOfSize:kBAFFontSizeForDetailText]} range:[str rangeOfString:@"● 什么是代驾代泊服务"]];
-            [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xf05b48],NSFontAttributeName:[UIFont systemFontOfSize:kBAFFontSizeForDetailText]} range:[str rangeOfString:@"● 什么是自行往返航站楼"]];
+            [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:kBAFFontSizeForDetailText]} range:[str rangeOfString:@"● 什么是代驾代泊服务"]];
+            [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:kBAFFontSizeForDetailText]} range:[str rangeOfString:@"● 什么是自行往返航站楼"]];
             NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-            [paragraphStyle setLineSpacing:6];
+            [paragraphStyle setLineSpacing:7];
             [attributeStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, str.length)];
             self.detailLabel.attributedText = attributeStr;
             
             self.tableView.hidden = YES;
             self.detailLabel.hidden = NO;
+            self.confirmButton.hidden = YES;
             
         }
             break;
         case kPopViewControllerTypeSelecCity:
         {
-            CGFloat height = arr.count*40+44;
+            
+            height = arr.count*40+44;
             if (height>320) {
                 height = 320;
             }
-            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
             self.popTitleLabel.text = @"请选择城市";
             self.tableView.hidden = NO;
             self.detailLabel.hidden = YES;
@@ -113,11 +108,10 @@
         case kPopViewControllerTypeSelecGoTerminal:
         case kPopViewControllerTypeSelecBackTerminal:
         {
-            CGFloat height = arr.count*40+44;
+            height = arr.count*40+44;
             if (height>320) {
                 height = 320;
             }
-            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
             if (type == kPopViewControllerTypeSelecGoTerminal) {
                 self.popTitleLabel.text = @"请选择出发航站楼";
             }else{
@@ -130,18 +124,17 @@
             break;
         case kPopViewControllerTypeTipsshow:
         {
-            self.bgView.frame = CGRectMake(0, screenHeight-300, screenWidth, 300);
+            height = 300;
             self.popTitleLabel.text = @"费用明细";
-//            ....
+            self.confirmButton.hidden = YES;
         }
             break;
         case kPopViewControllerTypeCompany:
         {
-            CGFloat height = arr.count*40+44;
+            height = arr.count*40+44;
             if (height>320) {
                 height = 320;
             }
-            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
             self.popTitleLabel.text = @"请选择同行人数";
             self.tableView.hidden = NO;
             self.detailLabel.hidden = YES;
@@ -150,7 +143,7 @@
         case kPopViewControllerTypeGoTime:
         case kPopViewControllerTypeBackTime:
         {
-            self.bgView.frame = CGRectMake(0, screenHeight-260, screenWidth, 260);
+            height = 260;
             self.popTitleLabel.text = @"请选择时间";
             [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
             [self.bgView addSubview:self.datePicker];
@@ -158,11 +151,10 @@
             break;
         case kPopViewControllerTypeTcCard:
         {
-            CGFloat height = arr.count*40+44;
+            height = arr.count*40+44;
             if (height>320) {
                 height = 320;
             }
-            self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
             self.popTitleLabel.text = @"请选择权益账户";
             self.tableView.hidden = NO;
             self.detailLabel.hidden = YES;
@@ -172,14 +164,24 @@
             break;
     }
 
+    
     self.headerView.frame = CGRectMake(0, 0, screenWidth, 44);
     self.popTitleLabel.frame = self.headerView.frame;
     self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-50,7, 30, 30);
     self.confirmButton.frame = CGRectMake(20,0, 44, 44);
-    self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
-    self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, CGRectGetHeight(self.bgView.frame)-CGRectGetHeight(self.headerView.frame));
-    
-    [self.tableView reloadData];
+    self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, height-CGRectGetHeight(self.headerView.frame));
+    self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, height-CGRectGetHeight(self.headerView.frame));
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.bgView.frame = CGRectMake(0, screenHeight-height, screenWidth, height);
+            } completion:^(BOOL finished) {
+                [self.tableView reloadData];
+            }];
+        }];
+    });
 }
 
 
@@ -259,7 +261,7 @@
             if (indexPath.row == 0) {
                 cell.topLine.hidden = YES;
                 cell.bottomLine.hidden = NO;
-                cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0xd5d5d5];
+                cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0x323232];
             }else{
                 cell.topLine.hidden = YES;
                 cell.bottomLine.hidden = YES;
@@ -379,8 +381,6 @@
 #pragma mark - actions
 - (void)confirmAction
 {
-    NSLog(@"确认");
-    
     switch (self.type) {
         case kPopViewControllerTypeGoTime:
         case kPopViewControllerTypeBackTime:
@@ -476,7 +476,7 @@
 - (UIView*)bgView
 {
     if (!_bgView) {
-        _bgView = [[UIView alloc]init];
+        _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, screenHeight, screenWidth, 0)];
         _bgView.backgroundColor = [UIColor colorWithHex:0xffffff];
     }
     return _bgView;
@@ -508,7 +508,6 @@
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cancelButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
-//        [_cancelButton setBackgroundImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
         _cancelButton.imageView.contentMode = UIViewContentModeCenter;
         [_cancelButton setBackgroundColor:[UIColor clearColor]];
         [_cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
@@ -552,8 +551,8 @@
         _detailLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _detailLabel.numberOfLines = 0;
         _detailLabel.textAlignment = NSTextAlignmentLeft;
-        _detailLabel.textColor = HexRGB(kBAFColorForTitle);
-        _detailLabel.font = [UIFont systemFontOfSize:kBAFFontSizeForDetailText];
+        _detailLabel.textColor = [UIColor colorWithHex:0x969696];
+        _detailLabel.font = [UIFont systemFontOfSize:15.0f];
     }
     return _detailLabel;
 }

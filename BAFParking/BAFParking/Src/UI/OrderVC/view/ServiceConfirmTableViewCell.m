@@ -35,19 +35,21 @@
     if ([arr[0] integerValue] == 5) {
         self.serviceLabel.text = [NSString stringWithFormat:@"%@(型号-%@)",self.serviceLabel.text,[[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults] objectForKey:OrderParamTypePetrol]];
     }
+
+    if ([serviceStr containsString:@"自行往返航站楼"]) {
+        self.costLabel.text = [NSString stringWithFormat:@"-¥%ld",[arr[3] integerValue]/100];
+    }else{
+        self.costLabel.text = [NSString stringWithFormat:@"¥%ld",[arr[3] integerValue]/100];
+    }
     
-    self.costLabel.text = [NSString stringWithFormat:@"%ld元",[arr[3] integerValue]/100];
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

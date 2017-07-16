@@ -64,7 +64,11 @@
     _serviceInfo = serviceInfo;
     self.serviceTitle.text = serviceInfo.title;
     self.serviceNotitionLabel.text = serviceInfo.remark;
-    self.couponLabel.text = [NSString stringWithFormat:@"%ld元",serviceInfo.strike_price.integerValue/100];
+    if (self.type == kOrderServiceTableViewCellTypeCommon) {
+        self.couponLabel.text = [NSString stringWithFormat:@"立减%ld元",serviceInfo.strike_price.integerValue/100];
+    }else{
+        self.couponLabel.text = [NSString stringWithFormat:@"%ld元",serviceInfo.strike_price.integerValue/100];
+    }
 }
 
 - (void)setShow:(BOOL)show

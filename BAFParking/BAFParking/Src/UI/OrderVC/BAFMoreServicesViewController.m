@@ -95,23 +95,49 @@
 
 - (CGFloat)heightForRatIndexPath:(NSIndexPath *)indexpath
 {
+//    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:subTitle];
+//    //    UIFont *dinFont = [UIFont fontWithName:kDefaultFontName size:14];
+//    //    NSMutableAttributedString *attributeStr = [self truncateNumberAndEngInString:subTitle font:dinFont];
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    [paragraphStyle setLineSpacing:3];
+//    [attributeStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, subTitle.length)];
+//    ,NSParagraphStyleAttributeName:paragraphStyle}
+//    self.memberSubLabel.attributedText = attributeStr;
+
+    NSString *str;
+    CGFloat height;
     if ([[self.more_serviceDic.allKeys objectAtIndex:indexpath.section] isEqualToString:@"204"]) {
-        return 160.0f;
+        str = [self.service_description objectForKey:@"fuel_description"];
+        height = 90.0f;
     }else{
-        return 130.0f;
+        str = [self.service_description objectForKey:@"car_wash_description"];
+        height = 60.0f;
     }
+    CGSize titleSize = [str boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}
+//                                                         ,NSParagraphStyleAttributeName:paragraphStyle}
+                                              context:nil].size;
+    CGSize titleUnit = [@"hh" boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}
+                        //                                                         ,NSParagraphStyleAttributeName:paragraphStyle}
+                                         context:nil].size;
+
+    
+    return height+ (titleSize.height/titleUnit.height)*(titleUnit.height+4)+20;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10.0f;
+    return 9.5f;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *sectionFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [sectionFooterView setBackgroundColor:[UIColor colorWithHex:0xf5f5f5]];
-    [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 10)];
+    [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 9.5f)];
     return sectionFooterView;
 }
 #pragma mark - UITableViewDataSource
@@ -131,8 +157,6 @@
         cell = [[[NSBundle mainBundle]loadNibNamed:@"MoreServicesTableViewCell" owner:nil options:nil] firstObject];
         cell.delegate = self;
     }
-    NSUInteger section = indexPath.section;
-
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     BAFParkServiceInfo *serviceInfo;
     serviceInfo = [BAFParkServiceInfo mj_objectWithKeyValues:[self.more_serviceDic objectForKey:[self.more_serviceDic.allKeys objectAtIndex:indexPath.section]]];
@@ -148,7 +172,6 @@
                 [cell setShow:YES];
             }
         }
-//        [cell setShow:self.isTextServiceShow];
     }else{
         cell.type = KMoreServicesTableViewCellType205;
         if ([self.dicDatasource objectForKey:OrderParamTypeService]) {

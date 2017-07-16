@@ -13,6 +13,7 @@
 #import "HRLParkInterface.h"
 #import "HRLogicManager.h"
 #import "BAFParkCommentInfo.h"
+#import "BAFParkInfo.h"
 
 #define ParkDetail1TableViewCellIdentifier      @"ParkDetail1TableViewCellIdentifier"
 #define ParkDetail2TableViewCellIdentifier      @"ParkDetail2TableViewCellIdentifier"
@@ -27,6 +28,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) IBOutlet UIButton *footerBtn;
 @property (strong, nonatomic) NSMutableArray *parkCommentList;
+//@property (strong, nonatomic) NSMutableDictionary *parkDetailDictionary;
+@property (strong, nonatomic) BAFParkInfo *parkDetailInfo;
 @end
 
 @implementation ParkDetailViewController
@@ -35,6 +38,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
     [super viewDidLoad];
     [self.footerBtn setFrame:CGRectMake(0, 0, screenWidth, 44)];
     self.myTableView.tableFooterView = self.footerBtn;
+    self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,8 +49,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
 {
     [super viewWillAppear:animated];
     [self parkDetailRequestWithParkId:self.parkid];
-    [self parkCommentListRequestWithParkId:self.parkid];
     self.parkCommentList = [NSMutableArray array];
+    self.parkDetailInfo = nil;
+}
+
+- (IBAction)footerCheckMoreAction:(id)sender {
+    NSLog(@"查看更多");
 }
 
 #pragma mark - UITableViewDelegate
@@ -54,6 +62,44 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
 {
     if (indexPath.section == 0) {
         return 308.0f;
+    }
+    else if (indexPath.section == 1){
+        if (self.parkDetailInfo) {
+            NSString *totalStr = self.parkDetailInfo.map_task;
+            NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            [paragraphStyle setLineSpacing:6];
+            [attributeStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, totalStr.length)];
+            CGSize titleSize = [totalStr boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
+                                                      context:nil].size;
+            return titleSize.height+20+10;
+        }
+        return 0;
+    }else if(indexPath.section == 2){
+        if (self.parkCommentList[indexPath.row]) {
+            BAFParkCommentInfo *commentInfo = self.parkCommentList[indexPath.row];
+            NSString *totalStr = commentInfo.remark;
+            NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            [paragraphStyle setLineSpacing:6];
+            [attributeStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, totalStr.length)];
+            CGSize titleSize = CGSizeZero;
+            if (totalStr&&![totalStr isEqualToString:@""]) {
+                titleSize = [totalStr boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
+                                                   context:nil].size;
+            }
+            
+            if ([commentInfo.tags isEqualToString:@""] || !commentInfo.tags) {
+                return titleSize.height+20+85;
+            }else{
+                return titleSize.height+20+115;
+            }
+        }
+        return 0;
     }
     return 308.0f;
 }
@@ -72,10 +118,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
     UIView *sectionFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [sectionFooterView setBackgroundColor:[UIColor colorWithHex:0xf5f5f5]];
     [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 30)];
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, screenWidth-24, 30)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, screenWidth-24, 30)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:14.0f];
-    label.textColor = [UIColor colorWithHex:0x585c64];
+    label.font = [UIFont systemFontOfSize:15.0f];
+    label.textColor = [UIColor colorWithHex:0x323232];
     if (section == 0) {
         return nil;
     }
@@ -101,10 +147,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
         return 1;
     }
     else{
-        return 2;
+        if (self.parkCommentList.count>=2) {
+            return 2;
+        }else{
+            return self.parkCommentList.count;
+        }
     }
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -112,28 +161,36 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
         ParkDetail1TableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:ParkDetail1TableViewCellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ParkDetail1TableViewCell" owner:nil options:nil] firstObject];
-            //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //        cell.delegate = self;
-            
         }
+        cell.parkDetailInfo = self.parkDetailInfo;
+        cell.parkCommentList = self.parkCommentList;
         return cell;
     }else if(indexPath.section == 1){
         ParkDetail2TableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:ParkDetail2TableViewCellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ParkDetail2TableViewCell" owner:nil options:nil] firstObject];
-            //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //        cell.delegate = self;
-            
+        }
+        if (self.parkDetailInfo) {
+            NSString *totalStr = self.parkDetailInfo.map_task;
+            NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            [paragraphStyle setLineSpacing:6];
+            [attributeStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, totalStr.length)];
+            cell.mapTaskLabel.attributedText = attributeStr;
         }
         return cell;
     }else{
         ParkCommetnTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:ParkCommetnTableViewCellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ParkCommetnTableViewCell" owner:nil options:nil] firstObject];
-            //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //        cell.delegate = self;
-            
         }
+        cell.commentInfo = [self.parkCommentList objectAtIndex:indexPath.row];
         return cell;
     }
 //    PersonalEditTableViewCellType type;
@@ -162,28 +219,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    if (self.type == kBAFOrderViewControllerTypeOrder) {
-    //        [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-    //    }else if(self.type == kBAFOrderViewControllerTypeModifyAll){
-    //        if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
-    //            [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-    //        }else{
-    //            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
-    //        }
-    //    }else if(self.type == kBAFOrderViewControllerTypeModifyPart){
-    //        if (indexPath.section != 1&&indexPath.section != 0) {
-    //            [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-    //        }else{
-    //            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
-    //        }
-    //    }
 }
 
-- (IBAction)footerCheckMoreAction:(id)sender {
-    NSLog(@"查看更多");
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat sectionHeaderHeight = 30;
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
 }
 
-
+#pragma mark - REQUEST
 - (void)parkDetailRequestWithParkId:(NSString *)parkId
 {
     id <HRLParkInterface> parkReq = [[HRLogicManager sharedInstance] getParkReqest];
@@ -204,7 +252,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            
+            self.parkDetailInfo = [BAFParkInfo mj_objectWithKeyValues:[obj objectForKey:@"data"]];
+            [self parkCommentListRequestWithParkId:self.parkid];
         }else{
             
         }
@@ -219,7 +268,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
                 [self.parkCommentList removeAllObjects];
             }
             self.parkCommentList = [BAFParkCommentInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
-            
+            [self.myTableView reloadData];
         }else{
             
         }

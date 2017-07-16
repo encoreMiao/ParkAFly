@@ -12,7 +12,7 @@
 
 @interface ParkListTableViewCell()
 @property (nonatomic, assign) ParkListTableViewCellType type;
-
+@property (weak, nonatomic) IBOutlet UILabel *carFeeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *parkImageView;
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
 @property (weak, nonatomic) IBOutlet UILabel *parkLabel;
@@ -24,7 +24,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
     
     [self.selectButton setTitle:@"选择" forState:UIControlStateNormal];
     [self.selectButton setTitle:@"已选择" forState:UIControlStateSelected];
@@ -36,7 +35,6 @@
     self.selectButton.layer.cornerRadius = 3.0f;
     self.selectButton.layer.borderWidth = 1.0f;
     self.selectButton.layer.borderColor = ((UIColor *)[UIColor colorWithHex:kBAFCommonColor]).CGColor;
-    
     
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detailGesture)];
     gesture.delegate = self;
@@ -52,7 +50,7 @@
     switch (_type) {
         case kParkListTableViewCellTypeShow:
         {
-
+            
         }
             break;
         case kParkListTableViewCellTypeSelect:
@@ -69,10 +67,15 @@
 {
     _parkinfo = parkinfo;
     _type = type;
-    [self.parkImageView sd_setImageWithURL:[NSURL URLWithString:parkinfo.map_pic]];
+    NSString *urlStr = [NSString stringWithFormat:@"Uploads/Picture/%@",parkinfo.map_pic];
+    NSString *totalUrl = REQURL(urlStr);
+    [self.parkImageView sd_setImageWithURL:[NSURL URLWithString:totalUrl]];
     self.locationLabel.text = parkinfo.map_address;
-    self.parkLabel.text = [NSString stringWithFormat:@"%@\n车位费：%@",parkinfo.map_title,parkinfo.map_charge.strike_price];
-    
+    self.parkLabel.text = [NSString stringWithFormat:@"%@",parkinfo.map_title];
+    NSString *carFee = [NSString stringWithFormat:@"车位费：%@",parkinfo.map_charge.strike_price];
+    NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:carFee];
+    [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[carFee rangeOfString:parkinfo.map_charge.strike_price]];
+    self.carFeeLabel.attributedText = mutStr;
     switch (type) {
         case kParkListTableViewCellTypeShow:
         {

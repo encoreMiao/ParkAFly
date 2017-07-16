@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuccessViewController">
             <connections>
                 <outlet property="buttonView" destination="PAp-gD-qn7" id="rFI-2i-ddt"/>
+                <outlet property="checktBtn" destination="QHb-v7-J5u" id="02U-HF-247"/>
+                <outlet property="contactBtn" destination="EbD-Ex-4lK" id="fyN-sA-sg4"/>
                 <outlet property="contentL" destination="NcZ-pC-yZW" id="15g-LD-oKx"/>
                 <outlet property="failureView" destination="9gM-3T-rOP" id="aLQ-h5-eVT"/>
                 <outlet property="feeL" destination="ePC-p3-f48" id="Opl-r2-i87"/>
@@ -31,20 +33,51 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9gM-3T-rOP">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊敬的客户，您好！ 您当前预约的机场停车服务，由于停车场车位已预约满，当前没有生育资源可预约，如有疑问，请联系客服咨询。给您带来的不便，请您谅解！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQI-v9-vyJ">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQI-v9-vyJ">
                             <rect key="frame" x="20" y="20" width="335" height="110"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <attributedString key="attributedText">
+                                <fragment content="尊敬的客户，您好！">
+                                    <attributes>
+                                        <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="7" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content=" ">
+                                    <attributes>
+                                        <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" metaFont="system" size="15"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="7" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="您当前预约的机场停车服务，由于停车场车位已预约满，当前没有生育资源可预约，如有疑问，请联系客服咨询。给您带来的不便，请您谅解！">
+                                    <attributes>
+                                        <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="7" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5T-Do-sVn">
+                            <rect key="frame" x="0.0" y="149.5" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="Pnd-cZ-v5r"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="jQI-v9-vyJ" firstAttribute="leading" secondItem="9gM-3T-rOP" secondAttribute="leading" constant="20" id="QDS-nx-zON"/>
+                        <constraint firstAttribute="trailing" secondItem="x5T-Do-sVn" secondAttribute="trailing" id="cMD-7O-43X"/>
+                        <constraint firstAttribute="bottom" secondItem="x5T-Do-sVn" secondAttribute="bottom" id="lPP-DV-eLi"/>
                         <constraint firstAttribute="height" constant="150" id="leG-Qv-6nJ"/>
                         <constraint firstAttribute="bottom" secondItem="jQI-v9-vyJ" secondAttribute="bottom" constant="20" id="mz8-Qs-Ibn"/>
                         <constraint firstAttribute="trailing" secondItem="jQI-v9-vyJ" secondAttribute="trailing" constant="20" id="qrc-0B-Yhq"/>
                         <constraint firstItem="jQI-v9-vyJ" firstAttribute="top" secondItem="9gM-3T-rOP" secondAttribute="top" constant="20" id="vzr-5O-0Lr"/>
+                        <constraint firstItem="x5T-Do-sVn" firstAttribute="leading" secondItem="9gM-3T-rOP" secondAttribute="leading" id="yfr-OS-ewg"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vU8-uZ-ePJ">
@@ -63,20 +96,32 @@
                                 <constraint firstAttribute="height" constant="14" id="JkV-48-8RI"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbu-6T-6KC">
-                            <rect key="frame" x="0.0" y="134" width="375" height="1"/>
+                            <rect key="frame" x="20" y="134" width="355" height="1"/>
                             <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="VTd-Fb-gxy"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示：请将待支付金额到现场交给客户经理结算。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j51-zc-bb6">
-                            <rect key="frame" x="20" y="135" width="335" height="55"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j51-zc-bb6">
+                            <rect key="frame" x="20" y="135" width="335" height="54"/>
+                            <attributedString key="attributedText">
+                                <fragment content="温馨提示：">
+                                    <attributes>
+                                        <color key="NSColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="请将待支付金额到现场交给客户经理结算。">
+                                    <attributes>
+                                        <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单提交成功！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTm-Af-FIe">
@@ -85,20 +130,31 @@
                                 <constraint firstAttribute="height" constant="18" id="I8W-Ej-mR2"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cta-Ny-no9">
+                            <rect key="frame" x="0.0" y="189" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="6jm-QX-LHx"/>
+                                <constraint firstAttribute="height" constant="0.5" id="RvE-FK-oEe"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="CTm-Af-FIe" firstAttribute="leading" secondItem="vU8-uZ-ePJ" secondAttribute="leading" id="2f9-CJ-nop"/>
                         <constraint firstItem="j51-zc-bb6" firstAttribute="top" secondItem="hbu-6T-6KC" secondAttribute="bottom" id="2hV-cb-I1v"/>
                         <constraint firstItem="JLt-0L-68M" firstAttribute="top" secondItem="vU8-uZ-ePJ" secondAttribute="top" constant="20" id="3AY-Ra-Lxu"/>
-                        <constraint firstItem="hbu-6T-6KC" firstAttribute="leading" secondItem="vU8-uZ-ePJ" secondAttribute="leading" id="5rc-o2-28o"/>
+                        <constraint firstItem="hbu-6T-6KC" firstAttribute="leading" secondItem="vU8-uZ-ePJ" secondAttribute="leading" constant="20" id="5rc-o2-28o"/>
                         <constraint firstItem="JLt-0L-68M" firstAttribute="centerX" secondItem="vU8-uZ-ePJ" secondAttribute="centerX" id="7ma-DF-dq9"/>
-                        <constraint firstAttribute="bottom" secondItem="j51-zc-bb6" secondAttribute="bottom" id="CPz-Zv-I8R"/>
+                        <constraint firstAttribute="trailing" secondItem="Cta-Ny-no9" secondAttribute="trailing" id="9Q5-cJ-odg"/>
+                        <constraint firstItem="Cta-Ny-no9" firstAttribute="leading" secondItem="vU8-uZ-ePJ" secondAttribute="leading" id="9Uj-GH-fCS"/>
                         <constraint firstAttribute="trailing" secondItem="CTm-Af-FIe" secondAttribute="trailing" id="GhW-qf-crg"/>
+                        <constraint firstAttribute="bottom" secondItem="Cta-Ny-no9" secondAttribute="bottom" id="HK6-q0-CjI"/>
                         <constraint firstAttribute="trailing" secondItem="j51-zc-bb6" secondAttribute="trailing" constant="20" id="Pfc-ie-sf7"/>
+                        <constraint firstItem="Cta-Ny-no9" firstAttribute="top" secondItem="j51-zc-bb6" secondAttribute="bottom" id="SZs-tX-UT2"/>
                         <constraint firstAttribute="trailing" secondItem="n99-cu-9qE" secondAttribute="trailing" id="UTn-MT-PAl"/>
                         <constraint firstItem="j51-zc-bb6" firstAttribute="leading" secondItem="vU8-uZ-ePJ" secondAttribute="leading" constant="20" id="bif-Zv-Vqq"/>
                         <constraint firstItem="CTm-Af-FIe" firstAttribute="top" secondItem="JLt-0L-68M" secondAttribute="bottom" constant="10" id="cer-mo-VjB"/>
@@ -126,14 +182,14 @@
                                 <constraint firstAttribute="height" constant="18" id="siA-EE-sO2"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVI-X1-RcP">
                             <rect key="frame" x="20" y="112" width="335" height="1"/>
-                            <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="2hn-2F-zAO"/>
+                                <constraint firstAttribute="height" constant="0.5" id="2hn-2F-zAO"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcZ-pC-yZW">
@@ -142,7 +198,7 @@
                                 <constraint firstAttribute="height" constant="15" id="kiS-zc-zmD"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lk-Qg-17d">
@@ -151,7 +207,7 @@
                                 <constraint firstAttribute="height" constant="15" id="sm2-pq-gD8"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="if9-o3-AEa">
@@ -160,7 +216,7 @@
                                 <constraint firstAttribute="height" constant="15" id="eGa-hC-BcB"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxz-is-aT3">
@@ -169,7 +225,7 @@
                                 <constraint firstAttribute="height" constant="15" id="SUr-81-7Gx"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计费用：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDT-BO-1jx">
@@ -179,14 +235,14 @@
                                 <constraint firstAttribute="height" constant="15" id="HdN-03-s4J"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ww8-4w-hAn">
                             <rect key="frame" x="0.0" y="258" width="375" height="1"/>
-                            <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="ZtJ-TE-UR1"/>
+                                <constraint firstAttribute="height" constant="0.5" id="ZtJ-TE-UR1"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NaU-5V-LQ4">
@@ -197,14 +253,70 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="0wl-og-N5l"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.当前订单为预计费用，实际费用以您的实际取车时间为准。 2.如未填写取车信息，请在回程前进入“个人中心-行程”点击“取车”完善取车信息。 3.优惠券或活动码可在支付时使用。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWh-Mh-V13">
-                                    <rect key="frame" x="20" y="40" width="335" height="78"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWh-Mh-V13">
+                                    <rect key="frame" x="20" y="40" width="335" height="85"/>
+                                    <attributedString key="attributedText">
+                                        <fragment content="1.">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" metaFont="system"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="当前订单为预计费用，实际费用以您的实际取车时间为准。">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" 2.">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" metaFont="system"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="如未填写取车信息，请在回程前进入“个人中心">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="-">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" metaFont="system"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="行程”点击“取车”完善取车信息。">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" 3.">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" metaFont="system"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="优惠券或活动码可在支付时使用。">
+                                            <attributes>
+                                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -278,17 +390,17 @@
                 <constraint firstItem="ZQc-eG-Nxb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kZQ-Cl-iax"/>
                 <constraint firstAttribute="trailing" secondItem="vU8-uZ-ePJ" secondAttribute="trailing" id="xXX-gJ-opT"/>
             </constraints>
-            <point key="canvasLocation" x="292.5" y="-219.5"/>
+            <point key="canvasLocation" x="205.5" y="-220.5"/>
         </view>
         <view contentMode="scaleToFill" id="PAp-gD-qn7">
-            <rect key="frame" x="0.0" y="0.0" width="376" height="148"/>
+            <rect key="frame" x="0.0" y="0.0" width="376" height="98"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbD-Ex-4lK">
                     <rect key="frame" x="20" y="30" width="143" height="30"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="联系客服">
-                        <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="contactClicked:" destination="-1" eventType="touchUpInside" id="47G-iR-mgs"/>
@@ -298,7 +410,7 @@
                     <rect key="frame" x="213" y="30" width="143" height="30"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="查看订单">
-                        <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="checkOrder:" destination="-1" eventType="touchUpInside" id="HIL-g3-6ec"/>
@@ -315,7 +427,7 @@
                 <constraint firstItem="EbD-Ex-4lK" firstAttribute="leading" secondItem="PAp-gD-qn7" secondAttribute="leading" constant="20" id="u5B-XR-NdD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-11" y="-131"/>
+            <point key="canvasLocation" x="192" y="-656"/>
         </view>
     </objects>
     <resources>

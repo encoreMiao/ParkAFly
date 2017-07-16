@@ -30,7 +30,7 @@
                             <constraint firstAttribute="height" constant="16" id="kvz-c8-lvY"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parking_xiangq_star2" translatesAutoresizingMaskIntoConstraints="NO" id="gsK-Zx-rUt">
@@ -68,7 +68,7 @@
                             <constraint firstAttribute="height" constant="16" id="Mv3-6I-cX9"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUd-Ne-LRB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0分  0条评价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUd-Ne-LRB">
                         <rect key="frame" x="135" y="221" width="309" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
@@ -80,7 +80,7 @@
                             <constraint firstAttribute="height" constant="14" id="Vga-yY-2Ct"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh8-de-f0c">
@@ -89,7 +89,7 @@
                             <constraint firstAttribute="height" constant="14" id="oFC-NH-Abr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7B-Na-sG2">
@@ -98,7 +98,17 @@
                             <constraint firstAttribute="width" constant="19" id="qO8-yh-juY"/>
                         </constraints>
                         <state key="normal" title="Button" image="btn_map"/>
+                        <connections>
+                            <action selector="addressAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2ch-eq-je7"/>
+                        </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyb-0D-Kfk">
+                        <rect key="frame" x="0.0" y="322" width="464" height="0.5"/>
+                        <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="WTF-MA-3UR"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="bUd-gC-FDU" firstAttribute="centerY" secondItem="IMV-lK-lga" secondAttribute="centerY" id="5kv-Z3-07j"/>
@@ -109,6 +119,7 @@
                     <constraint firstItem="mh8-de-f0c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="D6g-16-HlM"/>
                     <constraint firstItem="gsK-Zx-rUt" firstAttribute="top" secondItem="YqK-tP-GPk" secondAttribute="bottom" constant="10" id="Dpz-1v-ZAi"/>
                     <constraint firstItem="oHx-9g-bhA" firstAttribute="centerY" secondItem="bUd-gC-FDU" secondAttribute="centerY" id="EiR-bj-EFn"/>
+                    <constraint firstAttribute="bottom" secondItem="kyb-0D-Kfk" secondAttribute="bottom" id="Enj-vb-6KC"/>
                     <constraint firstItem="gsK-Zx-rUt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="H0N-LJ-W9h"/>
                     <constraint firstAttribute="trailing" secondItem="2IU-4C-eWn" secondAttribute="trailing" constant="20" id="Ieo-Lb-T5V"/>
                     <constraint firstAttribute="trailing" secondItem="rnb-YX-8Hp" secondAttribute="trailing" id="Ktd-oU-E7x"/>
@@ -124,12 +135,26 @@
                     <constraint firstItem="YqK-tP-GPk" firstAttribute="top" secondItem="rnb-YX-8Hp" secondAttribute="bottom" constant="10" id="ap1-eF-CO0"/>
                     <constraint firstItem="2IU-4C-eWn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bx4-E6-kc8"/>
                     <constraint firstItem="mh8-de-f0c" firstAttribute="top" secondItem="2IU-4C-eWn" secondAttribute="bottom" constant="10" id="cSq-yJ-jr3"/>
+                    <constraint firstItem="kyb-0D-Kfk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gMD-Wz-7e8"/>
                     <constraint firstItem="bUd-Ne-LRB" firstAttribute="centerY" secondItem="6AY-6H-NGC" secondAttribute="centerY" id="iQB-eY-W1F"/>
+                    <constraint firstAttribute="trailing" secondItem="kyb-0D-Kfk" secondAttribute="trailing" id="iRh-Lm-e4f"/>
                     <constraint firstItem="rnb-YX-8Hp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="l5y-4X-mzq"/>
                     <constraint firstAttribute="trailing" secondItem="b7B-Na-sG2" secondAttribute="trailing" constant="20" id="lbs-em-JQp"/>
                     <constraint firstItem="2IU-4C-eWn" firstAttribute="top" secondItem="IMV-lK-lga" secondAttribute="bottom" constant="15" id="uue-XL-1AM"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="addressLabel" destination="mh8-de-f0c" id="Ogw-ux-DiK"/>
+                <outlet property="feeLabel" destination="2IU-4C-eWn" id="nZe-dq-aft"/>
+                <outlet property="parkImage" destination="rnb-YX-8Hp" id="cgB-fX-au8"/>
+                <outlet property="parkNameLabel" destination="YqK-tP-GPk" id="sy5-LG-hTd"/>
+                <outlet property="scoreLabel" destination="bUd-Ne-LRB" id="Rrf-t5-Ix2"/>
+                <outlet property="star1" destination="gsK-Zx-rUt" id="hby-r2-hdJ"/>
+                <outlet property="star2" destination="IMV-lK-lga" id="4bi-ZL-PDr"/>
+                <outlet property="star3" destination="bUd-gC-FDU" id="KvA-EU-x4z"/>
+                <outlet property="star4" destination="oHx-9g-bhA" id="cfp-IZ-80p"/>
+                <outlet property="star5" destination="6AY-6H-NGC" id="XOO-iI-pgc"/>
+            </connections>
             <point key="canvasLocation" x="17" y="144.5"/>
         </tableViewCell>
     </objects>
