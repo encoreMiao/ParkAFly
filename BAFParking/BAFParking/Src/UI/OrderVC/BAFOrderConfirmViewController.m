@@ -461,6 +461,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self showTipsInView:self.view message:@"预约成功" offset:self.view.center.x+100];
             SuccessViewController *successVC = [[SuccessViewController alloc]init];
             successVC.type = kSuccessViewControllerTypeSuccess;
+            successVC.orderId = [obj objectForKey:@"data"];
             [self.navigationController pushViewController:successVC animated:YES];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];

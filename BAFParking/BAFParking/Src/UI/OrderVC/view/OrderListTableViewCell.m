@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *parkTime;
 @property (weak, nonatomic) IBOutlet UILabel *pickTime;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@property (weak, nonatomic) IBOutlet UIButton *btn1;
+@property (weak, nonatomic) IBOutlet UIButton *btn2;
 @end
 
 @implementation OrderListTableViewCell

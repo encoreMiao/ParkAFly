@@ -18,4 +18,5 @@ typedef NS_ENUM(NSInteger,SuccessViewControllerType){
 
 @interface SuccessViewController : BAFBaseViewController    
 @property (nonatomic, assign) SuccessViewControllerType type;
+@property (nonatomic, strong) NSString *orderId;
 @end

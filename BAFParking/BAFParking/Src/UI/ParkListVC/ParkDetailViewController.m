@@ -48,9 +48,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    [self setNavigationTitle:@"车场详情"];
+    [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
+    
+    
     [self parkDetailRequestWithParkId:self.parkid];
     self.parkCommentList = [NSMutableArray array];
     self.parkDetailInfo = nil;
+}
+
+- (void)backMethod:(id)sender
+{
+    [self.navigationController  popViewControllerAnimated:YES];
 }
 
 - (IBAction)footerCheckMoreAction:(id)sender {
@@ -193,27 +204,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
         cell.commentInfo = [self.parkCommentList objectAtIndex:indexPath.row];
         return cell;
     }
-//    PersonalEditTableViewCellType type;
-//    if (section == 0) {
-//        if (row == 0) {
-//            type = PersonalEditTableViewCellTypeEditHead;sx
-//        }else if (row == 1||row == 3){
-//            type = PersonalEditTableViewCellTypeEdit;
-//        }else{
-//            type = PersonalEditTableViewCellTypeSelect;
-//        }
-//        NSArray *arr = [self.identityArr objectAtIndex:row];
-//        [cell setTitle:arr[0] detail:arr[1] type:type];
-//    }
-//    else{
-//        if (row == 0||row == 2) {
-//            type = PersonalEditTableViewCellTypeEdit;
-//        }else{
-//            type = PersonalEditTableViewCellTypeSelect;
-//        }
-//        NSArray *arr = [self.carArr objectAtIndex:row];
-//        [cell setTitle:arr[0] detail:arr[1] type:type];
-//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

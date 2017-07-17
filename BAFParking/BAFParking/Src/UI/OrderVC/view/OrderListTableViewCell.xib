@@ -27,6 +27,7 @@
                                     <constraint firstAttribute="height" constant="25" id="ZoJ-iH-Kjg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="泊车时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cY-7i-ZAl">
@@ -45,6 +46,7 @@
                                     <constraint firstAttribute="height" constant="25" id="UAd-Iy-ZtS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="取车时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsn-lC-9jH">
@@ -63,6 +65,7 @@
                                     <constraint firstAttribute="height" constant="25" id="zqQ-hi-401"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="停车场：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXz-mz-HnH">
@@ -92,7 +95,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车牌号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rn-Q4-fOk">
                                 <rect key="frame" x="10" y="0.0" width="80" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="FEt-qd-m2s"/>
+                                    <constraint firstAttribute="height" constant="35.5" id="FEt-qd-m2s"/>
                                     <constraint firstAttribute="width" constant="80" id="ekl-2T-Y7q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -101,14 +104,14 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFR-rO-06O">
                                 <rect key="frame" x="167" y="135.5" width="80" height="28"/>
-                                <color key="backgroundColor" red="0.94631618923611116" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="jCM-mH-2PZ"/>
                                     <constraint firstAttribute="height" constant="28" id="tVX-oW-PDP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="修改">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="modifyAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="miS-nc-QXR"/>
@@ -116,14 +119,14 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-wu-iPv">
                                 <rect key="frame" x="257" y="135.5" width="80" height="28"/>
-                                <color key="backgroundColor" red="0.61846245659722221" green="0.85074869791666663" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="8Va-Fg-6aU"/>
                                     <constraint firstAttribute="width" constant="80" id="bcn-Qw-4ig"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="取消">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancelAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Krd-tJ-Uyr"/>
@@ -131,7 +134,7 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ab-3A-GbV">
                                 <rect key="frame" x="0.0" y="35" width="347" height="0.5"/>
-                                <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="WVT-d2-uJV"/>
                                 </constraints>
@@ -142,10 +145,11 @@
                                     <constraint firstAttribute="height" constant="35" id="rIh-hg-6Md"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.1531032986111111" green="0.23008897569444445" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="nAc-yS-ufb" firstAttribute="top" secondItem="WX2-MB-3P5" secondAttribute="top" id="0XB-DK-4xP"/>
                             <constraint firstItem="5tk-m2-zd0" firstAttribute="leading" secondItem="wsn-lC-9jH" secondAttribute="trailing" id="0Y3-cy-pfE"/>
@@ -179,6 +183,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="WX2-MB-3P5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="2VR-QL-m6C"/>
                     <constraint firstAttribute="bottom" secondItem="WX2-MB-3P5" secondAttribute="bottom" constant="10" id="Ct3-cs-Sv4"/>

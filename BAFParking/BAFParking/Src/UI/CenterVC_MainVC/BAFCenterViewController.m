@@ -22,6 +22,7 @@
 #import "HRLogicManager.h"
 #import "UIView+WebCache.h"
 #import "UIImageView+WebCache.h"
+#import "OrderDetailViewController.h"
 
 typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 {
@@ -172,6 +173,9 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 - (void)showOrderDetail:(id)sender
 {
     DLog(@"查看正在进行的订单详细信息");
+    OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
+    vc.orderIdStr = [self.orderView.orderDic objectForKey:@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Request

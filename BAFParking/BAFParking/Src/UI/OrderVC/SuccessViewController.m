@@ -42,6 +42,7 @@
 
 - (IBAction)checkOrder:(id)sender {
     OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
+    vc.orderIdStr = self.orderId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

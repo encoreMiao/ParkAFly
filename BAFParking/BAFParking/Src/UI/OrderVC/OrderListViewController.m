@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self.view addSubview:self.buttonView];
     self.orderListArr = [NSMutableArray array];
     self.mytableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.mytableview.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
 }
 
 - (void)didReceiveMemoryWarning {
