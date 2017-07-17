@@ -54,6 +54,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [self setNavigationTitle:@"评价"];
+    [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
+    
     [self commentTagRequest];
     
     self.mycollectionview.frame = CGRectMake(0,0, screenWidth, screenHeight);
@@ -77,6 +83,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)backMethod:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - request

@@ -15,6 +15,7 @@
 #import "BAFOrderViewController.h"
 #import "CommentViewController.h"
 #import "PayOrderViewController.h"
+#import "OrderDetailViewController.h"
 
 #define OrderListTableViewCellIdentifier   @"OrderListTableViewCellIdentifier"
 
@@ -112,7 +113,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 188.0f;
+    return 200.0f;
 }
 
 #pragma mark - UITableViewDataSource
@@ -169,6 +170,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         case kOrderListTableViewCellTypePay:
         {
             NSLog(@"车场端【确认取车】后可进行支付，点击跳转到订单支付");
+            PayOrderViewController  *vc = [[PayOrderViewController alloc]init];
+            vc.orderDic = cell.orderDic;
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case kOrderListTableViewCellTypeComment:
@@ -190,8 +194,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         case kOrderListTableViewCellTypeDetail:
         {
             NSLog(@"查看订单详情");
-            PayOrderViewController  *vc = [[PayOrderViewController alloc]init];
-            vc.orderDic = cell.orderDic;
+            OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
+            vc.orderIdStr = [cell.orderDic objectForKey:@"id"];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

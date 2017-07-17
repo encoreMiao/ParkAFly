@@ -250,7 +250,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         NSString *totalStr = @"";
         NSString *str = @"";
-        if (indexPath.section == 0) {
+        if (indexPath.section == 1) {
             if (indexPath.row == 1) {
                 if ([[self.orderDic objectForKey:@"park"] objectForKey:@"map_address"]&&(![[[self.orderDic objectForKey:@"park"] objectForKey:@"map_address"] isEqual:[NSNull null]])) {
                     totalStr = [NSString stringWithFormat:@"位置：%@",[[self.orderDic objectForKey:@"park"] objectForKey:@"map_address"]];

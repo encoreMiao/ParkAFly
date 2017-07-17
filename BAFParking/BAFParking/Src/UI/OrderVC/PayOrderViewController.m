@@ -74,12 +74,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
-//    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-//        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-//            [self.navigationController popToViewController:tempVC animated:YES];
-//        }
-//    }
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)configOrderDic:(NSDictionary *)dic

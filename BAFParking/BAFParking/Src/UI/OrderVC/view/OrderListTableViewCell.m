@@ -28,6 +28,11 @@
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detailGesture)];
     gesture.delegate = self;
     [self addGestureRecognizer:gesture];
+    
+    self.modifyButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+    self.modifyButton.layer.borderWidth = 0.5f;
+    self.cancelButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+    self.cancelButton.layer.borderWidth = 0.5f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -79,7 +84,7 @@
     }else if ([orderStatus isEqualToString:@"finish"]){
         //服务结束
         self.modifyButton.hidden = YES;
-        self.cancelButton.hidden = YES;
+        self.cancelButton.hidden = NO;
         if ([[self.orderDic objectForKey:@"is_comment"] integerValue]>0) {
             [self.cancelButton setTitle:@"查看评价" forState:UIControlStateNormal];
             self.cancelButton.tag = kOrderListTableViewCellTypeCheckComment;
