@@ -20,7 +20,7 @@
 #define OrderDetail1TableViewCellIdentifier @"OrderDetail1TableViewCellIdentifier"
 #define OrderDetailImageTableViewCellIdentifier @"OrderDetailImageTableViewCellIdentifier"
 #define OrderDetailStatusTableViewCellIdentifier @"OrderDetailStatusTableViewCellIdentifier"
-
+#define OrderDetailFeeTableViewCellIdentifier  @"OrderDetailFeeTableViewCellIdentifier"
 
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){

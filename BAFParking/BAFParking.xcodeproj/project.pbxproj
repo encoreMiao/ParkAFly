@@ -165,6 +165,8 @@
 		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
 		8DA526A91F02ABDA0063D61D /* PopFeeShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */; };
 		8DA526AA1F02ABDA0063D61D /* PopFeeShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */; };
+		8DAA924C1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAA924A1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.m */; };
+		8DAA924D1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAA924B1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.xib */; };
 		8DB4F8901EE297F9006ACDEA /* BAFUserModelManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */; };
 		8DBAE0A91F106E22003ACFAB /* PersonalEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0A71F106E22003ACFAB /* PersonalEditTableViewCell.m */; };
 		8DBAE0AA1F106E22003ACFAB /* PersonalEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0A81F106E22003ACFAB /* PersonalEditTableViewCell.xib */; };
@@ -494,6 +496,9 @@
 		8DA526A61F02ABDA0063D61D /* PopFeeShowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopFeeShowTableViewCell.h; sourceTree = "<group>"; };
 		8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopFeeShowTableViewCell.m; sourceTree = "<group>"; };
 		8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopFeeShowTableViewCell.xib; sourceTree = "<group>"; };
+		8DAA92491F1E59A800FCF348 /* OrderDetailFeeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailFeeTableViewCell.h; sourceTree = "<group>"; };
+		8DAA924A1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailFeeTableViewCell.m; sourceTree = "<group>"; };
+		8DAA924B1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailFeeTableViewCell.xib; sourceTree = "<group>"; };
 		8DB4F88E1EE297F9006ACDEA /* BAFUserModelManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFUserModelManger.h; sourceTree = "<group>"; };
 		8DB4F88F1EE297F9006ACDEA /* BAFUserModelManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFUserModelManger.m; sourceTree = "<group>"; };
 		8DBAE0A61F106E22003ACFAB /* PersonalEditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalEditTableViewCell.h; sourceTree = "<group>"; };
@@ -1218,6 +1223,9 @@
 				8D56DD391F1272B9000E3D99 /* OrderDetailStatusTableViewCell.h */,
 				8D56DD3A1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.m */,
 				8D56DD3B1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.xib */,
+				8DAA92491F1E59A800FCF348 /* OrderDetailFeeTableViewCell.h */,
+				8DAA924A1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.m */,
+				8DAA924B1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.xib */,
 			);
 			path = OrderDetailView;
 			sourceTree = "<group>";
@@ -1418,6 +1426,7 @@
 				8D575E811EF6B48C0061474D /* AccountDetailTableViewCell.xib in Resources */,
 				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
+				8DAA924D1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.xib in Resources */,
 				8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */,
 				8DBAE0AA1F106E22003ACFAB /* PersonalEditTableViewCell.xib in Resources */,
 				0001CDDE1ED05179000889CE /* PersonalCenterTableViewCell.xib in Resources */,
@@ -1625,6 +1634,7 @@
 				002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */,
 				8DE433541EED0121009379ED /* ParkListTableViewCell.m in Sources */,
 				8D3498211F09FEC7009D723C /* PayOrderViewController.m in Sources */,
+				8DAA924C1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.m in Sources */,
 				00214B411ECFDAC100FF6FDE /* NSObject+MJProperty.m in Sources */,
 				8D575E471EF4F6F30061474D /* PersonalAccountViewController.m in Sources */,
 				8D3498261F0A3460009D723C /* PayOrderTableViewCell.m in Sources */,
