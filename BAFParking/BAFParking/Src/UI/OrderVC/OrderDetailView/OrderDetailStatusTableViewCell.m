@@ -8,6 +8,11 @@
 
 #import "OrderDetailStatusTableViewCell.h"
 
+@interface OrderDetailStatusTableViewCell()
+@property (weak, nonatomic) IBOutlet UILabel *orderOperatorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@end
+
 @implementation OrderDetailStatusTableViewCell
 //65
 - (void)awakeFromNib {

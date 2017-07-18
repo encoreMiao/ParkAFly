@@ -56,22 +56,42 @@
         //预约泊车成功
         self.orderSuccessIV.image = [UIImage imageNamed:@"home_order_blue1"];
         self.orderSuccessL.textColor = [UIColor colorWithHex:0x3492e9];
+        
+        self.statusLabel.text = @"预约成功";
     }else if([orderStatus isEqualToString:@"park"]){
         //泊车成功
         self.parkFinishedIV.image = [UIImage imageNamed:@"home_order_blue1"];
         self.parkFinishedL.textColor = [UIColor colorWithHex:0x3492e9];
+        self.statusLabel.text = @"停车完成";
     }else if ([orderStatus isEqualToString:@"pick_appoint"]){
         //待取车
         self.waitToGetCarIV.image = [UIImage imageNamed:@"home_order_blue1"];
         self.waitToGetCarL.textColor = [UIColor colorWithHex:0x3492e9];
+        self.statusLabel.text = @"停车完成";
     }else if ([orderStatus isEqualToString:@"pick_sure"]||
               [orderStatus isEqualToString:@"payment_sure"]||
               [orderStatus isEqualToString:@"finish"]){
         //取车成功
         self.getCarSuccessIV.image = [UIImage imageNamed:@"home_order_blue1"];
         self.getCarSuccessL.textColor = [UIColor colorWithHex:0x3492e9];
+        if ([orderStatus isEqualToString:@"finish"]){
+            //服务结束
+            self.statusLabel.text = @"已完成";
+        }
+        else if ([orderStatus isEqualToString:@"payment_sure"]){
+            //已支付待确认
+            self.statusLabel.text = @"支付待确认";
+        }
+        else if ([orderStatus isEqualToString:@"pick_sure"]){
+            //已确认取车
+            self.statusLabel.text = @"待支付";
+        }
+        
     }
     
+    self.orderNoLabel.text = [orderDic objectForKey:@"order_no"];
+    
+    self.nameDetailLabel.text = [NSString stringWithFormat:@"%@     %@      %@",[orderDic objectForKey:@"contact_name"],[orderDic objectForKey:@"contact_phone"],[orderDic objectForKey:@"car_license_no"]];
 }
 
 @end

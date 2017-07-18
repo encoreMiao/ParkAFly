@@ -30,11 +30,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @interface OrderDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) NSMutableDictionary *orderDic;
+@property (strong, nonatomic) NSMutableArray *serviceArr;
 @end
 
 @implementation OrderDetailViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.orderDic = [NSMutableDictionary dictionary];
+    self.serviceArr = [NSMutableArray array];
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.myTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
 }
@@ -127,7 +130,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (indexPath.section == 0) {
         return 135.0f;
     }else if (indexPath.section == 1||indexPath.section == 2){
-        if (indexPath.section == 1&&indexPath.section == 1) {
+        if (indexPath.section == 1&&indexPath.row == 1) {
             NSString *totalStr;
             if ([[self.orderDic objectForKey:@"park"] objectForKey:@"map_address"]) {
                 totalStr = [NSString stringWithFormat:@"位置：%@",[[self.orderDic objectForKey:@"park"] objectForKey:@"map_address"]];
@@ -144,7 +147,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             return 30.0f;//104
         }
     }else if (indexPath.section == 3){
-        return 40.0f;
+        if (self.serviceArr.count >0) {
+            return 40.0f;
+        }
+        return 40.0f;//否则是订单费用
     }else if (indexPath.section == 4){
         return 40.0f;
     }else if (indexPath.section == 5){
@@ -166,11 +172,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     if (section == 0) {
         return 0.0f;
-    }else if (section == 1){
+    }else if (section == 1||section == 2){
         return 30.0f;
-    }else{
-        return 30.0f;
+    }else if (section == 3){
+        if (self.serviceArr.count>0) {
+            return 30.0f;
+        }
+        return 10.0f;
     }
+    return 0;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -188,21 +198,33 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     label.textColor = [UIColor colorWithHex:0x323232];
     if (section == 1) {
         label.text = @"停车信息";
+        [sectionFooterView addSubview:label];
     }
     if (section == 2) {
         label.text = @"取车信息";
+        [sectionFooterView addSubview:label];
     }
-//    if (section == 2) {
-//        label.text = @"服务项目";
-//    }
-    [sectionFooterView addSubview:label];
-    
+    if (section == 3) {
+        if (self.serviceArr.count>0) {
+            label.text = @"服务项目";
+            [sectionFooterView addSubview:label];
+        }
+        else{
+            [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 10)];
+        }
+    }
     return sectionFooterView;
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSInteger sectionNumber = 3;
+    if (self.serviceArr.count>0) {
+        sectionNumber ++;
+    }
+    sectionNumber ++;//订单费用
+    
 //    if ([self.orderDic objectForKey:@"picture"]) {
 //        if ([self.orderDic objectForKey:@"pick"]) {
 //            return 7;
@@ -213,7 +235,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 //        }
 //    }
 //    return 6;
-    return 3;
+    return sectionNumber;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -222,8 +244,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         return 1;
     }else if(section == 1||section == 2) {
         return 5;
-    }else{
-        return 0;//根据内容返回多少
+    }else if(section == 3){
+        if (self.serviceArr.count>0) {
+            return self.serviceArr.count;//根据内容返回多少
+        }
+        return 1;//订单费用
     }
     return 5;
 }
@@ -236,7 +261,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetail1TableViewCell" owner:nil options:nil] firstObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        if (cell.orderDic) {
+        if (self.orderDic) {
             cell.orderDic = self.orderDic;
         }
         return cell;
@@ -362,6 +387,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         cell.confirmContentLabel.numberOfLines = 0;
         return cell;
     }
+    
+    if (indexPath.section == 3) {
+        OrderDetail1TableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetail1TableViewCellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetail1TableViewCell" owner:nil options:nil] firstObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        if (self.orderDic) {
+            cell.orderDic = self.orderDic;
+        }
+        return cell;
+    }
+
+    
 //    else{
 //        ServiceConfirmTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:ServiceConfirmTableViewCellIdentifier];
 //        if (cell == nil) {
@@ -406,6 +445,29 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)configOrderDic:(NSDictionary *)dic
 {
-//    [self];
+    NSMutableDictionary *mutDic;
+    if ([[[dic objectForKey:@"order_fee_detail"]objectForKey:@"order_price"] objectForKey:@"single"]&&(![[[[dic objectForKey:@"order_fee_detail"]objectForKey:@"order_price"] objectForKey:@"single"] isEqual:[NSNull null]])) {
+        mutDic = [NSMutableDictionary dictionaryWithDictionary:[[[dic objectForKey:@"order_fee_detail"]objectForKey:@"order_price"] objectForKey:@"single"]];
+    }
+
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSString *key in mutDic) {
+        if ([key isEqualToString:@"202"]) {
+            [arr addObject:@"代泊服务"];
+        }
+        if ([key isEqualToString:@"206"]) {
+            [arr addObject:@"自行往返航站楼"];
+        }
+        if ([key isEqualToString:@"205"]) {
+            [arr addObject:@"洗车服务"];
+        }
+        if ([key isEqualToString:@"204"]) {
+            [arr addObject:@"代加油"];
+        }
+    }
+    self.serviceArr = [NSMutableArray arrayWithArray:arr];
+    
+    [self configTotoalfee];
+    [self.myTableView reloadData];
 }
 @end
