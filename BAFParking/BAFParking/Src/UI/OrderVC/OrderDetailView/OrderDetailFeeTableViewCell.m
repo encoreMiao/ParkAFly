@@ -9,9 +9,7 @@
 #import "OrderDetailFeeTableViewCell.h"
 
 @interface OrderDetailFeeTableViewCell()
-@property (weak, nonatomic) IBOutlet UILabel *serviceTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *detailImg;
+
 @end
 
 @implementation OrderDetailFeeTableViewCell
@@ -21,6 +19,22 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+- (void)setType:(OrderDetailFeeTableViewCellType)type
+{
+    _type = type;
+    switch (_type) {
+        case OrderDetailFeeTableViewCellTypeService:
+            self.detailImg.hidden = YES;
+            self.detailLabel.hidden = YES;
+            break;
+        case OrderDetailFeeTableViewCellTypeTotalFee:
+            self.detailImg.hidden = NO;
+            self.detailLabel.hidden = NO;
+        default:
+            break;
+    }
 }
 
 @end

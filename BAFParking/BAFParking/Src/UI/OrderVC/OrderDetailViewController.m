@@ -15,6 +15,7 @@
 #import "OrderDetail1TableViewCell.h"
 #import "OrderDetailImageTableViewCell.h"
 #import "OrderDetailStatusTableViewCell.h"
+#import "OrderDetailFeeTableViewCell.h"
 
 #define OrderConfirmTableViewCellIdentifier @"OrderConfirmTableViewCellIdentifier"
 #define OrderDetail1TableViewCellIdentifier @"OrderDetail1TableViewCellIdentifier"
@@ -389,15 +390,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     
     if (indexPath.section == 3) {
-        OrderDetail1TableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetail1TableViewCellIdentifier];
+        OrderDetailFeeTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetailFeeTableViewCellIdentifier];
         if (cell == nil) {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetail1TableViewCell" owner:nil options:nil] firstObject];
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetailFeeTableViewCell" owner:nil options:nil] firstObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        if (self.orderDic) {
-            cell.orderDic = self.orderDic;
+        if (self.serviceArr.count>0) {
+            cell.type = OrderDetailFeeTableViewCellTypeService;
+            cell.serviceTitleLabel.text = [self.serviceArr objectAtIndex:indexPath.row];
+            return cell;
         }
-        return cell;
+        cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
+        cell.serviceTitleLabel.text = [NSString stringWithFormat:@"订单总费用啦啦啦"];
+        return cell;//订单费用
+        
     }
 
     

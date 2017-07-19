@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrderDetailFeeTableViewCell : UITableViewCell
+typedef NS_ENUM(NSInteger,OrderDetailFeeTableViewCellType){
+    OrderDetailFeeTableViewCellTypeTotalFee,
+    OrderDetailFeeTableViewCellTypeService,
+};
 
+@interface OrderDetailFeeTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *serviceTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *detailImg;
+@property (assign, nonatomic) OrderDetailFeeTableViewCellType type;
 @end
