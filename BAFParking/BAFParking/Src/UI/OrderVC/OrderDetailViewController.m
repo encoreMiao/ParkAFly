@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) NSMutableDictionary *orderDic;
 @property (strong, nonatomic) NSMutableArray *serviceArr;
+@property (strong, nonatomic) NSMutableArray *operatorArr;
 @end
 
 @implementation OrderDetailViewController
@@ -39,6 +40,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [super viewDidLoad];
     self.orderDic = [NSMutableDictionary dictionary];
     self.serviceArr = [NSMutableArray array];
+    self.operatorArr = [NSMutableArray array];
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.myTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
 }
@@ -153,15 +155,34 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         return 40.0f;//否则是订单费用
     }else if (indexPath.section == 4){
-        return 40.0f;
+        if (self.serviceArr.count >0) {
+            return 40.0f;
+        }else{
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return 100.0f;
+                }
+                else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return 100.0f;
+                }else{
+                    return 65.0f;
+                }
+            }
+        }
     }else if (indexPath.section == 5){
-        if ([self.orderDic objectForKey:@"picture"]) {
-            if ([self.orderDic objectForKey:@"pick"]) {
-                return 100.0f;
+        if (self.serviceArr.count >0) {
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&[[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return 100.0f;
+                }
+                else if ([dic objectForKey:@"park"]&&[[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return 100.0f;
+                }else
+                    return 65.0f;
             }
-            if ([self.orderDic objectForKey:@"pick"]) {
-                return 100.0f;
-            }
+        }else{
             return 65.0f;
         }
     }else if (indexPath.section == 6){
@@ -180,6 +201,38 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             return 30.0f;
         }
         return 10.0f;
+    }else if (section == 4){
+        if (self.serviceArr.count >0) {
+            return 10.0f;
+        }else{
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]||![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return 30.0f;
+                }
+                else if ([dic objectForKey:@"park"]||![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return 30.0f;
+                }
+                return 30.0f;
+            }
+        }
+    }else if (section == 5){
+        if (self.serviceArr.count >0) {
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return 30.0f;
+                }
+                else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return 30.0f;
+                }
+                return 30.0f;
+            }
+        }else{
+            return 30.0f;
+        }
+    }else if (section == 6){
+        return 30.0f;
     }
     return 0;
 }
@@ -214,6 +267,50 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 10)];
         }
     }
+    if (section  == 4) {
+        if (self.serviceArr.count>0) {
+            [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 10)];
+        }else{
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    label.text = @"取车图片";
+                    [sectionFooterView addSubview:label];
+                }
+                else  if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    label.text = @"泊车图片";
+                    [sectionFooterView addSubview:label];
+                }else{
+                    label.text = @"订单状态";
+                    [sectionFooterView addSubview:label];
+                }
+                
+            }
+        }
+    }else if (section == 5){
+        if (self.serviceArr.count >0) {
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    label.text = @"取车图片";
+                    [sectionFooterView addSubview:label];
+                }
+                else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    label.text = @"泊车图片";
+                    [sectionFooterView addSubview:label];
+                }else{
+                    label.text = @"订单状态";
+                    [sectionFooterView addSubview:label];
+                }
+            }
+        }else{
+            label.text = @"订单状态";
+            [sectionFooterView addSubview:label];
+        }
+    }else if (section == 6){
+        label.text = @"订单状态";
+        [sectionFooterView addSubview:label];
+    }
     return sectionFooterView;
 }
 
@@ -225,17 +322,16 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         sectionNumber ++;
     }
     sectionNumber ++;//订单费用
-    
-//    if ([self.orderDic objectForKey:@"picture"]) {
-//        if ([self.orderDic objectForKey:@"pick"]) {
-//            return 7;
-//        }
-//        
-//        if ([self.orderDic objectForKey:@"pick"]) {
-//            return 7;
-//        }
-//    }
-//    return 6;
+    if ([self.orderDic objectForKey:@"picture"]) {
+        NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+        if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+            sectionNumber ++;
+        }
+        else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+            sectionNumber ++;
+        }
+    }
+    sectionNumber ++;
     return sectionNumber;
 }
 
@@ -250,8 +346,41 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             return self.serviceArr.count;//根据内容返回多少
         }
         return 1;//订单费用
+    }else if(section == 4){
+        if (self.serviceArr.count>0) {
+            return 1;
+        }else{
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return 1;
+                }
+                else  if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return 1;
+                }
+                return self.operatorArr.count;
+            }
+        }
+        
+    }else if (section == 5){
+        if (self.serviceArr.count >0) {
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return 1;
+                }
+                else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return 1;
+                }
+                return self.operatorArr.count;
+            }
+        }else{
+            return self.operatorArr.count;
+        }
+    }else if (section == 6){
+        return self.operatorArr.count;
     }
-    return 5;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -403,20 +532,81 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
         cell.serviceTitleLabel.text = [NSString stringWithFormat:@"订单总费用啦啦啦"];
         return cell;//订单费用
-        
     }
-
     
-//    else{
-//        ServiceConfirmTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:ServiceConfirmTableViewCellIdentifier];
-//        if (cell == nil) {
-//            cell = [[[NSBundle mainBundle]loadNibNamed:@"ServiceConfirmTableViewCell" owner:nil options:nil] firstObject];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            cell.delegate = self;
-//        }
-//        cell.serviceStr = [self.serviceArr objectAtIndex:indexPath.row];
-//        return cell;
-//    }
+    if (indexPath.section == 4) {
+        if (self.serviceArr.count>0) {
+            OrderDetailFeeTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetailFeeTableViewCellIdentifier];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetailFeeTableViewCell" owner:nil options:nil] firstObject];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
+            cell.serviceTitleLabel.text = [NSString stringWithFormat:@"订单总费用呵呵呵"];
+            return cell;
+        }else{
+            OrderDetailImageTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetailImageTableViewCellIdentifier];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetailImageTableViewCell" owner:nil options:nil] firstObject];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            OrderDetailStatusTableViewCell *cellstatus =  [tableView dequeueReusableCellWithIdentifier:OrderDetailStatusTableViewCellIdentifier];
+            if (cellstatus == nil) {
+                cellstatus = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetailStatusTableViewCell" owner:nil options:nil] firstObject];
+                cellstatus.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return cell;
+                }
+                else  if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return cell;
+                }
+                cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+                return cellstatus;
+            }
+        }
+        
+        
+    }else if (indexPath.section == 5){
+        OrderDetailImageTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetailImageTableViewCellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetailImageTableViewCell" owner:nil options:nil] firstObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        OrderDetailStatusTableViewCell *cellstatus =  [tableView dequeueReusableCellWithIdentifier:OrderDetailStatusTableViewCellIdentifier];
+        if (cellstatus == nil) {
+            cellstatus = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetailStatusTableViewCell" owner:nil options:nil] firstObject];
+            cellstatus.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        if (self.serviceArr.count >0) {
+            if ([self.orderDic objectForKey:@"picture"]) {
+                NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    return cell;
+                }
+                else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    return cell;
+                }
+                cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+                return cellstatus;
+            }
+        }else{
+            cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+            return cellstatus;
+        }
+    }else if (indexPath.section == 6){
+        OrderDetailStatusTableViewCell *cellstatus =  [tableView dequeueReusableCellWithIdentifier:OrderDetailStatusTableViewCellIdentifier];
+        if (cellstatus == nil) {
+            cellstatus = [[[NSBundle mainBundle]loadNibNamed:@"OrderDetailStatusTableViewCell" owner:nil options:nil] firstObject];
+            cellstatus.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+        return cellstatus;
+    }
     return nil;
 }
 
@@ -472,6 +662,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     self.serviceArr = [NSMutableArray arrayWithArray:arr];
+    
+    if ([dic objectForKey:@"operator_log"]) {
+        self.operatorArr = [NSMutableArray arrayWithArray:[dic objectForKey:@"operator_log"]];
+    }
     
     [self configTotoalfee];
     [self.myTableView reloadData];

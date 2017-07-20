@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderDetailStatusTableViewCell : UITableViewCell
-
+@property (nonatomic, retain) NSDictionary *operatorDic;
 @end

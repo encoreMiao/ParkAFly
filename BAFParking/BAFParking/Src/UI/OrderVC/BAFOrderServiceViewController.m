@@ -77,11 +77,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationRightButtonWithText:@"说明" method:@selector(rightBtnClicked:)];
     
     
-//    if ([self.dicDatasource objectForKey:OrderParamTypePark]) {
-//        NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"];
-//        [self parkListRequestWithParkid:arr[1]];
-//    }
-    [self parkListRequestWithParkid:@"20"];
+    if ([self.dicDatasource objectForKey:OrderParamTypePark]) {
+        NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"];
+        [self parkListRequestWithParkid:arr[1]];
+    }
+//    [self parkListRequestWithParkid:@"20"];
 }
 
 - (void)setupView
