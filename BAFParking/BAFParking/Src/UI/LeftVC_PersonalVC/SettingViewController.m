@@ -14,6 +14,7 @@
 #define SettingTableViewCellIdentifier  @"SettingTableViewCellIdentifier"
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UIButton *quitButton;
 @property (weak, nonatomic) IBOutlet UITableView *mytableview;
 @property (nonatomic, strong) NSArray *settingListArr;
 @end
@@ -23,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.settingListArr = @[@"用户协议",@"关于我们",@"帮助说明"];
+    self.quitButton.layer.borderColor = [[UIColor colorWithHex:0x3492e9] CGColor];
+    self.quitButton.layer.borderWidth = 0.5;
+    self.mytableview.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    self.mytableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,11 +45,12 @@
 
 - (void)backMethod:(id)sender
 {
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
-        }
-    }
+//    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+//        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
+//            [self.navigationController popToViewController:tempVC animated:YES];
+//        }
+//    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)quitMethod:(id)sender {
     [[BAFUserModelManger sharedInstance] removeUserInfo];

@@ -16,12 +16,14 @@
 #import "BAFBaseNavigationViewController.h"
 #import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 #import <IQKeyboardManager.h>
+#import "SHFGuideViewController.h"
 
 @interface AppDelegate ()<UIApplicationDelegate>
 {
     BMKMapManager* _mapManager;
 }
 @property (nonatomic, strong) MMDrawerController *drawerController;
+@property (nonatomic, strong) SHFGuideViewController *guideVC;
 @end
 
 @implementation AppDelegate
@@ -58,6 +60,12 @@
     
     [WXApi registerApp:@"wxd9b4c7082b53f5b3"];
     
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLaunch"] == nil){
+        [self showGuideVC];
+//        [[NSUserDefaults standardUserDefaults] setObject:@"launched" forKey:@"FirstLaunch"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
+//    
     return YES;
 }
 
@@ -211,6 +219,14 @@
 {
     return UIInterfaceOrientationMaskPortrait;
     //只支持这一个方向(正常的方向)
+}
+
+- (void)showGuideVC
+{
+    self.guideVC = [[SHFGuideViewController alloc] init];
+    [self.guideVC.view setFrame:[UIScreen mainScreen].bounds];
+    
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.guideVC.view];
 }
 
 @end

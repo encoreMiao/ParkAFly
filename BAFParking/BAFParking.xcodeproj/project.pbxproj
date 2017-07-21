@@ -101,6 +101,12 @@
 		00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E0F8991EF022220095AA06 /* MoreServicesTableViewCell.xib */; };
 		00E3B2F41EB4BDEC00A4FF73 /* LLBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F31EB4BDEC00A4FF73 /* LLBaseRequest.m */; };
 		00E3B2F71EB4BE6900A4FF73 /* LLErrorOfRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3B2F61EB4BE6900A4FF73 /* LLErrorOfRequest.m */; };
+		00F55B891F217BA50044209A /* SHFGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F55B871F217BA50044209A /* SHFGuideViewController.m */; };
+		00F55B8A1F217BA50044209A /* SHFGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F55B881F217BA50044209A /* SHFGuideViewController.xib */; };
+		00F55B981F217DF60044209A /* image1_750.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00F55B941F217DF60044209A /* image1_750.jpg */; };
+		00F55B991F217DF60044209A /* image3_750.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00F55B951F217DF60044209A /* image3_750.jpg */; };
+		00F55B9A1F217DF60044209A /* imge2_750.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00F55B961F217DF60044209A /* imge2_750.jpg */; };
+		00F55B9B1F217DF60044209A /* imge_welcome.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00F55B971F217DF60044209A /* imge_welcome.jpg */; };
 		3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */; };
 		8D3498021F07C301009D723C /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498001F07C301009D723C /* CommentViewController.m */; };
 		8D3498031F07C301009D723C /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498011F07C301009D723C /* CommentViewController.xib */; };
@@ -396,6 +402,13 @@
 		00E3B2F61EB4BE6900A4FF73 /* LLErrorOfRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLErrorOfRequest.m; sourceTree = "<group>"; };
 		00E3B2F91EB4C10B00A4FF73 /* BAFDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAFDefine.h; sourceTree = "<group>"; };
 		00E3B2FA1EB4C2A400A4FF73 /* IUCallBackInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUCallBackInterface.h; sourceTree = "<group>"; };
+		00F55B861F217BA50044209A /* SHFGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHFGuideViewController.h; sourceTree = "<group>"; };
+		00F55B871F217BA50044209A /* SHFGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHFGuideViewController.m; sourceTree = "<group>"; };
+		00F55B881F217BA50044209A /* SHFGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHFGuideViewController.xib; sourceTree = "<group>"; };
+		00F55B941F217DF60044209A /* image1_750.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1_750.jpg; sourceTree = "<group>"; };
+		00F55B951F217DF60044209A /* image3_750.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3_750.jpg; sourceTree = "<group>"; };
+		00F55B961F217DF60044209A /* imge2_750.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imge2_750.jpg; sourceTree = "<group>"; };
+		00F55B971F217DF60044209A /* imge_welcome.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imge_welcome.jpg; sourceTree = "<group>"; };
 		3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAFParking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.release.xcconfig"; sourceTree = "<group>"; };
 		8D3497FF1F07C301009D723C /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
@@ -816,6 +829,9 @@
 				8D575E911EF6CFFC0061474D /* PersonalEditViewController.h */,
 				8D575E921EF6CFFC0061474D /* PersonalEditViewController.m */,
 				8D575E931EF6CFFC0061474D /* PersonalEditViewController.xib */,
+				00F55B861F217BA50044209A /* SHFGuideViewController.h */,
+				00F55B871F217BA50044209A /* SHFGuideViewController.m */,
+				00F55B881F217BA50044209A /* SHFGuideViewController.xib */,
 			);
 			path = LeftVC_PersonalVC;
 			sourceTree = "<group>";
@@ -902,6 +918,7 @@
 		005E85C31E97924600115CAD /* BAFParking */ = {
 			isa = PBXGroup;
 			children = (
+				00F55B931F217DF60044209A /* welcomeimage */,
 				005E85C71E97924600115CAD /* AppDelegate.h */,
 				005E85C81E97924600115CAD /* AppDelegate.m */,
 				005E85CA1E97924600115CAD /* ViewController.h */,
@@ -1195,6 +1212,17 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		00F55B931F217DF60044209A /* welcomeimage */ = {
+			isa = PBXGroup;
+			children = (
+				00F55B941F217DF60044209A /* image1_750.jpg */,
+				00F55B951F217DF60044209A /* image3_750.jpg */,
+				00F55B961F217DF60044209A /* imge2_750.jpg */,
+				00F55B971F217DF60044209A /* imge_welcome.jpg */,
+			);
+			path = welcomeimage;
+			sourceTree = "<group>";
+		};
 		32E8DC519911CD6021F56D1A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1410,6 +1438,7 @@
 			files = (
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
+				00F55B9B1F217DF60044209A /* imge_welcome.jpg in Resources */,
 				8D3498081F08FC07009D723C /* CommentCollectionViewCell.xib in Resources */,
 				8D56DD381F127248000E3D99 /* OrderDetailImageTableViewCell.xib in Resources */,
 				8D575E8B1EF6BA0A0061474D /* SettingTableViewCell.xib in Resources */,
@@ -1447,10 +1476,13 @@
 				8D575E4D1EF4F70B0061474D /* CompanyAccountViewController.xib in Resources */,
 				00214B381ECFDAC100FF6FDE /* Info.plist in Resources */,
 				8D575E431EF4F6A70061474D /* CouponViewController.xib in Resources */,
+				00F55B9A1F217DF60044209A /* imge2_750.jpg in Resources */,
+				00F55B991F217DF60044209A /* image3_750.jpg in Resources */,
 				005E85D41E97924600115CAD /* LaunchScreen.storyboard in Resources */,
 				0001CDF21ED08135000889CE /* BAFLoginViewController.xib in Resources */,
 				0020933C1EDBDBDE00C26176 /* BAFOrderViewController.xib in Resources */,
 				002093421EDBE6FC00C26176 /* OrderTableViewCell.xib in Resources */,
+				00F55B8A1F217BA50044209A /* SHFGuideViewController.xib in Resources */,
 				8D575E601EF516A20061474D /* CombineNewRightsViewController.xib in Resources */,
 				00214B201ECFD0D500FF6FDE /* Assets.xcassets in Resources */,
 				005E85CF1E97924600115CAD /* Main.storyboard in Resources */,
@@ -1459,6 +1491,7 @@
 				0001CDD21ED05158000889CE /* BAFLeftViewController.xib in Resources */,
 				00E0F8961EF020710095AA06 /* BAFMoreServicesViewController.xib in Resources */,
 				8D575E481EF4F6F30061474D /* PersonalAccountViewController.xib in Resources */,
+				00F55B981F217DF60044209A /* image1_750.jpg in Resources */,
 				8DBAE0AF1F108099003ACFAB /* OrderDetailViewController.xib in Resources */,
 				8D575E6F1EF68A340061474D /* CardRechargeCollectionViewCell.xib in Resources */,
 				8DBAE0C31F108E56003ACFAB /* ParkCommetnTableViewCell.xib in Resources */,
@@ -1552,6 +1585,7 @@
 				0001CDCC1ED05130000889CE /* BAFCenterViewController.m in Sources */,
 				0022A22A1EB027EE00A920D6 /* NSString+BAFUrlEncodingAdditions.m in Sources */,
 				00E0F89A1EF022220095AA06 /* MoreServicesTableViewCell.m in Sources */,
+				00F55B891F217BA50044209A /* SHFGuideViewController.m in Sources */,
 				8D575E331EF4F2BD0061474D /* OrderListViewController.m in Sources */,
 				0001CDE71ED060DF000889CE /* DYMBannerVC.m in Sources */,
 				007A79FC1EB6C4C50070406B /* DevelopEnvironment.m in Sources */,

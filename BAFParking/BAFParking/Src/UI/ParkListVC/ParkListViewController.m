@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 @interface ParkListViewController ()<UITableViewDelegate,UITableViewDataSource,PopViewControllerDelegate,ParkListTableViewCellDelegate>
 @property (nonatomic, weak) IBOutlet  UITableView *mainTableView;
+@property (nonatomic, strong) NSString *currentCityID;
+@property (nonatomic, strong) NSString *currentCityTitle;
 @property (nonatomic, strong) NSMutableArray<BAFCityInfo *>        *cityArr;
 @property (nonatomic, strong) NSMutableArray<BAFParkInfo *>        *parkArr;
 @end
@@ -39,6 +41,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [super viewDidLoad];
     self.cityArr = [NSMutableArray array];
     self.parkArr = [NSMutableArray array];
+    self.currentCityID = nil;
+    self.currentCityTitle = nil;
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
@@ -60,10 +64,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         [self parkListRequestWithCityId:tempCityId[1]];
     }else{
-        if (self.type == kParkListViewControllerTypeShow) {
-            [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+        if (self.currentCityTitle &&self.currentCityID) {
+            if (self.type == kParkListViewControllerTypeShow) {
+                [self setNavigationRightButtonWithText:self.currentCityTitle method:@selector(rightBtnClicked:)];
+            }
+            [self parkListRequestWithCityId:self.currentCityID];//城市默认北京
+        }else{
+            if (self.type == kParkListViewControllerTypeShow) {
+                [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+            }
+            [self parkListRequestWithCityId:@"1"];//城市默认北京
         }
-        [self parkListRequestWithCityId:@"1"];//城市默认北京
+        
+        
     }
     
 }
@@ -219,6 +232,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             DLog(@"当前选择城市%@",currentCity.title);
             [self setNavigationRightButtonWithText:currentCity.title method:@selector(rightBtnClicked:)];
             [self parkListRequestWithCityId:currentCity.id];
+            self.currentCityID = currentCity.id;
+            self.currentCityTitle = currentCity.title;
         }
             break;
         default:

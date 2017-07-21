@@ -40,11 +40,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     UIView *feedBackImageView = nil;
     feedBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 15, screenWidth-40, 120)];
-    feedBackImageView.backgroundColor = HexRGB(kBAFLineGrayColor);
+    feedBackImageView.backgroundColor = HexRGB(0xf5f5f5);
     [self.view addSubview:feedBackImageView];
     
     _fTextView = [[GCPlaceholderTextView alloc] initWithFrame:CGRectMake(25,15+15 ,screenWidth-50,120-15)];
-    _fTextView.backgroundColor = [UIColor clearColor];
+    _fTextView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
     _fTextView.delegate = self;
     _fTextView.font = [UIFont systemFontOfSize:14.0f];
     _fTextView.placeholder = @"请留下您的意见或建议，以便我们更好的为您提供服务！如意见被采纳，工作人员将联系您并赠送一张50元停车券";
@@ -63,6 +63,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.view.backgroundColor = HexRGB(0xffffff);
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];

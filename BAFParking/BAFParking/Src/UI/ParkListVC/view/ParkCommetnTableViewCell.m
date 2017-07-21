@@ -81,6 +81,7 @@
         self.star5.image = [UIImage imageNamed:@"parking_xiangq_star2"];
     }
     
+    self.timeLabel.text = _commentInfo.create_time;
     
     
 }

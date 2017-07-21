@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingViewController">
             <connections>
                 <outlet property="mytableview" destination="ILJ-Ox-POX" id="R8l-O0-BL4"/>
+                <outlet property="quitButton" destination="O1V-l1-bIB" id="FLw-BU-Ry0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
