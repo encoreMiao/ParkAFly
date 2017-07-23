@@ -15,5 +15,5 @@ typedef NS_ENUM(NSInteger,CardRechargeCollectionViewCellType)
 };
 
 @interface CardRechargeCollectionViewCell : UICollectionViewCell
-@property (nonatomic, assign) CardRechargeCollectionViewCellType type;
+@property (weak, nonatomic) IBOutlet UITextField *inputTF;
 @end

@@ -24,19 +24,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卡号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohZ-d9-u0E">
-                    <rect key="frame" x="20" y="27" width="60" height="18"/>
+                    <rect key="frame" x="20" y="27" width="50" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="tDn-SO-YDe"/>
+                        <constraint firstAttribute="width" constant="50" id="tDn-SO-YDe"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTP-qR-VZp">
-                    <rect key="frame" x="89" y="15" width="266" height="42"/>
+                    <rect key="frame" x="79" y="15" width="276" height="42"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入卡号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="alb-b0-B8u">
-                            <rect key="frame" x="10" y="0.0" width="256" height="42"/>
+                            <rect key="frame" x="10" y="0.0" width="266" height="42"/>
                             <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
@@ -52,19 +52,19 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1M-x1-Fcw">
-                    <rect key="frame" x="20" y="84" width="60" height="18"/>
+                    <rect key="frame" x="20" y="84" width="50" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="hBq-Zm-xmN"/>
+                        <constraint firstAttribute="width" constant="50" id="hBq-Zm-xmN"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6S-Fh-v5d">
-                    <rect key="frame" x="89" y="72" width="266" height="42"/>
+                    <rect key="frame" x="79" y="72" width="276" height="42"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wLL-PE-yZx">
-                            <rect key="frame" x="10" y="0.0" width="256" height="42"/>
+                            <rect key="frame" x="10" y="0.0" width="266" height="42"/>
                             <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>

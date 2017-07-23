@@ -19,6 +19,9 @@ typedef NS_ENUM(NSInteger,PopViewControllerType){
     kPopViewControllerTypeCompany,//通行人数
     kPopViewControllerTypeTipsshow,//费用明细
     kPopViewControllerTypeTcCard,//权益卡列表
+    
+    kPopViewControllerTypeSelecColor,//选择颜色
+    kPopViewControllerTypeSelecSex,//选择性别
 };
 
 @protocol PopViewControllerDelegate <NSObject>

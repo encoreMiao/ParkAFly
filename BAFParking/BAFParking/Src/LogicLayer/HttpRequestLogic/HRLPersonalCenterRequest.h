@@ -10,5 +10,4 @@
 #import "HRLPersonalCenterInterface.h"
 
 @interface HRLPersonalCenterRequest : LLBaseRequest<HRLPersonalCenterInterface>
-
 @end

@@ -54,6 +54,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor colorWithHex:0xffffff];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     

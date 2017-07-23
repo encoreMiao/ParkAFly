@@ -26,22 +26,22 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uba-Dj-nGO">
-                        <rect key="frame" x="20" y="63" width="80" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="20" y="65" width="80" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_order_more" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-cw-YgO">
-                        <rect key="frame" x="467" y="63.5" width="20" height="20"/>
+                        <rect key="frame" x="467" y="68.5" width="20" height="10"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="DWt-Bs-FJ7"/>
-                            <constraint firstAttribute="height" constant="20" id="Sgr-Yl-uZ8"/>
+                            <constraint firstAttribute="height" constant="10" id="Sgr-Yl-uZ8"/>
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ve2-Ta-LDM">
                         <rect key="frame" x="110" y="0.0" width="357" height="147"/>
-                        <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
                             <outlet property="delegate" destination="H2p-sc-9uM" id="bKP-sf-FKG"/>

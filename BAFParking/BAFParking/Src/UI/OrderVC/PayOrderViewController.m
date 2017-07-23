@@ -41,6 +41,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 @property (strong, nonatomic) NSDictionary *feeDic;
 
+@property (strong, nonatomic) BAFCouponInfo *selectCouponinfo;
+
 @end
 
 @implementation PayOrderViewController
@@ -52,6 +54,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.tcCard = [NSMutableArray  array];
     self.dicDataSource = [NSMutableDictionary dictionary];
     self.feeDic = [NSDictionary dictionary];
+    self.selectCouponinfo = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,6 +144,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (indexPath.row == 1) {
         CouponViewController  *vc = [[CouponViewController alloc]init];
         vc.type = kCouponViewControllerTypeUse;
+        vc.handler = ^(BAFCouponInfo *couponinfo){
+            self.selectCouponinfo = couponinfo;
+        };
+        if (self.selectCouponinfo) {
+            vc.selectCouponInfo = self.selectCouponinfo;
+        }
         vc.orderId = [self.orderDic objectForKey:@"id"];
         [self.navigationController pushViewController:vc animated:YES];
     }

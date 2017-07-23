@@ -255,6 +255,8 @@
 - (void)rechargeOrderRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param;
 
 
+- (void)rechargeSignRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread param:(NSDictionary *)param;
+
 
 /**
  api/pay/recharge_notify_url

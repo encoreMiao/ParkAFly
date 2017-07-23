@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, PersonalEditTableViewCellType)
 };
 
 @interface PersonalEditTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UITextField *inputTF;
 - (void)setTitle:(NSString *)title detail:(NSString *)detail type:(PersonalEditTableViewCellType)type;
 - (void)updateDetail:(NSString *)detail;
 - (void)updateImage:(UIImage *)image;

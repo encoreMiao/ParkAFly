@@ -140,6 +140,28 @@
             self.detailLabel.hidden = YES;
         }
             break;
+        case kPopViewControllerTypeSelecSex:
+        {
+            height = arr.count*40+44;
+            if (height>320) {
+                height = 320;
+            }
+            self.popTitleLabel.text = @"请选择性别";
+            self.tableView.hidden = NO;
+            self.detailLabel.hidden = YES;
+        }
+            break;
+        case kPopViewControllerTypeSelecColor:
+        {
+            height = arr.count*40+44;
+            if (height>320) {
+                height = 320;
+            }
+            self.popTitleLabel.text = @"请选择车辆颜色";
+            self.tableView.hidden = NO;
+            self.detailLabel.hidden = YES;
+        }
+            break;
         case kPopViewControllerTypeGoTime:
         case kPopViewControllerTypeBackTime:
         {
@@ -231,6 +253,42 @@
         }
             break;
         case kPopViewControllerTypeCompany:
+        {
+            static NSString *CellIdentifier = @"commonTableViewCell";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+            }
+            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
+            if (self.selectedIndex == indexPath) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            return cell;
+        }
+            break;
+        case kPopViewControllerTypeSelecColor:
+        {
+            static NSString *CellIdentifier = @"commonTableViewCell";
+            UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+            }
+            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
+            if (self.selectedIndex == indexPath) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            return cell;
+        }
+            break;
+        case kPopViewControllerTypeSelecSex:
         {
             static NSString *CellIdentifier = @"commonTableViewCell";
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -412,6 +470,24 @@
             if (!self.selectedIndex) {
                 CSToastStyle *toastStyle = [CSToastManager sharedStyle];
                 [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择同行人数" duration:2.5 position:@(100) style:toastStyle];
+                return;
+            }
+        }
+            break;
+        case kPopViewControllerTypeSelecSex:
+        {
+            if (!self.selectedIndex) {
+                CSToastStyle *toastStyle = [CSToastManager sharedStyle];
+                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择性别" duration:2.5 position:@(100) style:toastStyle];
+                return;
+            }
+        }
+            break;
+        case kPopViewControllerTypeSelecColor:
+        {
+            if (!self.selectedIndex) {
+                CSToastStyle *toastStyle = [CSToastManager sharedStyle];
+                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择车辆颜色" duration:2.5 position:@(100) style:toastStyle];
                 return;
             }
         }

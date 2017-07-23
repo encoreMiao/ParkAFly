@@ -26,5 +26,4 @@
 @property (nonatomic, strong) NSString *remark;
 @property (nonatomic, strong) NSString *status;
 
-
 @end

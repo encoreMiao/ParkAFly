@@ -14,6 +14,7 @@
 #import "AccountDetailViewController.h"
 #import "BAFChargeInfo.h"
 #import "WXApi.h"
+#import "BAFChargePageInfo.h"
 
 #define WechatCollectionViewCellIdentifier        @"WechatCollectionViewCellIdentifier"
 #define CardRechargeCollectionViewCellIdentifier  @"CardRechargeCollectionViewCellIdentifier"
@@ -23,6 +24,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexPersonalAccount,//账户充值列表
     kRequestNumberIndexRechargeCard,//卡密充值
     kRequestNumberIndexRechargeCreate,//获取个人账户微信充值订单编号
+    kRequestNumberIndexClientInfo,//获取个人信息
+    kRequestNumberIndexRechargeSign,//订单签名
 };
 
 typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
@@ -45,6 +48,10 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 
 @property (nonatomic, strong) NSMutableArray *rechargeList;//账户余额充值列表
 @property (nonatomic, strong) BAFChargeInfo *currentChargeInfo;//当前选择的微信充值info
+@property (nonatomic, strong) NSIndexPath  *selectedIndexpath;//选择的充值方式
+@property (nonatomic, strong) NSString *orderID;
+
+@property (nonatomic, strong) NSMutableArray *activityList;//活动列表
 @end
 
 
@@ -70,6 +77,12 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     [self.mycollectionview registerNib:[UINib nibWithNibName:@"ChargeFooterCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
     
     self.rechargeList = [NSMutableArray array];
+    self.activityList = [NSMutableArray array];
+    
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    self.balanceTable.text = [NSString stringWithFormat:@"%@元",userInfo.account];
+    
+    self.selectedIndexpath = nil;
     
 }
 
@@ -169,26 +182,36 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     
     if (self.type == kPersonalAccountViewControllerTypeWechat) {
         WechatCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:WechatCollectionViewCellIdentifier forIndexPath:indexPath];
-        if (indexPath.row == 0) {
+        BAFChargeInfo *chargeInfo = self.rechargeList[indexPath.row];
+        BOOL isAcitvity = NO;
+        if (self.activityList.count >0) {
+            for (BAFChargePageActivityInfo *obj in self.activityList) {
+                if ([obj.id isEqualToString:chargeInfo.activityid]) {
+                    isAcitvity = YES;
+                }
+            }
+        }
+        if (isAcitvity) {
             cell.type = kWechatCollectionViewCellTypeActivity;
         }else{
             cell.type = kWechatCollectionViewCellTypeCommon;
         }
-        [cell setChargeInfo:self.rechargeList[indexPath.row]];
-//        id item = [self itemAtIndexPath:indexPath];
-//        BOOL isCollected = [self isCollectedItemAtIndexPath:indexPath];
-//        self.configureCellBlock(cell, item, isCollected);
+        [cell setChargeInfo:chargeInfo];
+        
+        if (self.selectedIndexpath&&self.selectedIndexpath == indexPath) {
+            [cell setCollectionSelected:YES];
+        }else{
+            [cell setCollectionSelected:NO];
+        }
+        
         return cell;
     }else{
         CardRechargeCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CardRechargeCollectionViewCellIdentifier forIndexPath:indexPath];
         if (indexPath.row == 0) {
-            cell.type = kCardRechargeCollectionViewCellTypeCardNumber;
+            cell.inputTF.placeholder = @"请输入卡号";
         }else{
-            cell.type = kCardRechargeCollectionViewCellTypeCode;
+            cell.inputTF.placeholder = @"请输入密码";
         }
-//        id item = [self itemAtIndexPath:indexPath];
-//        BOOL isCollected = [self isCollectedItemAtIndexPath:indexPath];
-//        self.configureCellBlock(cell, item, isCollected);
         return cell;
     }
 }
@@ -212,10 +235,14 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 {
     if (self.type == kPersonalAccountViewControllerTypeWechat) {
         WechatCollectionViewCell *cell = (WechatCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        if (self.selectedIndexpath) {
+            WechatCollectionViewCell *cell1 = (WechatCollectionViewCell *)[collectionView cellForItemAtIndexPath:self.selectedIndexpath];
+            [cell1 setCollectionSelected:NO];
+        }
+        self.selectedIndexpath = indexPath;
         [cell setCollectionSelected:YES];
         self.currentChargeInfo = cell.chargeInfo;
     }
-    
     
     
 //    //    if (collectionV.cellIndexPath.section == 0) {
@@ -239,7 +266,11 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 {
     if (self.type == kPersonalAccountViewControllerTypeWechat) {
         //先进行为空的判断
-        
+        if (!self.selectedIndexpath) {
+            [self showTipsInView:self.view message:@"请选择充值金额" offset:self.view.center.x+100];
+            return;
+        }
+        //充money赠送giftmoney支付金额pay_money
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
         [param setObject:userInfo.clientid forKey:@"client_id"];
@@ -249,8 +280,19 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
         [param setObject:self.currentChargeInfo.activityid forKey:@"activityid"];
         [param setObject:self.currentChargeInfo.discount forKey:@"recharge_discount"];
         [self createWeChatOderWithParam:param];
+        
     }else{
-        [self rechargeCarRequestWithCardNumber:@"" cardPassword:@""];
+        NSIndexPath *indexpath1 = [NSIndexPath indexPathForItem:0 inSection:0];
+        NSIndexPath *indexpath2 = [NSIndexPath indexPathForItem:1 inSection:0];
+        CardRechargeCollectionViewCell *cell1 = (CardRechargeCollectionViewCell *)[self.mycollectionview cellForItemAtIndexPath:indexpath1];
+        CardRechargeCollectionViewCell *cell2 = (CardRechargeCollectionViewCell *)[self.mycollectionview cellForItemAtIndexPath:indexpath2];
+        if (cell1.inputTF.text.length<=0) {
+            [self showTipsInView:self.view message:@"请输入卡号" offset:self.view.center.x+100];
+        }else if (cell2.inputTF.text.length<=0){
+            [self showTipsInView:self.view message:@"请输入密码" offset:self.view.center.x+100];
+        }else{
+            [self rechargeCarRequestWithCardNumber:cell1.inputTF.text cardPassword:cell2.inputTF.text];
+        }
     }
 }
 
@@ -258,7 +300,6 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 #pragma mark - REQUEST
 - (void)rechargeCarRequestWithCardNumber:(NSString *)cardNum cardPassword:(NSString *)cardPass
 {
-    //    /pay/recharge_card
     id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
     BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
     [personCenterReq rechargeCardRequestWithNumberIndex:kRequestNumberIndexRechargeCard delegte:self client_id:userInfo.clientid card_no:cardNum  card_password:cardPass];
@@ -272,9 +313,21 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 }
 - (void)createWeChatOderWithParam:(NSDictionary *)dic
 {
-//    rechargeOrderRequestWithNumberIndex
     id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
     [personCenterReq rechargeOrderRequestWithNumberIndex:kRequestNumberIndexRechargeCreate delegte:self param:dic];
+}
+
+- (void)getAccountInfo
+{
+    id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    [personCenterReq clientInfoRequestWithNumberIndex:kRequestNumberIndexClientInfo delegte:self client_id:userInfo.clientid];
+}
+
+- (void)createSignWithParam:(NSDictionary *)dic
+{
+    id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    [personCenterReq rechargeSignRequestWithNumberIndex:kRequestNumberIndexRechargeSign delegte:self param:dic];
 }
 
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
@@ -290,11 +343,12 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
             if (self.rechargeList) {
                 [self.rechargeList removeAllObjects];
             }
+            self.activityList = [NSMutableArray arrayWithArray:[BAFChargePageActivityInfo mj_objectArrayWithKeyValuesArray:[[obj objectForKey:@"data"] objectForKey:@"activity"]]];
+            
             self.rechargeList = [NSMutableArray arrayWithArray:[BAFChargeInfo mj_objectArrayWithKeyValuesArray:[[obj objectForKey:@"data"] objectForKey:@"rechargelist"]]];
             [self.mycollectionview reloadData];
-
         }else{
-            //
+            
         }
     }
     
@@ -304,9 +358,11 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            
+            [self showTipsInView:self.view message:@"绑定成功" offset:self.view.center.x+100];
+            [self getAccountInfo];
         }else{
-            
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            [self getAccountInfo];
         }
     }
     
@@ -315,9 +371,37 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            //订单编号是 data = 011201707090042751;
+            self.orderID = [obj objectForKey:@"data"];
+            NSMutableDictionary *param = [NSMutableDictionary dictionary];
+            [param setObject:self.orderID forKey:@"out_trade_no"];
+            [param setObject:self.currentChargeInfo.pay_money forKey:@"total_fee"];
+            [self createSignWithParam:param];
         }else{
             
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexClientInfo) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            BAFUserInfo *userInfo = [BAFUserInfo mj_objectWithKeyValues:[obj objectForKey:@"data"]];
+            [[BAFUserModelManger sharedInstance]saveUserInfo:userInfo];
+            self.balanceTable.text = [NSString stringWithFormat:@"%.0f元",userInfo.account.integerValue/100.0f];
+        }else{
+            
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexRechargeSign) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            [self getwechatpay:[obj objectForKey:@"data"]];
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
     }
 }
@@ -328,6 +412,21 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 }
 
 
+- (void)getwechatpay:(NSDictionary *)dict
+{
+//    NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+    //调起微信支付
+    PayReq* req             = [[PayReq alloc] init];
+    req.partnerId           = [dict objectForKey:@"partnerid"];
+    req.prepayId            = [dict objectForKey:@"prepayid"];
+    req.nonceStr            = [dict objectForKey:@"noncestr"];
+//    req.timeStamp           = stamp.intValue;
+    req.package             = [dict objectForKey:@"package"];
+    req.sign                = [dict objectForKey:@"sign"];
+    [WXApi sendReq:req];
+    //日志输出
+    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+}
 
 
 

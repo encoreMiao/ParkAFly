@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFEquityAccountInfo.h"
+@class RightsTableViewCell;
+
+@protocol RightsTableViewCellDelegate <NSObject>
+- (void)useNotiActionDelegate:(RightsTableViewCell *)cell;
+@end
 
 @interface RightsTableViewCell : UITableViewCell
-
+@property (nonatomic, retain) BAFEquityAccountInfo *accountInfo;
+@property (nonatomic, assign) id<RightsTableViewCellDelegate> delegate;
 @end

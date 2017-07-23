@@ -14,4 +14,5 @@
 
 @interface PersonalCenterHeaderView : UIView
 @property (nonatomic, weak) id<PersonalCenterHeaderViewDelegate> delegate;
+- (void)setupView;
 @end

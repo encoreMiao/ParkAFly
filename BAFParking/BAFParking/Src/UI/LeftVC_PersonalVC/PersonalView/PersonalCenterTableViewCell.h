@@ -23,5 +23,6 @@ typedef NS_ENUM(NSInteger,PersonalCenterCellType){
 };
 
 @interface PersonalCenterTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *cellSubTitle;
 - (void)setPersonalCenterCellWithDic:(NSDictionary *)dic;
 @end

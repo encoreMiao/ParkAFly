@@ -39,6 +39,12 @@
     [self setupView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.headerView setupView];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -51,9 +57,8 @@
     [self.headerView setFrame:CGRectMake(0, 0, screenWidth,195)];
     self.personalTableView.tableHeaderView = self.headerView;
     self.headerView.delegate =self;
+    [self.headerView setupView];
     
-//    [self.footerView setFrame:CGRectMake(0, 0, screenWidth, 55)];
-//    self.personalTableView.tableFooterView = self.footerView;
     [self.footerView setFrame:CGRectMake(0, screenHeight-55, screenWidth, 55)];
     [self.view addSubview:self.footerView];
     self.footerView.delegate = self;
@@ -82,7 +87,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PersonalCenterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([PersonalCenterTableViewCell class])];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setPersonalCenterCellWithDic:self.personalCellArray[indexPath.row]];
+    if (indexPath.row == 0) {
+        BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+        cell.cellSubTitle.text = [NSString stringWithFormat:@"%.0f元",userInfo.account.integerValue/100.0f];
+    }
     return cell;
 }
 
@@ -96,10 +106,13 @@
     UIViewController *vc ;
     switch (indexPath.row) {
         case 0:
+            
             vc = [[PersonalAccountViewController alloc]init];
             break;
         case 1:
-            vc = [[CompanyAccountViewController alloc]init];
+//            vc = [[CompanyAccountViewController alloc]init];
+            [self showTipsInView:self.view message:@"暂时未开通" offset:self.view.center.x+100];
+            return;
             break;
         case 2:
             vc = [[RightsViewController alloc]init];
@@ -122,13 +135,14 @@
             vc = [[FeedBackViewController alloc]init];
             break;
     }
-    UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
-    [nav pushViewController:vc animated:NO];
-    //当我们push成功之后，关闭我们的抽屉
     [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
         //设置打开抽屉模式为MMOpenDrawerGestureModeNone，也就是没有任何效果。
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     }];
+
+    UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+    [nav pushViewController:vc animated:NO];
+    //当我们push成功之后，关闭我们的抽屉
 }
 
 #pragma mark - PersonalCenterFooterViewTapDelegate

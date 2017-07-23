@@ -55,8 +55,8 @@
             self.selectButton.hidden = NO;
             break;
         case kCouponViewControllerTypeUseCell2:
-            self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg"];
-            self.selectButton.hidden = NO;
+            self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg4"];
+            self.selectButton.hidden = YES;
             break;
             
         default:
@@ -81,12 +81,72 @@
 - (void)setCouponInfo:(BAFCouponInfo *)couponInfo
 {
     _couponInfo = couponInfo;
+    NSString *str = [NSString stringWithFormat:@"%@\n%@",couponInfo.number,couponInfo.info];
+    NSMutableAttributedString *mutAttributeStr = [[NSMutableAttributedString alloc]initWithString:str];
+    [mutAttributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[str rangeOfString:couponInfo.number]];
+    [mutAttributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:16]} range:[str rangeOfString:couponInfo.info]];
+    self.couponDetailLabel.attributedText = mutAttributeStr;
     
+    
+    NSString *price = [NSString stringWithFormat:@"%ld",couponInfo.price.integerValue/100];
+    NSString *pricestr = [NSString stringWithFormat:@"¥%@",price];
+    NSMutableAttributedString *mutpriceStr = [[NSMutableAttributedString alloc]initWithString:pricestr];
+    [mutpriceStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:21]} range:[pricestr rangeOfString:@"¥"]];
+    [mutpriceStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:43]} range:[pricestr rangeOfString:price]];
+    self.couponLabel.attributedText = mutpriceStr;
+    
+    
+    self.validateDateLabel.text = [NSString stringWithFormat:@"有效期：%@ - %@",[self getTimeWithTime:couponInfo.starttime],[self getTimeWithTime:couponInfo.endtime]];
+    
+}
+
+-(NSString*)getTimeWithTime:(NSString *)timeStr
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateStyle:NSDateFormatterMediumStyle];
+//    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"yyyy.MM.dd HH:mm"];
+    
+    NSTimeInterval interval = timeStr.doubleValue;
+    // 毫秒值转化为秒
+    
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSString* dateString = [formatter stringFromDate:date];
+    return dateString;
 }
 
 - (IBAction)detailAction:(id)sender
 {
-    
+    if ([self.delegate respondsToSelector:@selector(detailActionDelegate:)]) {
+        [self.delegate detailActionDelegate:self];
+    }
+}
+
+- (void)setCouponSelected:(BOOL)selected
+{
+    switch (_type) {
+        case kCouponViewControllerTypeUseCell1:
+        {
+             self.selectButton.selected = selected;
+        }
+            break;
+        default:
+            break;
+    }
+}
+- (IBAction)selectAction:(id)sender {
+    switch (_type) {
+        case kCouponViewControllerTypeUseCell1:
+        {
+            if ([self.delegate respondsToSelector:@selector(selectActionDelegate:)]) {
+                [self.delegate selectActionDelegate:self];
+            }
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end

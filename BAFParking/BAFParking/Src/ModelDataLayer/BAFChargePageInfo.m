@@ -9,5 +9,10 @@
 #import "BAFChargePageInfo.h"
 
 @implementation BAFChargePageInfo
+@end
 
+@implementation BAFChargePageRechargeInfo
+@end
+
+@implementation BAFChargePageActivityInfo
 @end

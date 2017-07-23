@@ -32,6 +32,7 @@ static BAFUserModelManger * instance = nil;
     _userInfo = userInfo;
     NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:userInfo];
     [[NSUserDefaults standardUserDefaults] setObject:archiveData forKey:kBAFUserInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BAFUserInfo *)userInfo

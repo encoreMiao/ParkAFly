@@ -7,19 +7,45 @@
 //
 
 #import "PersonalCenterHeaderView.h"
+#import "UIImageView+WebCache.h"
 
 @interface PersonalCenterHeaderView()<UIGestureRecognizerDelegate>
-
+@property (weak, nonatomic) IBOutlet UIImageView *headerImage;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *carNumberLabel;
+@property (weak, nonatomic) IBOutlet UIButton *levelButton;
 @end
 
 @implementation PersonalCenterHeaderView
 - (instancetype)init{
     self = [super init];
     if (self) {
-        
+        [self setupView];
     }
-    DLog(@"init");
     return self;
+}
+
+- (void)setupView{
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    self.phoneNumberLabel.text = userInfo.ctel;
+    self.carNumberLabel.text = userInfo.carnum;
+    NSString *headerStr = [NSString stringWithFormat:@"%@%@",Server_Url, userInfo.avatar];//
+    //没有的时候用/Public/Weixin/images/four/logo02.png有的时候为/Uploads/user/7296/20170504/avatar_7296611
+    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:headerStr] placeholderImage:[UIImage imageNamed:@"leftbar_info_img"]];
+    
+    switch (userInfo.level_id.integerValue) {
+        case 1:
+            [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member1_img"] forState:UIControlStateNormal];
+            break;
+        case 2:
+            [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member2_img"] forState:UIControlStateNormal];
+            break;
+        case 3:
+            [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member3_img"] forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
 }
 
 //代码创建的会调用该方法
@@ -27,6 +53,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self setupView];
         [self addGestureOnBGView];
     }
     DLog(@"initWithFrame");
@@ -57,5 +84,7 @@
         [self.delegate PersonalCenterHeaderViewDidTapWithGesture:gesture];
     }
 }
+
+
 
 @end

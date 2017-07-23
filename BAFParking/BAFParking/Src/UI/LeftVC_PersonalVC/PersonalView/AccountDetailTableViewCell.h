@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAFClientPatrInfo.h"
 
 @interface AccountDetailTableViewCell : UITableViewCell
-
+@property (nonatomic, retain) BAFClientPatrInfo *patrInfo;
 @end

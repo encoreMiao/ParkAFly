@@ -11,7 +11,6 @@
 @interface PersonalCenterTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *cellImg;
 @property (weak, nonatomic) IBOutlet UILabel *cellTitle;
-@property (weak, nonatomic) IBOutlet UILabel *cellSubTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowIcon;
 
 @property (assign, nonatomic) PersonalCenterCellType type;

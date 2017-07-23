@@ -50,7 +50,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zh3-MN-y4W">
-                        <rect key="frame" x="201" y="104" width="54" height="28"/>
+                        <rect key="frame" x="193" y="104" width="70" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="lyw-9L-HYR"/>
+                            <constraint firstAttribute="height" constant="20" id="nzy-1Z-g5e"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="使用说明">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -91,6 +95,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="detailbutton" destination="zh3-MN-y4W" id="pXI-rH-A3Y"/>
                 <outlet property="rightsNumber" destination="YuU-r8-nIP" id="CKF-Tu-Nzp"/>
                 <outlet property="rightsStatus" destination="FCw-Cu-hMI" id="ZJo-OE-gNt"/>
                 <outlet property="rightsTitle" destination="A92-R8-xUf" id="B0F-iz-xYb"/>

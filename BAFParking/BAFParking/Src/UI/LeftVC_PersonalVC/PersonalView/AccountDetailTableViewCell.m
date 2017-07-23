@@ -8,6 +8,12 @@
 
 #import "AccountDetailTableViewCell.h"
 
+@interface AccountDetailTableViewCell()
+@property (weak, nonatomic) IBOutlet UILabel *accountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@end
+
 @implementation AccountDetailTableViewCell
 
 - (void)awakeFromNib {
@@ -17,8 +23,49 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
+
+- (void)setPatrInfo:(BAFClientPatrInfo *)patrInfo
+{
+    _patrInfo = patrInfo;
+    self.accountLabel.text = [NSString stringWithFormat:@"%0.f",patrInfo.money.integerValue/100.0f];
+    
+//    "status": "3" //类型:1.充值;2.充值活动;3.账户余额支付;4.充值卡充值
+    switch (patrInfo.status.integerValue) {
+        case 1:
+            self.typeLabel.text = @"充值";
+            break;
+        case 2:
+            self.typeLabel.text = @"充值活动";
+            break;
+        case 3:
+            self.typeLabel.text = @"账户余额支付";
+            break;
+        case 4:
+            self.typeLabel.text = @"充值卡充值";
+            break;
+        default:
+            break;
+    }
+    
+    self.timeLabel.text = [self getTimeWithTime:patrInfo.time];
+}
+
+-(NSString*)getTimeWithTime:(NSString *)timeStr
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    //    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    //    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"yyyy.MM.dd HH:mm"];
+    
+    NSTimeInterval interval = timeStr.doubleValue;
+    // 毫秒值转化为秒
+    
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSString* dateString = [formatter stringFromDate:date];
+    return dateString;
+}
+
 
 @end

@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 #define CouponTableViewCellIdentifier   @"CouponTableViewCellIdentifier"
 
-@interface CouponViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface CouponViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CouponTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *SelectView;
 @property (weak, nonatomic) IBOutlet UIButton *useBtn;//可用
 @property (weak, nonatomic) IBOutlet UIButton *notUseBtn;;//不可用
@@ -118,30 +118,16 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"CouponTableViewCell" owner:nil options:nil] firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.delegate = self;
+        cell.delegate = self;
     }
     cell.type = self.cellType;
-//    switch (self.type) {
-//        case kCouponViewControllerTypeCommon:
-//            //查看
-//            
-//            break;
-//        case kCouponViewControllerTypeUse:
-//            //使用
-//            break;
-//        default:
-//            break;
-//    }
+    cell.couponInfo = [self.couponArr objectAtIndex:indexPath.row];
     
-    
-//    cell.titleLabel.text = [self.payListArr objectAtIndex:indexPath.row];
-//    if (indexPath.row == 0) {
-//        if ([self.dicDataSource objectForKey:PayOrderTcCard]) {
-//            cell.moneyLabel.text = [self.dicDataSource objectForKey:PayOrderTcCard];
-//            [cell setShow:YES];
-//        }
-//    }
-    
+    if (kCouponViewControllerTypeUse==self.type &&self.cellType == kCouponViewControllerTypeUseCell1) {
+        if (self.selectCouponInfo&&[cell.couponInfo.number isEqualToString:self.selectCouponInfo.number] ) {
+            [cell setCouponSelected:YES];
+        }
+    }
     return cell;
 }
 
@@ -149,21 +135,47 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"优惠券选择");
-//    if (indexPath.row == 0) {
-//        if (self.tcCard.count == 0) {
-//            [self showTipsInView:self.view message:@"当前未绑定权益卡" offset:self.view.center.x+100];
-//            return;
-//        }
-//        [self popTcCard];
-//    }
-//    
-//    if (indexPath.row == 1) {
-//        CouponViewController  *vc = [[CouponViewController alloc]init];
-//        vc.type = kCouponViewControllerTypeUse;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
+    CouponTableViewCell *cell = [self.myTableview cellForRowAtIndexPath:indexPath];
+    if (cell.type == kCouponViewControllerTypeUseCell1) {
+        NSLog(@"优惠券选择");
+        if (self.handler) {
+            self.handler(cell.couponInfo);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
+#pragma mark - CouponTableViewCellDelegate
+- (void)detailActionDelegate:(CouponTableViewCell *)cell
+{
+    NSLog(@"优惠券说明说明");
+}
+
+- (void)selectActionDelegate:(CouponTableViewCell *)cell
+{
+    if (cell.type == kCouponViewControllerTypeUseCell1) {
+        NSLog(@"优惠券选择");
+        if (self.handler) {
+            self.handler(cell.couponInfo);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+//    if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+//        [_dicDatasource removeObjectForKey:OrderParamTypePark];
+//    }
+//    NSString *str = [NSString stringWithFormat:@"%@&%@",cell.parkinfo.map_title,cell.parkinfo.map_id];
+//    [_dicDatasource setObject:str forKey:OrderParamTypePark];
+//    [_dicDatasource setObject:cell.parkinfo.map_charge.first_day_price forKey:OrderParamTypeParkFeeFirstDay];
+//    [_dicDatasource setObject:cell.parkinfo.map_charge.market_price forKey:OrderParamTypeParkFeeDay];
+//    [_dicDatasource setObject:cell.parkinfo.map_address forKey:OrderParamTypeParkLocation];
+//    
+//    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+//        if ([tempVC isKindOfClass:[BAFOrderViewController class]]) {
+//            ((BAFOrderViewController *)tempVC).dicDatasource = _dicDatasource;
+//            [self.navigationController popToViewController:tempVC animated:YES];
+//        }
+//    }
+}
 #pragma mark - action
 - (IBAction)segementSelect:(id)sender {
     UIButton *button = (UIButton *)sender;
@@ -286,7 +298,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else{
             [self.couponArr removeAllObjects];
             if ([[obj objectForKey:@"code"] integerValue] == 3) {
-                 [self showTipsInView:self.view message:@"当前没有优惠券" offset:self.view.center.x+100];
+//                 [self showTipsInView:self.view message:@"当前没有优惠券" offset:self.view.center.x+100];
             }
         }
         [self.myTableview  reloadData];
@@ -298,14 +310,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self.couponArr removeAllObjects];
+            NSArray *arr = [[obj objectForKey:@"data"] objectForKey:@"coupon_list"];
+            [self.useBtn setTitle:[NSString stringWithFormat:@"可用(%ld)",arr.count] forState:UIControlStateNormal];
+            NSArray *arrNotuse = [[obj objectForKey:@"data"] objectForKey:@"disable_coupons_list"];
+            [self.notUseBtn setTitle:[NSString stringWithFormat:@"不可用(%ld)",arrNotuse.count] forState:UIControlStateNormal];
             if (self.cellType == kCouponViewControllerTypeUseCell1) {
-                self.couponArr = [NSMutableArray arrayWithArray:[[obj objectForKey:@"data"] objectForKey:@"coupon_list"]];
+                self.couponArr = [NSMutableArray arrayWithArray:[BAFCouponInfo mj_objectArrayWithKeyValuesArray:[[obj objectForKey:@"data"] objectForKey:@"coupon_list"]]];
             }else{
-                self.couponArr = [NSMutableArray arrayWithArray:[[obj objectForKey:@"data"] objectForKey:@"disable_coupons_list"]];
+                self.couponArr = [NSMutableArray arrayWithArray:[BAFCouponInfo mj_objectArrayWithKeyValuesArray:[[obj objectForKey:@"data"] objectForKey:@"disable_coupons_list"]]];
             }
         }else{
             [self.couponArr removeAllObjects];
-            [self showTipsInView:self.view message:@"当前没有优惠券" offset:self.view.center.x+100];
         }
         [self.myTableview  reloadData];
     }

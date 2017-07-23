@@ -10,10 +10,16 @@
 #import "BAFCenterViewController.h"
 #import "RightsTableViewCell.h"
 #import "CombineNewRightsViewController.h"
+#import "HRLPersonalCenterInterface.h"
+#import "BAFEquityAccountInfo.h"
 
 #define RightsTableViewCellIdentifier   @"RightsTableViewCellIdentifier"
 
-@interface RightsViewController ()<UITableViewDelegate, UITableViewDataSource>
+typedef NS_ENUM(NSInteger,RequestNumberIndex){
+    kRequestNumberAccountList,
+};
+
+@interface RightsViewController ()<UITableViewDelegate, UITableViewDataSource,RightsTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myRightsTableView;
 @property (strong, nonatomic) NSMutableArray *rightsArr;
 @end
@@ -37,6 +43,8 @@
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"权益账户"];
      [self setNavigationRightButtonWithText:@"绑定新卡" method:@selector(rightBtnClicked:)];
+    
+    [self equityAccountListRequest];
 }
 
 - (void)backMethod:(id)sender
@@ -64,8 +72,7 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return self.rightsArr.count;
-    return 3;
+    return self.rightsArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,20 +81,48 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"RightsTableViewCell" owner:nil options:nil] firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.delegate = self;
+        cell.delegate = self;
     }
-//    BAFParkInfo *parkinfo = ((BAFParkInfo *)[self.parkArr objectAtIndex:indexPath.row]);
-//    switch (self.type) {
-//        case kParkListViewControllerTypeShow:
-//            [cell setParkinfo:parkinfo withtype:kParkListTableViewCellTypeShow];
-//            break;
-//        case kParkListViewControllerTypeSelect:
-//            [cell setParkinfo:parkinfo withtype:kParkListTableViewCellTypeSelect];
-//            break;
-//        default:
-//            break;
-//    }
+    BAFEquityAccountInfo  *accountinfo = ((BAFEquityAccountInfo *)[self.rightsArr objectAtIndex:indexPath.row]);
+    cell.accountInfo = accountinfo;
     return cell;
 }
 
+#pragma mark - RightsTableViewCellDelegate
+- (void)useNotiActionDelegate:(RightsTableViewCell *)cell
+{
+    NSLog(@"权益账户使用说明");
+}
+
+#pragma mark - REQUEST
+- (void)equityAccountListRequest
+{
+    id <HRLPersonalCenterInterface> equityAccountList = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    [equityAccountList equityAccountListRequestWithNumberIndex:kRequestNumberAccountList delegte:self bind_phone:userInfo.ctel];
+}
+
+-(void)onJobComplete:(int)aRequestID Object:(id)obj
+{
+    if (aRequestID == kRequestNumberAccountList) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            //城市列表
+            if (self.rightsArr) {
+                [self.rightsArr removeAllObjects];
+            }
+            self.rightsArr = [BAFEquityAccountInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
+            [self.myRightsTableView reloadData];
+        }else{
+            
+        }
+    }
+}
+
+-(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
+{
+    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
+}
 @end

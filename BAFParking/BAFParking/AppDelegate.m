@@ -17,6 +17,7 @@
 #import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 #import <IQKeyboardManager.h>
 #import "SHFGuideViewController.h"
+#import "ParkListTableViewCell.h"
 
 @interface AppDelegate ()<UIApplicationDelegate>
 {
@@ -65,7 +66,6 @@
 //        [[NSUserDefaults standardUserDefaults] setObject:@"launched" forKey:@"FirstLaunch"];
 //        [[NSUserDefaults standardUserDefaults] synchronize];
 //    }
-//    
     return YES;
 }
 
@@ -225,8 +225,7 @@
 {
     self.guideVC = [[SHFGuideViewController alloc] init];
     [self.guideVC.view setFrame:[UIScreen mainScreen].bounds];
-    
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self.guideVC.view];
+    [self.drawerController.view addSubview:self.guideVC.view];
 }
 
 @end

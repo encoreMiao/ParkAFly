@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BAFCouponInfo.h"
+@class CouponTableViewCell;
 typedef NS_ENUM(NSInteger,CouponTableViewCellType){
     //查看优惠券
     kCouponTableViewCellTypeCommonCell1,//未使用
@@ -19,7 +20,14 @@ typedef NS_ENUM(NSInteger,CouponTableViewCellType){
     kCouponViewControllerTypeUseCell2,//不可用
 };
 
+@protocol CouponTableViewCellDelegate <NSObject>
+- (void)detailActionDelegate:(CouponTableViewCell *)cell;
+- (void)selectActionDelegate:(CouponTableViewCell *)cell;
+@end
+
 @interface CouponTableViewCell : UITableViewCell
 @property (assign, nonatomic) CouponTableViewCellType type;
 @property (strong, nonatomic) BAFCouponInfo *couponInfo;
+@property (assign, nonatomic) id<CouponTableViewCellDelegate> delegate;
+- (void)setCouponSelected:(BOOL)selected;
 @end

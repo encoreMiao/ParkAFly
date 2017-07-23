@@ -56,6 +56,11 @@
                     <constraint firstItem="ub2-MD-7d8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xnp-8r-SS4"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="accountLabel" destination="ub2-MD-7d8" id="F1G-ed-1ML"/>
+                <outlet property="timeLabel" destination="YuR-Ia-q8X" id="cpu-MA-fjy"/>
+                <outlet property="typeLabel" destination="aCy-RA-osI" id="LZK-d0-8o8"/>
+            </connections>
             <point key="canvasLocation" x="61.5" y="60"/>
         </tableViewCell>
     </objects>

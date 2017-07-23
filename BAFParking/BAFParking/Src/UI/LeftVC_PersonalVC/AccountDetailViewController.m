@@ -12,6 +12,7 @@
 #import "HRLPersonalCenterInterface.h"
 #import "HRLogicManager.h"
 #import "BAFUserModelManger.h"
+#import "BAFClientPatrInfo.h"
 
 #define AccountDetailTableViewCellIdentifier @"AccountDetailTableViewCellIdentifier"
 
@@ -43,6 +44,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"充值明细"];
+    
+    [self clientDetailRequest];
 }
 
 - (void)backMethod:(id)sender
@@ -63,7 +66,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.rechargeListArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,19 +75,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"AccountDetailTableViewCell" owner:nil options:nil] firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //        cell.delegate = self;
     }
-    //    BAFParkInfo *parkinfo = ((BAFParkInfo *)[self.parkArr objectAtIndex:indexPath.row]);
-    //    switch (self.type) {
-    //        case kParkListViewControllerTypeShow:
-    //            [cell setParkinfo:parkinfo withtype:kParkListTableViewCellTypeShow];
-    //            break;
-    //        case kParkListViewControllerTypeSelect:
-    //            [cell setParkinfo:parkinfo withtype:kParkListTableViewCellTypeSelect];
-    //            break;
-    //        default:
-    //            break;
-    //    }
+    
+    BAFClientPatrInfo *rechargeInfo = ((BAFClientPatrInfo *)[self.rechargeListArr objectAtIndex:indexPath.row]);
+    cell.patrInfo = rechargeInfo;
     return cell;
 }
 
@@ -92,7 +86,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)clientDetailRequest
 {
     //账户余额交易记录
-//    /api/client/client_patr
     id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
     BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
     [personCenterReq clientPatrRequestWithNumberIndex:kRequestNumberIndexClientPatr delegte:self client_id:userInfo.clientid];
@@ -108,10 +101,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             //账户余额交易记录
-            //data对应一个列表 BAFClientPatrInfo
-            
+            if (self.rechargeListArr) {
+                [self.rechargeListArr removeAllObjects];
+            }
+            self.rechargeListArr = [BAFClientPatrInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
+            [self.mainTableView reloadData];
         }else{
-            //
+            
         }
     }
 
