@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="CommetHeaderCollectionReusableView">
             <rect key="frame" x="0.0" y="0.0" width="381" height="237"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
@@ -143,6 +143,15 @@
                 <constraint firstItem="AfJ-B1-AGe" firstAttribute="centerY" secondItem="xqO-uf-uUC" secondAttribute="centerY" id="w2J-Yf-Lmh"/>
                 <constraint firstItem="zbR-tb-DEp" firstAttribute="leading" secondItem="dEw-bL-osL" secondAttribute="trailing" constant="15" id="zsX-Ls-9XT"/>
             </constraints>
+            <connections>
+                <outlet property="parkNameLabel" destination="OZp-5q-zUh" id="Ovd-lY-Xvd"/>
+                <outlet property="parkTimeLabel" destination="r56-AE-wci" id="iDu-gy-4M2"/>
+                <outlet property="star1" destination="Mkz-zU-4VR" id="7R2-kb-Gzp"/>
+                <outlet property="star2" destination="AfJ-B1-AGe" id="AKD-So-WGX"/>
+                <outlet property="star3" destination="xqO-uf-uUC" id="wbE-gG-pwd"/>
+                <outlet property="star4" destination="dEw-bL-osL" id="Rd4-xm-9h7"/>
+                <outlet property="star5" destination="zbR-tb-DEp" id="AQa-5l-bmN"/>
+            </connections>
             <point key="canvasLocation" x="40.5" y="136.5"/>
         </collectionReusableView>
     </objects>

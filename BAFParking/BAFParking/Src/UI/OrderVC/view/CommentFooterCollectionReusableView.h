@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GCPlaceholderTextView.h"
+
+typedef void (^CommetFeaderHandler) (NSString *commentRemark);
 
 @interface CommentFooterCollectionReusableView : UICollectionReusableView
-
+@property (nonatomic, copy) CommetFeaderHandler handler;
 @end

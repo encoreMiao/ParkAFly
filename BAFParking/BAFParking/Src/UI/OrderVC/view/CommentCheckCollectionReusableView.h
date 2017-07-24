@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CommentCheckCollectionReusableView : UICollectionReusableView
-
+@property (strong, nonatomic) NSDictionary *orderDic;
 @end

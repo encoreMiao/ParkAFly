@@ -12,14 +12,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.layer.borderColor = [[UIColor colorWithHex:0x3492e9] CGColor];
+    self.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.layer.borderWidth = 1.0f;
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+}
+
+- (void)setCommentCollectionSelected:(BOOL)commentSelected
+{
+    if (commentSelected) {
+        self.layer.borderColor = [[UIColor colorWithHex:0x3492e9] CGColor];
+    }else{
+        self.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+    }
 }
 
 @end

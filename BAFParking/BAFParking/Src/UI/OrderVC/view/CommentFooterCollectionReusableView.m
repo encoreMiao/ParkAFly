@@ -7,7 +7,6 @@
 //
 
 #import "CommentFooterCollectionReusableView.h"
-#import "GCPlaceholderTextView.h"
 #import "UIImage+Color.h"
 
 @interface CommentFooterCollectionReusableView ()<UITextViewDelegate>
@@ -19,7 +18,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         _fTextView = [[GCPlaceholderTextView alloc] initWithFrame:CGRectMake(20,30 ,screenWidth-40,120)];
-        _fTextView.backgroundColor = [UIColor clearColor];
+        _fTextView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
         _fTextView.delegate = self;
         _fTextView.font = [UIFont systemFontOfSize:14.0f];
         _fTextView.placeholder = @"请输入您本次泊车过程中的感受或意见，可以为其他泊友参考...";
@@ -30,14 +29,11 @@
         commentBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
         [commentBtn setTitle:@"发表评价" forState:UIControlStateNormal];
         [commentBtn setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateNormal];//88 92 100
-        [commentBtn setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateHighlighted];
         [commentBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0x3492e9]] forState:UIControlStateNormal];
-        [commentBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0x3492e9]] forState:UIControlStateHighlighted];
+        [commentBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0x3492e0]] forState:UIControlStateHighlighted];
         commentBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [commentBtn setBackgroundColor:[UIColor clearColor]];
-        commentBtn.clipsToBounds = YES;
         commentBtn.layer.cornerRadius = 3.0f;
-        commentBtn.layer.borderWidth = 1.0f;
         [commentBtn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
         commentBtn.frame = CGRectMake(20, CGRectGetMaxY(self.fTextView.frame)+30, screenWidth-40, 40);
         [self addSubview:commentBtn];
@@ -48,5 +44,13 @@
 - (void)commentAction:(UIButton *)btn
 {
     NSLog(@"发表评价");
+    if (self.handler) {
+        if (self.fTextView.text.length>0) {
+            self.handler(self.fTextView.text);
+        }else{
+            self.handler(nil);
+        }
+        
+    }
 }
 @end

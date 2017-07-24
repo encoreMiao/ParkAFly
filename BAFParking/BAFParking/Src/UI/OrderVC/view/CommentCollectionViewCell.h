@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface CommentCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+- (void)setCommentCollectionSelected:(BOOL)commentSelected;
 @end

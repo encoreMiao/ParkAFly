@@ -15,11 +15,14 @@
 #import "UIImage+Color.h"
 #import "CommentFooterCollectionReusableView.h"
 #import "CommentCheckCollectionReusableView.h"
+#import <IQKeyboardManager.h>
 
 #define CommentViewControllerCellIdentifier        @"CommentViewControllerCellIdentifier"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCommentTag,
+    kRequestNumberIndexComment,
+    kRequestNumberIndexViewComment,
 };
 
 @interface CommentViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextViewDelegate>
@@ -30,6 +33,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (nonatomic, strong) CommentFooterCollectionReusableView *commentfooterView;
 @property (nonatomic ,strong) CommentCheckCollectionReusableView *commentcheckfooterView;
 @property (nonatomic, strong) UIView *checkfooterView;
+
+@property (nonatomic, strong) NSIndexPath *selectIndexPath;
+
+@property (nonatomic, assign) NSInteger score;
+
+@property (nonatomic, strong) NSMutableDictionary *commentDic;
 @end
 
 @implementation CommentViewController
@@ -38,6 +47,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [super viewDidLoad];
     
     self.commentTagArr = [NSMutableArray array];
+    self.commentDic = [NSMutableDictionary dictionary];
     
     self.mycollectionview = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layoutForComment];
     _mycollectionview.scrollEnabled = NO;
@@ -49,11 +59,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     [self.mycollectionview registerNib:[UINib nibWithNibName:@"CommetHeaderCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180);
+    
+    self.selectIndexPath = nil;
+    self.score = 5;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     self.view.backgroundColor = [UIColor colorWithHex:0xffffff];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
@@ -73,17 +87,29 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.commentcheckfooterView = [[CommentCheckCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentCheckCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
         self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, 220);
+    
+        [self viewCommentRequestWithOrderId:[self.orderDic objectForKey:@"id"]];
     }
 }
 
-- (void)commentAction:(UIButton *)btn
+- (void)commentAction:(NSString *)remark
 {
-    NSLog(@"发表评价");
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:[NSString stringWithFormat:@"%ld",self.score] forKey:@"score"];
+    [params setValue:[self.commentTagArr objectAtIndex:self.selectIndexPath.row] forKey:@"tags"];
+    
+    [params setValue:[self.orderDic objectForKey:@"id"] forKey:@"order_id"];
+    [params setValue:[self.orderDic objectForKey:@"park_id"] forKey:@"park_id"];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    [params setValue:userInfo.ctel forKey:@"contact_phone"];
+    if (remark) {
+        [params setValue:remark forKey:@"remark"];
+    }
+    [self commentRequestWithParams:params];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)backMethod:(id)sender
@@ -98,7 +124,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [orderReq commentListRequestWithNumberIndex:kRequestNumberIndexCommentTag delegte:self];
 }
 
+- (void)commentRequestWithParams:(NSDictionary *)params
+{
+    id <HRLOrderInterface> commentReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [commentReq createCommentRequestWithNumberIndex:kRequestNumberIndexComment delegte:self param:params];
+}
 
+- (void)viewCommentRequestWithOrderId:(NSString *)orderid
+{
+    id <HRLOrderInterface> commentReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [commentReq viewCommentRequestWithNumberIndex:kRequestNumberIndexViewComment delegte:self order_id:orderid];
+}
 #pragma mark - REQUEST
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
 {
@@ -113,17 +149,28 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     
-//    if (aRequestID == kRequestNumberIndexCancelOrder) {
-//        if ([obj isKindOfClass:[NSDictionary class]]) {
-//            obj = (NSDictionary *)obj;
-//        }
-//        if ([[obj objectForKey:@"code"] integerValue]== 200) {
-//            [self orderListRequestWithOrderstatus:@"1"];
-//            [self showTipsInView:self.view message:@"取消成功" offset:self.view.center.x+100];
-//        }else{
-//            [self showTipsInView:self.view message:@"取消失败" offset:self.view.center.x+100];
-//        }
-//    }
+    if (aRequestID == kRequestNumberIndexComment) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            [self showTipsInView:self.view message:@"评价成功" offset:self.view.center.x+100];
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexViewComment) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            self.orderDic = [obj objectForKey:@"data"];
+            [self.mycollectionview  reloadData];
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+        }
+    }
 }
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
@@ -144,6 +191,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     CommentCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CommentViewControllerCellIdentifier forIndexPath:indexPath];
     cell.commentLabel.text = [self.commentTagArr objectAtIndex:indexPath.row];
+    
 //    if (indexPath.row == 0) {
 //        cell.type = kWechatCollectionViewCellTypeActivity;
 //    }else{
@@ -155,19 +203,50 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CommentCollectionViewCell *cell = (CommentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setCommentCollectionSelected:YES];
+    self.selectIndexPath = indexPath;
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CommentCollectionViewCell *cell = (CommentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setCommentCollectionSelected:NO];
+}
+
 // 设置headerView和footerView的
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *reusableView = nil;
     if (kind == UICollectionElementKindSectionHeader)
     {
-        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        CommetHeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        headerView.orderDic = self.orderDic;
+        headerView.handler = ^(NSInteger score){
+            self.score = score;
+        };
+        if (self.type == kCommentViewControllerTypeComment) {
+            headerView.type = CommetHeaderCollectionReusableViewTypeComment;
+        }else if (self.type == kCommentViewControllerTypeCommentCheck){
+            headerView.type = CommetHeaderCollectionReusableViewTypeCheck;
+        }
         reusableView = headerView;
     }
     if (kind == UICollectionElementKindSectionFooter)
     {
-        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
-        reusableView = headerView;
+        if (self.type == kCommentViewControllerTypeComment) {
+            CommentFooterCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
+            footerView.handler = ^(NSString *remark){
+                [self commentAction:remark];
+            };
+            reusableView = footerView;
+        }else{
+            CommentCheckCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
+            footerView.orderDic = self.commentDic;
+            reusableView = footerView;
+        }
+        
     }
     return reusableView;
 }
@@ -187,5 +266,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     return _layoutForComment;
 }
+
+
 
 @end
