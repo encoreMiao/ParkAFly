@@ -122,4 +122,29 @@
     self.parkNameLabel.text = [_orderDic objectForKey:@"park_name"];
     self.parkTimeLabel.text = [_orderDic objectForKey:@"actual_park_time"];
 }
+
+- (void)setScore:(NSString *)score
+{
+    _score = score;
+    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+    if(score.integerValue == 1){
+        self.star2.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star3.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    }else if(score.integerValue == 2){
+        self.star3.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    }else if(score.integerValue == 3){
+        self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    }else if(score.integerValue == 4){
+        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    }
+}
 @end

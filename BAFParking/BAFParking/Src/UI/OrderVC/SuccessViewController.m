@@ -10,7 +10,7 @@
 #import "BAFCenterViewController.h"
 #import "BAFOrderViewController.h"
 #import "BAFOrderServiceViewController.h"
-#import "OrderDetailViewController.h"
+#import "OrderListViewController.h"
 
 @interface SuccessViewController ()
 @property (nonatomic, strong) IBOutlet UIView *successView;
@@ -41,8 +41,8 @@
 }
 
 - (IBAction)checkOrder:(id)sender {
-    OrderDetailViewController *vc = [[OrderDetailViewController alloc]init];
-    vc.orderIdStr = self.orderId;
+    OrderListViewController *vc = [[OrderListViewController alloc]init];
+//    vc.orderIdStr = self.orderId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

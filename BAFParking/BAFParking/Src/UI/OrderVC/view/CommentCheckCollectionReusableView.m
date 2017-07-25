@@ -11,6 +11,8 @@
 @interface CommentCheckCollectionReusableView()
 @property (nonatomic, strong) UILabel *commentLabel;
 @property (nonatomic, strong) UILabel *backCommentLabel;
+@property (nonatomic, strong) UIView  *lineView;
+@property (nonatomic, strong) UIView  *bgView;
 @end
 
 @implementation CommentCheckCollectionReusableView
@@ -28,44 +30,47 @@
     
 }
 
-- (void)setOrderDic:(NSDictionary *)orderDic
+- (void)setCommentDic:(NSDictionary *)commentDic
 {
-    _orderDic = orderDic;
+    _commentDic = commentDic;
     
-    
-    if ([_orderDic objectForKey:@"remark"]&&![[_orderDic objectForKey:@"remark"] isEqual:[NSNull null]]) {
-        self.commentLabel.text = [_orderDic objectForKey:@"remark"];
+    CGFloat height = 30;
+    if ([commentDic objectForKey:@"remark"]&&![[commentDic objectForKey:@"remark"] isEqual:[NSNull null]]) {
+        self.commentLabel.text = [commentDic objectForKey:@"remark"];
         
         CGSize titleSize = [self.commentLabel.text boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
                                              options:NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}
-                            //                                                         ,NSParagraphStyleAttributeName:paragraphStyle}
                                              context:nil].size;
-        self.commentLabel.frame = CGRectMake(20, 30, screenWidth-40,titleSize.height);
+        self.commentLabel.frame = CGRectMake(20, height, screenWidth-40,titleSize.height);
+        height += titleSize.height+20;
     }
+    self.lineView.frame = CGRectMake(0, height, screenWidth, 0.5);
+    height += 0.5;
     
-    if ([_orderDic objectForKey:@"reply"]&&![[_orderDic objectForKey:@"reply"] isEqual:[NSNull null]]) {
-        self.backCommentLabel.text = [_orderDic objectForKey:@"reply"];
+    if ([commentDic objectForKey:@"reply"]&&![[commentDic objectForKey:@"reply"] isEqual:[NSNull null]]) {
+        self.backCommentLabel.text = [commentDic objectForKey:@"reply"];
         CGSize titleSize = [self.backCommentLabel.text boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
                                                                 options:NSStringDrawingUsesLineFragmentOrigin
                                                              attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}
-                            //                                                         ,NSParagraphStyleAttributeName:paragraphStyle}
                                                                 context:nil].size;
-        self.backCommentLabel.frame = CGRectMake(20, CGRectGetMaxY(self.commentLabel.frame)+20, screenWidth-40,titleSize.height);
-        
+        self.backCommentLabel.frame = CGRectMake(20, height+20, screenWidth-40,titleSize.height);
+        height += titleSize.height+20;
     }
 }
 
 - (void)setupView
 {
     [self addSubview:self.commentLabel];
+    [self addSubview:self.lineView];
+//    [self addSubview:self.bgView];
     [self addSubview:self.backCommentLabel];
 }
 
 - (UILabel *)commentLabel
 {
     if (!_commentLabel) {
-        _commentLabel = [[UILabel alloc]init];
+        _commentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _commentLabel.textColor = [UIColor colorWithHex:0x323232];
         _commentLabel.backgroundColor = [UIColor clearColor];
         _commentLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -76,7 +81,7 @@
 - (UILabel *)backCommentLabel
 {
     if (!_backCommentLabel) {
-        _backCommentLabel = [[UILabel alloc]init];
+        _backCommentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _backCommentLabel.textColor = [UIColor colorWithHex:0x323232];
         _backCommentLabel.backgroundColor = [UIColor clearColor];
         _backCommentLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -84,4 +89,21 @@
     return _backCommentLabel;
 }
 
+- (UIView *)lineView
+{
+    if (!_lineView) {
+        _lineView = [[UILabel alloc]initWithFrame:CGRectZero];
+        _lineView.backgroundColor = [UIColor colorWithHex:0xc9c9c9];
+    }
+    return _lineView;
+}
+
+- (UIView *)bgView
+{
+    if (!_bgView) {
+        _bgView = [[UILabel alloc]initWithFrame:CGRectZero];
+        _bgView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    }
+    return _bgView;
+}
 @end

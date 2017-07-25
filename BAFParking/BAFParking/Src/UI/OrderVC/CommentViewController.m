@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            self.orderDic = [obj objectForKey:@"data"];
+            self.commentDic = [obj objectForKey:@"data"];
             [self.mycollectionview  reloadData];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
@@ -191,6 +191,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     CommentCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CommentViewControllerCellIdentifier forIndexPath:indexPath];
     cell.commentLabel.text = [self.commentTagArr objectAtIndex:indexPath.row];
+    if (self.type == kCommentViewControllerTypeCommentCheck) {
+        cell.userInteractionEnabled = NO;
+    }else if (self.type == kCommentViewControllerTypeComment){
+        cell.userInteractionEnabled = YES;
+    }
+    
+    
     
 //    if (indexPath.row == 0) {
 //        cell.type = kWechatCollectionViewCellTypeActivity;
@@ -222,13 +229,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (kind == UICollectionElementKindSectionHeader)
     {
         CommetHeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-        headerView.orderDic = self.orderDic;
         headerView.handler = ^(NSInteger score){
             self.score = score;
         };
+        headerView.orderDic = self.orderDic;
         if (self.type == kCommentViewControllerTypeComment) {
             headerView.type = CommetHeaderCollectionReusableViewTypeComment;
         }else if (self.type == kCommentViewControllerTypeCommentCheck){
+            headerView.score = [self.commentDic objectForKey:@"score"];
             headerView.type = CommetHeaderCollectionReusableViewTypeCheck;
         }
         reusableView = headerView;
@@ -243,7 +251,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             reusableView = footerView;
         }else{
             CommentCheckCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
-            footerView.orderDic = self.commentDic;
+            if (self.commentDic) {
+                footerView.commentDic = self.commentDic;
+            }
             reusableView = footerView;
         }
         

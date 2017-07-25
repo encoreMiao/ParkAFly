@@ -25,5 +25,6 @@ typedef NS_ENUM(NSInteger, CommetHeaderCollectionReusableViewType){
 @property (assign, nonatomic) CommetHeaderCollectionReusableViewType type;
 @property (copy, nonatomic) CommetHeaderHandler handler;
 
-@property (strong, nonatomic) NSDictionary *orderDic;
+@property (strong, nonatomic) NSDictionary  *orderDic;
+@property (strong, nonatomic) NSString      *score;
 @end

@@ -118,17 +118,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self parkAirRequestWithCityId:[self.orderDicForModify objectForKey:@"city_id"]];//城市默认北京
         
         [self orderDetailRequestWithOrdersid:[self.orderDicForModify objectForKey:@"id"]];
-        
-        
-        self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:self.orderDicForModify];
-        [self.mainTableView reloadData];
     }
     
 }
 
 - (void)backMethod:(id)sender
 {
-    [self.navigationController  popToRootViewControllerAnimated:YES];
+//    [self.navigationController  popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)rightBtnClicked:(id)sender
@@ -526,7 +523,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [parkReq getParkByAidRequestWithNumberIndex:kRequestNumberIndexGetParkByAid delegte:self air_id:parkid];
 }
 
-#pragma mark - request
 - (void)orderDetailRequestWithOrdersid:(NSString *)order_id
 {
     //订单详情
@@ -634,7 +630,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             //修改订单
-            
+            [self showTipsInView:self.view message:@"订单修改成功" offset:self.view.center.x+100];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
@@ -647,7 +643,24 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             //订单详情
+            NSDictionary *resultDic = [obj objectForKey:@"data"];
+            self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:self.orderDicForModify];
+            if ([resultDic objectForKey:@"leave_terminal_name"]&&![[resultDic objectForKey:@"leave_terminal_name"] isEqual:[NSNull null]]) {
+                NSString *str = [NSString stringWithFormat:@"%@&%@",[resultDic objectForKey:@"leave_terminal_name"],[resultDic objectForKey:@"leave_terminal_id"]];
+                [self.dicDatasource setObject:str forKey:@"leave_terminal_id"];
+            }
             
+            if ([resultDic objectForKey:@"back_terminal_name"]&&![[resultDic objectForKey:@"back_terminal_name"] isEqual:[NSNull null]]) {
+                NSString *str = [NSString stringWithFormat:@"%@&%@",[resultDic objectForKey:@"back_terminal_name"],[resultDic objectForKey:@"back_terminal_id"]];
+                [self.dicDatasource setObject:str forKey:@"back_terminal_id"];
+            }
+            
+            if ([self.orderDicForModify objectForKey:@"park_name"]&&![[self.orderDicForModify objectForKey:@"park_name"] isEqual:[NSNull null]]) {
+                NSString *str = [NSString stringWithFormat:@"%@&%@",[self.orderDicForModify objectForKey:@"park_name"],[resultDic objectForKey:@"park_id"]];
+                [self.dicDatasource setObject:str forKey:@"park_id"];
+            }
+            
+            [self.mainTableView reloadData];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }

@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDu-et-bxb">
-                        <rect key="frame" x="28" y="20" width="22" height="22"/>
+                        <rect key="frame" x="20" y="20" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="Dck-jd-gOi"/>
                             <constraint firstAttribute="height" constant="22" id="NLV-18-CCp"/>
@@ -31,12 +31,12 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="权益账户" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YG2-nv-L5d">
-                        <rect key="frame" x="60" y="8" width="61.5" height="47.5"/>
+                        <rect key="frame" x="52" y="8" width="61.5" height="47.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="61.5" id="ktf-2C-wWv"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_order_more" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-ep-Tvu">
@@ -47,7 +47,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRA-LR-L3s">
-                        <rect key="frame" x="121.5" y="8" width="247.5" height="47.5"/>
+                        <rect key="frame" x="113.5" y="8" width="255.5" height="47.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -57,11 +57,11 @@
                     <constraint firstItem="GRA-LR-L3s" firstAttribute="leading" secondItem="YG2-nv-L5d" secondAttribute="trailing" id="05I-1v-58b"/>
                     <constraint firstAttribute="bottomMargin" secondItem="YG2-nv-L5d" secondAttribute="bottom" id="GLo-L7-ICq"/>
                     <constraint firstItem="mDu-et-bxb" firstAttribute="centerY" secondItem="YG2-nv-L5d" secondAttribute="centerY" id="Kea-py-nC2"/>
+                    <constraint firstItem="mDu-et-bxb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="NrU-Wc-Zws"/>
                     <constraint firstItem="GRA-LR-L3s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="OWd-oj-PyZ"/>
                     <constraint firstItem="aAK-ep-Tvu" firstAttribute="leading" secondItem="GRA-LR-L3s" secondAttribute="trailing" constant="5" id="W4b-ti-M7D"/>
                     <constraint firstItem="aAK-ep-Tvu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WTP-fT-xy4"/>
                     <constraint firstAttribute="bottomMargin" secondItem="GRA-LR-L3s" secondAttribute="bottom" id="eyM-GM-ayZ"/>
-                    <constraint firstItem="mDu-et-bxb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="lBn-Pe-fyF"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aAK-ep-Tvu" secondAttribute="trailing" constant="10" id="nKL-Hr-WQ4"/>
                     <constraint firstItem="YG2-nv-L5d" firstAttribute="leading" secondItem="mDu-et-bxb" secondAttribute="trailing" constant="10" id="pc7-Ng-ntv"/>
                     <constraint firstItem="YG2-nv-L5d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="xLg-nD-zos"/>

@@ -40,9 +40,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (weak, nonatomic) IBOutlet UILabel *orderFeeLabel;
 
 @property (strong, nonatomic) NSDictionary *feeDic;
+@property (strong, nonatomic) IBOutlet UILabel *totalFeeLabel;
 
 @property (strong, nonatomic) BAFCouponInfo *selectCouponinfo;
 
+@property (weak, nonatomic) IBOutlet  UIButton *detailBtn;
+@property (weak, nonatomic) IBOutlet  UIButton *weixinBtn;
+@property (weak, nonatomic) IBOutlet  UIButton *confirmPayBtn;
+@property (weak, nonatomic) IBOutlet  UIButton *moneyPayBtn;
 @end
 
 @implementation PayOrderViewController
@@ -73,6 +78,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     [self tcCardRequest];
     [self orderFeeRequest];
+    
+    self.confirmPayBtn.hidden = YES;
+    self.weixinBtn.hidden = NO;
+    self.moneyPayBtn.hidden = NO;
 }
 
 - (void)backMethod:(id)sender
