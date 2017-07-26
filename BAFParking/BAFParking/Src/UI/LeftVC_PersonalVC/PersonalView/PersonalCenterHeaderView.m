@@ -21,6 +21,7 @@
     self = [super init];
     if (self) {
         [self setupView];
+        self.carNumberLabel.hidden = YES;
     }
     return self;
 }
@@ -36,12 +37,15 @@
     switch (userInfo.level_id.integerValue) {
         case 1:
             [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member1_img"] forState:UIControlStateNormal];
+            self.carNumberLabel.hidden = YES;
             break;
         case 2:
             [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member2_img"] forState:UIControlStateNormal];
+            self.carNumberLabel.hidden = YES;
             break;
         case 3:
             [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member3_img"] forState:UIControlStateNormal];
+            self.carNumberLabel.hidden = NO;
             break;
         default:
             break;

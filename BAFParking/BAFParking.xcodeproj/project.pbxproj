@@ -120,6 +120,8 @@
 		8D3498221F09FEC7009D723C /* PayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498201F09FEC7009D723C /* PayOrderViewController.xib */; };
 		8D3498261F0A3460009D723C /* PayOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498241F0A3460009D723C /* PayOrderTableViewCell.m */; };
 		8D3498271F0A3460009D723C /* PayOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498251F0A3460009D723C /* PayOrderTableViewCell.xib */; };
+		8D4978541F28CC6400E0F917 /* ParkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4978521F28CC6400E0F917 /* ParkCollectionViewCell.m */; };
+		8D4978551F28CC6400E0F917 /* ParkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4978531F28CC6400E0F917 /* ParkCollectionViewCell.xib */; };
 		8D56DD271F11FB19000E3D99 /* BAFParkCommentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD261F11FB19000E3D99 /* BAFParkCommentInfo.m */; };
 		8D56DD2B1F120AF6000E3D99 /* BAFChargeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56DD2A1F120AF6000E3D99 /* BAFChargeInfo.m */; };
 		8D56DD2D1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D56DD2C1F121603000E3D99 /* ChargeFooterCollectionReusableView.xib */; };
@@ -430,6 +432,9 @@
 		8D3498231F0A3460009D723C /* PayOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOrderTableViewCell.h; sourceTree = "<group>"; };
 		8D3498241F0A3460009D723C /* PayOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOrderTableViewCell.m; sourceTree = "<group>"; };
 		8D3498251F0A3460009D723C /* PayOrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayOrderTableViewCell.xib; sourceTree = "<group>"; };
+		8D4978511F28CC6400E0F917 /* ParkCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkCollectionViewCell.h; sourceTree = "<group>"; };
+		8D4978521F28CC6400E0F917 /* ParkCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkCollectionViewCell.m; sourceTree = "<group>"; };
+		8D4978531F28CC6400E0F917 /* ParkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkCollectionViewCell.xib; sourceTree = "<group>"; };
 		8D56DD251F11FB19000E3D99 /* BAFParkCommentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkCommentInfo.h; sourceTree = "<group>"; };
 		8D56DD261F11FB19000E3D99 /* BAFParkCommentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkCommentInfo.m; sourceTree = "<group>"; };
 		8D56DD291F120AF6000E3D99 /* BAFChargeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFChargeInfo.h; sourceTree = "<group>"; };
@@ -1242,6 +1247,9 @@
 		8D56DD2E1F127197000E3D99 /* OrderDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				8D4978511F28CC6400E0F917 /* ParkCollectionViewCell.h */,
+				8D4978521F28CC6400E0F917 /* ParkCollectionViewCell.m */,
+				8D4978531F28CC6400E0F917 /* ParkCollectionViewCell.xib */,
 				8D56DD2F1F127217000E3D99 /* OrderDetail1TableViewCell.h */,
 				8D56DD301F127217000E3D99 /* OrderDetail1TableViewCell.m */,
 				8D56DD311F127217000E3D99 /* OrderDetail1TableViewCell.xib */,
@@ -1462,6 +1470,7 @@
 				8DBAE0B91F1081DA003ACFAB /* ParkDetail1TableViewCell.xib in Resources */,
 				8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */,
 				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
+				8D4978551F28CC6400E0F917 /* ParkCollectionViewCell.xib in Resources */,
 				8D56DD331F127217000E3D99 /* OrderDetail1TableViewCell.xib in Resources */,
 				8DBAE0BE1F108D30003ACFAB /* ParkDetail2TableViewCell.xib in Resources */,
 				8D575E951EF6CFFC0061474D /* PersonalEditViewController.xib in Resources */,
@@ -1637,6 +1646,7 @@
 				8D6058F31EE42DCD0066289C /* BAFWebViewController.m in Sources */,
 				8D34980C1F08FCF5009D723C /* CommetHeaderCollectionReusableView.m in Sources */,
 				8D575E511EF4F72B0061474D /* RightsViewController.m in Sources */,
+				8D4978541F28CC6400E0F917 /* ParkCollectionViewCell.m in Sources */,
 				8DBAE0BD1F108D30003ACFAB /* ParkDetail2TableViewCell.m in Sources */,
 				0020935F1EDC4FEC00C26176 /* OrderConfirmTableViewCell.m in Sources */,
 				8D575E691EF68A1C0061474D /* WechatCollectionViewCell.m in Sources */,

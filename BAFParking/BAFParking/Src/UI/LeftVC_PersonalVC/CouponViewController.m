@@ -342,8 +342,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 default:
                     break;
             }
+            [self showTipsInView:self.view message:@"兑换成功 " offset:self.view.center.x+100];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"您输入的电子码无效或已被使用，请重新输入" offset:self.view.center.x+100];
         }
     }
 }

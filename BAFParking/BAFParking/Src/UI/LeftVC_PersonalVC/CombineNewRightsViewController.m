@@ -55,11 +55,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[RightsViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)combineMethod
@@ -105,9 +101,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            [self showTipsInView:self.view message:@"保存成功" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"输入的卡号无效" offset:self.view.center.x+100];
+            [self performSelector:@selector(backMethod:) withObject:nil afterDelay:3.0f];
         }else{
-             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+             [self showTipsInView:self.view message:@"绑定成功" offset:self.view.center.x+100];
         }
     }
 }

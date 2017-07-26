@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderDetailImageTableViewCell : UITableViewCell
-
+@property (nonatomic, strong) NSArray *imageArr;
 @end

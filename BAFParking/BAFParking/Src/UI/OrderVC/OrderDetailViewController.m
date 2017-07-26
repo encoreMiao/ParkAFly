@@ -559,9 +559,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if ([self.orderDic objectForKey:@"picture"]) {
                 NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
                 if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    cell.imageArr = [dic objectForKey:@"pick"];
                     return cell;
                 }
                 else  if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    cell.imageArr = [dic objectForKey:@"park"];
                     return cell;
                 }
                 cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
@@ -586,9 +588,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if ([self.orderDic objectForKey:@"picture"]) {
                 NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
                 if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                    cell.imageArr = [dic objectForKey:@"pick"];
                     return cell;
                 }
                 else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                    cell.imageArr = [dic objectForKey:@"park"];
                     return cell;
                 }
                 cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
@@ -628,6 +632,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            /*
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:[obj objectForKey:@"data"]];
+            NSDictionary *dic1 = @{@"park":@[@"1",@"2",@"3",@"4"],
+                                   @"pick":@[@"1",@"2"]};
+            [dic setObject:dic1 forKey:@"picture"];*/
             self.orderDic = [obj objectForKey:@"data"];
             [self configOrderDic:self.orderDic];
         }

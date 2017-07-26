@@ -74,11 +74,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -107,10 +103,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)feedbackRequest
 {
     id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
-//    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
-//    [personCenterReq feedBackRequestWithNumberIndex:kRequestNumberIndexFeedBack delegte:self client_id:userInfo.clientid  content:self.fTextView.text];
     BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
-    [personCenterReq feedBackRequestWithNumberIndex:kRequestNumberIndexFeedBack delegte:self client_id:@"7296"  content:self.fTextView.text];
+    [personCenterReq feedBackRequestWithNumberIndex:kRequestNumberIndexFeedBack delegte:self client_id:userInfo.clientid  content:self.fTextView.text];
 }
 #pragma mark - REQUEST
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
@@ -122,10 +116,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([obj isKindOfClass:[NSDictionary class]]) {
             obj = (NSDictionary *)obj;
             if ([[obj objectForKey:@"code"] integerValue]==200) {
-                [self showTipsInView:self.view message:@"意见反馈成功" offset:self.view.center.x+100];
+                [self showTipsInView:self.view message:@"发表成功，谢谢您的评价" offset:self.view.center.x+100];
+                [self performSelector:@selector(backMethod:) withObject:nil afterDelay:3.0f];
             }
             else{
-
+                [self showTipsInView:self.view message:@"提交失败" offset:self.view.center.x+100];
             }
         }
     }
