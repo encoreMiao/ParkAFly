@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     self.activityList = [NSMutableArray array];
     
     BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
-    self.balanceTable.text = [NSString stringWithFormat:@"%@元",userInfo.account];
+    self.balanceTable.text = [NSString stringWithFormat:@"%.0f元",userInfo.account.integerValue/100.0f];
     
     self.selectedIndexpath = nil;
     

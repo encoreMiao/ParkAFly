@@ -33,6 +33,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (strong, nonatomic) NSMutableDictionary *orderDic;
 @property (strong, nonatomic) NSMutableArray *serviceArr;
 @property (strong, nonatomic) NSMutableArray *operatorArr;
+
+@property (strong, nonatomic) NSString *pickPhone;
+@property (strong, nonatomic) NSString *parkPhone;
 @end
 
 @implementation OrderDetailViewController
@@ -126,7 +129,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSLog(@"%@",indexPath);
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -459,6 +462,24 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
                     [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[totalStr rangeOfString:str]];
                     cell.confirmContentLabel.attributedText = mutStr;
+                    
+                    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                    attch.bounds = CGRectMake(0, 0, 19*0.8, 24*0.8);
+                    NSAttributedString *str1 = [[NSAttributedString alloc]initWithString:@"     "];
+                    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+                    [mutStr appendAttributedString:str1];
+                    [mutStr appendAttributedString:string];
+                    if (indexPath.row == 0) {
+                        attch.image = [UIImage imageNamed:@"btn_map"];
+                        // 用label的attributedText属性来使用富文本
+                        cell.confirmContentLabel.attributedText = mutStr;
+                    }else if(indexPath.row == 4){
+                        if (str.length>10){
+                            attch.image = [UIImage imageNamed:@"btn_phone"];
+                            // 用label的attributedText属性来使用富文本
+                            cell.confirmContentLabel.attributedText = mutStr;
+                        }
+                    }
                 }
             }
         }else{
@@ -512,6 +533,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
                 [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[totalStr rangeOfString:str]];
                 cell.confirmContentLabel.attributedText = mutStr;
+                
+                NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                attch.bounds = CGRectMake(0, 0, 19*0.8, 24*0.8);
+                NSAttributedString *str1 = [[NSAttributedString alloc]initWithString:@"     "];
+                NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+                [mutStr appendAttributedString:str1];
+                [mutStr appendAttributedString:string];
+                if(indexPath.row == 4){
+                    if (str.length>10){
+                        attch.image = [UIImage imageNamed:@"btn_phone"];
+                        // 用label的attributedText属性来使用富文本
+                        cell.confirmContentLabel.attributedText = mutStr;
+                    }
+                }
             }
         }
         cell.confirmContentLabel.numberOfLines = 0;
