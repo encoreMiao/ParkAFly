@@ -141,8 +141,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     CouponTableViewCell *cell = [self.myTableview cellForRowAtIndexPath:indexPath];
     if (cell.type == kCouponViewControllerTypeUseCell1) {
         NSLog(@"优惠券选择");
-        if (self.handler) {
-            self.handler(cell.couponInfo);
+        if ([cell couponSelected]) {
+            if (self.handler) {
+                self.handler(nil);
+            }
+        }else{
+            if (self.handler) {
+                self.handler(cell.couponInfo);
+            }
         }
         [self.navigationController popViewControllerAnimated:YES];
     }

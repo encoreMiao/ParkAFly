@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *couponDetailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *validateDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *detailBtn;
+@property (assign, nonatomic) BOOL isCouponSelected;
 @end
 
 
@@ -125,6 +126,7 @@
 
 - (void)setCouponSelected:(BOOL)selected
 {
+    _isCouponSelected = selected;
     switch (_type) {
         case kCouponViewControllerTypeUseCell1:
         {
@@ -134,6 +136,11 @@
         default:
             break;
     }
+}
+
+- (BOOL)couponSelected
+{
+    return _isCouponSelected;
 }
 - (IBAction)selectAction:(id)sender {
     switch (_type) {

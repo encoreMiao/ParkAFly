@@ -533,6 +533,14 @@
     
 }
 
+- (void)dismissSelf
+{
+    if ([self.delegate respondsToSelector:@selector(popviewDismissButtonDidClickedWithType:popview:)]) {
+        [self.delegate popviewDismissButtonDidClickedWithType:self.type popview:self];
+    }
+    [self dismiss];
+}
+
 - (void)dismiss
 {
     [UIView animateWithDuration:0.3 animations:^{
@@ -607,7 +615,7 @@
         [_cancelButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
         _cancelButton.imageView.contentMode = UIViewContentModeCenter;
         [_cancelButton setBackgroundColor:[UIColor clearColor]];
-        [_cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelButton addTarget:self action:@selector(dismissSelf) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelButton;
 }

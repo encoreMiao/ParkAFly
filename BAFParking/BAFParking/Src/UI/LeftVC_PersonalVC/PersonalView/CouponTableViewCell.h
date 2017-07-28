@@ -30,4 +30,5 @@ typedef NS_ENUM(NSInteger,CouponTableViewCellType){
 @property (strong, nonatomic) BAFCouponInfo *couponInfo;
 @property (assign, nonatomic) id<CouponTableViewCellDelegate> delegate;
 - (void)setCouponSelected:(BOOL)selected;
+- (BOOL)couponSelected;
 @end

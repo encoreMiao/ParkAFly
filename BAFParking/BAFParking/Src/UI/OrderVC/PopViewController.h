@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger,PopViewControllerType){
 
 @protocol PopViewControllerDelegate <NSObject>
 - (void)popviewConfirmButtonDidClickedWithType:(PopViewControllerType)type popview:(PopViewController*)popview;
+- (void)popviewDismissButtonDidClickedWithType:(PopViewControllerType)type popview:(PopViewController*)popview;
 @end
 
 
