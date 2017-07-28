@@ -19,12 +19,14 @@
 #import "BAFParkServiceInfo.h"
 #import "BAFMoreServicesViewController.h"
 #import "PopViewController.h"
+#import "OrderMoreCollectionViewCell.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexParkService,
 };
 
 #define OrderServiceTableViewCellIdentifier @"OrderServiceTableViewCellIdentifier"
+#define OrderMoreCollectionViewCellIdentifier   @"OrderMoreCollectionViewCellIdentifier"
 
 @interface BAFOrderServiceViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderServiceTableViewCellDelegate>
 @property (nonatomic, strong) IBOutlet OrderFooterView *footerView;
@@ -226,7 +228,35 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     else {
-        return 64;
+        if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+            NSMutableArray *mutArr = [NSMutableArray array];
+            NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+            for (NSString *str in arr) {
+                NSArray *arrs = [str componentsSeparatedByString:@"=>"];
+                if ([arrs[0] isEqualToString:@"5"]) {
+                    [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
+                }
+                if ([arrs[0] isEqualToString:@"6"]) {
+                    [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
+                }
+            }
+            if (mutArr.count>0) {
+                NSString *str = [mutArr componentsJoinedByString:@"\n"];
+                NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
+                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                [paragraphStyle setLineSpacing:6];
+                CGSize titleSize = [str boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                                     options:NSStringDrawingUsesLineFragmentOrigin
+                                                  attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
+                                                     context:nil].size;
+                return 20+titleSize.height+50+20;
+            }else{
+                return 64;
+            }
+        }
+        else{
+            return 64;
+        }
     }
     return 0;
 }
@@ -307,6 +337,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderServiceTableViewCell" owner:nil options:nil] firstObject];
         cell.delegate = self;
     }
+    
+    OrderMoreCollectionViewCell *orderMoreCell =  [tableView dequeueReusableCellWithIdentifier:OrderMoreCollectionViewCellIdentifier];
+    if (orderMoreCell == nil) {
+        orderMoreCell = [[[NSBundle mainBundle]loadNibNamed:@"OrderMoreCollectionViewCell" owner:nil options:nil] firstObject];
+    }
     NSUInteger section = indexPath.section;
     if (section == 0) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -325,8 +360,36 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         cell.serviceInfo = serviceInfo;
         
     }else{
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.type = kOrderServiceTableViewCellTypeDisclosure;
+        if ([self.dicDatasource objectForKey:OrderParamTypeService]) {
+            NSMutableArray *mutArr = [NSMutableArray array];
+            NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+            for (NSString *str in arr) {
+                NSArray *arrs = [str componentsSeparatedByString:@"=>"];
+                if ([arrs[0] isEqualToString:@"5"]) {
+                    [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
+                }
+                if ([arrs[0] isEqualToString:@"6"]) {
+                    [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
+                }
+            }
+            if (mutArr.count>0) {
+                NSString *str = [mutArr componentsJoinedByString:@"\n"];
+                NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
+                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                [paragraphStyle setLineSpacing:6];
+                [attributeStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, str.length)];
+                
+                orderMoreCell.serviceLabel.attributedText = attributeStr;
+                return orderMoreCell;
+            }else{
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.type = kOrderServiceTableViewCellTypeDisclosure;
+            }
+        }
+        else{
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell.type = kOrderServiceTableViewCellTypeDisclosure;
+        }
     }
     return cell;
 }
