@@ -16,6 +16,11 @@
 @property (nonatomic, strong) IBOutlet UIView *successView;
 @property (nonatomic, strong) IBOutlet UIView *failureView;
 @property (nonatomic, strong) IBOutlet UIView *payView;
+
+@property (nonatomic, strong) IBOutlet UIView *rechargeSuccessView;
+@property (nonatomic, strong) IBOutlet UILabel *rechargeMoneyLabel;//充值金额
+@property (nonatomic, strong) IBOutlet UILabel *rechargeTimeLabel;//充值时间
+
 @property (nonatomic, strong) IBOutlet UIView *buttonView;
 @property (weak, nonatomic)   IBOutlet UIButton *contactBtn;
 @property (weak, nonatomic)   IBOutlet UIButton *checktBtn;
@@ -62,7 +67,20 @@
             [self setNavigationTitle:@"现金支付"];
             self.successView.hidden = YES;
             self.failureView.hidden = YES;
+            self.rechargeSuccessView.hidden = YES;
             self.payView.hidden = NO;
+            [self.view addSubview:self.buttonView];
+            self.buttonView.hidden = NO;
+            [self.buttonView setFrame:CGRectMake(0, CGRectGetMaxY(self.payView.frame), screenWidth, 100)];
+        }
+            break;
+        case kSuccessViewControllerTypeRechargeSuccess:
+        {
+            [self setNavigationTitle:@"充值成功"];
+            self.rechargeSuccessView.hidden = NO;
+            self.successView.hidden = YES;
+            self.failureView.hidden = YES;
+            self.payView.hidden = YES;
             [self.view addSubview:self.buttonView];
             self.buttonView.hidden = NO;
             [self.buttonView setFrame:CGRectMake(0, CGRectGetMaxY(self.payView.frame), screenWidth, 100)];
@@ -74,6 +92,7 @@
             self.successView.hidden = YES;
             self.failureView.hidden = NO;
             self.payView.hidden = YES;
+            self.rechargeSuccessView.hidden = YES;
             [self.view addSubview:self.buttonView];
             self.buttonView.hidden = NO;
             [self.buttonView setFrame:CGRectMake(0, CGRectGetMaxY(self.failureView.frame), screenWidth, 100)];
@@ -84,6 +103,7 @@
             [self setNavigationTitle:@"预约成功"];
             self.successView.hidden = NO;
             self.failureView.hidden = YES;
+            self.rechargeSuccessView.hidden = YES;
             self.payView.hidden = YES;
             [self.view addSubview:self.buttonView];
             self.buttonView.hidden = NO;

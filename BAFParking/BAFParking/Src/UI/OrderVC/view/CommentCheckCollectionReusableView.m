@@ -49,13 +49,17 @@
     height += 0.5;
     
     if ([commentDic objectForKey:@"reply"]&&![[commentDic objectForKey:@"reply"] isEqual:[NSNull null]]) {
-        self.backCommentLabel.text = [commentDic objectForKey:@"reply"];
+        NSString *str = [NSString stringWithFormat:@"泊安飞回复:\n%@",[commentDic objectForKey:@"reply"]];
+        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:str];
         CGSize titleSize = [self.backCommentLabel.text boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
                                                                 options:NSStringDrawingUsesLineFragmentOrigin
                                                              attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}
                                                                 context:nil].size;
         self.backCommentLabel.frame = CGRectMake(20, height+20, screenWidth-40,titleSize.height);
         height += titleSize.height+20;
+        
+        [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[str rangeOfString:@"泊安飞回复:"]];
+        self.backCommentLabel.attributedText = mutStr;
     }
 }
 
@@ -73,6 +77,7 @@
         _commentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _commentLabel.textColor = [UIColor colorWithHex:0x323232];
         _commentLabel.backgroundColor = [UIColor clearColor];
+        _commentLabel.numberOfLines = 0;
         _commentLabel.font = [UIFont systemFontOfSize:14.0f];
     }
     return _commentLabel;
@@ -84,6 +89,7 @@
         _backCommentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _backCommentLabel.textColor = [UIColor colorWithHex:0x323232];
         _backCommentLabel.backgroundColor = [UIColor clearColor];
+        _backCommentLabel.numberOfLines = 0;
         _backCommentLabel.font = [UIFont systemFontOfSize:14.0f];
     }
     return _backCommentLabel;

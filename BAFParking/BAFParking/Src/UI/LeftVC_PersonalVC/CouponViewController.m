@@ -40,6 +40,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (strong, nonatomic) UIView *buttonView;
 
 @property (assign, nonatomic) CouponTableViewCellType cellType;
+
+
+@property (strong, nonatomic) IBOutlet UIView *nonCouponView;
 @end
 
 @implementation CouponViewController
@@ -57,6 +60,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
@@ -109,7 +113,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.couponArr.count;
-//    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -297,10 +300,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             self.couponArr = [NSMutableArray arrayWithArray:[BAFCouponInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]]];
         }else{
             [self.couponArr removeAllObjects];
-            if ([[obj objectForKey:@"code"] integerValue] == 3) {
-//                 [self showTipsInView:self.view message:@"当前没有优惠券" offset:self.view.center.x+100];
-            }
         }
+        
+        if (self.cellType == kCouponTableViewCellTypeCommonCell1||
+            self.cellType == kCouponViewControllerTypeUseCell1)
+        {
+            if (self.couponArr.count<=0) {
+                [self.nonCouponView setFrame:CGRectMake(0, 0, screenWidth,195)];
+                self.myTableview.tableHeaderView = self.nonCouponView;
+            }else{
+                self.myTableview.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 1)];
+            }
+        }else{
+            self.myTableview.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 1)];
+        }
+        
         [self.myTableview  reloadData];
     }
     
@@ -322,6 +336,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else{
             [self.couponArr removeAllObjects];
         }
+        
+        if (self.cellType == kCouponTableViewCellTypeCommonCell1||
+            self.cellType == kCouponViewControllerTypeUseCell1)
+        {
+            if (self.couponArr.count<=0) {
+                [self.nonCouponView setFrame:CGRectMake(0, 0, screenWidth,195)];
+                self.myTableview.tableHeaderView = self.nonCouponView;
+            }else{
+                self.myTableview.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 1)];
+            }
+        }else{
+            self.myTableview.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 1)];
+        }
+
         [self.myTableview  reloadData];
     }
     

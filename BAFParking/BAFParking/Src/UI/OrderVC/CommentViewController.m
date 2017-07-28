@@ -75,11 +75,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationTitle:@"评价"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     
-    [self commentTagRequest];
     
     self.mycollectionview.frame = CGRectMake(0,0, screenWidth, screenHeight);
     
     if (self.type == kCommentViewControllerTypeComment) {
+        [self commentTagRequest];
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
         self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, 220);
@@ -154,7 +154,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            [self showTipsInView:self.view message:@"评价成功" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"感谢您的评价，发表成功!" offset:self.view.center.x+100];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
@@ -166,7 +166,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             self.commentDic = [obj objectForKey:@"data"];
-            [self.mycollectionview  reloadData];
+            [self commentTagRequest];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
@@ -177,7 +177,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
-
 
 #pragma mark UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -193,20 +192,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     cell.commentLabel.text = [self.commentTagArr objectAtIndex:indexPath.row];
     if (self.type == kCommentViewControllerTypeCommentCheck) {
         cell.userInteractionEnabled = NO;
+        //查看
+        NSString *tags = [self.commentDic objectForKey:@"tags"];
+        if (![tags isEqual:[NSNull null]]
+            &&tags.length>0
+            &&[[self.commentTagArr objectAtIndex:indexPath.row]isEqualToString:tags])
+        {
+            [cell  setCommentCollectionSelected:YES];
+        }else{
+            [cell  setCommentCollectionSelected:NO];
+        }
     }else if (self.type == kCommentViewControllerTypeComment){
         cell.userInteractionEnabled = YES;
     }
-    
-    
-    
-//    if (indexPath.row == 0) {
-//        cell.type = kWechatCollectionViewCellTypeActivity;
-//    }else{
-//        cell.type = kWechatCollectionViewCellTypeCommon;
-//    }
-    //        id item = [self itemAtIndexPath:indexPath];
-    //        BOOL isCollected = [self isCollectedItemAtIndexPath:indexPath];
-    //        self.configureCellBlock(cell, item, isCollected);
     return cell;
 }
 
@@ -222,7 +220,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [cell setCommentCollectionSelected:NO];
 }
 
-// 设置headerView和footerView的
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *reusableView = nil;

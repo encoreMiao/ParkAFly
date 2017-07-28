@@ -14,7 +14,6 @@
 #import "OrderConfirmTableViewCell.h"
 #import "OrderDetail1TableViewCell.h"
 #import "OrderDetailImageTableViewCell.h"
-#import "OrderDetailStatusTableViewCell.h"
 #import "OrderDetailFeeTableViewCell.h"
 
 #define OrderConfirmTableViewCellIdentifier @"OrderConfirmTableViewCellIdentifier"
@@ -82,47 +81,104 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (NSArray *)configTotoalfee
 {
     NSMutableArray *mutArr = [NSMutableArray array];
-//    NSInteger totalFee = 0;
-//    NSInteger firstdayfee = [[self.orderDic objectForKey:OrderParamTypeParkFeeFirstDay] integerValue];
-//    NSInteger dayfee = [[self.orderDic objectForKey:OrderParamTypeParkFeeDay] integerValue];
-//    NSInteger days = -1;
-//    if ([self.orderDic objectForKey:OrderParamTypePark_day]) {
-//        days = [[self.orderDic objectForKey:OrderParamTypePark_day] integerValue];
-//    }
-//    if (days>=0) {
-//        totalFee = firstdayfee + dayfee*days;
-//    }else{
-//        totalFee = firstdayfee;
-//    }
-//    if ([self.orderDic objectForKey:OrderParamTypeService]) {
-//        NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
-//        self.serviceArr = [NSMutableArray arrayWithArray:arr];
-//        for (NSString *str in self.serviceArr) {
-//            NSArray *detailArr = [str componentsSeparatedByString:@"=>"];
-//            totalFee += [detailArr[3] integerValue];
-//        }
-//    }
-//    self.feeLabel.text = [NSString stringWithFormat:@"预计费用：¥%ld元",totalFee/100];
-//    
-//    [mutArr addObject:[NSArray arrayWithObjects:@"预计费用",[NSString stringWithFormat:@"¥%ld元",totalFee/100], nil]];
-//    
-//    if (days>0) {
-//        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld元",(firstdayfee + dayfee*days)/100], nil]];
-//    }else{
-//        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld元",firstdayfee/100], nil]];
-//    }
-//    
-//    if ([self.orderDic objectForKey:OrderParamTypeService]) {
-//        NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
-//        self.serviceArr = [NSMutableArray arrayWithArray:arr];
-//        for (NSString *str in self.serviceArr) {
-//            NSArray *detailArr = [str componentsSeparatedByString:@"=>"];
-//            totalFee += [detailArr[3] integerValue];
-//            
-//            [mutArr addObject:[NSArray arrayWithObjects:detailArr[2],[NSString stringWithFormat:@"¥%ld元",[detailArr[3] integerValue]/100], nil]];
-//        }
-//    }
+    NSInteger totalFee = 0;
+    NSDictionary *orderFeeDetail = [self.orderDic objectForKey:@"order_fee_detail"];
+    NSDictionary *orderPrice =[orderFeeDetail objectForKey:@"order_price"];
+    NSDictionary *basicDic = [[orderPrice objectForKey:@"basic"] objectForKey:@"101"];
+    NSInteger firstdayfee = [[basicDic objectForKey:@"first_day_price"] integerValue];
+    NSInteger dayfee = [[basicDic objectForKey:@"market_price"] integerValue];
+    NSInteger days = -1;
+    if ([orderFeeDetail objectForKey:@"park_day"]) {
+        days = [[orderFeeDetail objectForKey:@"park_day"] integerValue];
+    }
+    if (days>=0) {
+        totalFee = firstdayfee + dayfee*days;
+    }else{
+        totalFee = firstdayfee;
+    }
+    
+    if ([orderPrice objectForKey:@"single"]) {
+        for (NSString *str in self.serviceArr) {
+            NSArray *detailArr = [str componentsSeparatedByString:@"&"];
+            if ([str containsString:@"自行往返"]) {
+                totalFee -= [detailArr[1] integerValue];
+            }else{
+                totalFee += [detailArr[1] integerValue];
+            }
+        }
+    }
+    [mutArr addObject:[NSArray arrayWithObjects:[self orderFeeStr],[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
 
+    if (days>0) {
+        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld",(firstdayfee + dayfee*days)/100], nil]];
+    }else{
+        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld",firstdayfee/100], nil]];
+    }
+
+    if (self.serviceArr.count>0) {
+        for (NSString *str in self.serviceArr) {
+            NSArray *detailArr = [str componentsSeparatedByString:@"&"];
+            if ([str containsString:@"自行往返"]) {
+                [mutArr addObject:[NSArray arrayWithObjects:detailArr[0],[NSString stringWithFormat:@"-¥%ld",[detailArr[1] integerValue]/100], nil]];
+            }else{
+                [mutArr addObject:[NSArray arrayWithObjects:detailArr[0],[NSString stringWithFormat:@"¥%ld",[detailArr[1] integerValue]/100], nil]];
+            }
+            
+        }
+    }
+    
+    
+    if ([[self orderFeeStr] isEqualToString:@"预计费用"]) {
+        //应支付
+        [mutArr addObject:[NSArray arrayWithObjects:@"应支付",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
+    }else{
+        //支付方式
+        [mutArr addObject:[NSArray arrayWithObjects:@"支付方式",@"", nil]];
+        NSArray *payment_detailArr = [orderFeeDetail objectForKey:@"payment_detail"];
+        NSArray *discount_price = [orderFeeDetail objectForKey:@"discount_price"];
+        if (![discount_price isEqual:[NSNull null]]&&discount_price!=nil) {
+            if (discount_price.count>0) {
+                for (NSDictionary *dic in discount_price) {
+                    [mutArr addObject:[NSArray arrayWithObjects:@"vip抵扣",[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"discount_total"] integerValue]/100], nil]];
+                }
+            }
+        }
+        
+        if (![payment_detailArr isEqual:[NSNull null]]&&payment_detailArr!=nil) {
+            if (payment_detailArr.count>0) {
+                for (NSDictionary *dic in payment_detailArr) {
+                    NSString *payStr = @"";
+                    NSString *pay_method = [dic objectForKey:@"pay_method"];
+                    if ([pay_method isEqualToString:@"cash"]) {
+                        payStr = @"现金支付";
+                    }
+                    if ([pay_method isEqualToString:@"wechat"]) {
+                        payStr = @"微信支付";
+                    }
+                    if ([pay_method isEqualToString:@"alipay"]) {
+                        payStr = @"支付宝支付";
+                    }
+                    if ([pay_method isEqualToString:@"personal_account"]) {
+                        payStr = @"个人账户支付";
+                    }
+                    if ([pay_method isEqualToString:@"company_account"]) {
+                        payStr = @"集团账户支付";
+                    }
+                    if ([pay_method isEqualToString:@"coupon_code"]) {
+                        payStr = @"优惠码";
+                    }
+                    if ([pay_method isEqualToString:@"activity_code"]) {
+                        payStr = @"权益账户";
+                    }
+                    [mutArr addObject:[NSArray arrayWithObjects:payStr,[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"pay_amount"] integerValue]/100], nil]];
+                }
+            }
+        }
+    }
+    
+//    "to_be_price" = 6000;待支付价格
+//    after_discount_total_price 折扣后价格
+//    actual_already_pay_price 实际支付价格
     return mutArr;
 }
 
@@ -130,7 +186,53 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@",indexPath);
+
+    //弹出详细说明
+    if (self.serviceArr.count>0) {
+        if (indexPath.section == 4) {
+            [self detailfeeAction:nil];
+        }
+    }else{
+        if (indexPath.section == 3) {
+            [self detailfeeAction:nil];
+        }
+    }
+    
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            //地理位置
+            [[self.orderDic objectForKey:@"park"]objectForKey:@"map_lat"];
+            [[self.orderDic objectForKey:@"park"]objectForKey:@"map_lon"];
+        }
+        //泊车经理
+        if (indexPath.row == 4) {
+            NSString *phone = [self.orderDic objectForKey:@"park_manager_phone"];
+            if (![phone isEqual:[NSNull null]]&& phone.length>10) {
+                [self callPhoneNumber:phone];
+            }
+        }
+    }
+    
+    if (indexPath.section == 2){
+        //取车经理
+        if (indexPath.row == 4) {
+            NSString *phone = [self.orderDic objectForKey:@"pick_manager_phone"];
+            if (![phone isEqual:[NSNull null]]&& phone.length>10) {
+                [self callPhoneNumber:phone];
+            }
+        }
+    }
 }
+
+- (void)callPhoneNumber:(NSString *)phoneNumber {
+    UIWebView*callWebview =[[UIWebView alloc] init];
+    NSURL *telURL =[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phoneNumber]];// 貌似tel:// 或者 tel: 都行
+    [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:callWebview];
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
@@ -169,7 +271,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
                     return 100.0f;
                 }else{
-                    return 65.0f;
+                    return [self heightForStatusRow:indexPath.row];
                 }
             }
         }
@@ -182,17 +284,52 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 }
                 else if ([dic objectForKey:@"park"]&&[[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
                     return 100.0f;
-                }else
-                    return 65.0f;
+                }else{
+                    return [self heightForStatusRow:indexPath.row];
+                }
             }
         }else{
-            return 65.0f;
+            return [self heightForStatusRow:indexPath.row];
         }
     }else if (indexPath.section == 6){
-        return 65.0f;
+        return [self heightForStatusRow:indexPath.row];
     }
     return 0;
 }
+
+- (CGFloat)heightForStatusRow:(NSUInteger)row
+{
+    NSString *action = [[self.operatorArr objectAtIndex:row] objectForKey:@"action"];
+    NSString *str;
+    if ([action isEqualToString:@"park_appoint"]) {
+        str = @"预约泊车成功，订单已分派，形成改变请及时修改您的预约信息。";
+    }
+    if ([action isEqualToString:@"cancel"]) {
+        str = @"订单已取消";
+    }
+    if ([action isEqualToString:@"park"]) {
+        str = @"车辆已停放至车场，停车开始计费，如回程时间改变，请及时修改您的取车时间";
+    }
+    if ([action isEqualToString:@"pick_sure"]) {
+        str = @"取车时间已确认，停车结束计费，订单费用可在线支付或交现金给工作人员";
+    }
+    if ([action isEqualToString:@"finish"]) {
+        str = @"取车成功！感谢使用泊安飞服务，业务咨询或意见反馈，可致电4008138666联系客服。";
+    }
+    if ([action isEqualToString:@"wash_car"]) {
+        str = @"已为您的爱车洗车";
+    }
+    if ([action isEqualToString:@"fill_oil"]) {
+        str = @"已为您的爱车代加油100元";
+    }
+    CGSize titleSize = [str boundingRectWithSize:CGSizeMake(screenWidth-48, MAXFLOAT)
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:15.0f]}
+                                              context:nil].size;
+    return titleSize.height + 50;
+//    self.orderOperatorLabel.text
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -561,11 +698,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if (self.serviceArr.count>0) {
             cell.type = OrderDetailFeeTableViewCellTypeService;
-            cell.serviceTitleLabel.text = [self.serviceArr objectAtIndex:indexPath.row];
+            NSString *str = [self.serviceArr objectAtIndex:indexPath.row];
+            cell.serviceTitleLabel.text = [[str componentsSeparatedByString:@"&"] objectAtIndex:0];
             return cell;
         }
         cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
-        cell.serviceTitleLabel.text = [NSString stringWithFormat:@"订单总费用啦啦啦"];
+        cell.serviceTitleLabel.text = [self orderFeeStr];
         return cell;//订单费用
     }
     
@@ -577,7 +715,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
-            cell.serviceTitleLabel.text = [NSString stringWithFormat:@"订单总费用呵呵呵"];
+            cell.serviceTitleLabel.text = [self orderFeeStr];
             return cell;
         }else{
             OrderDetailImageTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetailImageTableViewCellIdentifier];
@@ -649,6 +787,35 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     return nil;
 }
 
+- (NSString *)orderFeeStr
+{
+    NSString *orderStatus = [self.orderDic objectForKey:@"order_status"];
+    if ([orderStatus isEqualToString:@"park_appoint"]||
+        [orderStatus isEqualToString:@"approve"]) {
+        //预约泊车成功
+        return @"预计费用";
+    }else if([orderStatus isEqualToString:@"park"]){
+        //泊车成功
+        return @"预计费用";
+    }else if ([orderStatus isEqualToString:@"pick_appoint"]){
+        //待取车
+        return @"预计费用";
+    }else if ([orderStatus isEqualToString:@"finish"]){
+        //服务结束
+        return @"订单总费用";
+    }
+    else if ([orderStatus isEqualToString:@"payment_sure"]){
+        //已支付待确认
+        return @"订单总费用";
+    }
+    else if ([orderStatus isEqualToString:@"pick_sure"]){
+        //已确认取车
+        return @"预计费用";
+    }
+    return nil;
+}
+
+
 #pragma mark request
 - (void)orderDetailRequest
 {
@@ -692,17 +859,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
     NSMutableArray *arr = [NSMutableArray array];
     for (NSString *key in mutDic) {
+        NSDictionary *dic = [mutDic objectForKey:key];
+        NSString *string = [NSString stringWithFormat:@"%@&%@",[dic objectForKey:@"title"],[dic objectForKey:@"strike_price"]];
+        [arr addObject:string];
         if ([key isEqualToString:@"202"]) {
-            [arr addObject:@"代泊服务"];
+//            [arr addObject:@"代泊服务"];
         }
         if ([key isEqualToString:@"206"]) {
-            [arr addObject:@"自行往返航站楼"];
+//            [arr addObject:@"自行往返航站楼"];
         }
         if ([key isEqualToString:@"205"]) {
-            [arr addObject:@"洗车服务"];
+//            [arr addObject:@"洗车服务"];
         }
         if ([key isEqualToString:@"204"]) {
-            [arr addObject:@"代加油"];
+//            [arr addObject:@"代加油"];
         }
     }
     self.serviceArr = [NSMutableArray arrayWithArray:arr];

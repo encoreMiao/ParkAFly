@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger,SuccessViewControllerType){
     kSuccessViewControllerTypeSuccess,
     kSuccessViewControllerTypeFailure,
     kSuccessViewControllerTypePay,
+    kSuccessViewControllerTypeRechargeSuccess,
 };
 
 

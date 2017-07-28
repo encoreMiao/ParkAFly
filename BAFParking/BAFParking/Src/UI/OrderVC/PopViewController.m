@@ -321,9 +321,30 @@
                 cell.bottomLine.hidden = NO;
                 cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0x323232];
             }else{
-                cell.topLine.hidden = YES;
-                cell.bottomLine.hidden = YES;
-                cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0x969696];
+                if ([arr containsObject:@"支付方式"]||[arr containsObject:@"应支付"]) {
+                    cell.topLine.hidden = NO;
+                    cell.bottomLine.hidden = NO;
+                    cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0x323232];
+                    cell.popfeeMoneyLabel.textColor = [UIColor colorWithHex:0xfb694b];
+                }else if ([arr containsObject:@"vip抵扣"]
+                          ||[arr containsObject:@"现金支付"]
+                          ||[arr containsObject:@"微信支付"]
+                          ||[arr containsObject:@"支付宝支付"]
+                          ||[arr containsObject:@"个人账户支付"]
+                          ||[arr containsObject:@"集团账户支付"]
+                          ||[arr containsObject:@"优惠码"]
+                          ||[arr containsObject:@"权益账户"]                        
+                          ){
+                    cell.topLine.hidden = YES;
+                    cell.bottomLine.hidden = YES;
+                    cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0x969696];
+                    cell.popfeeMoneyLabel.textColor = [UIColor colorWithHex:0xfb694b];
+                }else{
+                    cell.topLine.hidden = YES;
+                    cell.bottomLine.hidden = YES;
+                    cell.popfeetitleLabel.textColor = [UIColor colorWithHex:0x969696];
+                    cell.popfeeMoneyLabel.textColor = [UIColor colorWithHex:0x323232];
+                }
             }
             
             cell.popfeetitleLabel.text = arr[0];

@@ -15,6 +15,7 @@
 #import "BAFChargeInfo.h"
 #import "WXApi.h"
 #import "BAFChargePageInfo.h"
+#import "SuccessViewController.h"
 
 #define WechatCollectionViewCellIdentifier        @"WechatCollectionViewCellIdentifier"
 #define CardRechargeCollectionViewCellIdentifier  @"CardRechargeCollectionViewCellIdentifier"
@@ -409,6 +410,14 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
 {
     [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
+}
+
+- (void)rechargeSuccess
+{
+    SuccessViewController *successVC = [[SuccessViewController alloc]init];
+    successVC.type = kSuccessViewControllerTypeRechargeSuccess;
+    [self.navigationController pushViewController:successVC animated:YES];
+    //充值金额和充值时间
 }
 
 
