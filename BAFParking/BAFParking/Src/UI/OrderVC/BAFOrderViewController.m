@@ -439,7 +439,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
             self.definesPresentationContext = YES;
             popView.delegate = self;
-            [popView configViewWithData:@[@"1",@"2",@"3"] type:kPopViewControllerTypeCompany];
+            [popView configViewWithData:@[@"1",@"2",@"3",@"4"] type:kPopViewControllerTypeCompany];
             [self presentViewController:popView animated:NO completion:nil];
         }
             break;
@@ -494,7 +494,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             break;
         case kPopViewControllerTypeCompany:
         {
-            NSArray *arr = @[@"1",@"2",@"3"];
+            NSArray *arr = @[@"1",@"2",@"3",@"4"];
             [_dicDatasource setObject:arr[popview.selectedIndex.row] forKey:OrderParamTypeCompany];
             [self.mainTableView reloadData];
         }

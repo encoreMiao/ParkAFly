@@ -244,23 +244,6 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
         [cell setCollectionSelected:YES];
         self.currentChargeInfo = cell.chargeInfo;
     }
-    
-    
-//    //    if (collectionV.cellIndexPath.section == 0) {
-//    MBKStickerItemModel *model = [(MBKCollectionDataSource *)collectionV.dataSource itemAtIndexPath:indexPath];
-//    NSString *sticker = [model.imgUrl urlencode]; //贴纸图片链接
-//    NSString *stickerName = [model.name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//贴纸名称
-//    NSString *amount = model.collectedNum;
-//    BOOL own = [(MBKCollectionDataSource *)collectionV.dataSource isCollectedItemAtIndexPath:indexPath];//是否获得(true false)
-//    //        NSString *h5host = @"https://integration-m.mobike.com";
-//    NSString *h5host = ((configs *)[[MBKSettingStore sharedInstance]getConfigInfo]).h5BaseUrl;
-//    NSString *urlStr = [NSString stringWithFormat:@"%@/app/pages/treasure_hunt_sticker/index.html?sticker=%@&stickerName=%@&amount=%@&own=%@",h5host,sticker,stickerName,amount,own?@"true":@"false"];
-//    MBKWebViewController *webView = [[MBKWebViewController alloc] initWithUrlString:urlStr andTitle:nil];
-//    webView.view.backgroundColor = [[UIColor colorWithHex:0x262930] colorWithAlphaComponent:1];
-//    webView.myWebView.mj_h = screenHeight;
-//    webView.myWebView.mj_y = -64;
-//    [self pushViewControllerA:webView animated:YES];
-//    //    }
 }
 #pragma mark - ChargeFooterCollectionReusableViewDelegate
 - (void)chargeActionDelegate:(ChargeFooterCollectionReusableView *)footerView

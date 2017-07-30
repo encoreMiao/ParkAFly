@@ -96,7 +96,7 @@
         case kPopViewControllerTypeSelecCity:
         {
             
-            height = arr.count*40+44;
+            height = arr.count*50+44;
             if (height>320) {
                 height = 320;
             }
@@ -108,7 +108,7 @@
         case kPopViewControllerTypeSelecGoTerminal:
         case kPopViewControllerTypeSelecBackTerminal:
         {
-            height = arr.count*40+44;
+            height = arr.count*50+44;
             if (height>320) {
                 height = 320;
             }
@@ -131,7 +131,7 @@
             break;
         case kPopViewControllerTypeCompany:
         {
-            height = arr.count*40+44;
+            height = arr.count*50+44;
             if (height>320) {
                 height = 320;
             }
@@ -142,7 +142,7 @@
             break;
         case kPopViewControllerTypeSelecSex:
         {
-            height = arr.count*40+44;
+            height = arr.count*50+44;
             if (height>320) {
                 height = 320;
             }
@@ -153,7 +153,7 @@
             break;
         case kPopViewControllerTypeSelecColor:
         {
-            height = arr.count*40+44;
+            height = arr.count*50+44;
             if (height>320) {
                 height = 320;
             }
@@ -169,11 +169,12 @@
             self.popTitleLabel.text = @"请选择时间";
             [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
             [self.bgView addSubview:self.datePicker];
+            self.tableView.hidden = YES;
         }
             break;
         case kPopViewControllerTypeTcCard:
         {
-            height = arr.count*40+44;
+            height = arr.count*50+44;
             if (height>320) {
                 height = 320;
             }
@@ -189,7 +190,7 @@
     
     self.headerView.frame = CGRectMake(0, 0, screenWidth, 44);
     self.popTitleLabel.frame = self.headerView.frame;
-    self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-50,7, 30, 30);
+    self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-64,0, 44, 44);
     self.confirmButton.frame = CGRectMake(20,0, 44, 44);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, height-CGRectGetHeight(self.headerView.frame));
     self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, height-CGRectGetHeight(self.headerView.frame));
@@ -385,7 +386,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 50;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -603,7 +604,8 @@
         _tableView.backgroundColor = [UIColor colorWithHex:0xffffff];
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.delegate = self;
-        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        _tableView.separatorStyle = UITableViewCellSelectionStyleGray;
+        _tableView.separatorColor = [UIColor colorWithHex:0xc9c9c9];
     }
     return _tableView;
 }
@@ -612,10 +614,11 @@
 {
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelButton setImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
-        _cancelButton.imageView.contentMode = UIViewContentModeCenter;
-        [_cancelButton setBackgroundColor:[UIColor clearColor]];
-        [_cancelButton addTarget:self action:@selector(dismissSelf) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15.0f]];
+        [_cancelButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
+        [_cancelButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
+        [_cancelButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelButton;
 }
@@ -624,11 +627,11 @@
 {
     if (!_confirmButton) {
         _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_confirmButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_confirmButton setTitle:@"取消" forState:UIControlStateNormal];
         [_confirmButton.titleLabel setFont:[UIFont systemFontOfSize:15.0f]];
         [_confirmButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
         [_confirmButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
-        [_confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+        [_confirmButton addTarget:self action:@selector(dismissSelf) forControlEvents:UIControlEventTouchUpInside];
     }
     return _confirmButton;
 }

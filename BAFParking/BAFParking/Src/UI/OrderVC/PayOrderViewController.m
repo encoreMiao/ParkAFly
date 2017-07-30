@@ -47,6 +47,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (strong, nonatomic) NSString *tcCardFee;
 @property (strong, nonatomic) NSMutableDictionary *tcRequestDic;
 
+@property (assign, nonatomic) BOOL selectAccount;//选择余额
+
 @property (weak, nonatomic) IBOutlet  UIButton *detailBtn;
 @property (weak, nonatomic) IBOutlet  UIButton *weixinBtn;
 @property (weak, nonatomic) IBOutlet  UIButton *confirmPayBtn;
@@ -66,6 +68,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.tcRequestDic = [NSMutableDictionary dictionary];
     self.selectCouponinfo = nil;
     self.tcCardFee = nil;
+    self.selectAccount = NO;
+    
+    [self configOrderDic:self.orderDic];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,8 +87,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"订单支付"];
-    
-    [self configOrderDic:self.orderDic];
     
     [self orderFeeRequest];
     
@@ -113,6 +116,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.definesPresentationContext = YES;
     popView.delegate = self;
     [popView configViewWithData:self.tcCard type:kPopViewControllerTypeTcCard];
+    [self presentViewController:popView animated:NO completion:nil];
+}
+- (IBAction)detailAction:(id)sender {
+    PopViewController *popView = [[PopViewController alloc] init];
+    popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    self.definesPresentationContext = YES;
+    [popView configViewWithData:[self configTotoalfee] type:kPopViewControllerTypeTipsshow];
     [self presentViewController:popView animated:NO completion:nil];
 }
 
@@ -159,6 +170,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }else if (indexPath.row == 2){
         cell.detailImg.hidden = YES;
+        BAFUserInfo *userinfo = [[BAFUserModelManger sharedInstance] userInfo];
+        if (self.selectAccount) {
+            NSString *moneyStr = [NSString stringWithFormat:@"-¥%.0f",userinfo.account.integerValue/100.0f];
+            NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:moneyStr];
+            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[moneyStr rangeOfString:[NSString stringWithFormat:@"-¥%.0f",userinfo.account.integerValue/100.0f]]];
+            cell.moneyLabel.attributedText = mutStr;
+            [cell setShow: YES];
+        }else{
+            NSString *moneyStr = [NSString stringWithFormat:@"¥%.0f",userinfo.account.integerValue/100.0f];
+            NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:moneyStr];
+            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[moneyStr rangeOfString:[NSString stringWithFormat:@"¥%.0f",userinfo.account.integerValue/100.0f]]];
+            cell.moneyLabel.attributedText = mutStr;
+            [cell setShow:NO];
+        }
     }
     return cell;
 }
@@ -175,17 +200,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self popTcCard];
     }else if (indexPath.row == 1) {
         [self jumpToCouponVC];
-//        CouponViewController  *vc = [[CouponViewController alloc]init];
-//        vc.type = kCouponViewControllerTypeUse;
-//        vc.handler = ^(BAFCouponInfo *couponinfo){
-//            self.selectCouponinfo = couponinfo;
-//            [self.mytableview  reloadData];
-//        };
-//        if (self.selectCouponinfo) {
-//            vc.selectCouponInfo = self.selectCouponinfo;
-//        }
-//        vc.orderId = [self.orderDic objectForKey:@"id"];
-//        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -215,9 +229,16 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self jumpToCouponVC];
         }else{
             self.selectCouponinfo = nil;
+            [self.mytableview  reloadData];
         }
     }else if ([cell.titleLabel.text isEqualToString:@"个人账户"]) {
         cell.show = !cell.show;
+        if (cell.show == YES) {
+            self.selectAccount = YES;
+        }else{
+            self.selectAccount = NO;
+        }
+        [self.mytableview  reloadData];
     }
 
 }
@@ -274,6 +295,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
 }
 
+- (void)configTotalFee
+{
+    
+}
+
 #pragma mark - request
 - (void)tcCardRequest
 {
@@ -297,7 +323,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)orderPaymentSet
 {
 //    order/order_payment_set
-    
+    NSInteger totalFee = [[[self.orderDic objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
+    NSString *totalFeeText = [NSString stringWithFormat:@"¥%ld",totalFee/100];
+    self.totalFeeLabel.text = totalFeeText;
 }
 
 #pragma mark request
@@ -344,11 +372,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             self.feeDic = [obj objectForKey:@"data"];
-            NSInteger basicTotalFee = [[[[obj objectForKey:@"data"]objectForKey:@"order_price"]objectForKey:@"basic_total_price"] integerValue];
+            NSUInteger basicTotalFee = [[[[obj objectForKey:@"data"]objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
             NSString *feeText = [NSString stringWithFormat:@"预计费用：¥%ld",basicTotalFee/100];
             NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:feeText];
             [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeText rangeOfString:[NSString stringWithFormat:@"¥%ld",basicTotalFee/100]]];
             self.orderFeeLabel.attributedText = mutStr;
+            
+            NSInteger totalFee = [[[[obj objectForKey:@"data"]objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
+            NSString *totalFeeText = [NSString stringWithFormat:@"¥%ld",totalFee/100];
+            self.totalFeeLabel.text = totalFeeText;
         }else{
             
         }
@@ -451,57 +483,53 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     
     
-    if ([[self orderFeeStr] isEqualToString:@"预计费用"]) {
-        //应支付
-        [mutArr addObject:[NSArray arrayWithObjects:@"应支付",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
-    }else{
-        //支付方式
-        [mutArr addObject:[NSArray arrayWithObjects:@"支付方式",@"", nil]];
-        NSArray *payment_detailArr = [orderFeeDetail objectForKey:@"payment_detail"];
-        NSArray *discount_price = [orderFeeDetail objectForKey:@"discount_price"];
-        if (![discount_price isEqual:[NSNull null]]&&discount_price!=nil) {
-            if (discount_price.count>0) {
-                for (NSDictionary *dic in discount_price) {
-                    [mutArr addObject:[NSArray arrayWithObjects:@"vip抵扣",[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"discount_total"] integerValue]/100], nil]];
-                }
-            }
-        }
-        
-        if (![payment_detailArr isEqual:[NSNull null]]&&payment_detailArr!=nil) {
-            if (payment_detailArr.count>0) {
-                for (NSDictionary *dic in payment_detailArr) {
-                    NSString *payStr = @"";
-                    NSString *pay_method = [dic objectForKey:@"pay_method"];
-                    if ([pay_method isEqualToString:@"cash"]) {
-                        payStr = @"现金支付";
-                    }
-                    if ([pay_method isEqualToString:@"wechat"]) {
-                        payStr = @"微信支付";
-                    }
-                    if ([pay_method isEqualToString:@"alipay"]) {
-                        payStr = @"支付宝支付";
-                    }
-                    if ([pay_method isEqualToString:@"personal_account"]) {
-                        payStr = @"个人账户支付";
-                    }
-                    if ([pay_method isEqualToString:@"company_account"]) {
-                        payStr = @"集团账户支付";
-                    }
-                    if ([pay_method isEqualToString:@"coupon_code"]) {
-                        payStr = @"优惠码";
-                    }
-                    if ([pay_method isEqualToString:@"activity_code"]) {
-                        payStr = @"权益账户";
-                    }
-                    [mutArr addObject:[NSArray arrayWithObjects:payStr,[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"pay_amount"] integerValue]/100], nil]];
-                }
-            }
-        }
-    }
-    
-    //    "to_be_price" = 6000;待支付价格
-    //    after_discount_total_price 折扣后价格
-    //    actual_already_pay_price 实际支付价格
+//    if ([[self orderFeeStr] isEqualToString:@"预计费用"]) {
+//        //应支付
+//        [mutArr addObject:[NSArray arrayWithObjects:@"应支付",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
+//    }else{
+//        //支付方式
+//        [mutArr addObject:[NSArray arrayWithObjects:@"支付方式",@"", nil]];
+//        NSArray *payment_detailArr = [orderFeeDetail objectForKey:@"payment_detail"];
+//        NSArray *discount_price = [orderFeeDetail objectForKey:@"discount_price"];
+//        if (![discount_price isEqual:[NSNull null]]&&discount_price!=nil) {
+//            if (discount_price.count>0) {
+//                for (NSDictionary *dic in discount_price) {
+//                    [mutArr addObject:[NSArray arrayWithObjects:@"vip抵扣",[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"discount_total"] integerValue]/100], nil]];
+//                }
+//            }
+//        }
+//        
+//        if (![payment_detailArr isEqual:[NSNull null]]&&payment_detailArr!=nil) {
+//            if (payment_detailArr.count>0) {
+//                for (NSDictionary *dic in payment_detailArr) {
+//                    NSString *payStr = @"";
+//                    NSString *pay_method = [dic objectForKey:@"pay_method"];
+//                    if ([pay_method isEqualToString:@"cash"]) {
+//                        payStr = @"现金支付";
+//                    }
+//                    if ([pay_method isEqualToString:@"wechat"]) {
+//                        payStr = @"微信支付";
+//                    }
+//                    if ([pay_method isEqualToString:@"alipay"]) {
+//                        payStr = @"支付宝支付";
+//                    }
+//                    if ([pay_method isEqualToString:@"personal_account"]) {
+//                        payStr = @"个人账户支付";
+//                    }
+//                    if ([pay_method isEqualToString:@"company_account"]) {
+//                        payStr = @"集团账户支付";
+//                    }
+//                    if ([pay_method isEqualToString:@"coupon_code"]) {
+//                        payStr = @"优惠码";
+//                    }
+//                    if ([pay_method isEqualToString:@"activity_code"]) {
+//                        payStr = @"权益账户";
+//                    }
+//                    [mutArr addObject:[NSArray arrayWithObjects:payStr,[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"pay_amount"] integerValue]/100], nil]];
+//                }
+//            }
+//        }
+//    }
     return mutArr;
 }
 

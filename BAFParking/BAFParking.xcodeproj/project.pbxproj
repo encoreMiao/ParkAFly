@@ -190,6 +190,8 @@
 		8DBAE0BE1F108D30003ACFAB /* ParkDetail2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0BC1F108D30003ACFAB /* ParkDetail2TableViewCell.xib */; };
 		8DBAE0C21F108E56003ACFAB /* ParkCommetnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBAE0C01F108E56003ACFAB /* ParkCommetnTableViewCell.m */; };
 		8DBAE0C31F108E56003ACFAB /* ParkCommetnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0C11F108E56003ACFAB /* ParkCommetnTableViewCell.xib */; };
+		8DC7BC661F2E9C9B00FDE5C0 /* ParkCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7BC641F2E9C9B00FDE5C0 /* ParkCommentViewController.m */; };
+		8DC7BC671F2E9C9B00FDE5C0 /* ParkCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7BC651F2E9C9B00FDE5C0 /* ParkCommentViewController.xib */; };
 		8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433431EE9E4EA009379ED /* PopTableViewCell.m */; };
 		8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */; };
 		8DE433491EEBC90A009379ED /* BAFParkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433481EEBC90A009379ED /* BAFParkInfo.m */; };
@@ -542,6 +544,9 @@
 		8DBAE0BF1F108E56003ACFAB /* ParkCommetnTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkCommetnTableViewCell.h; sourceTree = "<group>"; };
 		8DBAE0C01F108E56003ACFAB /* ParkCommetnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkCommetnTableViewCell.m; sourceTree = "<group>"; };
 		8DBAE0C11F108E56003ACFAB /* ParkCommetnTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkCommetnTableViewCell.xib; sourceTree = "<group>"; };
+		8DC7BC631F2E9C9B00FDE5C0 /* ParkCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkCommentViewController.h; sourceTree = "<group>"; };
+		8DC7BC641F2E9C9B00FDE5C0 /* ParkCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkCommentViewController.m; sourceTree = "<group>"; };
+		8DC7BC651F2E9C9B00FDE5C0 /* ParkCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkCommentViewController.xib; sourceTree = "<group>"; };
 		8DE433421EE9E4EA009379ED /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
 		8DE433431EE9E4EA009379ED /* PopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopTableViewCell.m; sourceTree = "<group>"; };
 		8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopTableViewCell.xib; sourceTree = "<group>"; };
@@ -1311,6 +1316,9 @@
 				8DBAE0B01F1080B9003ACFAB /* ParkDetailViewController.h */,
 				8DBAE0B11F1080B9003ACFAB /* ParkDetailViewController.m */,
 				8DBAE0B21F1080B9003ACFAB /* ParkDetailViewController.xib */,
+				8DC7BC631F2E9C9B00FDE5C0 /* ParkCommentViewController.h */,
+				8DC7BC641F2E9C9B00FDE5C0 /* ParkCommentViewController.m */,
+				8DC7BC651F2E9C9B00FDE5C0 /* ParkCommentViewController.xib */,
 			);
 			path = ParkListVC;
 			sourceTree = "<group>";
@@ -1498,6 +1506,7 @@
 				00F55B991F217DF60044209A /* image3_750.jpg in Resources */,
 				005E85D41E97924600115CAD /* LaunchScreen.storyboard in Resources */,
 				0001CDF21ED08135000889CE /* BAFLoginViewController.xib in Resources */,
+				8DC7BC671F2E9C9B00FDE5C0 /* ParkCommentViewController.xib in Resources */,
 				0020933C1EDBDBDE00C26176 /* BAFOrderViewController.xib in Resources */,
 				002093421EDBE6FC00C26176 /* OrderTableViewCell.xib in Resources */,
 				00F55B8A1F217BA50044209A /* SHFGuideViewController.xib in Resources */,
@@ -1673,6 +1682,7 @@
 				002093511EDC29DC00C26176 /* OrderServiceHeaderView.m in Sources */,
 				8D3498071F08FC07009D723C /* CommentCollectionViewCell.m in Sources */,
 				0001CDDC1ED05179000889CE /* PersonalCenterHeaderView.m in Sources */,
+				8DC7BC661F2E9C9B00FDE5C0 /* ParkCommentViewController.m in Sources */,
 				8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
 				8D56DD321F127217000E3D99 /* OrderDetail1TableViewCell.m in Sources */,

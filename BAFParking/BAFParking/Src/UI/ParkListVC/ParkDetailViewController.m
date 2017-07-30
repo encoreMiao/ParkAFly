@@ -14,6 +14,7 @@
 #import "HRLogicManager.h"
 #import "BAFParkCommentInfo.h"
 #import "BAFParkInfo.h"
+#import "ParkCommentViewController.h"
 
 #define ParkDetail1TableViewCellIdentifier      @"ParkDetail1TableViewCellIdentifier"
 #define ParkDetail2TableViewCellIdentifier      @"ParkDetail2TableViewCellIdentifier"
@@ -66,6 +67,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
 
 - (IBAction)footerCheckMoreAction:(id)sender {
     NSLog(@"查看更多");
+    ParkCommentViewController *vc = [[ParkCommentViewController alloc]init];
+    vc.parkid = self.parkid;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDelegate
