@@ -47,10 +47,16 @@
     [self.mScrollView addSubview:self.mobile3ImageView];
     
     
+    self.mobile3ImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(btnClick:)];
+    [self.mobile3ImageView addGestureRecognizer:gesture];
+    
     buttonClose = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonClose addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-    buttonClose.frame = CGRectMake(0, 0, 80, 80);
-    [buttonClose setImage:[UIImage imageNamed:@"pay_cancel"] forState:UIControlStateNormal];
+    buttonClose.frame = CGRectMake(screenWidth-80, screenHeight-80, 80, 80);
+    [buttonClose setTitleColor:[UIColor colorWithHex:0x3492e9] forState:UIControlStateNormal];
+    [buttonClose setTitle:@"跳过" forState:UIControlStateNormal];
+    buttonClose.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     [self.view addSubview:buttonClose];
     
     _mobile1ImageView.userInteractionEnabled = YES;
@@ -90,8 +96,19 @@
         _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_1242"];
         _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_1242"];
     }
-
 }
+
+#pragma mark - UIScrollViewDelegate
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if(scrollView.contentOffset.x > screenWidth * 1)
+    {
+        buttonClose.hidden = YES;
+    }else{
+        buttonClose.hidden = NO;
+    }
+}
+
 
 #pragma mark - UserAction
 - (void)btnClick:(id)sender {

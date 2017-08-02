@@ -163,7 +163,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="335" height="238"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydz-cA-FqI">
-                                    <rect key="frame" x="0.0" y="198" width="335" height="40"/>
+                                    <rect key="frame" x="0.0" y="160" width="335" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="hcn-E5-hcb"/>
                                     </constraints>
@@ -174,14 +174,14 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_bg_img" translatesAutoresizingMaskIntoConstraints="NO" id="DTC-ct-bmM">
-                                    <rect key="frame" x="110" y="108" width="115" height="80"/>
+                                    <rect key="frame" x="110" y="70" width="115" height="80"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="ydz-cA-FqI" secondAttribute="trailing" id="0By-Ii-DCo"/>
                                 <constraint firstItem="DTC-ct-bmM" firstAttribute="centerX" secondItem="FC7-nF-Th3" secondAttribute="centerX" id="RVf-Ks-bD8"/>
-                                <constraint firstAttribute="bottom" secondItem="ydz-cA-FqI" secondAttribute="bottom" id="TS5-fK-qk1"/>
+                                <constraint firstItem="DTC-ct-bmM" firstAttribute="top" secondItem="FC7-nF-Th3" secondAttribute="top" constant="70" id="S36-yC-pwb"/>
                                 <constraint firstItem="ydz-cA-FqI" firstAttribute="leading" secondItem="FC7-nF-Th3" secondAttribute="leading" id="cIT-JX-XyV"/>
                                 <constraint firstItem="ydz-cA-FqI" firstAttribute="top" secondItem="DTC-ct-bmM" secondAttribute="bottom" constant="10" id="xTt-nc-DEJ"/>
                             </constraints>

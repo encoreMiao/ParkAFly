@@ -221,7 +221,7 @@
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
@@ -240,7 +240,7 @@
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = ((BAFParkAir *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
@@ -259,7 +259,7 @@
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
@@ -277,7 +277,7 @@
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
@@ -295,7 +295,7 @@
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
@@ -313,7 +313,7 @@
             PopFeeShowTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:PopFeeShowTableViewCellIdentifier];
             if (cell == nil) {
                 cell = [[[NSBundle mainBundle]loadNibNamed:@"PopFeeShowTableViewCell" owner:nil options:nil] firstObject];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             NSArray *arr = [self.arrDatasource objectAtIndex:indexPath.row];
@@ -359,7 +359,7 @@
             UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
             cell.textLabel.text = ((BAFTcCardInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).type_name;

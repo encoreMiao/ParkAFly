@@ -80,7 +80,13 @@
 {
     _orderDic = orderDic;
     if (self.type == kBAFCenterOrderViewTypeGoing) {
-        self.plan_park_timeL.text = [NSString stringWithFormat:@"预约泊车时间:%@",[orderDic objectForKey:@"plan_park_time"]];
+        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+        NSDate *date =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];
+        NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+        [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSString *str = [dateFormat1 stringFromDate:date];
+        self.plan_park_timeL.text = [NSString stringWithFormat:@"预约泊车时间:%@",str];
         self.car_license_noL.text = [orderDic objectForKey:@"car_license_no"];
         self.park_nameL.text = [orderDic objectForKey:@"park_name"];
 //        "order_status" = "park_appoint";

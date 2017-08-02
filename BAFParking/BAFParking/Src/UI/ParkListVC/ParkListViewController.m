@@ -18,6 +18,7 @@
 #import "BAFOrderViewController.h"
 #import "ParkDetailViewController.h"
 #import "BAFLoginViewController.h"
+#import "MapViewController.h"
 
 #define  ParkListTableViewCelldentifier     @"ParkListTableViewCelldentifier"
 
@@ -216,6 +217,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         case kParkListTableViewCellActionTypeLocation:
         {
             //跳到地图页面
+            MapViewController *vc = [[MapViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         default:
@@ -294,7 +297,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
 {
-    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
+//    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 
 @end

@@ -671,6 +671,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
 {
-    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
+//    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 @end
