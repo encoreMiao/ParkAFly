@@ -77,9 +77,20 @@
     
     [self.mScrollView setContentSize:CGSizeMake(screenWidth * 3, screenHeight)];
 
-    _mobile1ImageView.image = [UIImage imageNamed:@"image1_750.jpg"];
-    _mobile2ImageView.image = [UIImage imageNamed:@"imge2_750.jpg"];
-    _mobile3ImageView.image = [UIImage imageNamed:@"image3_750.jpg"];
+    if (iPhone6plus) {
+        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_640"];
+        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_640"];
+        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_640"];
+    }else if(iPhone6){
+        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_750"];
+        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_750"];
+        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_750"];
+    }else{
+        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_1242"];
+        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_1242"];
+        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_1242"];
+    }
+
 }
 
 #pragma mark - UserAction
