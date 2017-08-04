@@ -104,6 +104,10 @@
 		00F55B891F217BA50044209A /* SHFGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F55B871F217BA50044209A /* SHFGuideViewController.m */; };
 		00F55B8A1F217BA50044209A /* SHFGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F55B881F217BA50044209A /* SHFGuideViewController.xib */; };
 		3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */; };
+		8D15BDA61F347D4600BF8BE4 /* THLevelDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D15BDA51F347D4600BF8BE4 /* THLevelDB.mm */; };
+		8D15BDA91F347D9100BF8BE4 /* libleveldb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D15BDA71F347D9100BF8BE4 /* libleveldb.a */; };
+		8D15BDAA1F347D9100BF8BE4 /* libmemenv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D15BDA81F347D9100BF8BE4 /* libmemenv.a */; };
+		8D15BDAD1F347E1E00BF8BE4 /* LeveldbManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D15BDAC1F347E1E00BF8BE4 /* LeveldbManager.m */; };
 		8D3498021F07C301009D723C /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498001F07C301009D723C /* CommentViewController.m */; };
 		8D3498031F07C301009D723C /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498011F07C301009D723C /* CommentViewController.xib */; };
 		8D3498071F08FC07009D723C /* CommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498051F08FC07009D723C /* CommentCollectionViewCell.m */; };
@@ -423,6 +427,26 @@
 		00F55B881F217BA50044209A /* SHFGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHFGuideViewController.xib; sourceTree = "<group>"; };
 		3D9F2DD9B4763A6507BCA1F4 /* libPods-BAFParking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAFParking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F49DAFA6432E5C0C73476E4 /* Pods-BAFParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.release.xcconfig"; sourceTree = "<group>"; };
+		8D15BD961F347D3700BF8BE4 /* c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = c.h; sourceTree = "<group>"; };
+		8D15BD971F347D3700BF8BE4 /* cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cache.h; sourceTree = "<group>"; };
+		8D15BD981F347D3700BF8BE4 /* comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comparator.h; sourceTree = "<group>"; };
+		8D15BD991F347D3700BF8BE4 /* db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = db.h; sourceTree = "<group>"; };
+		8D15BD9A1F347D3700BF8BE4 /* dumpfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dumpfile.h; sourceTree = "<group>"; };
+		8D15BD9B1F347D3700BF8BE4 /* env.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
+		8D15BD9C1F347D3700BF8BE4 /* filter_policy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filter_policy.h; sourceTree = "<group>"; };
+		8D15BD9D1F347D3700BF8BE4 /* iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iterator.h; sourceTree = "<group>"; };
+		8D15BD9E1F347D3700BF8BE4 /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
+		8D15BD9F1F347D3700BF8BE4 /* slice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slice.h; sourceTree = "<group>"; };
+		8D15BDA01F347D3700BF8BE4 /* status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = status.h; sourceTree = "<group>"; };
+		8D15BDA11F347D3700BF8BE4 /* table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
+		8D15BDA21F347D3700BF8BE4 /* table_builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = table_builder.h; sourceTree = "<group>"; };
+		8D15BDA31F347D3700BF8BE4 /* write_batch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = write_batch.h; sourceTree = "<group>"; };
+		8D15BDA41F347D4600BF8BE4 /* THLevelDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLevelDB.h; sourceTree = "<group>"; };
+		8D15BDA51F347D4600BF8BE4 /* THLevelDB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = THLevelDB.mm; sourceTree = "<group>"; };
+		8D15BDA71F347D9100BF8BE4 /* libleveldb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libleveldb.a; sourceTree = "<group>"; };
+		8D15BDA81F347D9100BF8BE4 /* libmemenv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmemenv.a; sourceTree = "<group>"; };
+		8D15BDAB1F347E1E00BF8BE4 /* LeveldbManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeveldbManager.h; sourceTree = "<group>"; };
+		8D15BDAC1F347E1E00BF8BE4 /* LeveldbManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeveldbManager.m; sourceTree = "<group>"; };
 		8D3497FF1F07C301009D723C /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		8D3498001F07C301009D723C /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		8D3498011F07C301009D723C /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
@@ -593,7 +617,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D15BDA91F347D9100BF8BE4 /* libleveldb.a in Frameworks */,
 				3CB722FCECF79573B7AF41F6 /* libPods-BAFParking.a in Frameworks */,
+				8D15BDAA1F347D9100BF8BE4 /* libmemenv.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,6 +1270,11 @@
 		00EC0F861EC00BC300CDDEA8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8D15BDA41F347D4600BF8BE4 /* THLevelDB.h */,
+				8D15BDA51F347D4600BF8BE4 /* THLevelDB.mm */,
+				8D15BDA71F347D9100BF8BE4 /* libleveldb.a */,
+				8D15BDA81F347D9100BF8BE4 /* libmemenv.a */,
+				8D15BD951F347D3700BF8BE4 /* leveldb */,
 				8D575E531EF504EE0061474D /* HPGrowingTextView */,
 				0093D3A71EE052A00035987C /* Toast */,
 				0001CDDF1ED060DF000889CE /* DYMRollingBanner */,
@@ -1279,9 +1310,32 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8D15BD951F347D3700BF8BE4 /* leveldb */ = {
+			isa = PBXGroup;
+			children = (
+				8D15BD961F347D3700BF8BE4 /* c.h */,
+				8D15BD971F347D3700BF8BE4 /* cache.h */,
+				8D15BD981F347D3700BF8BE4 /* comparator.h */,
+				8D15BD991F347D3700BF8BE4 /* db.h */,
+				8D15BD9A1F347D3700BF8BE4 /* dumpfile.h */,
+				8D15BD9B1F347D3700BF8BE4 /* env.h */,
+				8D15BD9C1F347D3700BF8BE4 /* filter_policy.h */,
+				8D15BD9D1F347D3700BF8BE4 /* iterator.h */,
+				8D15BD9E1F347D3700BF8BE4 /* options.h */,
+				8D15BD9F1F347D3700BF8BE4 /* slice.h */,
+				8D15BDA01F347D3700BF8BE4 /* status.h */,
+				8D15BDA11F347D3700BF8BE4 /* table.h */,
+				8D15BDA21F347D3700BF8BE4 /* table_builder.h */,
+				8D15BDA31F347D3700BF8BE4 /* write_batch.h */,
+			);
+			path = leveldb;
+			sourceTree = "<group>";
+		};
 		8D56DD281F1209DF000E3D99 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				8D15BDAB1F347E1E00BF8BE4 /* LeveldbManager.h */,
+				8D15BDAC1F347E1E00BF8BE4 /* LeveldbManager.m */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -1680,6 +1734,7 @@
 				005E85C61E97924600115CAD /* main.m in Sources */,
 				8DBAE0B81F1081DA003ACFAB /* ParkDetail1TableViewCell.m in Sources */,
 				00214B391ECFDAC100FF6FDE /* MJExtensionConst.m in Sources */,
+				8D15BDAD1F347E1E00BF8BE4 /* LeveldbManager.m in Sources */,
 				0020935A1EDC4B1700C26176 /* BAFOrderConfirmViewController.m in Sources */,
 				005074481EBB097000A6E8B1 /* HRLParkRequest.m in Sources */,
 				00E0F8951EF020710095AA06 /* BAFMoreServicesViewController.m in Sources */,
@@ -1727,6 +1782,7 @@
 				8DC7BC661F2E9C9B00FDE5C0 /* ParkCommentViewController.m in Sources */,
 				8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,
+				8D15BDA61F347D4600BF8BE4 /* THLevelDB.mm in Sources */,
 				8D56DD321F127217000E3D99 /* OrderDetail1TableViewCell.m in Sources */,
 				8D575E801EF6B48C0061474D /* AccountDetailTableViewCell.m in Sources */,
 				00214B3A1ECFDAC100FF6FDE /* MJFoundation.m in Sources */,
@@ -1926,6 +1982,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BAFParking/Utils/Source/wexinSDK",
+					"$(PROJECT_DIR)/BAFParking/Utils/Source/leveldb",
+					"$(PROJECT_DIR)/BAFParking/Utils/Source",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boanfei.boanfei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1951,6 +2009,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BAFParking/Utils/Source/wexinSDK",
+					"$(PROJECT_DIR)/BAFParking/Utils/Source/leveldb",
+					"$(PROJECT_DIR)/BAFParking/Utils/Source",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boanfei.boanfei;
 				PRODUCT_NAME = "$(TARGET_NAME)";

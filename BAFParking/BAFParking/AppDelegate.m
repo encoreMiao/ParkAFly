@@ -19,6 +19,8 @@
 #import "SHFGuideViewController.h"
 #import "ParkListTableViewCell.h"
 
+#import "THLevelDB.h"
+
 @interface AppDelegate ()<UIApplicationDelegate>
 {
     BMKMapManager* _mapManager;
@@ -66,6 +68,17 @@
 //        [[NSUserDefaults standardUserDefaults] setObject:@"launched" forKey:@"FirstLaunch"];
 //        [[NSUserDefaults standardUserDefaults] synchronize];
 //    }
+    
+//    //初始化数据库
+//    NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//    NSString *pageDBPath = [docPath stringByAppendingPathComponent:@"my_leveldb.ldb"];
+//    THLevelDB *myLevelDB = [THLevelDB levelDBWithPath:pageDBPath];
+//    
+//    [myLevelDB setString:@"hello world" forKey:@"username"];
+//    
+//    NSString *str = [myLevelDB stringForKey:@"username"];
+//    NSLog(@"%@",str);
+    
     return YES;
 }
 
