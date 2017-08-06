@@ -71,14 +71,17 @@
                                 <constraint firstAttribute="width" constant="80" id="Mlz-Sq-8Gd"/>
                             </constraints>
                             <state key="normal" image="leftbar_member1_img"/>
+                            <connections>
+                                <action selector="memberLeveBtnClicked:" destination="-1" eventType="touchUpInside" id="pFJ-ME-hJc"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="京12345" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Sm-Vh-ubc">
-                            <rect key="frame" x="160.5" y="140" width="55" height="10"/>
+                            <rect key="frame" x="170.5" y="140" width="40.5" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="iGm-ZN-NWl"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2L0-hI-dI7">
@@ -91,11 +94,18 @@
                             <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="leftbar_info_img" translatesAutoresizingMaskIntoConstraints="NO" id="E95-gg-Jee">
-                            <rect key="frame" x="161" y="32" width="55" height="55"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftbar_info_img" translatesAutoresizingMaskIntoConstraints="NO" id="E95-gg-Jee">
+                            <rect key="frame" x="160" y="28" width="55" height="55"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="55" id="M4H-vn-yUz"/>
                                 <constraint firstAttribute="height" constant="55" id="rbN-3h-AhH"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftbar_lock_img" translatesAutoresizingMaskIntoConstraints="NO" id="OXo-bV-uoU">
+                            <rect key="frame" x="159.5" y="141.5" width="6" height="7"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="65r-tI-LZ7"/>
+                                <constraint firstAttribute="width" constant="6" id="uxR-aS-ybY"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -103,14 +113,16 @@
                     <constraints>
                         <constraint firstItem="FkK-x5-c4l" firstAttribute="centerX" secondItem="WLt-H3-hCT" secondAttribute="centerX" id="8G3-bF-EUw"/>
                         <constraint firstAttribute="height" constant="175" id="9P1-rZ-eOz"/>
+                        <constraint firstItem="OXo-bV-uoU" firstAttribute="centerY" secondItem="4Sm-Vh-ubc" secondAttribute="centerY" id="KfA-Yz-Gca"/>
                         <constraint firstItem="FkK-x5-c4l" firstAttribute="top" secondItem="rUa-d4-8ZC" secondAttribute="bottom" constant="5" id="L4D-8w-Ksq"/>
                         <constraint firstItem="2L0-hI-dI7" firstAttribute="leading" secondItem="WLt-H3-hCT" secondAttribute="leading" constant="10" id="Lsm-UG-edw"/>
                         <constraint firstItem="E95-gg-Jee" firstAttribute="top" secondItem="WLt-H3-hCT" secondAttribute="top" constant="28" id="SEi-tF-e8v"/>
+                        <constraint firstItem="4Sm-Vh-ubc" firstAttribute="leading" secondItem="OXo-bV-uoU" secondAttribute="trailing" constant="5" id="UgC-bK-gEQ"/>
                         <constraint firstAttribute="bottom" secondItem="2L0-hI-dI7" secondAttribute="bottom" constant="0.5" id="VBG-r3-hXU"/>
                         <constraint firstAttribute="trailing" secondItem="rUa-d4-8ZC" secondAttribute="trailing" id="dcZ-bF-viA"/>
                         <constraint firstItem="rUa-d4-8ZC" firstAttribute="top" secondItem="E95-gg-Jee" secondAttribute="bottom" constant="12" id="lbF-Vv-qNN"/>
                         <constraint firstItem="4Sm-Vh-ubc" firstAttribute="top" secondItem="FkK-x5-c4l" secondAttribute="bottom" constant="5" id="nNU-N8-Cha"/>
-                        <constraint firstItem="4Sm-Vh-ubc" firstAttribute="centerX" secondItem="WLt-H3-hCT" secondAttribute="centerX" id="pDO-cw-PAO"/>
+                        <constraint firstItem="4Sm-Vh-ubc" firstAttribute="centerX" secondItem="WLt-H3-hCT" secondAttribute="centerX" constant="3" id="pDO-cw-PAO"/>
                         <constraint firstAttribute="trailing" secondItem="2L0-hI-dI7" secondAttribute="trailing" constant="10" id="t6V-SG-Y7I"/>
                         <constraint firstItem="rUa-d4-8ZC" firstAttribute="leading" secondItem="WLt-H3-hCT" secondAttribute="leading" id="zYo-F5-8PF"/>
                         <constraint firstItem="E95-gg-Jee" firstAttribute="centerX" secondItem="WLt-H3-hCT" secondAttribute="centerX" id="ziB-pv-x5e"/>
@@ -125,11 +137,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="carLicenseImageView" destination="OXo-bV-uoU" id="mZz-lJ-p7J"/>
                 <outlet property="carNumberLabel" destination="4Sm-Vh-ubc" id="Uhr-Od-Xdz"/>
                 <outlet property="headerImage" destination="E95-gg-Jee" id="xXj-Ak-Szg"/>
                 <outlet property="phoneNumberLabel" destination="rUa-d4-8ZC" id="Kh2-Kg-CTR"/>
             </connections>
-            <point key="canvasLocation" x="350" y="-237"/>
+            <point key="canvasLocation" x="349.5" y="-237.5"/>
         </view>
         <view contentMode="scaleToFill" id="KcR-7P-oi9" customClass="PersonalCenterFooterView">
             <rect key="frame" x="0.0" y="0.0" width="353" height="48"/>
@@ -178,6 +191,7 @@
         <image name="leftbar_bg" width="250" height="667"/>
         <image name="leftbar_info8" width="22" height="22"/>
         <image name="leftbar_info_img" width="55" height="55"/>
+        <image name="leftbar_lock_img" width="6" height="7"/>
         <image name="leftbar_member1_img" width="79" height="22"/>
     </resources>
 </document>

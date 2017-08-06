@@ -51,7 +51,17 @@
     }
     self.rightsStatus.text = str;
     
-    self.rightsUpdateTime.text = [NSString stringWithFormat:@"使用期限：%@ - %@",accountInfo.begin_time, accountInfo.end_time];
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *datebegin =[dateFormat dateFromString:accountInfo.begin_time];
+    NSDate *dateend =[dateFormat dateFromString:accountInfo.end_time];
+    NSString *strbegin = [dateFormat1 stringFromDate:datebegin];
+    NSString *strend = [dateFormat1 stringFromDate:dateend];
+    
+    self.rightsUpdateTime.text = [NSString stringWithFormat:@"使用期限：%@ - %@",strbegin,strend];
     
 }
 

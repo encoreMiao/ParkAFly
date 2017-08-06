@@ -48,8 +48,15 @@
     if ([action isEqualToString:@"fill_oil"]) {
         self.orderOperatorLabel.text = @"已为您的爱车代加油100元";
     }
-    self.timeLabel.text = [self.operatorDic objectForKey:@"create_time"];
     
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *createDate =[dateFormat dateFromString:[self.operatorDic objectForKey:@"create_time"]];//actual_park_time
+    NSString *createStr = [dateFormat1 stringFromDate:createDate];
+    self.timeLabel.text = createStr;
 }
 
 @end

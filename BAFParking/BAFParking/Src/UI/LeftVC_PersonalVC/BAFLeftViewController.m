@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSArray *personalCellArray;
 @property (nonatomic, weak) IBOutlet PersonalCenterHeaderView *headerView;
 @property (nonatomic, weak) IBOutlet PersonalCenterFooterView *footerView;
+
 @end
 
 @implementation BAFLeftViewController
@@ -165,6 +166,9 @@
     [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     }];
+}
+- (IBAction)memberLeveBtnClicked:(id)sender {
+    NSLog(@"泊主等级");
 }
 
 @end

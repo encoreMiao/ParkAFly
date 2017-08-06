@@ -42,12 +42,24 @@
 - (void)setOrderDic:(NSDictionary *)orderDic
 {
     _orderDic = orderDic;
-    self.parkTime.text = [NSString stringWithFormat:@"%@",[orderDic objectForKey:@"plan_park_time"]];
+    
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *datepark =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];
+    NSDate *datepick =[dateFormat dateFromString:[orderDic objectForKey:@"plan_pick_time"]];
+    NSString *strpark = [dateFormat1 stringFromDate:datepark];
+    NSString *strpick = [dateFormat1 stringFromDate:datepick];
+    
+    
+    self.parkTime.text = [NSString stringWithFormat:@"%@",strpark];
     self.carlicenseL.text = [orderDic objectForKey:@"car_license_no"];
     self.parkL.text = [orderDic objectForKey:@"park_name"];
     
     if (![[orderDic objectForKey:@"plan_pick_time"]isEqualToString:@"0000-00-00 00:00:00"]) {
-        self.pickTime.text = [NSString stringWithFormat:@"%@",[orderDic objectForKey:@"plan_pick_time"]];
+        self.pickTime.text = [NSString stringWithFormat:@"%@",strpick];
     }else{
         self.pickTime.text = @"";
     }

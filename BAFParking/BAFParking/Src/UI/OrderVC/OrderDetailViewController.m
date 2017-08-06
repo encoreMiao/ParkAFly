@@ -576,15 +576,23 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     totalStr = [NSString stringWithFormat:@"停车场：%@",str];
                 }
                 if (indexPath.row == 2) {
+                    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+                    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+                    
                     if ([[self.orderDic objectForKey:@"actual_park_time"] isEqualToString:@"0000-00-00 00:00:00"]) {
                         str = @"";
                         if ([[self.orderDic objectForKey:@"plan_park_time"] isEqualToString:@"0000-00-00 00:00:00"]){
                             str = @"";
                         }else{
-                            str = [self.orderDic objectForKey:@"plan_park_time"];
+//                            str = [self.orderDic objectForKey:@"plan_park_time"];
+                            NSDate *date =[dateFormat dateFromString:[self.orderDic objectForKey:@"plan_park_time"]];
+                            str = [dateFormat1 stringFromDate:date];
                         }
                     }else {
-                        str = [self.orderDic objectForKey:@"actual_park_time"];
+                        NSDate *date =[dateFormat dateFromString:[self.orderDic objectForKey:@"actual_park_time"]];
+                        str = [dateFormat1 stringFromDate:date];
                     }
                     totalStr = [NSString stringWithFormat:@"停车时间：%@",str];
                 }
@@ -631,15 +639,22 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
         }else{
             if (indexPath.row == 0) {
+                NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+                NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+                
                 if ([[self.orderDic objectForKey:@"actual_pick_time"] isEqualToString:@"0000-00-00 00:00:00"]) {
                     str = @"";
                     if ([[self.orderDic objectForKey:@"plan_pick_time"] isEqualToString:@"0000-00-00 00:00:00"]){
                         str = @"";
                     }else{
-                        str = [self.orderDic objectForKey:@"plan_pick_time"];
+                        NSDate *date =[dateFormat dateFromString:[self.orderDic objectForKey:@"plan_pick_time"]];
+                        str = [dateFormat1 stringFromDate:date];
                     }
                 }else {
-                    str = [self.orderDic objectForKey:@"actual_pick_time"];
+                    NSDate *date =[dateFormat dateFromString:[self.orderDic objectForKey:@"actual_pick_time"]];
+                    str = [dateFormat1 stringFromDate:date];
                 }
                 totalStr = [NSString stringWithFormat:@"取车时间：%@",str];
             }
@@ -661,9 +676,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
             if (indexPath.row == 3) {
                 if ([self.orderDic objectForKey:@"back_passenger_number"]&&(![[self.orderDic objectForKey:@"back_passenger_number"] isEqual:[NSNull null]])) {
-                    str = [self.orderDic objectForKey:@"back_passenger_number"];
+                    str =[NSString stringWithFormat:@"%@人", [self.orderDic objectForKey:@"back_passenger_number"]];
                 }else{
-                    str = @"1";
+                    str = @"1人";
                 }
                 totalStr = [NSString stringWithFormat:@"同行人数：%@",str];
             }

@@ -120,7 +120,15 @@
 {
     _orderDic = orderDic;
     self.parkNameLabel.text = [_orderDic objectForKey:@"park_name"];
-    self.parkTimeLabel.text = [_orderDic objectForKey:@"actual_park_time"];
+    
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *datepark =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];//actual_park_time
+    NSString *strpark = [dateFormat1 stringFromDate:datepark];
+    self.parkTimeLabel.text = strpark;
 }
 
 - (void)setScore:(NSString *)score

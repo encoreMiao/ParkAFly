@@ -164,16 +164,23 @@
     mutDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
     self.contentL.text = [NSString stringWithFormat:@"%@     %@      %@",[mutDic objectForKey:OrderParamTypeContact_name],[mutDic objectForKey:OrderParamTypeContact_phone],[mutDic objectForKey:OrderParamTypeCar_license_no]];
     
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
     NSString *str;
     if ([mutDic objectForKey:OrderParamTypeGoTime]) {
-        str = [mutDic objectForKey:OrderParamTypeGoTime];
+        NSDate *date =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeGoTime]];
+        str = [dateFormat1 stringFromDate:date];
     }else{
         str = @"";
     }
     self.parkTimeL.text = [NSString stringWithFormat:@"预计停车时间：%@",str];
     
     if ([mutDic objectForKey:OrderParamTypeTime]) {
-        str = [mutDic objectForKey:OrderParamTypeTime];
+        NSDate *date =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeTime]];
+        str = [dateFormat1 stringFromDate:date];
     }else{
         str = @"";
     }

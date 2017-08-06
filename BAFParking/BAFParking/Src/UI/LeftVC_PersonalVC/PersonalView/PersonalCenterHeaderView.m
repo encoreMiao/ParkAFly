@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *carNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *levelButton;
+@property (nonatomic, weak) IBOutlet UIImageView *carLicenseImageView;
 @end
 
 @implementation PersonalCenterHeaderView
@@ -21,6 +22,7 @@
     self = [super init];
     if (self) {
         [self setupView];
+        self.carLicenseImageView.hidden = YES;
         self.carNumberLabel.hidden = YES;
     }
     return self;
@@ -37,14 +39,17 @@
     switch (userInfo.level_id.integerValue) {
         case 1:
             [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member1_img"] forState:UIControlStateNormal];
+            self.carLicenseImageView.hidden = YES;
             self.carNumberLabel.hidden = YES;
             break;
         case 2:
             [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member2_img"] forState:UIControlStateNormal];
+            self.carLicenseImageView.hidden = YES;
             self.carNumberLabel.hidden = YES;
             break;
         case 3:
             [self.levelButton setImage:[UIImage imageNamed:@"leftbar_member3_img"] forState:UIControlStateNormal];
+            self.carLicenseImageView.hidden = NO;
             self.carNumberLabel.hidden = NO;
             break;
         default:
