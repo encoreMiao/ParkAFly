@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *brand;
 @property (nonatomic, strong) NSString *color;
-@property (nonatomic, strong) NSString *cityname;
+@property (nonatomic, strong) NSString *city_name;
 
 @property (nonatomic, strong) NSString *level_id;
 @property (nonatomic, strong) NSString *starttime;

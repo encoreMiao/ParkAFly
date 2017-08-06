@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 #define PersonalEditTableViewCellIdentifier  @"PersonalEditTableViewCellIdentifier"
 
-@interface PersonalEditViewController ()<UITableViewDelegate, UITableViewDataSource,PopViewControllerDelegate>
+@interface PersonalEditViewController ()<UITableViewDelegate, UITableViewDataSource,PopViewControllerDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *identityArr;
 @property (nonatomic, strong) NSMutableArray *carArr;
@@ -203,16 +203,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     [cell updateDetail:[self.clientDic objectForKey:baf_cname]];
                 }else{
                     if (userInfo.cname && ![userInfo.cname isEqual:[NSNull null]]) {
+                        [self.clientDic setObject:userInfo.cname forKey:baf_cname];
                         [cell updateDetail:userInfo.cname];
                     }
                 }
             }
             
             if (row == 3) {
+                cell.inputTF.userInteractionEnabled = NO;
+                cell.inputTF.enabled = NO;
                 if (self.clientDic &&[self.clientDic objectForKey:baf_ctel]) {
                     [cell updateDetail:[self.clientDic objectForKey:baf_ctel]];
                 }else{
                     if (userInfo.ctel && ![userInfo.ctel isEqual:[NSNull null]]) {
+                        [self.clientDic setObject:userInfo.ctel forKey:baf_ctel];
                         [cell updateDetail:userInfo.ctel];
                     }
                 }
@@ -224,10 +228,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     [cell updateDetail:[self.clientDic objectForKey:baf_csex]];
                 }else{
                     if (userInfo.csex.integerValue == 1) {
+                        [self.clientDic setObject:@"男" forKey:baf_csex];
                         [cell updateDetail:@"男"];
                     }
                     
                     if (userInfo.csex.integerValue == 2) {
+                        [self.clientDic setObject:@"女" forKey:baf_csex];
                         [cell updateDetail:@"女"];
                     }
                 }
@@ -237,8 +243,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     NSArray *arr = [[self.clientDic objectForKey:baf_caddr] componentsSeparatedByString:@"&"];
                     [cell updateDetail:arr[0]];
                 }else{
-                    if (userInfo.cityname && ![userInfo.cityname isEqual:[NSNull null]]) {
-                        [cell updateDetail:userInfo.cityname];
+                    if (userInfo.city_name && ![userInfo.city_name isEqual:[NSNull null]]) {
+                        [self.clientDic setObject:[NSString stringWithFormat:@"%@&%@", userInfo.city_name,userInfo.caddr] forKey:baf_caddr];
+                        [cell updateDetail:userInfo.city_name];
                     }
                 }
             }
@@ -256,18 +263,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 }
                 else{
                     if (userInfo.carnum && ![userInfo.carnum isEqual:[NSNull null]]) {
+                        [self.clientDic setObject:userInfo.carnum forKey:baf_carnum];
                         [cell updateDetail:userInfo.carnum];
                     }
                 }
             }
-            
-            
             if (row == 2) {
                 if (self.clientDic &&[self.clientDic objectForKey:baf_brand]) {
                     [cell updateDetail:[self.clientDic objectForKey:baf_brand]];
                 }
                 else{
                     if (userInfo.brand && ![userInfo.brand isEqual:[NSNull null]]) {
+                        [self.clientDic setObject:userInfo.brand forKey:baf_brand];
                         [cell updateDetail:userInfo.brand];
                     }
                 }
@@ -280,6 +287,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 }
                 else{
                     if (userInfo.color && ![userInfo.color isEqual:[NSNull null]]) {
+                        [self.clientDic setObject:userInfo.color forKey:baf_color];
                         [cell updateDetail:userInfo.color];
                     }
                 }
@@ -298,6 +306,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0&& indexPath.section == 0) {
         //修改头像
+        [self modifyHeadMenu];
     }else if (indexPath.row == 2&& indexPath.section == 0) {
         //选择性别
         PopViewController *popView = [[PopViewController alloc] init];
@@ -326,22 +335,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [popView configViewWithData:self.colorArr type:kPopViewControllerTypeSelecColor];
         [self presentViewController:popView animated:NO completion:nil];
     }
-    
-//    if (self.type == kBAFOrderViewControllerTypeOrder) {
-//        [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-//    }else if(self.type == kBAFOrderViewControllerTypeModifyAll){
-//        if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
-//            [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-//        }else{
-//            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
-//        }
-//    }else if(self.type == kBAFOrderViewControllerTypeModifyPart){
-//        if (indexPath.section != 1&&indexPath.section != 0) {
-//            [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-//        }else{
-//            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
-//        }
-//    }
 }
 
 #pragma mark - PopViewControllerDelegate
@@ -466,6 +459,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             BAFUserInfo *userInfo = [BAFUserInfo mj_objectWithKeyValues:[obj objectForKey:@"data"]];
             [[BAFUserModelManger sharedInstance]saveUserInfo:userInfo];
+            
         }else{
             
         }
@@ -478,5 +472,34 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 //    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 
+- (void)modifyHeadMenu {
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"拍照", nil),NSLocalizedString(@"用户相册", nil), nil];
+    [actionSheet showInView:self.view];
+}
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    if (buttonIndex == 0) {
+        [self openImagePickerControllerWith:UIImagePickerControllerSourceTypeCamera];
+    }else if (buttonIndex == 1) {
+        [self openImagePickerControllerWith:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+}
+
+
+- (void)openImagePickerControllerWith:(UIImagePickerControllerSourceType)type {
+    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        type = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.view.backgroundColor = [UIColor whiteColor];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = type;
+    imagePickerController.allowsEditing = YES;
+    if (type == UIImagePickerControllerSourceTypePhotoLibrary) {
+//        [imagePickerController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"common_black"] mbk_stretchImage] forBarMetrics:UIBarMetricsDefault];
+        [imagePickerController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:20.0]}];
+    }
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
 @end

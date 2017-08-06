@@ -97,10 +97,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self parkAirRequestWithCityId:tempCityId[1]];
         }else{
             BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
-            if (userInfo.cityname) {
-                [self setNavigationRightButtonWithText:userInfo.cityname image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
+            if (userInfo.city_name) {
+                [self setNavigationRightButtonWithText:userInfo.city_name image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
                 [self parkAirRequestWithCityId:userInfo.caddr];//城市默认北京
-                [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", userInfo.cityname,userInfo.caddr] forKey:OrderParamTypeCity];
+                [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", userInfo.city_name,userInfo.caddr] forKey:OrderParamTypeCity];
             }
             else{
                 [self setNavigationRightButtonWithText:@"北京" image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
