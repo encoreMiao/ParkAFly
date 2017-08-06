@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self.view addSubview:self.buttonView];
     self.orderListArr = [NSMutableArray array];
     self.mytableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.mytableview.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    self.mytableview.backgroundColor = [UIColor colorWithHex:0xffffff];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -241,11 +241,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self.orderListArr removeAllObjects];
             self.orderListArr = [NSMutableArray arrayWithArray:[obj objectForKey:@"data"]];
-            [self.mytableview  reloadData];
         }else{
             [self.orderListArr removeAllObjects];
-            [self.mytableview reloadData];
+            
         }
+
+        if (self.orderListArr.count<=0) {
+            [self.noneView setFrame:CGRectMake(0, 0, screenWidth,195)];
+            self.mytableview.tableHeaderView = self.noneView;
+            self.mytableview.backgroundColor = [UIColor colorWithHex:0xffffff];
+        }else{
+            self.mytableview.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 1)];
+            self.mytableview.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+        }
+        
+        [self.mytableview reloadData];
     }
     
     if (aRequestID == kRequestNumberIndexCancelOrder) {

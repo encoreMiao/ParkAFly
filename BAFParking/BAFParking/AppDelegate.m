@@ -63,12 +63,12 @@
     
     [WXApi registerApp:@"wxd9b4c7082b53f5b3"];
     
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLaunch"] == nil){
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLaunch"] == nil){
         [self showGuideVC];
-//        [[NSUserDefaults standardUserDefaults] setObject:@"launched" forKey:@"FirstLaunch"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
-    
+        [[NSUserDefaults standardUserDefaults] setObject:@"launched" forKey:@"FirstLaunch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
 //    //初始化数据库
 //    NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 //    NSString *pageDBPath = [docPath stringByAppendingPathComponent:@"my_leveldb.ldb"];
@@ -121,53 +121,22 @@
     return  isSuc;
 }
 
--(void) onReq:(BaseReq*)req
-{
-    if([req isKindOfClass:[GetMessageFromWXReq class]])
-    {
-        // 微信请求App提供内容， 需要app提供内容后使用sendRsp返回
-        NSString *strTitle = [NSString stringWithFormat:@"微信请求App提供内容"];
-        NSString *strMsg = @"微信请求App提供内容，App要调用sendResp:GetMessageFromWXResp返回给微信";
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        alert.tag = 1000;
-        [alert show];
-    }
-    else if([req isKindOfClass:[ShowMessageFromWXReq class]])
-    {
-        ShowMessageFromWXReq* temp = (ShowMessageFromWXReq*)req;
-        WXMediaMessage *msg = temp.message;
-        
-        //显示微信传过来的内容
-        WXAppExtendObject *obj = msg.mediaObject;
-        
-        NSString *strTitle = [NSString stringWithFormat:@"微信请求App显示内容"];
-//        NSString *strMsg = [NSString stringWithFormat:@"标题：%@ \n内容：%@ \n附带信息：%@ \n缩略图:%u bytes\n\n", msg.title, msg.description, obj.extInfo, msg.thumbData.length];
-        NSString *strMsg = @"";
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else if([req isKindOfClass:[LaunchFromWXReq class]])
-    {
-        //从微信启动App
-        NSString *strTitle = [NSString stringWithFormat:@"从微信启动"];
-        NSString *strMsg = @"这是从微信启动的消息";
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-}
-
 -(void) onResp:(BaseResp*)resp
 {
     if([resp isKindOfClass:[SendMessageToWXResp class]])
     {
-        NSString *strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
-        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        if (resp.errCode == WXSuccess) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享成功" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }else{
+            NSString *strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
+            NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        
     }else if([resp isKindOfClass:[PayResp class]]){
         //支付返回结果，实际支付结果需要去微信服务器端查询
         NSString *strMsg,*strTitle = [NSString stringWithFormat:@"支付结果"];
@@ -187,36 +156,6 @@
     }
 
 }
-
-//-(void) RespLinkContent
-//{
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    message.title = @"专访张小龙：产品之上的世界观";
-//    message.description = @"微信的平台化发展方向是否真的会让这个原本简洁的产品变得臃肿？在国际化发展方向上，微信面临的问题真的是文化差异壁垒吗？腾讯高级副总裁、微信产品负责人张小龙给出了自己的回复。";
-//    [message setThumbImage:[UIImage imageNamed:@"res2.png"]];
-//    
-//    WXWebpageObject *ext = [WXWebpageObject object];
-//    ext.webpageUrl = @"http://tech.qq.com/zt2012/tmtdecode/252.htm";
-//    
-//    message.mediaObject = ext;
-//    
-//    GetMessageFromWXResp* resp = [[GetMessageFromWXResp alloc] init];
-//    resp.message = message;
-//    resp.bText = NO;
-//    
-//    [WXApi sendResp:resp];
-//}
-
-
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//    // Return YES for supported orientations
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-//    } else {
-//        return YES;
-//    }
-//}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {

@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger,OrderServiceTableViewCellType){
     kOrderServiceTableViewCellTypeCommon,
     kOrderServiceTableViewCellTypeCommonText,
     kOrderServiceTableViewCellTypeDisclosure,
+    
+    kOrderServiceTableViewCellTypeMore,//更多服务
 };
 
 @interface OrderServiceTableViewCell : UITableViewCell
@@ -27,4 +29,10 @@ typedef NS_ENUM(NSInteger,OrderServiceTableViewCellType){
 @property (nonatomic, assign) BOOL  show;
 @property (nonatomic, assign) id<OrderServiceTableViewCellDelegate> delegate;
 @property (nonatomic, strong) NSString *parkflyno;
+@property (weak, nonatomic) IBOutlet UIView     *moreServiceView;
+//@property (weak, nonatomic) IBOutlet UILabel    *moreServiceLabel;
+@property (weak, nonatomic) IBOutlet UILabel    *more1ServiceLabel;
+@property (weak, nonatomic) IBOutlet UILabel    *more1MoneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel    *more2ServiceLabel;
+@property (weak, nonatomic) IBOutlet UILabel    *more2MoneyLabel;
 @end

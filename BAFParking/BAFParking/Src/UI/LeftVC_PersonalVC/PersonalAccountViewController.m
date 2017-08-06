@@ -85,6 +85,8 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     
     self.selectedIndexpath = nil;
     
+    self.wechatChargeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5);
+    self.cardChargeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,7 +100,7 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"账户余额"];
-    [self setNavigationRightButtonWithText:@"充值明细" method:@selector(rightBtnClicked:)];
+    [self setNavigationRightButtonWithText:@"明细" method:@selector(rightBtnClicked:)];
     
     self.mycollectionview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, screenHeight-170);
     
@@ -342,7 +344,7 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            [self showTipsInView:self.view message:@"绑定成功" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"充值成功" offset:self.view.center.x+100];
             [self getAccountInfo];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];

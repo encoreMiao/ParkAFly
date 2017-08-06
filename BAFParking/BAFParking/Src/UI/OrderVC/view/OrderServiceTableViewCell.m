@@ -33,6 +33,7 @@
         case kOrderServiceTableViewCellTypeCommon:
             self.detailTextF.hidden = YES;
             self.couponLabel.hidden = NO;
+            self.moreServiceView.hidden = YES;
             break;
         case kOrderServiceTableViewCellTypeCommonText:
             if (_show) {
@@ -41,6 +42,7 @@
                 self.detailTextF.hidden = YES;
             }
             self.couponLabel.hidden = NO;
+            self.moreServiceView.hidden = YES;
             break;
         case kOrderServiceTableViewCellTypeDisclosure:
             self.detailTextF.hidden = YES;
@@ -48,6 +50,15 @@
             self.serviceTitle.text = @"更多服务";
             self.serviceNotitionLabel.text = @"提供代加油、洗车服务等";
             [self.clickButton setImage:[UIImage imageNamed:@"list_ip_more"] forState:UIControlStateNormal];
+            self.moreServiceView.hidden = YES;
+            break;
+        case kOrderServiceTableViewCellTypeMore:
+            self.detailTextF.hidden = YES;
+            self.couponLabel.hidden = YES;
+            self.serviceTitle.text = @"更多服务";
+            self.serviceNotitionLabel.hidden = YES;
+            [self.clickButton setImage:[UIImage imageNamed:@"list_ip_more"] forState:UIControlStateNormal];
+            self.moreServiceView.hidden = NO;
             break;
         default:
             break;

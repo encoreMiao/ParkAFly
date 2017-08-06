@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.rechargeListArr = [NSMutableArray array];
+    
+    self.mainTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,7 +45,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
-    [self setNavigationTitle:@"充值明细"];
+    [self setNavigationTitle:@"明细"];
     
     [self clientDetailRequest];
 }

@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *comentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commetTagLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *replylabel;
 
 @property (strong, nonatomic) BAFParkCommentInfo *commentInfo;
 @end

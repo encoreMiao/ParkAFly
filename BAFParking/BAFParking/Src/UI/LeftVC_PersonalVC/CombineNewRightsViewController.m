@@ -104,7 +104,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self showTipsInView:self.view message:@"输入的卡号无效" offset:self.view.center.x+100];
             [self performSelector:@selector(backMethod:) withObject:nil afterDelay:3.0f];
         }else{
-             [self showTipsInView:self.view message:@"绑定成功" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"绑定成功" offset:self.view.center.x+100];
+            [self backMethod:nil];
         }
     }
 }

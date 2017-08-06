@@ -7,10 +7,12 @@
 //
 
 #import "BAFBaseViewController.h"
-#import <BaiduMapAPI_Map/BMKMapView.h>
+#import <BaiduMapAPI_Map/BMKMapComponent.h>
 
 @interface MapViewController : BAFBaseViewController
-{
-    BMKMapView* _mapView;
-}
+@property (nonatomic, assign) CLLocationCoordinate2D coor;
+@property (nonatomic, strong) NSString *pointStr;
+@property (nonatomic, strong) NSString *titleStr;
+@property (nonatomic, strong) NSString *detailStr;
+@property (nonatomic, strong) NSString *imageStr;//parkinfo.map_pic
 @end

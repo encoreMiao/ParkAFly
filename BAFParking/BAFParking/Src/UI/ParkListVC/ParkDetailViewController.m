@@ -15,6 +15,7 @@
 #import "BAFParkCommentInfo.h"
 #import "BAFParkInfo.h"
 #import "ParkCommentViewController.h"
+#import "MapViewController.h"
 
 #define ParkDetail1TableViewCellIdentifier      @"ParkDetail1TableViewCellIdentifier"
 #define ParkDetail2TableViewCellIdentifier      @"ParkDetail2TableViewCellIdentifier"
@@ -108,10 +109,27 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
                                                    context:nil].size;
             }
             
+            CGFloat height = titleSize.height;
+            
+            if ([commentInfo.reply isEqualToString:@""]||
+                commentInfo.reply == nil||
+                [commentInfo.reply isEqual:[NSNull null]]) {
+                
+            }
+            else{
+                NSString *replyStr = [NSString stringWithFormat:@"泊安飞回复：\n%@",commentInfo.reply];
+                CGSize replySize = [replyStr boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
+                                                   context:nil].size;
+                height +=replySize.height+24;
+            }
+            
+            
             if ([commentInfo.tags isEqualToString:@""] || !commentInfo.tags) {
-                return titleSize.height+20+85;
+                return height+20+85;
             }else{
-                return titleSize.height+20+115;
+                return height+20+115;
             }
         }
         return 0;
@@ -181,6 +199,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
         }
         cell.parkDetailInfo = self.parkDetailInfo;
         cell.parkCommentList = self.parkCommentList;
+        WS(weakself);
+        cell.handler = ^(void){
+            MapViewController *vc = [[MapViewController alloc]init];
+            vc.imageStr = weakself.parkDetailInfo.map_pic;
+            vc.pointStr = weakself.parkDetailInfo.map_title;
+            vc.titleStr = weakself.parkDetailInfo.map_content;
+            vc.detailStr = weakself.parkDetailInfo.map_address;
+            CLLocationCoordinate2D coor;
+            coor.latitude = weakself.parkDetailInfo.map_lon.doubleValue;
+            coor.longitude = weakself.parkDetailInfo.map_lat.doubleValue;
+            vc.coor = coor;
+            [self.navigationController pushViewController:vc animated:YES];
+        };
+        
         return cell;
     }else if(indexPath.section == 1){
         ParkDetail2TableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:ParkDetail2TableViewCellIdentifier];

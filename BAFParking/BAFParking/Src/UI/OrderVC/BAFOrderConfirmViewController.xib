@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BAFOrderConfirmViewController">
             <connections>
+                <outlet property="detailButton" destination="LbK-AJ-iZP" id="2Wc-gm-97Z"/>
                 <outlet property="feeLabel" destination="mbV-5M-BiD" id="pFq-8J-6mD"/>
                 <outlet property="headerText" destination="uVA-gg-v5F" id="6Lh-OB-Waz"/>
                 <outlet property="headerlabel" destination="uVA-gg-v5F" id="fcW-rk-AAD"/>
@@ -100,9 +101,9 @@
             <rect key="frame" x="0.0" y="0.0" width="446" height="91"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gAw-Uq-wNH">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_frame" translatesAutoresizingMaskIntoConstraints="NO" id="gAw-Uq-wNH">
                     <rect key="frame" x="0.0" y="86" width="446" height="5"/>
-                    <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="5" id="DqM-JX-bFj"/>
                     </constraints>
@@ -128,4 +129,7 @@
             <point key="canvasLocation" x="535" y="-65"/>
         </view>
     </objects>
+    <resources>
+        <image name="list_frame" width="375" height="2"/>
+    </resources>
 </document>

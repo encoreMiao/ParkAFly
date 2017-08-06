@@ -46,7 +46,7 @@
     if (parkDetailInfo) {
         NSString *urlStr = [NSString stringWithFormat:@"Uploads/Picture/%@",self.parkDetailInfo.map_pic];
         NSString *totalUrl = REQURL(urlStr);
-        [self.parkImage sd_setImageWithURL:[NSURL URLWithString:totalUrl]];
+        [self.parkImage sd_setImageWithURL:[NSURL URLWithString:totalUrl] placeholderImage:[UIImage imageNamed:@"parking_loading_img"]];
         
         self.parkNameLabel.text = self.parkDetailInfo.map_address;
         
@@ -57,7 +57,7 @@
         
         NSString *mapAddress = [NSString stringWithFormat:@"地址：%@",self.parkDetailInfo.map_address];
         NSMutableAttributedString *mutAddressStr = [[NSMutableAttributedString alloc]initWithString:mapAddress];
-        [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[carFee rangeOfString:self.parkDetailInfo.map_address]];
+        [mutAddressStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[mapAddress rangeOfString:self.parkDetailInfo.map_address]];
         self.addressLabel.attributedText = mutAddressStr;
     }
 }
@@ -108,6 +108,11 @@
 
 - (IBAction)addressAction:(id)sender {
     DLog(@"地图页面");
+    if (self.handler) {
+        self.handler();
+    }
+    
+    
 }
 
 

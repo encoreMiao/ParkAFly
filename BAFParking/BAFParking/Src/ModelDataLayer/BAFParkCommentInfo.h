@@ -36,6 +36,7 @@
 @property (nonatomic, strong) NSString *is_delete;
 @property (nonatomic, strong) NSString *create_time;
 @property (nonatomic, strong) NSString *reply_time;
+@property (nonatomic, strong) NSString *reply;
 @property (nonatomic, strong) NSString *sort_time;
 @property (nonatomic, strong) NSString *avg_star;//平均星
 @property (nonatomic, strong) NSString *avg_score;//平均分

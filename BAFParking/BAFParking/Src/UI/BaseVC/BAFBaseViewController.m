@@ -51,8 +51,28 @@
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.backButton]];
 }
 
+- (void)setNavigationRightButtonWithImage:(UIImage *)image method:(SEL)method{
+    [self.rightButton setImage:image forState:UIControlStateNormal];
+    [self.rightButton addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightButton]];
+}
+
 - (void)setNavigationRightButtonWithText:(NSString *)text method:(SEL)method{
     [self.rightButton setTitle:text forState:UIControlStateNormal];
+    [_rightButton addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightButton]];
+}
+
+- (void)setNavigationRightButtonWithText:(NSString *)text image:(UIImage *)image method:(SEL)method{
+    [self.rightButton setTitle:text forState:UIControlStateNormal];
+    [self.rightButton setImage:image forState:UIControlStateNormal];
+    CGSize size = [self.rightButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.rightButton.titleLabel.font}];
+    self.rightButton.imageEdgeInsets = UIEdgeInsetsMake(size.height/2-5, size.width, -size.height/2+5, -size.width);
+    self.rightButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 5);
+    // 重点位置结束
+//    self.rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+
+    
     [_rightButton addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightButton]];
 }
@@ -62,11 +82,6 @@
     return self.rightButton.titleLabel.text;
 }
 
-- (void)setNavigationRightButtonWithImage:(UIImage *)image method:(SEL)method{
-    [self.rightButton setImage:image forState:UIControlStateNormal];
-    [_rightButton addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightButton]];
-}
 - (void)setNavigationTitle:(NSString *)title{
     self.navigationItem.titleView = self.titleLabel;
     [self.titleLabel setText:title];

@@ -605,7 +605,8 @@
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSelectionStyleGray;
-        _tableView.separatorColor = [UIColor colorWithHex:0xc9c9c9];
+//        _tableView.separatorColor = [UIColor colorWithHex:0xc9c9c9];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;;
     }
     return _tableView;
 }

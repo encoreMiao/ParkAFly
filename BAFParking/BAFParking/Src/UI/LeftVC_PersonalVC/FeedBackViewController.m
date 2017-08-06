@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([obj isKindOfClass:[NSDictionary class]]) {
             obj = (NSDictionary *)obj;
             if ([[obj objectForKey:@"code"] integerValue]==200) {
-                [self showTipsInView:self.view message:@"发表成功，谢谢您的评价" offset:self.view.center.x+100];
+                [self showTipsInView:self.view message:@"意见反馈成功" offset:self.view.center.x+100];
                 [self performSelector:@selector(backMethod:) withObject:nil afterDelay:3.0f];
             }
             else{

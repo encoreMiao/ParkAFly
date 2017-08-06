@@ -61,23 +61,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (self.dicDatasource) {
         NSArray *tempCityId = [[self.dicDatasource objectForKey:OrderParamTypeCity] componentsSeparatedByString:@"&"];
         if (self.type == kParkListViewControllerTypeShow) {
-            [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
+            [self setNavigationRightButtonWithText:tempCityId[0] image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
         }
         [self parkListRequestWithCityId:tempCityId[1]];
     }else{
         if (self.currentCityTitle &&self.currentCityID) {
             if (self.type == kParkListViewControllerTypeShow) {
-                [self setNavigationRightButtonWithText:self.currentCityTitle method:@selector(rightBtnClicked:)];
+                [self setNavigationRightButtonWithText:self.currentCityTitle image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
             }
             [self parkListRequestWithCityId:self.currentCityID];//城市默认北京
         }else{
             if (self.type == kParkListViewControllerTypeShow) {
-                [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+                [self setNavigationRightButtonWithText:@"北京" image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
             }
             [self parkListRequestWithCityId:@"1"];//城市默认北京
         }
-        
-        
     }
     
 }
@@ -218,6 +216,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         {
             //跳到地图页面
             MapViewController *vc = [[MapViewController alloc]init];
+            vc.imageStr = cell.parkinfo.map_pic;
+            vc.pointStr = cell.parkinfo.map_title;
+            vc.titleStr = cell.parkinfo.map_content;
+            vc.detailStr = cell.parkinfo.map_address;
+            CLLocationCoordinate2D coor;
+            coor.latitude = cell.parkinfo.map_lon.doubleValue;
+            coor.longitude = cell.parkinfo.map_lat.doubleValue;
+            vc.coor = coor;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

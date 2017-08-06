@@ -69,10 +69,10 @@
     _type = type;
     NSString *urlStr = [NSString stringWithFormat:@"Uploads/Picture/%@",parkinfo.map_pic];
     NSString *totalUrl = REQURL(urlStr);
-    [self.parkImageView sd_setImageWithURL:[NSURL URLWithString:totalUrl]];
+    [self.parkImageView sd_setImageWithURL:[NSURL URLWithString:totalUrl] placeholderImage:[UIImage imageNamed:@"parking_loading_img"]];
     self.locationLabel.text = parkinfo.map_address;
     self.parkLabel.text = [NSString stringWithFormat:@"%@",parkinfo.map_title];
-    NSString *carFee = [NSString stringWithFormat:@"车位费：%@",parkinfo.map_charge.strike_price];
+    NSString *carFee = [NSString stringWithFormat:@"车位费：%ld元",parkinfo.map_charge.strike_price.integerValue/100];
     NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:carFee];
     [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[carFee rangeOfString:parkinfo.map_charge.strike_price]];
     self.carFeeLabel.attributedText = mutStr;

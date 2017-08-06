@@ -7,6 +7,7 @@
 //
 
 #import "CouponTableViewCell.h"
+#import "UIColor+HexColor.h"
 
 @interface CouponTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
@@ -42,11 +43,21 @@
             self.selectButton.hidden = YES;
             break;
         case kCouponTableViewCellTypeCommonCell2:
+            //灰色
             self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg3"];
             self.selectButton.hidden = YES;
+            self.couponLabel.textColor = [UIColor colorWithHex:0x969696];
+            self.couponDetailLabel.textColor = [UIColor colorWithHex:0x969696];
+            self.validateDateLabel.textColor = [UIColor colorWithHex:0x969696];
+            self.detailBtn.hidden =YES;
             break;
         case kCouponTableViewCellTypeCommonCell3:
+            //灰色
+            self.couponLabel.textColor = [UIColor colorWithHex:0x969696];
+            self.couponDetailLabel.textColor = [UIColor colorWithHex:0x969696];
+            self.validateDateLabel.textColor = [UIColor colorWithHex:0x969696];
             self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg2"];
+            self.detailBtn.hidden = YES;
             self.selectButton.hidden = YES;
             break;
             
@@ -57,7 +68,11 @@
             break;
         case kCouponViewControllerTypeUseCell2:
             self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg4"];
+            self.couponLabel.textColor = [UIColor colorWithHex:0x969696];
+            self.couponDetailLabel.textColor = [UIColor colorWithHex:0x969696];
+            self.validateDateLabel.textColor = [UIColor colorWithHex:0x969696];
             self.selectButton.hidden = YES;
+            self.detailBtn.hidden = YES;
             break;
             
         default:

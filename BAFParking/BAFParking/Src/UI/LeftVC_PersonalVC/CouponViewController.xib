@@ -242,18 +242,18 @@
             <point key="canvasLocation" x="34.5" y="54.5"/>
         </view>
         <view contentMode="scaleToFill" id="Axs-vF-QDW">
-            <rect key="frame" x="0.0" y="0.0" width="385" height="271"/>
+            <rect key="frame" x="0.0" y="0.0" width="463" height="270"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_youhuiq_empty" translatesAutoresizingMaskIntoConstraints="NO" id="YiG-ia-koc">
-                    <rect key="frame" x="153.5" y="50" width="77" height="86"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_youhuiq_empty" translatesAutoresizingMaskIntoConstraints="NO" id="YiG-ia-koc">
+                    <rect key="frame" x="193" y="50" width="77" height="86"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="77" id="eLQ-nH-KQx"/>
                         <constraint firstAttribute="height" constant="86" id="jFa-uN-3cz"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前没有可用优惠券！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDY-CW-ddI">
-                    <rect key="frame" x="0.0" y="146" width="385" height="17"/>
+                    <rect key="frame" x="0.0" y="146" width="463" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -268,7 +268,7 @@
                 <constraint firstItem="eDY-CW-ddI" firstAttribute="top" secondItem="YiG-ia-koc" secondAttribute="bottom" constant="10" id="nBZ-kS-Sox"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="528" y="-2"/>
+            <point key="canvasLocation" x="566.5" y="-3"/>
         </view>
     </objects>
     <resources>

@@ -12,6 +12,7 @@
 - (void)setNavigationBackButtonWithText:(NSString *)text method:(SEL)method;
 - (void)setNavigationBackButtonWithImage:(UIImage *)image method:(SEL)method;
 - (void)setNavigationRightButtonWithText:(NSString *)text method:(SEL)method;
+- (void)setNavigationRightButtonWithText:(NSString *)text image:(UIImage *)image method:(SEL)method;
 - (void)setNavigationRightButtonWithImage:(UIImage *)image method:(SEL)method;
 - (void)setNavigationTitle:(NSString *)title;
 - (NSString *)rightButtonText;

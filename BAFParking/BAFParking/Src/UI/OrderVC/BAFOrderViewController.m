@@ -93,17 +93,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([_dicDatasource objectForKey:OrderParamTypeCity]) {
             NSString *cityid = [_dicDatasource objectForKey:OrderParamTypeCity];
             NSArray *tempCityId = [cityid componentsSeparatedByString:@"&"];
-            [self setNavigationRightButtonWithText:tempCityId[0] method:@selector(rightBtnClicked:)];
+            [self setNavigationRightButtonWithText:tempCityId[0] image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
             [self parkAirRequestWithCityId:tempCityId[1]];
         }else{
             BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
             if (userInfo.cityname) {
-                [self setNavigationRightButtonWithText:userInfo.cityname method:@selector(rightBtnClicked:)];
+                [self setNavigationRightButtonWithText:userInfo.cityname image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
                 [self parkAirRequestWithCityId:userInfo.caddr];//城市默认北京
                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", userInfo.cityname,userInfo.caddr] forKey:OrderParamTypeCity];
             }
             else{
-                [self setNavigationRightButtonWithText:@"北京" method:@selector(rightBtnClicked:)];
+                [self setNavigationRightButtonWithText:@"北京" image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
                 [self parkAirRequestWithCityId:@"1"];//城市默认北京
                 [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@", @"北京",@"1"] forKey:OrderParamTypeCity];
             }
@@ -218,7 +218,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     OrderTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderTableViewCellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderTableViewCell" owner:nil options:nil] firstObject];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         
     }
@@ -228,14 +227,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if (row == 0 ) {
             cell.type = kOrderTableViewCellTypeGoTime;
             if ([_dicDatasource objectForKey:OrderParamTypeGoTime]) {
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+                NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+                
                 id strDate = [_dicDatasource objectForKey:OrderParamTypeGoTime];
                 if ([strDate isKindOfClass:[NSDate class]]) {
-                    [cell setOrderTFText:[dateFormatter stringFromDate:strDate]];
+                    [cell setOrderTFText:[dateFormat1 stringFromDate:strDate]];
                 }
                 if ([strDate isKindOfClass:[NSString class]]) {
-                    [cell setOrderTFText:strDate];
+                    NSDate *date =[dateFormat dateFromString:strDate];
+                    NSString *str = [dateFormat1 stringFromDate:date];
+                    [cell setOrderTFText:str];
                 }
             }
         }else if(row == 1){
@@ -264,15 +268,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if (row == 0) {
             cell.type = kOrderTableViewCellTypeBackTime;
             if ([_dicDatasource objectForKey:OrderParamTypeTime]) {
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+                NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+                
                 id strDate = [_dicDatasource objectForKey:OrderParamTypeTime];
                 if ([strDate isKindOfClass:[NSDate class]]) {
-                    [cell setOrderTFText:[dateFormatter stringFromDate:strDate]];
+                    [cell setOrderTFText:[dateFormat1 stringFromDate:strDate]];
                 }
                 if ([strDate isKindOfClass:[NSString class]]) {
                     if (![strDate isEqualToString:@"0000-00-00 00:00:00"]) {
-                        [cell setOrderTFText:strDate];
+                        NSDate *date =[dateFormat dateFromString:strDate];
+                        NSString *str = [dateFormat1 stringFromDate:date];
+                        [cell setOrderTFText:str];
                     }
                 }
             }
@@ -338,6 +347,16 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else if(![_dicDatasource objectForKey:OrderParamTypePark]) {
             [self showTipsInView:self.view message:@"请先选择停车场" offset:self.view.center.x+100];
         }else{
+            if ([_dicDatasource objectForKey:OrderParamTypeTime]&&(![_dicDatasource objectForKey:OrderParamTypeBackTerminal])) {
+                [self showTipsInView:self.view message:@"请先返程航站楼" offset:self.view.center.x+100];
+                return;
+            }
+            
+            if ((![_dicDatasource objectForKey:OrderParamTypeTime])&&([_dicDatasource objectForKey:OrderParamTypeBackTerminal])) {
+                [self showTipsInView:self.view message:@"请先取车时间" offset:self.view.center.x+100];
+                return;
+            }
+            
             int days = -1;
             if ([_dicDatasource objectForKey:OrderParamTypeTime]) {
                 NSDate *gotime = [_dicDatasource objectForKey:OrderParamTypeGoTime];
@@ -469,7 +488,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         {
             BAFCityInfo *currentCity = ((BAFCityInfo *)[self.cityArr objectAtIndex:popview.selectedIndex.row]);
             DLog(@"当前选择城市%@",currentCity.title);
-            [self setNavigationRightButtonWithText:currentCity.title method:@selector(rightBtnClicked:)];
+            [self setNavigationRightButtonWithText:currentCity.title image:[UIImage imageNamed:@"parking_cbb"]  method:@selector(rightBtnClicked:)];
             [_dicDatasource removeAllObjects];
             [self.mainTableView reloadData];
             [_dicDatasource setObject:[NSString stringWithFormat:@"%@&%@",currentCity.title,currentCity.id] forKey:OrderParamTypeCity];

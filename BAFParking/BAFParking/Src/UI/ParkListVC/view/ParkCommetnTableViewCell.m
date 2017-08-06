@@ -20,8 +20,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)setCommentInfo:(BAFParkCommentInfo *)commentInfo
@@ -30,9 +28,8 @@
     NSString *totalUrl = [NSString stringWithFormat:@"%@%@",Server_Url, commentInfo.avatar];
 //    http://parknfly.cn
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:totalUrl] placeholderImage:[UIImage imageNamed:@"btn_img"]];
-//    self.headImageView.image = [UIImage imageNamed:@"btn_img"];
     
-    self.phoneLabel.text = commentInfo.contact_phone;
+    self.phoneLabel.text = [self numberSuitScanf:commentInfo.contact_phone];
     
     NSString *totalStr = commentInfo.remark;
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
@@ -81,8 +78,40 @@
         self.star5.image = [UIImage imageNamed:@"parking_xiangq_star2"];
     }
     
-    self.timeLabel.text = _commentInfo.create_time;
     
-    
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDate *date =[dateFormat dateFromString:_commentInfo.create_time];
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *str = [dateFormat1 stringFromDate:date];
+    self.timeLabel.text = str;
+
+    if ([_commentInfo.reply isEqualToString:@""]||
+        _commentInfo.reply == nil||
+        [_commentInfo.reply isEqual:[NSNull null]]) {
+        self.replylabel.text = @"";
+    }
+    else{
+        NSString *replyStr = [NSString stringWithFormat:@"泊安飞回复：\n%@",_commentInfo.reply];
+        NSMutableAttributedString *mutAttr = [[NSMutableAttributedString alloc]initWithString:replyStr];
+        [mutAttr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, replyStr.length)];
+        [mutAttr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle} range:[replyStr rangeOfString:_commentInfo.reply]];
+        self.replylabel.attributedText = mutAttr;
+    }
 }
+
+-(NSString *)numberSuitScanf:(NSString*)number{
+    
+//    //首先验证是不是手机号码
+//    NSString *MOBILE = @"^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\\\\d{8}$";
+//    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+//    BOOL isOk = [regextestmobile evaluateWithObject:number];
+//    if (isOk) {//如果是手机号码的话
+        NSString *numberString = [number stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+        return numberString;
+//    }
+//    return number;
+}
+
 @end

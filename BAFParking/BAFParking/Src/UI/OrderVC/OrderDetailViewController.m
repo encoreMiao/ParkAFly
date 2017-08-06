@@ -15,6 +15,7 @@
 #import "OrderDetail1TableViewCell.h"
 #import "OrderDetailImageTableViewCell.h"
 #import "OrderDetailFeeTableViewCell.h"
+#import "MapViewController.h"
 
 #define OrderConfirmTableViewCellIdentifier @"OrderConfirmTableViewCellIdentifier"
 #define OrderDetail1TableViewCellIdentifier @"OrderDetail1TableViewCellIdentifier"
@@ -201,8 +202,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             //地理位置
-            [[self.orderDic objectForKey:@"park"]objectForKey:@"map_lat"];
-            [[self.orderDic objectForKey:@"park"]objectForKey:@"map_lon"];
+            MapViewController *vc = [[MapViewController alloc]init];
+            NSDictionary *dic = [self.orderDic objectForKey:@"park"];
+            vc.imageStr = [dic objectForKey:@"map_pic"];
+            vc.pointStr = [dic objectForKey:@"map_title"];
+            vc.titleStr = [dic objectForKey:@"map_content"];
+            vc.detailStr = [dic objectForKey:@"map_address"];
+            CLLocationCoordinate2D coor;
+            coor.latitude = [[dic objectForKey:@"map_lon"] doubleValue];
+            coor.longitude = [[dic objectForKey:@"map_lat"] doubleValue];
+            vc.coor = coor;
+            [self.navigationController pushViewController:vc animated:YES];
         }
         //泊车经理
         if (indexPath.row == 4) {

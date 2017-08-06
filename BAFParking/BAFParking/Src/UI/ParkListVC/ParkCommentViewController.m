@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
-    [self setNavigationTitle:@"评价详情"];
+    [self setNavigationTitle:@"全部评价"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     
     [self parkCommentListRequestWithParkId:self.parkid];
@@ -70,10 +70,26 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
                                            context:nil].size;
     }
     
+    CGFloat height = titleSize.height;
+    
+    if ([commentInfo.reply isEqualToString:@""]||
+        commentInfo.reply == nil||
+        [commentInfo.reply isEqual:[NSNull null]]) {
+        
+    }
+    else{
+        NSString *replyStr = [NSString stringWithFormat:@"泊安飞回复：\n%@",commentInfo.reply];
+        CGSize replySize = [replyStr boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                               attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
+                                                  context:nil].size;
+        height +=replySize.height+24;
+    }
+    
     if ([commentInfo.tags isEqualToString:@""] || !commentInfo.tags) {
-        return titleSize.height+20+85;
+        return height+20+85;
     }else{
-        return titleSize.height+20+115;
+        return height+20+115;
     }
 }
 

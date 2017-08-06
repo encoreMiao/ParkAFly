@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (strong, nonatomic) NSMutableArray *serviceArr;
 @property (nonatomic, strong) NSIndexPath *selectIndexpath;
 @property (nonatomic, strong) IBOutlet UILabel *feeLabel;
+@property (nonatomic, strong) IBOutlet UIButton *detailButton;
 @end
 
 
@@ -51,6 +52,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.headerlabel.text = [NSString stringWithFormat:@"%@     %@      %@",[self.orderDic objectForKey:OrderParamTypeContact_name],[self.orderDic objectForKey:OrderParamTypeContact_phone],[self.orderDic objectForKey:OrderParamTypeCar_license_no]];
     self.mainTableVIEW.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableVIEW.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    
+    [self.detailButton setTitle:@"明细" forState:UIControlStateNormal];
+    [self.detailButton setImage:[UIImage imageNamed:@"btn_detailed"] forState:UIControlStateNormal];
+    CGSize size = [self.detailButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.detailButton.titleLabel.font}];
+    self.detailButton.imageEdgeInsets = UIEdgeInsetsMake(0, size.width+10, 0, -size.width-10);
+    self.detailButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 5);
     
     [self configTotoalfee];
     
@@ -107,7 +114,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else{
         totalFee = firstdayfee;
     }
-    if ([self.orderDic objectForKey:OrderParamTypeService]) {
+    if ([self.orderDic objectForKey:OrderParamTypeService]&&![[self.orderDic objectForKey:OrderParamTypeService] isEqualToString:@""]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
         self.serviceArr = [NSMutableArray arrayWithArray:arr];
         for (NSString *str in self.serviceArr) {
@@ -119,7 +126,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
         }
     }
-    self.feeLabel.text = [NSString stringWithFormat:@"预计费用：¥%ld",totalFee/100];
+    NSString *feeStr = [NSString stringWithFormat:@"预计费用：¥%ld",totalFee/100];
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:feeStr];
+     [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeStr rangeOfString:[NSString stringWithFormat:@"¥%ld",totalFee/100]]];
+    self.feeLabel.attributedText = attributeStr;
     
     [mutArr addObject:[NSArray arrayWithObjects:@"预计费用",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
     
@@ -129,7 +139,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld",firstdayfee/100], nil]];
     }
     
-    if ([self.orderDic objectForKey:OrderParamTypeService]) {
+    if ([self.orderDic objectForKey:OrderParamTypeService]&&![[self.orderDic objectForKey:OrderParamTypeService] isEqualToString:@""]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
         self.serviceArr = [NSMutableArray arrayWithArray:arr];
         for (NSString *str in self.serviceArr) {
@@ -207,7 +217,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([self.orderDic objectForKey:OrderParamTypeService]) {
+    if ([self.orderDic objectForKey:OrderParamTypeService]&&![[self.orderDic objectForKey:OrderParamTypeService] isEqualToString:@""]) {
         return 3;
     }
     return 2;
@@ -296,18 +306,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 }
                 if (indexPath.row == 3) {
                     if ([self.orderDic objectForKey:OrderParamTypeCompany]) {
-                        str = [self.orderDic objectForKey:OrderParamTypeCompany];
+                        str = [NSString stringWithFormat:@"%@人",[self.orderDic objectForKey:OrderParamTypeCompany]];
                     }else{
-                        str = @"1";
+                        str = @"1人";
                     }
                     totalStr = [NSString stringWithFormat:@"同行人数：%@",str];
                 }
             }else{
                 if (indexPath.row == 2) {
                     if ([self.orderDic objectForKey:OrderParamTypeCompany]) {
-                        str = [self.orderDic objectForKey:OrderParamTypeCompany];
+                        str = [NSString stringWithFormat:@"%@人",[self.orderDic objectForKey:OrderParamTypeCompany]];
                     }else{
-                        str = @"1";
+                        str = @"1人";
                     }
                     totalStr = [NSString stringWithFormat:@"同行人数：%@",str];
                 }
@@ -342,9 +352,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (buttonIndex == 1){
         //确定取消
         [self.serviceArr removeObjectAtIndex:self.selectIndexpath.row];
-        [self.orderDic setValue:[self.serviceArr componentsJoinedByString:@"&"] forKey:OrderParamTypeService];
+        if (self.serviceArr.count==0) {
+            [self.orderDic removeObjectForKey:OrderParamTypeService];
+        }else{
+            [self.orderDic setValue:[self.serviceArr componentsJoinedByString:@"&"] forKey:OrderParamTypeService];
+        }
         [[NSUserDefaults standardUserDefaults] setObject:self.orderDic forKey:OrderDefaults];
-        [[NSUserDefaults standardUserDefaults]synchronize];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         [self configTotoalfee];
         [self.mainTableVIEW reloadData];

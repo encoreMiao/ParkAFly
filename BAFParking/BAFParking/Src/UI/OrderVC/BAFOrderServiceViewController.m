@@ -19,14 +19,14 @@
 #import "BAFParkServiceInfo.h"
 #import "BAFMoreServicesViewController.h"
 #import "PopViewController.h"
-#import "OrderMoreCollectionViewCell.h"
+//#import "OrderMoreCollectionViewCell.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexParkService,
 };
 
-#define OrderServiceTableViewCellIdentifier @"OrderServiceTableViewCellIdentifier"
-#define OrderMoreCollectionViewCellIdentifier   @"OrderMoreCollectionViewCellIdentifier"
+#define OrderServiceTableViewCellIdentifier     @"OrderServiceTableViewCellIdentifier"
+//#define OrderMoreCollectionViewCellIdentifier   @"OrderMoreCollectionViewCellIdentifier"
 
 @interface BAFOrderServiceViewController ()<UITableViewDelegate, UITableViewDataSource,OrderFooterViewDelegate,OrderServiceTableViewCellDelegate>
 @property (nonatomic, strong) IBOutlet OrderFooterView *footerView;
@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
+    
     self.isTextServiceShow = NO;
     self.textServiceIndexPath = nil;
     self.isCommonServiceShow = NO;
@@ -76,14 +76,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationTitle:@"预约停车"];
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
-    [self setNavigationRightButtonWithText:@"说明" method:@selector(rightBtnClicked:)];
-    
+    [self setNavigationRightButtonWithImage:[UIImage imageNamed:@"list_nav_explain"] method:@selector(rightBtnClicked:)];
     
     if ([self.dicDatasource objectForKey:OrderParamTypePark]) {
         NSArray *arr = [[self.dicDatasource objectForKey:OrderParamTypePark] componentsSeparatedByString:@"&"];
         [self parkListRequestWithParkid:arr[1]];
     }
-//    [self parkListRequestWithParkid:@"20"];
 }
 
 - (void)setupView
@@ -132,8 +130,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     [[NSUserDefaults standardUserDefaults]setObject:self.dicDatasource forKey:OrderDefaults];
     BAFOrderConfirmViewController *orderConfirmVC = [[BAFOrderConfirmViewController alloc]init];
-//    orderConfirmVC.single_serviceDic = self.single_serviceDic;
-//    orderConfirmVC.more_serviceDic = self.more_serviceDic;
     [self.navigationController pushViewController:orderConfirmVC animated:YES];
 }
 
@@ -194,6 +190,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.section == 1) {
         [self configServiceOrder];
         if ([[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]) {
@@ -234,7 +232,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             for (NSString *str in arr) {
                 NSArray *arrs = [str componentsSeparatedByString:@"=>"];
                 if ([arrs[0] isEqualToString:@"5"]) {
-                    [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
+                    [mutArr addObject:[NSString stringWithFormat:@"%@%@    %.0f元",arrs[2],[self.dicDatasource objectForKey:OrderParamTypePetrol],[arrs[3] integerValue]/100.0f]];
                 }
                 if ([arrs[0] isEqualToString:@"6"]) {
                     [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
@@ -242,14 +240,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
             if (mutArr.count>0) {
                 NSString *str = [mutArr componentsJoinedByString:@"\n"];
-                NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
                 NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
                 [paragraphStyle setLineSpacing:6];
                 CGSize titleSize = [str boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
                                                      options:NSStringDrawingUsesLineFragmentOrigin
                                                   attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
                                                      context:nil].size;
-                return 20+titleSize.height+50+20;
+                return 20+titleSize.height+42;
             }else{
                 return 64;
             }
@@ -338,10 +335,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         cell.delegate = self;
     }
     
-    OrderMoreCollectionViewCell *orderMoreCell =  [tableView dequeueReusableCellWithIdentifier:OrderMoreCollectionViewCellIdentifier];
-    if (orderMoreCell == nil) {
-        orderMoreCell = [[[NSBundle mainBundle]loadNibNamed:@"OrderMoreCollectionViewCell" owner:nil options:nil] firstObject];
-    }
+//    OrderMoreCollectionViewCell *orderMoreCell =  [tableView dequeueReusableCellWithIdentifier:OrderMoreCollectionViewCellIdentifier];
+//    if (orderMoreCell == nil) {
+//        orderMoreCell = [[[NSBundle mainBundle]loadNibNamed:@"OrderMoreCollectionViewCell" owner:nil options:nil] firstObject];
+//    }
     NSUInteger section = indexPath.section;
     if (section == 0) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -366,21 +363,51 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             for (NSString *str in arr) {
                 NSArray *arrs = [str componentsSeparatedByString:@"=>"];
                 if ([arrs[0] isEqualToString:@"5"]) {
-                    [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
+                    [mutArr addObject:str];
                 }
                 if ([arrs[0] isEqualToString:@"6"]) {
-                    [mutArr addObject:[NSString stringWithFormat:@"%@    %.0f元",arrs[2],[arrs[3] integerValue]/100.0f]];
+                    [mutArr addObject:str];
                 }
             }
-            if (mutArr.count>0) {
-                NSString *str = [mutArr componentsJoinedByString:@"\n"];
-                NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
-                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-                [paragraphStyle setLineSpacing:6];
-                [attributeStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, str.length)];
-                
-                orderMoreCell.serviceLabel.attributedText = attributeStr;
-                return orderMoreCell;
+            if (mutArr.count> 0) {
+                if (mutArr.count == 1) {
+                    cell.more1MoneyLabel.hidden = NO;
+                    cell.more2MoneyLabel.hidden = YES;
+                    cell.more1ServiceLabel.hidden = NO;
+                    cell.more2ServiceLabel.hidden = YES;
+                    
+                    NSArray *arrs = [mutArr[0] componentsSeparatedByString:@"=>"];
+                    if ([arrs[0] isEqualToString:@"5"]) {
+                        cell.more1ServiceLabel.text = [NSString stringWithFormat:@"%@(%@)",arrs[2],[self.dicDatasource objectForKey:OrderParamTypePetrol]];
+                    }else{
+                        cell.more1ServiceLabel.text = [NSString stringWithFormat:@"%@",arrs[2]];
+                    }
+                    cell.more1MoneyLabel.text =[NSString stringWithFormat:@"%.0f元",[arrs[3] integerValue]/100.0f];
+                }else{
+                    cell.more1MoneyLabel.hidden = NO;
+                    cell.more2MoneyLabel.hidden = NO;
+                    cell.more1ServiceLabel.hidden = NO;
+                    cell.more2ServiceLabel.hidden = NO;
+                    
+                    NSArray *arrs = [mutArr[0] componentsSeparatedByString:@"=>"];
+                    if ([arrs[0] isEqualToString:@"5"]) {
+                        cell.more1ServiceLabel.text = [NSString stringWithFormat:@"%@(%@)",arrs[2],[self.dicDatasource objectForKey:OrderParamTypePetrol]];
+                    }else{
+                        cell.more1ServiceLabel.text = [NSString stringWithFormat:@"%@",arrs[2]];
+                    }
+                    cell.more1MoneyLabel.text =[NSString stringWithFormat:@"%.0f元",[arrs[3] integerValue]/100.0f];
+                    
+                    NSArray *arrs1 = [mutArr[1] componentsSeparatedByString:@"=>"];
+                    if ([arrs1[0] isEqualToString:@"5"]) {
+                        cell.more2ServiceLabel.text = [NSString stringWithFormat:@"%@(%@)",arrs1[2],[self.dicDatasource objectForKey:OrderParamTypePetrol]];
+                    }else{
+                        cell.more2ServiceLabel.text = [NSString stringWithFormat:@"%@",arrs1[2]];
+                    }
+                    cell.more2MoneyLabel.text =[NSString stringWithFormat:@"%.0f元",[arrs1[3] integerValue]/100.0f];
+                    
+                }
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.type = kOrderServiceTableViewCellTypeMore;
             }else{
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.type = kOrderServiceTableViewCellTypeDisclosure;

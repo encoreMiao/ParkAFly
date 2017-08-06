@@ -59,20 +59,17 @@
                 btn.layer.borderWidth = 1.f;
                 btn.layer.cornerRadius = 3.0f;
                 btn.layer.borderColor = [[UIColor colorWithHex:0x3492e9] CGColor];
+                [btn.layer masksToBounds];
                 btn.frame = CGRectMake(CGRectGetMaxX(self.fuelLabel.frame)+60*i+15*i, CGRectGetMinY(self.fuelLabel.frame)+5, 60, 56/2);
                 btn.titleLabel.textAlignment = NSTextAlignmentCenter;
                 btn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
                 [btn setTitle:arr[i] forState:UIControlStateNormal];
-                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [btn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0xffffff]] forState:UIControlStateNormal];
-                [btn setTitle:arr[i] forState:UIControlStateSelected];
-                [btn setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateSelected];
-                [btn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0x3492e9]] forState:UIControlStateSelected];
+                [self setFuelBtn:btn selected:NO];
                 [self.gastypeview addSubview:btn];
                 btn.tag = i;
                 if ([dic objectForKey:OrderParamTypePetrol]) {
                     if ([[dic objectForKey:OrderParamTypePetrol] isEqualToString:arr[i]]) {
-                        btn.selected = YES;
+                        [self setFuelBtn:btn selected:YES];
                     }
                 }
                 [btn addTarget:self action:@selector(fuelbtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -102,6 +99,7 @@
         for (int i = 0; i<_buttonArr.count; i++) {
             UIButton *btntemp = (UIButton *)_buttonArr[i];
             btntemp.selected = NO;
+            
         }
         self.fuelStr = nil;
     }
@@ -118,9 +116,9 @@
     UIButton *btn = (UIButton *)sender;
     for (int i = 0; i<_buttonArr.count; i++) {
         UIButton *btntemp = (UIButton *)_buttonArr[i];
-        btntemp.selected = NO;
+        [self setFuelBtn:btntemp selected:NO];
     }
-    btn.selected = YES;
+    [self setFuelBtn:btn selected:YES];
     self.fuelStr = btn.titleLabel.text;
     self.show = YES;
     
@@ -128,5 +126,19 @@
         [self.delegate fuelSelectedAction:self];
     }
 
+}
+
+- (void)setFuelBtn:(UIButton *)btn selected:(BOOL)selected
+{
+    if (selected) {
+        btn.layer.borderWidth = 0;
+        [btn setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor colorWithHex:0x3492e9]];
+    }else{
+        btn.layer.borderWidth = 0.5f;
+        btn.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+        [btn setTitleColor:[UIColor colorWithHex:0x323232] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor colorWithHex:0xffffff]];
+    }
 }
 @end

@@ -22,8 +22,8 @@
     //0 未知 1男 2女
     if (userInfo.csex.integerValue == 0) {
         //未知
-        [self.maleButton setImage:[UIImage imageNamed:@"list_rb_gender"] forState:UIControlStateNormal];
-        [self.femaleButton setImage:[UIImage imageNamed:@"list_rb_gender"] forState:UIControlStateNormal];
+        [self.maleButton setImage:[UIImage imageNamed:@"list_rb2_gender"] forState:UIControlStateNormal];
+        [self.femaleButton setImage:[UIImage imageNamed:@"list_rb2_gender"] forState:UIControlStateNormal];
     }else if (userInfo.csex.integerValue == 1) {
         //男
         [self.maleButton setImage:[UIImage imageNamed:@"list_rb_gender"] forState:UIControlStateNormal];

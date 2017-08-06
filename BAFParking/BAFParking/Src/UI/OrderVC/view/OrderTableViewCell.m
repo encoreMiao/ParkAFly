@@ -59,7 +59,7 @@
             break;
         case kOrderTableViewCellTypeCompany:
             self.orderTypeImageView.image = [UIImage imageNamed:@"list_ip_tongx"];
-            self.orderTF.placeholder = @"请选择通行人数";
+            self.orderTF.placeholder = @"请选择同行人数";
             break;
     }
 }
