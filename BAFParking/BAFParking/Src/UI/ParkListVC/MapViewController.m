@@ -57,7 +57,7 @@
     self.detailLabel.text = _detailStr;
     NSString *urlStr = [NSString stringWithFormat:@"Uploads/Picture/%@",self.imageStr];
     NSString *totalUrl = REQURL(urlStr);
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:totalUrl]];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:totalUrl] placeholderImage:[UIImage imageNamed:@"parking_loading_img"]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -132,8 +132,7 @@
 {
     if (!_imageView) {
         _imageView = [[UIImageView alloc]init];
-        _imageView.frame = CGRectMake(12, 12, 62, 62);
-//        _imageView.backgroundColor = [UIColor blackColor];
+        _imageView.frame = CGRectMake(12, 12, 62*1.5, 62);
     }
     return _imageView;
 }
@@ -142,8 +141,8 @@
 {
     if (!_bottomeTitleLabel) {
         _bottomeTitleLabel = [[UILabel alloc]init];
-        _bottomeTitleLabel.frame = CGRectMake(62+12+20,12, self.bottomView.frame.size.width-94, 30);
-        _bottomeTitleLabel.font = [UIFont systemFontOfSize:18];
+        _bottomeTitleLabel.frame = CGRectMake(62*1.5+12+12,12, self.bottomView.frame.size.width-94, 20);
+        _bottomeTitleLabel.font = [UIFont systemFontOfSize:16];
         _bottomeTitleLabel.textColor = [UIColor colorWithHex:0x323232];
     }
     return _bottomeTitleLabel;
@@ -152,8 +151,8 @@
 - (UILabel *)detailLabel{
     if (!_detailLabel) {
         _detailLabel = [[UILabel alloc]init];
-        _detailLabel.frame = CGRectMake(62+12+20,42, self.bottomView.frame.size.width-94, 44);
-        _detailLabel.font = [UIFont systemFontOfSize:16];
+        _detailLabel.frame = CGRectMake(62*1.5+12+12,32, self.bottomView.frame.size.width-94, 44);
+        _detailLabel.font = [UIFont systemFontOfSize:14];
         _detailLabel.numberOfLines = 0;
         _detailLabel.textColor = [UIColor colorWithHex:0x969696];
     }

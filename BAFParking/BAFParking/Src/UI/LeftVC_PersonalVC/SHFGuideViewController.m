@@ -84,17 +84,24 @@
     [self.mScrollView setContentSize:CGSizeMake(screenWidth * 3, screenHeight)];
 
     if (iPhone6plus) {
-        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_640"];
-        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_640"];
-        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_640"];
-    }else if(iPhone6){
-        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_750"];
-        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_750"];
-        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_750"];
-    }else{
         _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_1242"];
         _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_1242"];
         _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_1242"];
+    }else if(iPhone4){
+        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_640*960"];
+        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_640*960"];
+        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_640*960"];
+    }
+    else if(iPhone5){
+        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_640"];//640*1136
+        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_640"];
+        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_640"];
+    }
+    else{
+        _mobile1ImageView.image = [UIImage imageNamed:@"Guide_image1_750"];
+        _mobile2ImageView.image = [UIImage imageNamed:@"Guide_image2_750"];
+        _mobile3ImageView.image = [UIImage imageNamed:@"Guide_image3_750"];
+        
     }
 }
 

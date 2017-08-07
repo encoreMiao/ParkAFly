@@ -107,7 +107,6 @@
 		8D15BDA61F347D4600BF8BE4 /* THLevelDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D15BDA51F347D4600BF8BE4 /* THLevelDB.mm */; };
 		8D15BDA91F347D9100BF8BE4 /* libleveldb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D15BDA71F347D9100BF8BE4 /* libleveldb.a */; };
 		8D15BDAA1F347D9100BF8BE4 /* libmemenv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D15BDA81F347D9100BF8BE4 /* libmemenv.a */; };
-		8D15BDAD1F347E1E00BF8BE4 /* LeveldbManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D15BDAC1F347E1E00BF8BE4 /* LeveldbManager.m */; };
 		8D3498021F07C301009D723C /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498001F07C301009D723C /* CommentViewController.m */; };
 		8D3498031F07C301009D723C /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3498011F07C301009D723C /* CommentViewController.xib */; };
 		8D3498071F08FC07009D723C /* CommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3498051F08FC07009D723C /* CommentCollectionViewCell.m */; };
@@ -173,6 +172,9 @@
 		8D6058F71EE438C30066289C /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6058F51EE438C30066289C /* PopViewController.m */; };
 		8D6521D51F2B0CAA00679596 /* OrderMoreCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6521D31F2B0CAA00679596 /* OrderMoreCollectionViewCell.m */; };
 		8D6521D61F2B0CAA00679596 /* OrderMoreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6521D41F2B0CAA00679596 /* OrderMoreCollectionViewCell.xib */; };
+		8D945A841F387DF3005D87B1 /* Guide_image1_640*960.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D945A811F387DF3005D87B1 /* Guide_image1_640*960.png */; };
+		8D945A851F387DF3005D87B1 /* Guide_image2_640*960.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D945A821F387DF3005D87B1 /* Guide_image2_640*960.png */; };
+		8D945A861F387DF3005D87B1 /* Guide_image3_640*960.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D945A831F387DF3005D87B1 /* Guide_image3_640*960.png */; };
 		8DA526A91F02ABDA0063D61D /* PopFeeShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */; };
 		8DA526AA1F02ABDA0063D61D /* PopFeeShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */; };
 		8DAA924C1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAA924A1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.m */; };
@@ -445,8 +447,6 @@
 		8D15BDA51F347D4600BF8BE4 /* THLevelDB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = THLevelDB.mm; sourceTree = "<group>"; };
 		8D15BDA71F347D9100BF8BE4 /* libleveldb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libleveldb.a; sourceTree = "<group>"; };
 		8D15BDA81F347D9100BF8BE4 /* libmemenv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmemenv.a; sourceTree = "<group>"; };
-		8D15BDAB1F347E1E00BF8BE4 /* LeveldbManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeveldbManager.h; sourceTree = "<group>"; };
-		8D15BDAC1F347E1E00BF8BE4 /* LeveldbManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeveldbManager.m; sourceTree = "<group>"; };
 		8D3497FF1F07C301009D723C /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		8D3498001F07C301009D723C /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		8D3498011F07C301009D723C /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
@@ -548,6 +548,9 @@
 		8D6521D21F2B0CAA00679596 /* OrderMoreCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMoreCollectionViewCell.h; sourceTree = "<group>"; };
 		8D6521D31F2B0CAA00679596 /* OrderMoreCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMoreCollectionViewCell.m; sourceTree = "<group>"; };
 		8D6521D41F2B0CAA00679596 /* OrderMoreCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderMoreCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D945A811F387DF3005D87B1 /* Guide_image1_640*960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Guide_image1_640*960.png"; sourceTree = "<group>"; };
+		8D945A821F387DF3005D87B1 /* Guide_image2_640*960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Guide_image2_640*960.png"; sourceTree = "<group>"; };
+		8D945A831F387DF3005D87B1 /* Guide_image3_640*960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Guide_image3_640*960.png"; sourceTree = "<group>"; };
 		8DA526A61F02ABDA0063D61D /* PopFeeShowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopFeeShowTableViewCell.h; sourceTree = "<group>"; };
 		8DA526A71F02ABDA0063D61D /* PopFeeShowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopFeeShowTableViewCell.m; sourceTree = "<group>"; };
 		8DA526A81F02ABDA0063D61D /* PopFeeShowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopFeeShowTableViewCell.xib; sourceTree = "<group>"; };
@@ -992,7 +995,6 @@
 				005E85D21E97924600115CAD /* LaunchScreen.storyboard */,
 				00214B1F1ECFD0D500FF6FDE /* Assets.xcassets */,
 				005E85D51E97924600115CAD /* Info.plist */,
-				8D56DD281F1209DF000E3D99 /* MVC */,
 				00E3B2F81EB4C0E500A4FF73 /* Config */,
 				00C854641EAF771300EAD557 /* Src */,
 				0022A21F1EB026CC00A920D6 /* Utils */,
@@ -1288,6 +1290,9 @@
 			children = (
 				8DB6C9511F31F56600012746 /* Welcome750.png */,
 				8DB6C9531F31F56F00012746 /* Welcome1242.png */,
+				8D945A811F387DF3005D87B1 /* Guide_image1_640*960.png */,
+				8D945A821F387DF3005D87B1 /* Guide_image2_640*960.png */,
+				8D945A831F387DF3005D87B1 /* Guide_image3_640*960.png */,
 				8DB6C93D1F31F30C00012746 /* Guide_image1_640.png */,
 				8DB6C93E1F31F30C00012746 /* Guide_image2_640.png */,
 				8DB6C93F1F31F30C00012746 /* Guide_image3_640.png */,
@@ -1329,15 +1334,6 @@
 				8D15BDA31F347D3700BF8BE4 /* write_batch.h */,
 			);
 			path = leveldb;
-			sourceTree = "<group>";
-		};
-		8D56DD281F1209DF000E3D99 /* MVC */ = {
-			isa = PBXGroup;
-			children = (
-				8D15BDAB1F347E1E00BF8BE4 /* LeveldbManager.h */,
-				8D15BDAC1F347E1E00BF8BE4 /* LeveldbManager.m */,
-			);
-			path = MVC;
 			sourceTree = "<group>";
 		};
 		8D56DD2E1F127197000E3D99 /* OrderDetailView */ = {
@@ -1546,6 +1542,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D945A841F387DF3005D87B1 /* Guide_image1_640*960.png in Resources */,
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				8DB6C9561F31F71800012746 /* Images.xcassets in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
@@ -1578,6 +1575,7 @@
 				8DB6C9401F31F30C00012746 /* Guide_image1_640.png in Resources */,
 				8DBAE0B91F1081DA003ACFAB /* ParkDetail1TableViewCell.xib in Resources */,
 				8D575E5B1EF511120061474D /* RightsTableViewCell.xib in Resources */,
+				8D945A851F387DF3005D87B1 /* Guide_image2_640*960.png in Resources */,
 				00E0F89B1EF022220095AA06 /* MoreServicesTableViewCell.xib in Resources */,
 				8D4978551F28CC6400E0F917 /* ParkCollectionViewCell.xib in Resources */,
 				8D56DD331F127217000E3D99 /* OrderDetail1TableViewCell.xib in Resources */,
@@ -1600,6 +1598,7 @@
 				0001CDF21ED08135000889CE /* BAFLoginViewController.xib in Resources */,
 				8DB6C9421F31F30C00012746 /* Guide_image3_640.png in Resources */,
 				8DC7BC671F2E9C9B00FDE5C0 /* ParkCommentViewController.xib in Resources */,
+				8D945A861F387DF3005D87B1 /* Guide_image3_640*960.png in Resources */,
 				0020933C1EDBDBDE00C26176 /* BAFOrderViewController.xib in Resources */,
 				8DB6C94C1F31F34600012746 /* Guide_image1_1242.png in Resources */,
 				002093421EDBE6FC00C26176 /* OrderTableViewCell.xib in Resources */,
@@ -1734,7 +1733,6 @@
 				005E85C61E97924600115CAD /* main.m in Sources */,
 				8DBAE0B81F1081DA003ACFAB /* ParkDetail1TableViewCell.m in Sources */,
 				00214B391ECFDAC100FF6FDE /* MJExtensionConst.m in Sources */,
-				8D15BDAD1F347E1E00BF8BE4 /* LeveldbManager.m in Sources */,
 				0020935A1EDC4B1700C26176 /* BAFOrderConfirmViewController.m in Sources */,
 				005074481EBB097000A6E8B1 /* HRLParkRequest.m in Sources */,
 				00E0F8951EF020710095AA06 /* BAFMoreServicesViewController.m in Sources */,
