@@ -675,6 +675,9 @@
                               action:@selector(datePickerDateChanged:)
                     forControlEvents:UIControlEventValueChanged];
         NSDate *todayDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
+        NSTimeInterval interval = [todayDate timeIntervalSince1970];
+        interval = (15*60)-(int)(interval)%(15*60) + floor(interval);
+        todayDate = [NSDate dateWithTimeIntervalSince1970:interval];
         NSDate *threeMonthsFromToday = [self dateAfterMonths:todayDate gapMonth:3];
         _datePicker.minimumDate = todayDate;
         _datePicker.maximumDate = threeMonthsFromToday;
