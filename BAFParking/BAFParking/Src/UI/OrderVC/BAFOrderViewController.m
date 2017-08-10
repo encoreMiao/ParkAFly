@@ -299,7 +299,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else{
         cell.type = kOrderTableViewCellTypeCompany;
         if ([_dicDatasource objectForKey:OrderParamTypeCompany]) {
-            [cell setOrderTFText:[_dicDatasource objectForKey:OrderParamTypeCompany]];
+            [cell setOrderTFText:[NSString stringWithFormat:@"%@人",[_dicDatasource objectForKey:OrderParamTypeCompany]]];
         }
     }
     return cell;
@@ -341,19 +341,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     if (self.type == kBAFOrderViewControllerTypeOrder) {
         if (![_dicDatasource objectForKey:OrderParamTypeGoTime]) {
-            [self showTipsInView:self.view message:@"请先选择出发时间" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"请选择出发时间" offset:self.view.center.x+100];
         }else if(![_dicDatasource objectForKey:OrderParamTypeTerminal]) {
-            [self showTipsInView:self.view message:@"请先选择出发航站楼" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"请选择出发航站楼" offset:self.view.center.x+100];
         }else if(![_dicDatasource objectForKey:OrderParamTypePark]) {
-            [self showTipsInView:self.view message:@"请先选择停车场" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"请选择停车场" offset:self.view.center.x+100];
         }else{
             if ([_dicDatasource objectForKey:OrderParamTypeTime]&&(![_dicDatasource objectForKey:OrderParamTypeBackTerminal])) {
-                [self showTipsInView:self.view message:@"请先返程航站楼" offset:self.view.center.x+100];
+                [self showTipsInView:self.view message:@"请选择返程航站楼" offset:self.view.center.x+100];
                 return;
             }
             
             if ((![_dicDatasource objectForKey:OrderParamTypeTime])&&([_dicDatasource objectForKey:OrderParamTypeBackTerminal])) {
-                [self showTipsInView:self.view message:@"请先取车时间" offset:self.view.center.x+100];
+                [self showTipsInView:self.view message:@"请选择取车时间" offset:self.view.center.x+100];
                 return;
             }
             
@@ -440,7 +440,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         {
             NSLog(@"park");
             if (![_dicDatasource objectForKey:OrderParamTypeTerminal]) {
-                 [self showTipsInView:self.view message:@"请先选择出发航站楼" offset:self.view.center.x+100];
+                 [self showTipsInView:self.view message:@"请选择选择出发航站楼" offset:self.view.center.x+100];
             }else{
                 //跳转到停车场选择
                 ParkListViewController  *parklistVC = [[ParkListViewController alloc]init];

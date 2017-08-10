@@ -13,6 +13,7 @@
 #import "CouponTableViewCell.h"
 #import "BAFUserModelManger.h"
 #import "BAFCouponInfo.h"
+#import "PopViewController.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCouponListRequest,
@@ -158,6 +159,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)detailActionDelegate:(CouponTableViewCell *)cell
 {
     NSLog(@"优惠券说明说明");
+    PopViewController *popView = [[PopViewController alloc] init];
+    popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    popView.detailStr = @"• 本券仅供预约泊安飞停车抵扣费用使用；\n• 单笔订单仅限使用一张优惠券；\n• 本券请在有效期内使用，过期失效；\n• 使用本券发生退款时，优惠券退至账户内，在有效期内使用仍然有效；\n• 本券最终解释权归北京泊安飞科技有限公司所有。";
+    popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    self.definesPresentationContext = YES;
+    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
+    [self presentViewController:popView animated:NO completion:nil];
 }
 
 - (void)selectActionDelegate:(CouponTableViewCell *)cell

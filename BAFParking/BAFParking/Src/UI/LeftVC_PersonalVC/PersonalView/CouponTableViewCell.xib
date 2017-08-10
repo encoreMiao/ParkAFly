@@ -86,7 +86,7 @@ Cg
                         </constraints>
                         <state key="normal" title="Button" backgroundImage="list_youhuiq_explain"/>
                         <connections>
-                            <action selector="detailAction:" destination="KGk-i7-Jjw" eventType="touchDragInside" id="0Q8-4Z-foO"/>
+                            <action selector="detailAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xBc-9O-xBe"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-Rk-3Hs">

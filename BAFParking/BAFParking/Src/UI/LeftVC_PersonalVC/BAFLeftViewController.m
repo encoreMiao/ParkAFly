@@ -20,6 +20,7 @@
 #import "FeedBackViewController.h"
 #import "SettingViewController.h"
 #import "PersonalEditViewController.h"
+#import "BAFWebViewController.h"
 
 @interface BAFLeftViewController ()
 <UITableViewDelegate, UITableViewDataSource,PersonalCenterFooterViewDelegate,PersonalCenterHeaderViewDelegate>
@@ -169,6 +170,14 @@
 }
 - (IBAction)memberLeveBtnClicked:(id)sender {
     NSLog(@"泊主等级");
+    BAFWebViewController  *webview = [[BAFWebViewController alloc]init];
+    UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+    [nav pushViewController:webview animated:NO];
+    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    }];
+    [webview loadTargetURL:[NSURL URLWithString:@"http://parknfly.cn/Public/Wap/level/index.html"] title:@"会员"];
+
 }
 
 @end

@@ -52,9 +52,9 @@
     self.rightsStatus.text = str;
     
     NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
-    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    [dateFormat setDateFormat:@"yyyy.MM.dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
     NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
-    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [dateFormat1 setDateFormat:@"yyyy.MM.dd HH:mm"];
     
     NSDate *datebegin =[dateFormat dateFromString:accountInfo.begin_time];
     NSDate *dateend =[dateFormat dateFromString:accountInfo.end_time];

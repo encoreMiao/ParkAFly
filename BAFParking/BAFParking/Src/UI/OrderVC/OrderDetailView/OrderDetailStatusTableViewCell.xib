@@ -71,6 +71,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="orderOperatorLabel" destination="JEn-ih-7Ps" id="leu-zX-x38"/>
+                <outlet property="showActiveIV" destination="Zuy-JQ-9Vs" id="SeR-nU-AJH"/>
                 <outlet property="timeLabel" destination="ehE-Ha-6fB" id="ck9-Z6-acb"/>
             </connections>
             <point key="canvasLocation" x="100" y="144"/>

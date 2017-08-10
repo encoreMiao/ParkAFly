@@ -83,13 +83,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
                                                   options:NSStringDrawingUsesLineFragmentOrigin
                                                attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
                                                   context:nil].size;
-        height +=replySize.height+24;
+        height +=replySize.height;
     }
     
     if ([commentInfo.tags isEqualToString:@""] || !commentInfo.tags) {
-        return height+20+85;
+        return height+20+95;
     }else{
-        return height+20+115;
+        return height+20+125;
     }
 }
 

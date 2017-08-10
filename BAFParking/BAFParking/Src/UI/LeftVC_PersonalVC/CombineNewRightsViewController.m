@@ -101,11 +101,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             obj = (NSDictionary *)obj;
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
-            [self showTipsInView:self.view message:@"输入的卡号无效" offset:self.view.center.x+100];
-            [self performSelector:@selector(backMethod:) withObject:nil afterDelay:3.0f];
-        }else{
             [self showTipsInView:self.view message:@"绑定成功" offset:self.view.center.x+100];
             [self backMethod:nil];
+        }else{
+            [self showTipsInView:self.view message:@"输入的卡号无效" offset:self.view.center.x+100];
+            [self performSelector:@selector(backMethod:) withObject:nil afterDelay:3.0f];
         }
     }
 }

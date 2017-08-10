@@ -24,6 +24,8 @@
 //时间选择
 @property (nonatomic, retain) UIDatePicker  *datePicker;
 @property (nonatomic, retain) NSMutableArray *arrDatasource;
+
+@property (nonatomic, retain) UIScrollView *scrollView;
 @end
 
 
@@ -56,7 +58,8 @@
     [self.view addSubview:self.bgView];
     [self.bgView addSubview:self.headerView];
     [self.bgView addSubview:self.tableView];
-    [self.bgView addSubview:self.detailLabel];
+    [self.bgView addSubview:self.scrollView];
+    [self.scrollView addSubview:self.detailLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,8 +80,10 @@
         {
 //            self.bgView.frame = CGRectMake(0, 20, screenWidth, 350);
             height = 350;
-            self.popTitleLabel.text = @"服务说明";
-            NSString *str = @"默认提供停车场与航站楼之间往返的免费摆渡车服务，客户自驾车至停车场停车，乘坐车场摆渡车前往航站楼；返程时，在航站楼乘坐摆渡车回到停车场取车。\n ● 什么是代驾代泊服务\n指客户自驾车到航站楼，在约定地点将车辆交付给伯安飞专业司机代驾到停车场停放妥当；返程时由伯安飞司机在客户约定时间将车辆从停车场送往航站楼交还给客户。\n● 什么是自行往返航站楼\n指客户自驾车至停车场停车，自行车前往航站楼；返程时，自行回到停车场取车。客户不需要乘坐伯安飞摆渡车，自行往返停车场与航站楼。";
+            self.popTitleLabel.text = @"说明";
+//            NSString *str = @"默认提供停车场与航站楼之间往返的免费摆渡车服务，客户自驾车至停车场停车，乘坐车场摆渡车前往航站楼；返程时，在航站楼乘坐摆渡车回到停车场取车。\n ● 什么是代驾代泊服务\n指客户自驾车到航站楼，在约定地点将车辆交付给伯安飞专业司机代驾到停车场停放妥当；返程时由伯安飞司机在客户约定时间将车辆从停车场送往航站楼交还给客户。\n● 什么是自行往返航站楼\n指客户自驾车至停车场停车，自行车前往航站楼；返程时，自行回到停车场取车。客户不需要乘坐伯安飞摆渡车，自行往返停车场与航站楼。";
+            
+            NSString *str = self.detailStr;
             NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:str];
             [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:kBAFFontSizeForDetailText]} range:[str rangeOfString:@"● 什么是代驾代泊服务"]];
             [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:kBAFFontSizeForDetailText]} range:[str rangeOfString:@"● 什么是自行往返航站楼"]];
@@ -88,7 +93,7 @@
             self.detailLabel.attributedText = attributeStr;
             
             self.tableView.hidden = YES;
-            self.detailLabel.hidden = NO;
+            self.scrollView.hidden = NO;
             self.confirmButton.hidden = YES;
             
         }
@@ -102,7 +107,7 @@
             }
             self.popTitleLabel.text = @"请选择城市";
             self.tableView.hidden = NO;
-            self.detailLabel.hidden = YES;
+            self.scrollView.hidden = YES;
         }
             break;
         case kPopViewControllerTypeSelecGoTerminal:
@@ -119,7 +124,7 @@
             }
 
             self.tableView.hidden = NO;
-            self.detailLabel.hidden = YES;
+            self.scrollView.hidden = YES;
         }
             break;
         case kPopViewControllerTypeTipsshow:
@@ -137,7 +142,7 @@
             }
             self.popTitleLabel.text = @"请选择同行人数";
             self.tableView.hidden = NO;
-            self.detailLabel.hidden = YES;
+            self.scrollView.hidden = YES;
         }
             break;
         case kPopViewControllerTypeSelecSex:
@@ -148,7 +153,7 @@
             }
             self.popTitleLabel.text = @"请选择性别";
             self.tableView.hidden = NO;
-            self.detailLabel.hidden = YES;
+            self.scrollView.hidden = YES;
         }
             break;
         case kPopViewControllerTypeSelecColor:
@@ -159,7 +164,7 @@
             }
             self.popTitleLabel.text = @"请选择车辆颜色";
             self.tableView.hidden = NO;
-            self.detailLabel.hidden = YES;
+            self.scrollView.hidden = YES;
         }
             break;
         case kPopViewControllerTypeGoTime:
@@ -180,7 +185,7 @@
             }
             self.popTitleLabel.text = @"请选择权益账户";
             self.tableView.hidden = NO;
-            self.detailLabel.hidden = YES;
+            self.scrollView.hidden = YES;
         }
             break;
         default:
@@ -193,7 +198,16 @@
     self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-64,0, 44, 44);
     self.confirmButton.frame = CGRectMake(20,0, 44, 44);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, height-CGRectGetHeight(self.headerView.frame));
-    self.detailLabel.frame = CGRectMake(10, CGRectGetMaxY(self.headerView.frame), screenWidth-20, height-CGRectGetHeight(self.headerView.frame));
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:7];
+    CGSize detailSize = [self.detailLabel.text boundingRectWithSize:CGSizeMake(screenWidth-20, MAXFLOAT)
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSParagraphStyleAttributeName:paragraphStyle}
+                                          context:nil].size;
+    self.detailLabel.frame = CGRectMake(20, 20, screenWidth-40,detailSize.height);
+    self.scrollView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, height-CGRectGetHeight(self.headerView.frame));
+    self.scrollView.contentSize = CGSizeMake(screenWidth-40, self.detailLabel.frame.size.height+40);
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.3 animations:^{
             self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
@@ -262,7 +276,8 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
-            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
+//            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@人",[self.arrDatasource objectAtIndex:indexPath.row]];
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }else{
@@ -686,4 +701,12 @@
     return _datePicker;
 }
 
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectZero];
+        _scrollView.backgroundColor = [UIColor whiteColor];
+    }
+    return _scrollView;
+}
 @end

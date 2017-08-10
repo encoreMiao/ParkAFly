@@ -28,26 +28,30 @@
 - (void)setPatrInfo:(BAFClientPatrInfo *)patrInfo
 {
     _patrInfo = patrInfo;
-    self.accountLabel.text = [NSString stringWithFormat:@"%0.f",patrInfo.money.integerValue/100.0f];
+    NSString *str = [NSString stringWithFormat:@"%0.f",patrInfo.money.integerValue/100.0f];
     
 //    "status": "3" //类型:1.充值;2.充值活动;3.账户余额支付;4.充值卡充值
     switch (patrInfo.status.integerValue) {
         case 1:
             self.typeLabel.text = @"充值";
+            str = [NSString stringWithFormat:@"+%@",str];
             break;
         case 2:
-            self.typeLabel.text = @"充值活动";
+            self.typeLabel.text = @"充值";
+            str = [NSString stringWithFormat:@"+%@",str];
             break;
         case 3:
-            self.typeLabel.text = @"账户余额支付";
+            self.typeLabel.text = @"支出";
+            str = [NSString stringWithFormat:@"-%@",str];
             break;
         case 4:
-            self.typeLabel.text = @"充值卡充值";
+            self.typeLabel.text = @"充值";
+            str = [NSString stringWithFormat:@"+%@",str];
             break;
         default:
             break;
     }
-    
+    self.accountLabel.text = str;
     self.timeLabel.text = [self getTimeWithTime:patrInfo.time];
 }
 

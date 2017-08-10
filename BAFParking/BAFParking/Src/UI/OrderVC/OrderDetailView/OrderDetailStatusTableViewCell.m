@@ -11,6 +11,7 @@
 @interface OrderDetailStatusTableViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *orderOperatorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *showActiveIV;
 @end
 
 @implementation OrderDetailStatusTableViewCell
@@ -28,7 +29,7 @@
     _operatorDic = operatorDic;
     NSString *action = [operatorDic objectForKey:@"action"];
     if ([action isEqualToString:@"park_appoint"]) {
-        self.orderOperatorLabel.text = @"预约泊车成功，订单已分派，形成改变请及时修改您的预约信息。";
+        self.orderOperatorLabel.text = @"预约泊车成功，订单已分派，行程改变请及时修改您的预约信息。";
     }
     if ([action isEqualToString:@"cancel"]) {
         self.orderOperatorLabel.text = @"订单已取消";
@@ -57,6 +58,16 @@
     NSDate *createDate =[dateFormat dateFromString:[self.operatorDic objectForKey:@"create_time"]];//actual_park_time
     NSString *createStr = [dateFormat1 stringFromDate:createDate];
     self.timeLabel.text = createStr;
+}
+
+- (void)setShowActive:(BOOL)showActive
+{
+    _showActive = showActive;
+    if (_showActive) {
+        self.showActiveIV.image = [UIImage imageNamed:@"order_xiangq_pre"];
+    }else{
+        self.showActiveIV.image = [UIImage imageNamed:@"order_xiangq_pre2"];
+    }
 }
 
 @end

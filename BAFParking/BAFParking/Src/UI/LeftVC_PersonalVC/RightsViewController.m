@@ -12,6 +12,7 @@
 #import "CombineNewRightsViewController.h"
 #import "HRLPersonalCenterInterface.h"
 #import "BAFEquityAccountInfo.h"
+#import "PopViewController.h"
 
 #define RightsTableViewCellIdentifier   @"RightsTableViewCellIdentifier"
 
@@ -92,6 +93,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)useNotiActionDelegate:(RightsTableViewCell *)cell
 {
     NSLog(@"权益账户使用说明");
+    PopViewController *popView = [[PopViewController alloc] init];
+    popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    popView.detailStr = @"• 使用此卡结算订单，可享受第一次停车30天内免费停车，超出30天以外车位费享受8折优惠；\n• 从第二次停车开始，使用此卡结算订单，车位费享受80%优惠；\n • 代客泊车、代加油等单项服务正常收费；\n• 权益卡有效期内，享受不限次免费自助洗车；\n• 权益卡在有效期能享受优惠，过期失效。";
+    popView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    self.definesPresentationContext = YES;
+    [popView configViewWithData:nil type:kPopViewControllerTypeTop];
+    [self presentViewController:popView animated:NO completion:nil];
 }
 
 #pragma mark - REQUEST

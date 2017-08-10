@@ -35,4 +35,6 @@ typedef NS_ENUM(NSInteger,PopViewControllerType){
 @property (nonatomic, retain) NSIndexPath   *selectedIndex;
 @property (nonatomic, assign) id<PopViewControllerDelegate> delegate;
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type;
+
+@property (nonatomic, strong) NSString *detailStr;
 @end

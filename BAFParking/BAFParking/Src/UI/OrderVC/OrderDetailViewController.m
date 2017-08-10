@@ -765,6 +765,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     return cell;
                 }
                 cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+                if (indexPath.row == 0) {
+                    cellstatus.showActive = YES;
+                }else{
+                    cellstatus.showActive = NO;
+                }
                 return cellstatus;
             }
         }
@@ -794,10 +799,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     return cell;
                 }
                 cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+                if (indexPath.row == 0) {
+                    cellstatus.showActive = YES;
+                }else{
+                    cellstatus.showActive = NO;
+                }
                 return cellstatus;
             }
         }else{
             cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+            if (indexPath.row == 0) {
+                cellstatus.showActive = YES;
+            }else{
+                cellstatus.showActive = NO;
+            }
             return cellstatus;
         }
     }else if (indexPath.section == 6){
@@ -807,6 +822,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             cellstatus.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         cellstatus.operatorDic = [self.operatorArr objectAtIndex:indexPath.row];
+        if (indexPath.row == 0) {
+            cellstatus.showActive = YES;
+        }else{
+            cellstatus.showActive = NO;
+        }
         return cellstatus;
     }
     return nil;

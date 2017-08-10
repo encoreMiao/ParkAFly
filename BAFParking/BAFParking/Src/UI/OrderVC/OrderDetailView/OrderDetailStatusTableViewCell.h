@@ -10,4 +10,5 @@
 
 @interface OrderDetailStatusTableViewCell : UITableViewCell
 @property (nonatomic, retain) NSDictionary *operatorDic;
+@property (nonatomic, assign) BOOL showActive;//yes有眼色
 @end
