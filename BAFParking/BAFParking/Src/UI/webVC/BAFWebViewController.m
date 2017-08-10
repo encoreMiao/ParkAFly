@@ -42,7 +42,7 @@
 
 - (void)backMethod:(id)sender
 {
-    [self.navigationController  popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - webview delegate

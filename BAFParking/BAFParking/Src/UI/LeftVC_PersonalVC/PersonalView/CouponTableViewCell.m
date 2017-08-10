@@ -97,10 +97,10 @@
 - (void)setCouponInfo:(BAFCouponInfo *)couponInfo
 {
     _couponInfo = couponInfo;
-    NSString *str = [NSString stringWithFormat:@"%@\n%@",couponInfo.number,couponInfo.info];
+    NSString *str = [NSString stringWithFormat:@"%@\n%@",couponInfo.number,couponInfo.prtitle];
     NSMutableAttributedString *mutAttributeStr = [[NSMutableAttributedString alloc]initWithString:str];
     [mutAttributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[str rangeOfString:couponInfo.number]];
-    [mutAttributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:16]} range:[str rangeOfString:couponInfo.info]];
+    [mutAttributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x323232],NSFontAttributeName:[UIFont systemFontOfSize:16]} range:[str rangeOfString:couponInfo.prtitle]];
     self.couponDetailLabel.attributedText = mutAttributeStr;
     
     

@@ -53,8 +53,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.mainTableVIEW.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableVIEW.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
     
-    [self.detailButton setTitle:@"明细" forState:UIControlStateNormal];
-    [self.detailButton setImage:[UIImage imageNamed:@"btn_detailed"] forState:UIControlStateNormal];
+    
     CGSize size = [self.detailButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.detailButton.titleLabel.font}];
     self.detailButton.imageEdgeInsets = UIEdgeInsetsMake(0, size.width+10, 0, -size.width-10);
     self.detailButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 5);

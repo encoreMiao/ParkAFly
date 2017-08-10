@@ -12,6 +12,7 @@
 #import <IQKeyboardManager.h>
 #import "PopViewController.h"
 #import "BAFCityInfo.h"
+#import "UIViewController+MMDrawerController.h"
 
 #define  baf_client_id  @"client_id" //用户 id
 #define  baf_cname      @"cname" //姓名
@@ -78,6 +79,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

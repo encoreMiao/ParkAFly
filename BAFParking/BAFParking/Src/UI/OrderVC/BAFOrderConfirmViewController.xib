@@ -45,9 +45,10 @@
                             <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbK-AJ-iZP">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbK-AJ-iZP">
                             <rect key="frame" x="160" y="0.0" width="75" height="62"/>
-                            <state key="normal" title="明细">
+                            <color key="tintColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="明细" image="btn_detailed">
                                 <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -130,6 +131,7 @@
         </view>
     </objects>
     <resources>
+        <image name="btn_detailed" width="14" height="13"/>
         <image name="list_frame" width="375" height="2"/>
     </resources>
 </document>

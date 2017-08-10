@@ -22,6 +22,7 @@
 //关于我们:http://parknfly.cn/Wap/Index/app_about
 //用户协议:http://www.parknfly.cn/Wap/Index/baf_agreement
 //会员说明：http://parknfly.cn/Public/Wap/level/index.html
+//普通泊主：http://parknfly.cn/Public/Wap/level/index.html
 //
 //测试：
 //价格说明:http://parknfly.com.cn/Wap/Index/app_price
