@@ -130,10 +130,10 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享成功" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
         }else{
-            NSString *strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
+            NSString *strTitle = [NSString stringWithFormat:@"失败"];
             NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
 
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
         }
         

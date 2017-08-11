@@ -155,6 +155,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self showTipsInView:self.view message:@"感谢您的评价，发表成功!" offset:self.view.center.x+100];
+
+            if (self.commentfinishHandler) {
+                self.commentfinishHandler();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }

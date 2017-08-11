@@ -78,6 +78,14 @@
         {
             [self setNavigationTitle:@"充值成功"];
             self.rechargeSuccessView.hidden = NO;
+            NSString *str = [NSString stringWithFormat:@"充值金额：%@",self.rechargeMoneyStr];
+            NSMutableAttributedString *mutAtr = [[NSMutableAttributedString alloc]initWithString:str];
+            [mutAtr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:self.rechargeMoneyLabel.font} range:[str rangeOfString:self.rechargeMoneyStr]];
+            self.rechargeMoneyLabel.attributedText = mutAtr;
+            
+            NSString *strTime = [NSString stringWithFormat:@"充值时间：%@",self.rechargeTimeStr];
+            self.rechargeTimeLabel.text = strTime;
+            
             self.successView.hidden = YES;
             self.failureView.hidden = YES;
             self.payView.hidden = YES;

@@ -448,7 +448,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self showTipsInView:self.view message:@"保存成功" offset:self.view.center.x+100];
-            [self getAccountInfo];
+//            [self getAccountInfo];
+            [self backMethod:nil];
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
@@ -461,7 +462,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             BAFUserInfo *userInfo = [BAFUserInfo mj_objectWithKeyValues:[obj objectForKey:@"data"]];
             [[BAFUserModelManger sharedInstance]saveUserInfo:userInfo];
-            
         }else{
             
         }

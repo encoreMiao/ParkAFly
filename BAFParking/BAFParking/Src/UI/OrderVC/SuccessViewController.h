@@ -20,4 +20,8 @@ typedef NS_ENUM(NSInteger,SuccessViewControllerType){
 @interface SuccessViewController : BAFBaseViewController    
 @property (nonatomic, assign) SuccessViewControllerType type;
 @property (nonatomic, strong) NSString *orderId;
+
+
+@property (nonatomic, strong) NSString *rechargeMoneyStr;//充值金额
+@property (nonatomic, strong) NSString *rechargeTimeStr;//充值时间
 @end

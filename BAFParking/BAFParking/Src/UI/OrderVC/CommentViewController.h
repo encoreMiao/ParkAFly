@@ -7,6 +7,9 @@
 //
 
 #import "BAFBaseViewController.h"
+
+typedef void (^CommetFinishedHandler) (void);
+
 typedef NS_ENUM(NSInteger,CommentViewControllerType)
 {
     kCommentViewControllerTypeCommentCheck,
@@ -16,4 +19,5 @@ typedef NS_ENUM(NSInteger,CommentViewControllerType)
 @interface CommentViewController : BAFBaseViewController
 @property (nonatomic, retain) NSDictionary *orderDic;
 @property (nonatomic, assign) CommentViewControllerType type;
+@property (nonatomic, copy)   CommetFinishedHandler commentfinishHandler;
 @end
