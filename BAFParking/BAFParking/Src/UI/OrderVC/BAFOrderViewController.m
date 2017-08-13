@@ -643,7 +643,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 //                _chargeRemark = self.parkArr[0].map_charge.remark;
                 _chargeRemark = [NSString stringWithFormat:@"该车场收费标准为：%@",self.parkArr[0].map_price];
                 [_dicDatasource setObject:self.parkArr[0].map_charge.first_day_price forKey:OrderParamTypeParkFeeFirstDay];
-                [_dicDatasource setObject:self.parkArr[0].map_charge.market_price forKey:OrderParamTypeParkFeeDay];
+                [_dicDatasource setObject:self.parkArr[0].map_charge.strike_price forKey:OrderParamTypeParkFeeDay];
                 [_dicDatasource setObject:self.parkArr[0].map_address forKey:OrderParamTypeParkLocation];
                 
                 

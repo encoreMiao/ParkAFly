@@ -28,11 +28,6 @@
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detailGesture)];
     gesture.delegate = self;
     [self addGestureRecognizer:gesture];
-    
-    self.modifyButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
-    self.modifyButton.layer.borderWidth = 0.5f;
-    self.cancelButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
-    self.cancelButton.layer.borderWidth = 0.5f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -63,6 +58,16 @@
     }else{
         self.pickTime.text = @"";
     }
+    
+    
+    self.modifyButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+    self.modifyButton.layer.borderWidth = 0.5f;
+    self.cancelButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+    self.cancelButton.layer.borderWidth = 0.5f;
+    [self.modifyButton setTitleColor:[UIColor colorWithHex:0x323232] forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[UIColor colorWithHex:0x323232] forState:UIControlStateNormal];
+    self.modifyButton.backgroundColor = [UIColor whiteColor];
+    self.cancelButton.backgroundColor = [UIColor whiteColor];
     
 //    业务状态:预约成功-停车完成-待支付-支付待确认- 已完成
     NSString *orderStatus = [orderDic objectForKey:@"order_status"];
@@ -128,6 +133,10 @@
         self.cancelButton.hidden = NO;
         [self.cancelButton setTitle:@"支付" forState:UIControlStateNormal];
         self.cancelButton.tag = kOrderListTableViewCellTypePay;
+        
+        self.cancelButton.layer.borderWidth = 0.f;
+        [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.cancelButton.backgroundColor = [UIColor colorWithHex:0xfb694b];
         
         [self.orderstatus setTitle:@"待支付" forState:UIControlStateNormal];
        

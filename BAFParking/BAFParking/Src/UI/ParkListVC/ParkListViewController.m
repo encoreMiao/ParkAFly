@@ -186,7 +186,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 NSString *str = [NSString stringWithFormat:@"%@&%@",cell.parkinfo.map_title,cell.parkinfo.map_id];
                 [_dicDatasource setObject:str forKey:OrderParamTypePark];
                 [_dicDatasource setObject:cell.parkinfo.map_charge.first_day_price forKey:OrderParamTypeParkFeeFirstDay];
-                [_dicDatasource setObject:cell.parkinfo.map_charge.market_price forKey:OrderParamTypeParkFeeDay];
+                [_dicDatasource setObject:cell.parkinfo.map_charge.strike_price forKey:OrderParamTypeParkFeeDay];
                 [_dicDatasource setObject:cell.parkinfo.map_address forKey:OrderParamTypeParkLocation];
                 
                 for (UIViewController *tempVC in self.navigationController.viewControllers) {

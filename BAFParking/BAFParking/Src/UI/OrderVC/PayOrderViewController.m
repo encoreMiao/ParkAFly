@@ -441,11 +441,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSDictionary *orderPrice =[orderFeeDetail objectForKey:@"order_price"];
     NSDictionary *basicDic = [[orderPrice objectForKey:@"basic"] objectForKey:@"101"];
     NSInteger firstdayfee = [[basicDic objectForKey:@"first_day_price"] integerValue];
-    NSInteger dayfee = [[basicDic objectForKey:@"market_price"] integerValue];
+    NSInteger dayfee = [[basicDic objectForKey:@"strike_price"] integerValue];//market_price
     NSInteger days = -1;
     if ([orderFeeDetail objectForKey:@"park_day"]) {
         days = [[orderFeeDetail objectForKey:@"park_day"] integerValue];
     }
+    days = days-1;
     if (days>=0) {
         totalFee = firstdayfee + dayfee*days;
     }else{

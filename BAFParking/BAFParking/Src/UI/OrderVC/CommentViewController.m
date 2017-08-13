@@ -50,8 +50,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.commentDic = [NSMutableDictionary dictionary];
     
     self.mycollectionview = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layoutForComment];
+    self.mycollectionview.backgroundColor = [UIColor whiteColor];
     _mycollectionview.scrollEnabled = NO;
-    _mycollectionview.backgroundColor = [UIColor clearColor];
     [_mycollectionview registerNib:[UINib nibWithNibName:@"CommentCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:CommentViewControllerCellIdentifier];
     self.mycollectionview.delegate = self;
     self.mycollectionview.dataSource = self;
@@ -84,9 +84,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
         self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, 220);
     }else{
-        self.commentcheckfooterView = [[CommentCheckCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
+        self.commentcheckfooterView = [[CommentCheckCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         [self.mycollectionview registerClass:[CommentCheckCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, 220);
+        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, screenHeight);
     
         [self viewCommentRequestWithOrderId:[self.orderDic objectForKey:@"id"]];
     }

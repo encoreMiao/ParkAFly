@@ -112,6 +112,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if ([self.orderDic objectForKey:OrderParamTypePark_day]) {
         days = [[self.orderDic objectForKey:OrderParamTypePark_day] integerValue];
     }
+    days = days-1;
     if (days>=0) {
         totalFee = firstdayfee + dayfee*days;
     }else{
@@ -466,13 +467,26 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     
     if ([self.orderDic objectForKey:OrderParamTypeService]) {
-        NSMutableArray *mutArr = [NSMutableArray array];
+//        NSMutableArray *mutArr = [NSMutableArray array];
+//        NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
+//        for (NSString *serviceStr in arr) {
+//            NSArray *serviceArr = [serviceStr componentsSeparatedByString:@"=>"];
+//            [mutArr addObject:[NSString stringWithFormat:@"%@=>%@",serviceArr[0],serviceArr[1]]];
+//        }
+//        [mutDic setObject:mutArr forKey:OrderParamTypeService];
+        
+        NSMutableDictionary *serviceDic = [NSMutableDictionary dictionary];
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
         for (NSString *serviceStr in arr) {
             NSArray *serviceArr = [serviceStr componentsSeparatedByString:@"=>"];
-            [mutArr addObject:[NSString stringWithFormat:@"%@=>%@",serviceArr[0],serviceArr[1]]];
+            if ([serviceArr[0] isEqualToString:@"5"]) {
+                [serviceDic setObject:[mutDic objectForKey:@"petrol"] forKey:serviceArr[0]];
+            }else{
+                [serviceDic setObject:@"" forKey:serviceArr[0]];
+            }
+//            [mutArr addObject:[NSString stringWithFormat:@"%@=>%@",serviceArr[0],serviceArr[1]]];
         }
-        [mutDic setObject:mutArr forKey:OrderParamTypeService];
+        [mutDic setObject:serviceDic forKey:OrderParamTypeService];
     }
     
     [orderReq addOrderRequestWithNumberIndex:kRequestNumberIndexAddOrder delegte:self param:mutDic];
