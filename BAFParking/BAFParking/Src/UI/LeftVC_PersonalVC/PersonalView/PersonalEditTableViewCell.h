@@ -20,4 +20,5 @@ typedef NS_ENUM(NSInteger, PersonalEditTableViewCellType)
 - (void)setTitle:(NSString *)title detail:(NSString *)detail type:(PersonalEditTableViewCellType)type;
 - (void)updateDetail:(NSString *)detail;
 - (void)updateImage:(UIImage *)image;
+- (void)updateImageUrl:(NSURL *)imageUrl;
 @end

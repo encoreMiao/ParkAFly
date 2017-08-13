@@ -227,17 +227,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 //    [personCenterReq clientEditRequestWithNumberIndex:kRequestNumberIndexClientEdit delegte:self param:dic];
     
     
-//    UIImage *img = [UIImage imageNamed:@"maik"];
-//    NSData *data = UIImageJPEGRepresentation(img, 0.5);
-////    NSString *imgStr =[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];//为什么没转换过来data中有非utf8的数据
-//    NSString *imgExt = [NSString typeForImageData:data];
-//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-//                         @"7296",@"client_id",
-//                         [data base64Encoding],@"avatar_data",
-//                         imgExt,@"avatar_ext",
-//                         nil];
-//    [personCenterReq clientAvatarRequestWithNumberIndex:kRequestNumberIndexClientAvatar delegte:self param:dic];
-    
 
 //    [personCenterReq feedBackRequestWithNumberIndex:kRequestNumberIndexFeedBack delegte:self client_id:@"7296" content:@"反馈啦啦啦啦啦啦啦啦啦"];
     

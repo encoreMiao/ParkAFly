@@ -13,6 +13,7 @@
 #import "PopViewController.h"
 #import "BAFCityInfo.h"
 #import "UIViewController+MMDrawerController.h"
+#import "NSString+ImageExtName.h"
 
 #define  baf_client_id  @"client_id" //用户 id
 #define  baf_cname      @"cname" //姓名
@@ -29,6 +30,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexColorList,
     kRequestNumberIndexEditClient,
     kRequestNumberIndexClientInfo,
+    kRequestNumberIndexClientAvatar,
 };
 
 #define PersonalEditTableViewCellIdentifier  @"PersonalEditTableViewCellIdentifier"
@@ -41,6 +43,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @property (nonatomic, strong) NSMutableArray *colorArr;
 
 @property (nonatomic, strong) NSMutableDictionary *clientDic;
+@property (nonatomic, strong) UIImage *headerImage;
 @end
 
 @implementation PersonalEditViewController
@@ -56,6 +59,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     self.tableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableview.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    
+    self.headerImage = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -198,6 +203,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (section == 0) {
         if (row == 0) {
             type = PersonalEditTableViewCellTypeEditHead;
+            if (self.headerImage) {
+                [cell updateImage:self.headerImage];
+            }else{
+                NSString *headerStr = [NSString stringWithFormat:@"%@%@",Server_Url, userInfo.avatar];
+                [cell updateImageUrl:[NSURL URLWithString:headerStr]];
+//                //没有的时候用/Public/Weixin/images/four/logo02.png有的时候为/Uploads/user/7296/20170504/avatar_7296611               
+            }
         }else if (row == 1||row == 3){
             type = PersonalEditTableViewCellTypeEdit;
             if (row == 1) {
@@ -467,6 +479,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }
     
+    if (aRequestID == kRequestNumberIndexClientAvatar) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            [self showTipsInView:self.view message:[obj objectForKey:@"头像更换成功"] offset:self.view.center.x+100];
+            [self.tableview reloadData];
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"更换头像失败"] offset:self.view.center.x+100];
+        }
+    }
+    
 }
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
@@ -499,9 +523,38 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     imagePickerController.sourceType = type;
     imagePickerController.allowsEditing = YES;
     if (type == UIImagePickerControllerSourceTypePhotoLibrary) {
-//        [imagePickerController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"common_black"] mbk_stretchImage] forBarMetrics:UIBarMetricsDefault];
         [imagePickerController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:20.0]}];
     }
     [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+#pragma mark –
+#pragma mark Camera View Delegate Methods
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    if (info != nil) {
+        [self performSelector:@selector(processImagePicker:) withObject:info afterDelay:0.1f];
+    }
+}
+
+- (void)processImagePicker:(NSDictionary *)info {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(processImagePicker:) object:nil];
+    
+    UIImage *tempImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    self.headerImage = tempImage;
+    NSData *data = UIImageJPEGRepresentation(tempImage, 0.5);
+    //    NSString *imgStr =[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];//为什么没转换过来data中有非utf8的数据
+    NSString *imgExt = [NSString typeForImageData:data];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         @"7296",@"client_id",
+                         [data base64Encoding],@"avatar_data",
+                         imgExt,@"avatar_ext",
+                         nil];
+    id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    [personCenterReq clientAvatarRequestWithNumberIndex:kRequestNumberIndexClientAvatar delegte:self param:dic];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 @end

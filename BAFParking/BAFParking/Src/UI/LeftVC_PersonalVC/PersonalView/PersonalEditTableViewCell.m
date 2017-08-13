@@ -7,6 +7,7 @@
 //
 
 #import "PersonalEditTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface PersonalEditTableViewCell()
 @property (nonatomic, assign) PersonalEditTableViewCellType type;
@@ -80,7 +81,13 @@
 
 - (void)updateImage:(UIImage *)image
 {
+    self.headIV.layer.cornerRadius = self.headIV.frame.size.height/2.0;
     self.headIV.image = image;
+}
+
+- (void)updateImageUrl:(NSURL *)imageUrl
+{
+    [self.headIV sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"btn_img"]];
 }
 
 @end
