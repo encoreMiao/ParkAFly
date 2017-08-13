@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString *starttime;
 @property (nonatomic, strong) NSString *endtime;
 @property (nonatomic, strong) NSString *status;
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *descriptionOfActivity;
 @end
 
 

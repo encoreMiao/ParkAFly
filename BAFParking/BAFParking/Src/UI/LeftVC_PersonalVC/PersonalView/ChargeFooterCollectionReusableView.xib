@@ -29,40 +29,17 @@
                         <action selector="chargeAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="uS8-Hw-2IF"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNf-5d-g3o" userLabel="说明： 1.用户将金额充值到泊安飞账户，当时充值当时到账。 2.进行充值后，余额会显示在“个人中心-账户”中，用于泊安飞下单时使用。 3.充值送现金活动即将推出，敬请期待。">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNf-5d-g3o" userLabel="说明： 1.用户将金额充值到泊安飞账户，当时充值当时到账。 2.进行充值后，余额会显示在“个人中心-账户”中，用于泊安飞下单时使用。 3.充值送现金活动即将推出，敬请期待。">
                     <rect key="frame" x="20" y="87" width="420" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="coz-4k-K3z"/>
                     </constraints>
-                    <attributedString key="attributedText">
-                        <fragment content="说明：">
-                            <attributes>
-                                <color key="NSColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                            </attributes>
-                        </fragment>
-                        <fragment>
-                            <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                            <attributes>
-                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                            </attributes>
-                        </fragment>
-                        <fragment>
-                            <string key="content">1.用户将金额充值到泊安飞账户，当时充值当时到账。
+                    <string key="text">说明：
+1.用户将金额充值到泊安飞账户，当时充值当时到账。
 2.进行充值后，余额会显示在“个人中心-账户”中，用于泊安飞下单时使用。
 3.充值送现金活动即将推出，敬请期待。</string>
-                            <attributes>
-                                <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                    <tabStops/>
-                                </paragraphStyle>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
+                    <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="13"/>
+                    <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -74,6 +51,9 @@ Cg
                 <constraint firstItem="MNf-5d-g3o" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="20" id="lpS-lz-d6g"/>
                 <constraint firstAttribute="trailing" secondItem="MNf-5d-g3o" secondAttribute="trailing" constant="20" id="pFU-0I-VsE"/>
             </constraints>
+            <connections>
+                <outlet property="label" destination="MNf-5d-g3o" id="C70-am-7ii"/>
+            </connections>
             <point key="canvasLocation" x="-26" y="-25"/>
         </collectionReusableView>
     </objects>

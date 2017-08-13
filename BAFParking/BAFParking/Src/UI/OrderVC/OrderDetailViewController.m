@@ -16,6 +16,9 @@
 #import "OrderDetailImageTableViewCell.h"
 #import "OrderDetailFeeTableViewCell.h"
 #import "MapViewController.h"
+#import "BAFOrderViewController.h"
+#import "OrderListViewController.h"
+#import "BAFCenterViewController.h"
 
 #define OrderConfirmTableViewCellIdentifier @"OrderConfirmTableViewCellIdentifier"
 #define OrderDetail1TableViewCellIdentifier @"OrderDetail1TableViewCellIdentifier"
@@ -66,6 +69,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
+    UINavigationController* navi = self.navigationController;
+    UIViewController *vc = [navi.viewControllers objectAtIndex:(navi.viewControllers.count-2)];
+    OrderListViewController *ordervc = [[OrderListViewController alloc]init];
+    if ([vc isKindOfClass:[BAFCenterViewController class]]){
+        NSMutableArray *vcArr = [NSMutableArray arrayWithArray:navi.viewControllers];
+        [vcArr insertObject:ordervc atIndex:1];
+        navi.viewControllers = vcArr;
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

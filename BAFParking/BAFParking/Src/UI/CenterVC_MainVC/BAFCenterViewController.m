@@ -89,7 +89,6 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 
 - (void)setupScrollView
 {
-    _rollingBannerVC;
     _rollingBannerVC = [DYMRollingBannerVC new];
     [_rollingBannerVC.view setFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(self.headerScrollerView.frame))];
 //    _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
@@ -98,7 +97,6 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
     
     // Set the placeholder image (optional, the default place holder is nil)
     _rollingBannerVC.placeHolderImage = [UIImage imageNamed:@"home_banner3"];
-    // Define the way how you load the image from a remote url
     [_rollingBannerVC setRemoteImageLoadingBlock:^(UIImageView *imageView, NSString *imageUrlStr, UIImage *placeHolderImage) {
         [imageView sd_cancelCurrentImageLoad];
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrlStr] placeholderImage:placeHolderImage options:SDWebImageProgressiveDownload];

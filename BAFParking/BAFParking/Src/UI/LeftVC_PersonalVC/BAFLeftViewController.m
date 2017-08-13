@@ -22,6 +22,11 @@
 #import "PersonalEditViewController.h"
 #import "BAFWebViewController.h"
 
+
+typedef NS_ENUM(NSInteger,RequestNumberIndex){
+    kRequestNumberIndexClientInfo,//获取个人信息
+};
+
 @interface BAFLeftViewController ()
 <UITableViewDelegate, UITableViewDataSource,PersonalCenterFooterViewDelegate,PersonalCenterHeaderViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *personalTableView;
@@ -44,7 +49,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.headerView setupView];
+    
+    [self getAccountInfo];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -178,6 +184,34 @@
     }];
     [webview loadTargetURL:[NSURL URLWithString:@"http://parknfly.cn/Public/Wap/level/index.html"] title:@"会员"];
 
+}
+
+
+- (void)getAccountInfo
+{
+    id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    [personCenterReq clientInfoRequestWithNumberIndex:kRequestNumberIndexClientInfo delegte:self client_id:userInfo.clientid];
+}
+
+
+
+-(void)onJobComplete:(int)aRequestID Object:(id)obj
+{
+    if (aRequestID == kRequestNumberIndexClientInfo) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            BAFUserInfo *userInfo = [BAFUserInfo mj_objectWithKeyValues:[obj objectForKey:@"data"]];
+            [[BAFUserModelManger sharedInstance]saveUserInfo:userInfo];
+            
+            [self.headerView setupView];
+            [self.personalTableView reloadData];
+        }else{
+            
+        }
+    }
 }
 
 @end

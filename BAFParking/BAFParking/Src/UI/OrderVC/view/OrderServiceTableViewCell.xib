@@ -44,7 +44,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="YD9-dI-CLR"/>
                         </constraints>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>

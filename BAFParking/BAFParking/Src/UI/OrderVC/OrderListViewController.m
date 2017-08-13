@@ -137,7 +137,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - OrderListTableViewCellDelegate
 - (void)orderBtnActionTag:(NSInteger)btnTag cell:(OrderListTableViewCell *)cell
 {
-    NSIndexPath *indexpath = [self.mytableview indexPathForCell:cell];
     NSLog(@"%@",cell.orderDic);
     //修改时提交按钮为保存，泊车时间定位到当前时间两小时之后
     switch (btnTag) {
@@ -145,6 +144,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         {
             NSLog(@"实际未停车，锁定出发航站楼、停车场项，其他信息可修改(如需修改，需联系客服或重新下单)");
             BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
+            orderVC.handler = ^(void){
+                [self segementSelect:self.ongoingButton];
+            };
             orderVC.type = kBAFOrderViewControllerTypeModifyAll;
             orderVC.orderDicForModify = cell.orderDic;
             [self.navigationController pushViewController:orderVC animated:YES];
@@ -154,6 +156,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         {
             NSLog(@"实际已停车，修改时锁定泊车时间、出发航站楼、停车场项，只能修改取车时间、返程航站楼，保存后提交");
             BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
+            orderVC.handler = ^(void){
+                [self segementSelect:self.ongoingButton];
+            };
             orderVC.type = kBAFOrderViewControllerTypeModifyPart;
             orderVC.orderDicForModify = cell.orderDic;
             [self.navigationController pushViewController:orderVC animated:YES];

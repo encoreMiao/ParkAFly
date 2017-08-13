@@ -53,6 +53,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.mainTableVIEW.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableVIEW.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
     
+    UIView *footlineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0.5, screenWidth, 0.5)];
+    footlineView.backgroundColor = [UIColor colorWithHex:0xc9c9c9];
+    self.mainTableVIEW.tableFooterView = footlineView;
+    
     
     CGSize size = [self.detailButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.detailButton.titleLabel.font}];
     self.detailButton.imageEdgeInsets = UIEdgeInsetsMake(0, size.width+10, 0, -size.width-10);
@@ -199,15 +203,27 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:15.0f];
     label.textColor = [UIColor colorWithHex:0x323232];
+    
+    UIView *toplineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0.5, screenWidth, 0.5)];
+    toplineView.backgroundColor = [UIColor colorWithHex:0xc9c9c9];
+    UIView *bottomlineView = [[UIView alloc]initWithFrame:CGRectMake(0, 29.5, screenWidth, 0.5)];
+    bottomlineView.backgroundColor = [UIColor colorWithHex:0xc9c9c9];
+    
     if (section == 0) {
         label.text = @"停车信息";
+        [sectionFooterView addSubview:bottomlineView];
     }
     if (section == 1) {
         label.text = @"取车信息";
+        [sectionFooterView addSubview:bottomlineView];
+        [sectionFooterView addSubview:toplineView];
     }
     if (section == 2) {
         label.text = @"服务项目";
+        [sectionFooterView addSubview:bottomlineView];
+        [sectionFooterView addSubview:toplineView];
     }
+    
     [sectionFooterView addSubview:label];
 
     return sectionFooterView;

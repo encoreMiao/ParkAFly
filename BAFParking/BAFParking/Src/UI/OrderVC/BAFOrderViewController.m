@@ -79,7 +79,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (self.type == kBAFOrderViewControllerTypeOrder) {
         //预约
         [self.footerView.nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
-        self.footerView.tipsLabel.text = @"1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。\n2.如有疑问，请致电3008138666联系客服。";
+        self.footerView.tipsLabel.text = @"1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。\n2.如有疑问，请致电4008138666联系客服。";
         
         [self cityListRequest];
         if ([_dicDatasource objectForKey:OrderParamTypePark]) {
@@ -381,6 +381,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self.navigationController pushViewController:orderServiceVC animated:YES];
         }
     }else{
+        NSString *str = [_dicDatasource objectForKey:OrderParamTypeBackTerminal];
+        if ([[_dicDatasource objectForKey:OrderParamTypeTime] isEqualToString:@"0000-00-00 00:00:00"]&&(str.length>1)) {
+            [self showTipsInView:self.view message:@"请选择取车时间" offset:self.view.center.x+100];
+            return;
+        }
+        
+        if ((![[_dicDatasource objectForKey:OrderParamTypeTime] isEqualToString:@"0000-00-00 00:00:00"])&&(str.length<=1)) {
+            [self showTipsInView:self.view message:@"请选择返程航站楼" offset:self.view.center.x+100];
+            return;
+        }
+        
         id strDate = [_dicDatasource objectForKey:OrderParamTypeTime];
         if ([strDate isKindOfClass:[NSString class]]) {
             if (![strDate isEqualToString:@"0000-00-00 00:00:00"]) {
@@ -650,6 +661,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             //修改订单
             [self showTipsInView:self.view message:@"订单修改成功" offset:self.view.center.x+100];
+            if (self.handler) {
+                self.handler();
+            }
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }

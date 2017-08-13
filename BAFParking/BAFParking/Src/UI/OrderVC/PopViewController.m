@@ -132,6 +132,7 @@
             height = 300;
             self.popTitleLabel.text = @"费用明细";
             self.confirmButton.hidden = YES;
+            self.scrollView.hidden = YES;
         }
             break;
         case kPopViewControllerTypeCompany:
@@ -689,7 +690,8 @@
         [_datePicker addTarget:self
                               action:@selector(datePickerDateChanged:)
                     forControlEvents:UIControlEventValueChanged];
-        NSDate *todayDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
+//        NSDate *todayDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
+        NSDate *todayDate = [[NSDate date] dateByAddingTimeInterval:0];
         NSTimeInterval interval = [todayDate timeIntervalSince1970];
         interval = (15*60)-(int)(interval)%(15*60) + floor(interval);
         todayDate = [NSDate dateWithTimeIntervalSince1970:interval];

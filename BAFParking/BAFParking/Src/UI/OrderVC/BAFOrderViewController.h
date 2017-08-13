@@ -20,6 +20,7 @@
 #define OrderParamTypeParkFeeFirstDay         @"OrderParamTypeParkFeeFirstDay"//map_charge=>first_day_price
 #define OrderParamTypeParkFeeDay              @"OrderParamTypeParkFeeDay"//map_charge=>market_price
 
+typedef void (^ModifySucessHandler) (void);
 
 typedef NS_ENUM(NSInteger,BAFOrderViewControllerType){
     kBAFOrderViewControllerTypeOrder,
@@ -32,4 +33,5 @@ typedef NS_ENUM(NSInteger,BAFOrderViewControllerType){
 @property (nonatomic, strong) NSMutableDictionary       *dicDatasource;
 @property (nonatomic, assign) BAFOrderViewControllerType type;
 @property (nonatomic, strong) NSDictionary              *orderDicForModify;
+@property (nonatomic, copy)   ModifySucessHandler        handler;
 @end

@@ -645,13 +645,12 @@
     NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
                                   [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
-    //GET请求
-    [self getRequestWithUrl:REQURL(@"api/order/app_wechat_pay") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+    [self postRequestWithUrl:REQURL(@"api/order/app_wechat_pay") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
         NSLog(@"JSON = %@", responseObject);
         if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
             [workThread onJobComplete:numberIndex Object:(id)responseObject];
         }
-    }failure:^(id operation, NSError *error) {
+    } failure:^(id operation, NSError *error) {
         if ([workThread respondsToSelector:@selector(onJobTimeout:Error:)]) {
             [workThread onJobTimeout:numberIndex Error:nil];
         }

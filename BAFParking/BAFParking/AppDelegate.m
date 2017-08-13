@@ -61,7 +61,7 @@
 //    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [self.window setRootViewController:self.drawerController];
     
-    [WXApi registerApp:@"wxd9b4c7082b53f5b3"];
+    [WXApi registerApp:@"wx5a0773783b93d27b"];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLaunch"] == nil){
         [self showGuideVC];

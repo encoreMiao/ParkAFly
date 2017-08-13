@@ -292,8 +292,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSString *str = [NSString stringWithFormat:@"%@=>%@=>%@=>%@",cell.serviceInfo.charge_id,cell.serviceInfo.remark,cell.serviceInfo.title,cell.serviceInfo.strike_price];
     NSIndexPath *indexpath = [self.mainTableView indexPathForCell:cell];
     if ([[self.single_serviceDic.allKeys objectAtIndex:indexpath.row] isEqualToString:@"202"]) {
+        if (!cell.show) {
+            NSDate *twohoursDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
+            NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+            NSDate *parkDate =[dateFormat dateFromString:[self.dicDatasource objectForKey:OrderParamTypeGoTime]];
+            if ([twohoursDate compare:parkDate] == NSOrderedDescending) {
+                [self showTipsInView:self.view message:@"代泊服务需提前两小时" offset:self.view.center.x+100];
+                return;
+            }
+        }
         self.isTextServiceShow = !cell.show;
         self.isCommonServiceShow = NO;
+        
+        
     }else{
         self.isTextServiceShow = NO;
         self.isCommonServiceShow = !cell.show;

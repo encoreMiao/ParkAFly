@@ -83,7 +83,7 @@
     _pageControl = [[UIPageControl alloc] init];
     [_pageControl addTarget:self action:@selector(pageControlTapped:) forControlEvents:UIControlEventValueChanged];
     
-    self.edgeBackgroundColor = [UIColor blackColor];
+    self.edgeBackgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - page control

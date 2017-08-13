@@ -16,4 +16,5 @@
 @interface ChargeFooterCollectionReusableView : UICollectionReusableView
 - (IBAction)chargeAction:(id)sender;
 @property (nonatomic, weak) id<ChargeFooterCollectionReusableViewDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UILabel *label;
 @end
