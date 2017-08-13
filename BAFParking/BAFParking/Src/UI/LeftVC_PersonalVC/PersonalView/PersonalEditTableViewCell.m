@@ -22,6 +22,15 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.headIV.layer.cornerRadius = 22.0;
+    self.headIV.layer.borderColor = [[UIColor clearColor] CGColor];
+    self.headIV.layer.borderWidth = 0.0f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -81,7 +90,6 @@
 
 - (void)updateImage:(UIImage *)image
 {
-    self.headIV.layer.cornerRadius = self.headIV.frame.size.height/2.0;
     self.headIV.image = image;
 }
 
