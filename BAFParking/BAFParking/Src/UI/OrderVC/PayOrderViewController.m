@@ -70,6 +70,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.tcCardFee = nil;
     self.selectAccount = NO;
     
+    
+    CGSize size = [self.detailBtn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.detailBtn.titleLabel.font}];
+    self.detailBtn.imageEdgeInsets = UIEdgeInsetsMake(0, size.width+10-10, 0, -size.width-10+10);
+    self.detailBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -5-10, 0, 5+10);
+
+    
     [self configOrderDic:self.orderDic];
 }
 
@@ -323,9 +329,25 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)orderPaymentSet
 {
 //    order/order_payment_set
+    
     NSInteger totalFee = [[[self.orderDic objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
-    NSString *totalFeeText = [NSString stringWithFormat:@"¥%ld",totalFee/100];
+    [self changeTotalFee:totalFee];
+}
+
+- (void)changeTotalFee:(NSInteger)totalfee
+{
+    if(totalfee<=0){
+        self.weixinBtn.hidden = YES;
+        self.moneyPayBtn.hidden = YES;
+        self.confirmPayBtn.hidden = NO;
+    }else{
+        self.weixinBtn.hidden = NO;
+        self.moneyPayBtn.hidden = NO;
+        self.confirmPayBtn.hidden = YES;
+    }
+    NSString *totalFeeText = [NSString stringWithFormat:@"¥%ld",totalfee/100];
     self.totalFeeLabel.text = totalFeeText;
+    
 }
 
 #pragma mark request

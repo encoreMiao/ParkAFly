@@ -356,13 +356,15 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self showTipsInView:self.view message:@"充值成功" offset:self.view.center.x+100];
-            [self getAccountInfo];
             
-            SuccessViewController *successVC = [[SuccessViewController alloc]init];
-            successVC.type = kSuccessViewControllerTypeRechargeSuccess;
-            successVC.rechargeMoneyStr = @"300元";
-            successVC.rechargeTimeStr = @"2016-03-15 15:00";
-            [self.navigationController pushViewController:successVC animated:YES];
+            [self.mycollectionview reloadData];//清空之前的充值数据。
+            
+            [self getAccountInfo];
+//            SuccessViewController *successVC = [[SuccessViewController alloc]init];
+//            successVC.type = kSuccessViewControllerTypeRechargeSuccess;
+//            successVC.rechargeMoneyStr = @"300元";
+//            successVC.rechargeTimeStr = @"2016-03-15 15:00";
+//            [self.navigationController pushViewController:successVC animated:YES];
             
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
@@ -426,14 +428,13 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 
 - (void)getwechatpay:(NSDictionary *)dict
 {
-//    NSMutableString *stamp  = [dict objectForKey:@"timestamp"];//stamp.intValue
-    
+    NSMutableString *stamp  = [dict objectForKey:@"timestamp"];//stamp.intValue
     //调起微信支付
     PayReq* req             = [[PayReq alloc] init];
     req.partnerId           = [dict objectForKey:@"partnerid"];
     req.prepayId            = [dict objectForKey:@"prepayid"];
     req.nonceStr            = [dict objectForKey:@"noncestr"];
-    req.timeStamp           = [[NSDate date] timeIntervalSince1970];
+    req.timeStamp           = stamp.intValue;
     req.package             = [dict objectForKey:@"package"];
     req.sign                = [dict objectForKey:@"sign"];
     [WXApi sendReq:req];

@@ -10,6 +10,7 @@
 
 @protocol OrderFooterViewDelegate <NSObject>
 - (void)nextStepButtonDelegate:(id)sender;
+- (void)showPriceInformationDelegate:(id)sender;
 @end
 
 

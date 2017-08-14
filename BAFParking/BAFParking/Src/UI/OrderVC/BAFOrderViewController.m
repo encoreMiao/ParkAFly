@@ -22,6 +22,7 @@
 #import "ParkListViewController.h"
 #import "HRLOrderInterface.h"
 #import "SuccessViewController.h"
+#import "BAFWebViewController.h"
 
 typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCityList,
@@ -706,4 +707,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
 //    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
+
+
+- (void)showPriceInformationDelegate:(id)sender
+{
+    BAFWebViewController  *webview = [[BAFWebViewController alloc]init];
+    [self.navigationController pushViewController:webview animated:YES];
+    [webview loadTargetURL:[NSURL URLWithString:@"http://parknfly.cn/Wap/Index/app_price"] title:@"价格说明"];
+}
+
 @end

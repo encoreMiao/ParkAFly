@@ -53,21 +53,22 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaM-jH-cM8">
                             <rect key="frame" x="250" y="10.5" width="105" height="42"/>
-                            <color key="backgroundColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="105" id="DKm-2v-5Fh"/>
                                 <constraint firstAttribute="height" constant="42" id="Vy3-Dw-2VA"/>
                             </constraints>
                             <state key="normal" title="现金支付">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNa-kb-uT5">
-                            <rect key="frame" x="20" y="32" width="31" height="15"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNa-kb-uT5">
+                            <rect key="frame" x="20" y="32" width="45" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="qbf-Pa-H7l"/>
                             </constraints>
-                            <state key="normal" title="明细">
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="明细" image="btn_detailed">
                                 <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -327,6 +328,7 @@
         </view>
     </objects>
     <resources>
+        <image name="btn_detailed" width="14" height="13"/>
         <image name="list_chb2_item" width="26" height="26"/>
     </resources>
 </document>
