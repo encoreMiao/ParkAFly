@@ -16,6 +16,7 @@
 #import "BAFTcCardInfo.h"
 #import "HRLOrderInterface.h"
 #import "CouponViewController.h"
+#import "WXApi.h"
 
 #define PayOrderTableViewCellIdentifier  @"PayOrderTableViewCellIdentifier"
 #define PayOrderTcCard  @"PayOrderTcCard"
@@ -27,9 +28,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexOrderFeeRequest,
     kRequestNumberIndexOrderDetail,
     kRequestNumberIndexOrderPaymentSet,//设置支付明细
+    kRequestNumberIndexRechargeSign,
 };
 
-@interface PayOrderViewController ()<UITableViewDelegate, UITableViewDataSource,PopViewControllerDelegate,PayOrderTableViewCellDelegate>
+@interface PayOrderViewController ()<UITableViewDelegate, UITableViewDataSource,PopViewControllerDelegate,PayOrderTableViewCellDelegate,WXApiDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mytableview;
 @property (weak, nonatomic) IBOutlet UILabel *orderNo;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
@@ -47,7 +49,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 @property (strong, nonatomic) BAFCouponInfo *selectCouponinfo;//选择优惠券
 @property (strong, nonatomic) NSString *tcCardFee;//选择权益卡
+@property (strong, nonatomic) NSString *selectTcCardNo;//权益卡号
 @property (assign, nonatomic) BOOL selectAccount;//选择余额
+@property (assign, nonatomic) NSInteger accountAmountShow;//个人账户余额减去的金额
 
 @property (strong, nonatomic) NSMutableDictionary *tcRequestDic;//算权益余额的请求参数
 
@@ -70,6 +74,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.selectCouponinfo = nil;
     self.tcCardFee = nil;
     self.selectAccount = NO;
+    
+    BAFUserInfo *userinfo = [[BAFUserModelManger sharedInstance] userInfo];
+    self.accountAmountShow = userinfo.account.integerValue;
     
     CGSize size = [self.detailBtn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.detailBtn.titleLabel.font}];
     self.detailBtn.imageEdgeInsets = UIEdgeInsetsMake(0, size.width+10-10, 0, -size.width-10+10);
@@ -97,7 +104,28 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.confirmPayBtn.hidden = YES;
     self.weixinBtn.hidden = NO;
     self.moneyPayBtn.hidden = NO;
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(paysuccess) name:PaySuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(payfailure) name:PayFailureNotification object:nil];
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PaySuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PayFailureNotification object:nil];
+}
+
+- (void)paysuccess
+{
+    NSLog(@"hh支付成功");
+}
+
+- (void)payfailure
+{
+    NSLog(@"hh支付失败");
+}
+
 
 - (void)backMethod:(id)sender
 {
@@ -130,6 +158,45 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.definesPresentationContext = YES;
     [popView configViewWithData:[self configTotoalfee] type:kPopViewControllerTypeTipsshow];
     [self presentViewController:popView animated:NO completion:nil];
+}
+
+- (IBAction)paymentConfirmWithSender:(UIButton *)sender
+{
+    //支付方式:cash.现金支付;confirm. 确认支付;wechat.微信支付
+    NSString *paymode;
+    if ([sender.titleLabel.text isEqualToString:@"现金支付"]) {
+        paymode = @"cash";
+    }else if([sender.titleLabel.text isEqualToString:@"确认支付"]){
+        paymode = @"confirm";
+    }else{
+        paymode = @"wechat";
+    }
+    //    order/order_payment_set
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:paymode forKey:@"paymode"];
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    [param setObject:userInfo.clientid forKey:@"client_id"];//客户 id
+    [param setObject:[self.orderDic objectForKey:@"id"] forKey:@"order_id"];//订单 id
+    
+    if (self.selectCouponinfo) {
+        [param setObject:self.selectCouponinfo.number forKey:@"coupon_code"];//优惠码
+        [param setObject:[NSString stringWithFormat:@"%.0f",self.selectCouponinfo.price.integerValue/100.0f] forKey:@"coupon_pay_money"];//优惠券抵扣金额(以元为单位)
+    }
+    
+    if (self.tcCardFee) {
+        [param setObject:self.selectTcCardNo forKey:@"activity_code"];//权益卡号
+        [param setObject:self.tcCardFee forKey:@"activity_pay_money"];//权益账户抵扣金额
+    }
+    
+    if (self.selectAccount) {
+        [param setObject:[NSString stringWithFormat:@"%ld",self.accountAmountShow] forKey:@"account_pay_money"];//个人账户余额支付部分
+    }
+    
+    NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
+    [param setObject:[str stringByReplacingOccurrencesOfString:@"¥" withString:@""] forKey:@"actual_pay_money"];//微信支付或现金支付部分
+    
+    id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [orderReq orderPaymentSetWithNumberIndex:kRequestNumberIndexOrderPaymentSet delegte:self param:param];
 }
 
 #pragma mark - UITableViewDelegate
@@ -185,9 +252,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         cell.detailImg.hidden = YES;
         BAFUserInfo *userinfo = [[BAFUserModelManger sharedInstance] userInfo];
         if (self.selectAccount) {
-            NSString *moneyStr = [NSString stringWithFormat:@"-¥%.0f",userinfo.account.integerValue/100.0f];
+            NSString *moneyStr = [NSString stringWithFormat:@"-¥%.0f",self.accountAmountShow/100.0f];
             NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:moneyStr];
-            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[moneyStr rangeOfString:[NSString stringWithFormat:@"-¥%.0f",userinfo.account.integerValue/100.0f]]];
+            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[moneyStr rangeOfString:[NSString stringWithFormat:@"-¥%.0f",self.accountAmountShow/100.0f]]];
             cell.moneyLabel.attributedText = mutStr;
             [cell setShow: YES];
         }else{
@@ -198,9 +265,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [cell setShow:NO];
         }
     }
-    
-    
-    
     return cell;
 }
 
@@ -230,12 +294,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if ([cell.titleLabel.text isEqualToString:@"权益账户"]) {
         cell.show = !cell.show;
         if (!cell.show) {
+            self.tcCardFee = nil;
             if ([self.dicDataSource objectForKey:PayOrderTcCard]) {
                 [self.dicDataSource removeObjectForKey:PayOrderTcCard];
-                [self.mytableview reloadData];
             }
-            
-            
+            [self orderPaymentSet];
         }else{
             if (self.tcCard.count == 0) {
                 [self showTipsInView:self.view message:@"当前未绑定权益卡" offset:self.view.center.x+100];
@@ -251,7 +314,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self jumpToCouponVC];
         }else{
             self.selectCouponinfo = nil;
-            [self.mytableview  reloadData];
+            [self orderPaymentSet];
         }
     }else if ([cell.titleLabel.text isEqualToString:@"个人账户"]) {
         cell.show = !cell.show;
@@ -260,9 +323,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else{
             self.selectAccount = NO;
         }
-        [self.mytableview  reloadData];
+        [self orderPaymentSet];
     }
-
 }
 
 - (void)jumpToCouponVC
@@ -271,13 +333,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     vc.type = kCouponViewControllerTypeUse;
     vc.handler = ^(BAFCouponInfo *couponinfo){
         self.selectCouponinfo = couponinfo;
-        [self.mytableview  reloadData];
+        [self orderPaymentSet];
     };
     if (self.selectCouponinfo) {
         vc.selectCouponInfo = self.selectCouponinfo;
     }
     vc.orderId = [self.orderDic objectForKey:@"id"];
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 #pragma mark - PopViewControllerDelegate
@@ -292,6 +355,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             
             NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:self.tcRequestDic];
             [muDic setObject:tcCardInfo.card_no forKey:@"card_no"];
+            self.selectTcCardNo = tcCardInfo.card_no;
             [self checktCarReqeustWithParam:muDic];
         }
             break;
@@ -305,7 +369,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     switch (type) {
         case kPopViewControllerTypeTcCard:
         {
-            [self.mytableview reloadData];
+            [self orderPaymentSet];
         }
             break;
         default:
@@ -383,34 +447,43 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)orderPaymentSet
 {
-//    order/order_payment_set
-
     NSInteger chargeAmount = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
     NSInteger totalFee = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
     BAFUserInfo *userinfo = [[BAFUserModelManger sharedInstance] userInfo];
-    NSInteger accountAmount = userinfo.account.integerValue;//账户余额
+    self.accountAmountShow = userinfo.account.integerValue;//账户余额
     
     if (self.tcCardFee && self.selectCouponinfo) {
         //余额不能点
         totalFee = totalFee - self.tcCardFee.integerValue - self.selectCouponinfo.price.integerValue;
     }else if (self.tcCardFee && self.selectAccount){
         //优惠券不能点
-        totalFee = totalFee - self.tcCardFee.integerValue - accountAmount;
+        totalFee = totalFee - self.tcCardFee.integerValue - self.accountAmountShow;
     }else if (self.selectCouponinfo && self.selectAccount){
         //权益卡不能点
-        totalFee = totalFee - self.selectCouponinfo.price.integerValue - accountAmount;
+        totalFee = totalFee - self.selectCouponinfo.price.integerValue - self.accountAmountShow;
     }else if (self.selectCouponinfo && (self.selectCouponinfo.price.integerValue>= chargeAmount)){
         //权益卡和余额不能点
         totalFee = totalFee - self.selectCouponinfo.price.integerValue;
-    }else if (self.selectAccount && (accountAmount >= chargeAmount)){
+    }else if (self.selectAccount && (self.accountAmountShow >= chargeAmount)){
         //权益卡和优惠券不能点
-        totalFee = totalFee - accountAmount;
+        totalFee = totalFee - self.accountAmountShow;
     }
     
     if (totalFee<=0) {
         totalFee = 0;
     }
+    
+    if (self.selectAccount) {
+        if (totalFee == 0) {
+            self.accountAmountShow = (totalFee - self.tcCardFee.integerValue - self.selectCouponinfo.price.integerValue);
+        }
+    }
+    if (self.accountAmountShow<=0) {
+        self.accountAmountShow = 0;
+    }
+    
     [self changeTotalFee:totalFee];
+    [self.mytableview reloadData];
 }
 
 - (void)changeTotalFee:(NSInteger)totalfee
@@ -439,6 +512,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [orderReq orderDetailRequestWithNumberIndex:kRequestNumberIndexOrderDetail delegte:self order_id:[self.orderDic objectForKey:@"id"]];
 }
 
+- (void)createSignWithParam:(NSDictionary *)dic
+{
+    id <HRLPersonalCenterInterface> personCenterReq = [[HRLogicManager sharedInstance] getPersonalCenterReqest];
+    [personCenterReq rechargeSignRequestWithNumberIndex:kRequestNumberIndexRechargeSign delegte:self param:dic];
+}
 
 #pragma mark - REQUEST
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
@@ -463,9 +541,48 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             //计算腾讯权益卡费用成功
             self.tcCardFee = [obj objectForKey:@"data"];
-            [self.mytableview  reloadData];
+            [self orderPaymentSet];
         }else{
            
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexOrderPaymentSet) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            NSString *payMethod = [[obj objectForKey:@"data"] objectForKey:@"pay_method"];
+            //确认支付和微信支付调转页面相同 恭喜你支付成功（不用传金额）
+            if ([payMethod isEqualToString:@"confirm"]){
+                //确认支付
+            }else if ([payMethod isEqualToString:@"cash"]){
+                //现金支付 跳转到订单提交成功页面 温馨提示请将待支付金额到现场交给客户经理结算（要传金额）
+                
+            }else if ([payMethod isEqualToString:@"wechat"]) {
+                //微信支付
+                NSString *orderID = [[obj objectForKey:@"data"] objectForKey:@"trade_no"];
+                NSMutableDictionary *param = [NSMutableDictionary dictionary];
+                [param setObject:[NSString stringWithFormat:@"%@",orderID] forKey:@"out_trade_no"];
+                NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
+                [param setObject:[str stringByReplacingOccurrencesOfString:@"¥" withString:@""] forKey:@"total_fee"];
+                [param setObject:@"payment" forKey:@"pay_type"];
+                [self createSignWithParam:param];
+            }
+            
+        }else{
+            
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexRechargeSign) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            [self getwechatpay:[obj objectForKey:@"data"]];
+        }else{
+            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
     }
     
@@ -481,9 +598,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeText rangeOfString:[NSString stringWithFormat:@"¥%ld",basicTotalFee/100]]];
             self.orderFeeLabel.attributedText = mutStr;
             
-            NSInteger totalFee = [[[[obj objectForKey:@"data"]objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
-            NSString *totalFeeText = [NSString stringWithFormat:@"¥%ld",totalFee/100];
-            self.totalFeeLabel.text = totalFeeText;
+            [self orderPaymentSet];
         }else{
             
         }
@@ -676,14 +791,28 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         return @"预计费用";//待取车
     }else if ([orderStatus isEqualToString:@"finish"]){
         return @"订单总费用";//服务结束
-    }
-    else if ([orderStatus isEqualToString:@"payment_sure"]){
+    }else if ([orderStatus isEqualToString:@"payment_sure"]){
         return @"订单总费用";//已支付待确认
-    }
-    else if ([orderStatus isEqualToString:@"pick_sure"]){
+    }else if ([orderStatus isEqualToString:@"pick_sure"]){
         return @"预计费用";//已确认取车
     }
     return nil;
+}
+
+- (void)getwechatpay:(NSDictionary *)dict
+{
+    NSMutableString *stamp  = [dict objectForKey:@"timestamp"];//stamp.intValue
+    //调起微信支付
+    PayReq* req             = [[PayReq alloc] init];
+    req.partnerId           = [dict objectForKey:@"partnerid"];
+    req.prepayId            = [dict objectForKey:@"prepayid"];
+    req.nonceStr            = [dict objectForKey:@"noncestr"];
+    req.timeStamp           = stamp.intValue;
+    req.package             = [dict objectForKey:@"package"];
+    req.sign                = [dict objectForKey:@"sign"];
+    [WXApi sendReq:req];
+    //日志输出
+    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
 }
 
 @end

@@ -34,6 +34,12 @@
     self.carNumberLabel.text = userInfo.carnum;
     NSString *headerStr = [NSString stringWithFormat:@"%@%@",Server_Url, userInfo.avatar];//
     //没有的时候用/Public/Weixin/images/four/logo02.png有的时候为/Uploads/user/7296/20170504/avatar_7296611
+    
+    self.headerImage.layer.cornerRadius = 55.0/2;
+    self.headerImage.layer.borderColor = [[UIColor clearColor] CGColor];
+    self.headerImage.layer.borderWidth = 0.0f;
+    self.headerImage.clipsToBounds = YES;
+    
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:headerStr] placeholderImage:[UIImage imageNamed:@"leftbar_info_img"]];
     
     switch (userInfo.level_id.integerValue) {

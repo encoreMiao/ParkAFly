@@ -16,6 +16,8 @@
 #import "WXApi.h"
 #import "BAFChargePageInfo.h"
 #import "SuccessViewController.h"
+#import "WXApi.h"
+
 
 #define WechatCollectionViewCellIdentifier        @"WechatCollectionViewCellIdentifier"
 #define CardRechargeCollectionViewCellIdentifier  @"CardRechargeCollectionViewCellIdentifier"
@@ -36,7 +38,7 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
 };
 
 
-@interface PersonalAccountViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,ChargeFooterCollectionReusableViewDelegate>
+@interface PersonalAccountViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,ChargeFooterCollectionReusableViewDelegate,WXApiDelegate>
 @property (weak, nonatomic)     IBOutlet UILabel    *balanceTable;//账户余额
 @property (weak, nonatomic)     IBOutlet UIButton   *cardChargeButton;
 @property (weak, nonatomic)     IBOutlet UIButton   *wechatChargeButton;
@@ -105,6 +107,27 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     self.mycollectionview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, screenHeight-170);
     
     [self wechatReqeust];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(paysuccess) name:PaySuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(payfailure) name:PayFailureNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PaySuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PayFailureNotification object:nil];
+}
+
+- (void)paysuccess
+{
+    NSLog(@"hh支付成功");
+    [self getAccountInfo];
+}
+
+- (void)payfailure
+{
+    NSLog(@"hh支付失败");
 }
 
 - (void)backMethod:(id)sender
@@ -381,6 +404,7 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
             NSMutableDictionary *param = [NSMutableDictionary dictionary];
             [param setObject:[NSString stringWithFormat:@"%@",self.orderID] forKey:@"out_trade_no"];
             [param setObject:self.currentChargeInfo.pay_money forKey:@"total_fee"];
+            [param setObject:@"recharge" forKey:@"pay_type"];
             [self createSignWithParam:param];
         }else{
             
@@ -441,5 +465,4 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     //日志输出
     NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
 }
-
 @end

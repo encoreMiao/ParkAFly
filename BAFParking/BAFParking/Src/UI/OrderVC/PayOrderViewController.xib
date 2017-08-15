@@ -50,6 +50,9 @@
                             <state key="normal" title="微信支付">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="paymentConfirmWithSender:" destination="-1" eventType="touchUpInside" id="IIz-G4-iOi"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaM-jH-cM8">
                             <rect key="frame" x="250" y="10.5" width="105" height="42"/>
@@ -61,6 +64,9 @@
                             <state key="normal" title="现金支付">
                                 <color key="titleColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="paymentConfirmWithSender:" destination="-1" eventType="touchUpInside" id="enp-fF-ayv"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNa-kb-uT5">
                             <rect key="frame" x="20" y="32" width="45" height="15"/>
@@ -302,6 +308,9 @@
                     <state key="normal" title="确认支付">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="paymentConfirmWithSender:" destination="-1" eventType="touchUpInside" id="WqI-Cm-XOY"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

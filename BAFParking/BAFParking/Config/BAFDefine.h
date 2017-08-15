@@ -66,5 +66,8 @@
 #define OrderDefaults   @"OrderDefaults" //预约的内容
 
 
+#define PaySuccessNotification  @"PaySuccessNotification"
+#define PayFailureNotification  @"PayFailureNotification"
+
 #endif /* BAFDefine_h */
 
