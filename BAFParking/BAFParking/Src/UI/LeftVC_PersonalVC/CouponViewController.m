@@ -93,6 +93,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
+    if (self.handler) {
+        self.handler(self.selectCouponInfo);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -143,10 +146,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (cell.type == kCouponViewControllerTypeUseCell1) {
         NSLog(@"优惠券选择");
         if ([cell couponSelected]) {
+            self.selectCouponInfo = nil;
             if (self.handler) {
                 self.handler(nil);
             }
         }else{
+            self.selectCouponInfo = cell.couponInfo;
             if (self.handler) {
                 self.handler(cell.couponInfo);
             }

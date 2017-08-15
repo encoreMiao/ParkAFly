@@ -26,34 +26,34 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     kRequestNumberIndexCheckCardRequest,//计算腾讯权益卡费用
     kRequestNumberIndexOrderFeeRequest,
     kRequestNumberIndexOrderDetail,
+    kRequestNumberIndexOrderPaymentSet,//设置支付明细
 };
 
 @interface PayOrderViewController ()<UITableViewDelegate, UITableViewDataSource,PopViewControllerDelegate,PayOrderTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *mytableview;
-@property (strong, nonatomic) NSArray *payListArr;
-@property (strong, nonatomic) NSMutableArray *tcCard;
-@property (strong, nonatomic) NSMutableDictionary *dicDataSource;
-
 @property (weak, nonatomic) IBOutlet UILabel *orderNo;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *parkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *parkTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderFeeLabel;
-
-@property (strong, nonatomic) NSDictionary *feeDic;
-@property (strong, nonatomic) IBOutlet UILabel *totalFeeLabel;
-
-@property (strong, nonatomic) BAFCouponInfo *selectCouponinfo;
-@property (strong, nonatomic) NSString *tcCardFee;
-@property (strong, nonatomic) NSMutableDictionary *tcRequestDic;
-
-@property (assign, nonatomic) BOOL selectAccount;//选择余额
-
 @property (weak, nonatomic) IBOutlet  UIButton *detailBtn;
 @property (weak, nonatomic) IBOutlet  UIButton *weixinBtn;
 @property (weak, nonatomic) IBOutlet  UIButton *confirmPayBtn;
 @property (weak, nonatomic) IBOutlet  UIButton *moneyPayBtn;
-@property (strong, nonatomic) NSMutableArray *serviceArr;
+@property (strong, nonatomic) IBOutlet UILabel *totalFeeLabel;
+
+@property (strong, nonatomic) NSArray *payListArr;
+@property (strong, nonatomic) NSMutableArray *tcCard;
+
+@property (strong, nonatomic) BAFCouponInfo *selectCouponinfo;//选择优惠券
+@property (strong, nonatomic) NSString *tcCardFee;//选择权益卡
+@property (assign, nonatomic) BOOL selectAccount;//选择余额
+
+@property (strong, nonatomic) NSMutableDictionary *tcRequestDic;//算权益余额的请求参数
+
+@property (strong, nonatomic) NSMutableDictionary *dicDataSource;//PayOrderTcCard
+@property (strong, nonatomic) NSDictionary      *feeDic;
+@property (strong, nonatomic) NSMutableArray    *serviceArr;
 @end
 
 @implementation PayOrderViewController
@@ -66,15 +66,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.dicDataSource = [NSMutableDictionary dictionary];
     self.feeDic = [NSDictionary dictionary];
     self.tcRequestDic = [NSMutableDictionary dictionary];
+    
     self.selectCouponinfo = nil;
     self.tcCardFee = nil;
     self.selectAccount = NO;
     
-    
     CGSize size = [self.detailBtn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.detailBtn.titleLabel.font}];
     self.detailBtn.imageEdgeInsets = UIEdgeInsetsMake(0, size.width+10-10, 0, -size.width-10+10);
     self.detailBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -5-10, 0, 5+10);
-
     
     [self configOrderDic:self.orderDic];
 }
@@ -86,14 +85,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self orderDetailRequest];
-    
+
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"订单支付"];
     
+    [self orderDetailRequest];
     [self orderFeeRequest];
     
     self.confirmPayBtn.hidden = YES;
@@ -124,6 +122,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [popView configViewWithData:self.tcCard type:kPopViewControllerTypeTcCard];
     [self presentViewController:popView animated:NO completion:nil];
 }
+
 - (IBAction)detailAction:(id)sender {
     PopViewController *popView = [[PopViewController alloc] init];
     popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
@@ -153,6 +152,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         cell.delegate = self;
     }
     cell.titleLabel.text = [self.payListArr objectAtIndex:indexPath.row];
+    if (![self canbeSelectedInCurrentIndexPath:indexPath]){
+        cell.titleLabel.textColor = [UIColor colorWithHex:0x969696];
+        cell.userInteractionEnabled = NO;
+    }else{
+        cell.titleLabel.textColor = [UIColor colorWithHex:0x323232];
+        cell.userInteractionEnabled = YES;
+    }
+
     if (indexPath.row == 0) {
         if ([self.dicDataSource objectForKey:PayOrderTcCard]) {
             NSString *moneyStr = [NSString stringWithFormat:@"%@ -¥%.0f",[self.dicDataSource objectForKey:PayOrderTcCard],self.tcCardFee.integerValue/100.0f];
@@ -191,6 +198,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [cell setShow:NO];
         }
     }
+    
+    
+    
     return cell;
 }
 
@@ -198,6 +208,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (![self canbeSelectedInCurrentIndexPath:indexPath]) {
+        return;
+    }
+    
     if (indexPath.row == 0) {
         if (self.tcCard.count == 0) {
             [self showTipsInView:self.view message:@"当前未绑定权益卡" offset:self.view.center.x+100];
@@ -219,6 +234,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 [self.dicDataSource removeObjectForKey:PayOrderTcCard];
                 [self.mytableview reloadData];
             }
+            
             
         }else{
             if (self.tcCard.count == 0) {
@@ -270,17 +286,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     switch (type) {
         case kPopViewControllerTypeTcCard:
         {
-            
             BAFTcCardInfo *tcCardInfo = ((BAFTcCardInfo *)[self.tcCard objectAtIndex:popview.selectedIndex.row]);
             [self.dicDataSource removeObjectForKey:PayOrderTcCard];
             [self.dicDataSource setObject:tcCardInfo.type_name forKey:PayOrderTcCard];
-//            [self.mytableview  reloadData];
             
             NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:self.tcRequestDic];
             [muDic setObject:tcCardInfo.card_no forKey:@"card_no"];
             [self checktCarReqeustWithParam:muDic];
-            
-            
         }
             break;
         default:
@@ -299,11 +311,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         default:
             break;
     }
-}
-
-- (void)configTotalFee
-{
-    
 }
 
 #pragma mark - request
@@ -326,11 +333,83 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [orderReq orderFeeRequestWithNumberIndex:kRequestNumberIndexOrderFeeRequest delegte:self order_id:[self.orderDic objectForKey:@"id"]];
 }
 
+- (BOOL)canbeSelectedInCurrentIndexPath:(NSIndexPath *)indexpath
+{
+    NSInteger chargeAmount = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
+    BAFUserInfo *userinfo = [[BAFUserModelManger sharedInstance] userInfo];
+    NSInteger accountAmount = userinfo.account.integerValue;//账户余额
+    
+    if (self.tcCardFee && self.selectCouponinfo) {
+        //余额不能点
+        if (indexpath.row == 2) {
+            return NO;
+        }
+    }else if (self.tcCardFee && self.selectAccount){
+        //优惠券不能点
+        if (indexpath.row == 1) {
+            return NO;
+        }
+    }else if (self.selectCouponinfo && self.selectAccount){
+        //权益卡不能点
+        if (indexpath.row == 0) {
+            return NO;
+        }
+    }else if (self.selectCouponinfo && (self.selectCouponinfo.price.integerValue>= chargeAmount)){
+        //权益卡和余额不能点
+        if (indexpath.row == 0) {
+            return NO;
+        }
+        if (indexpath.row == 2) {
+            return NO;
+        }
+    }else if (self.selectAccount && (accountAmount >= chargeAmount)){
+        //权益卡和优惠券不能点
+        if (indexpath.row == 0) {
+            return NO;
+        }
+        if (indexpath.row == 1) {
+            return NO;
+        }
+    }else if (self.tcCardFee && (self.tcCardFee.integerValue >= chargeAmount)){
+        if (indexpath.row == 2) {
+            return NO;
+        }
+        if (indexpath.row == 1) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (void)orderPaymentSet
 {
 //    order/order_payment_set
+
+    NSInteger chargeAmount = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
+    NSInteger totalFee = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
+    BAFUserInfo *userinfo = [[BAFUserModelManger sharedInstance] userInfo];
+    NSInteger accountAmount = userinfo.account.integerValue;//账户余额
     
-    NSInteger totalFee = [[[self.orderDic objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
+    if (self.tcCardFee && self.selectCouponinfo) {
+        //余额不能点
+        totalFee = totalFee - self.tcCardFee.integerValue - self.selectCouponinfo.price.integerValue;
+    }else if (self.tcCardFee && self.selectAccount){
+        //优惠券不能点
+        totalFee = totalFee - self.tcCardFee.integerValue - accountAmount;
+    }else if (self.selectCouponinfo && self.selectAccount){
+        //权益卡不能点
+        totalFee = totalFee - self.selectCouponinfo.price.integerValue - accountAmount;
+    }else if (self.selectCouponinfo && (self.selectCouponinfo.price.integerValue>= chargeAmount)){
+        //权益卡和余额不能点
+        totalFee = totalFee - self.selectCouponinfo.price.integerValue;
+    }else if (self.selectAccount && (accountAmount >= chargeAmount)){
+        //权益卡和优惠券不能点
+        totalFee = totalFee - accountAmount;
+    }
+    
+    if (totalFee<=0) {
+        totalFee = 0;
+    }
     [self changeTotalFee:totalFee];
 }
 
@@ -360,6 +439,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [orderReq orderDetailRequestWithNumberIndex:kRequestNumberIndexOrderDetail delegte:self order_id:[self.orderDic objectForKey:@"id"]];
 }
 
+
 #pragma mark - REQUEST
 -(void)onJobComplete:(int)aRequestID Object:(id)obj
 {
@@ -374,6 +454,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self.tcCard removeAllObjects];
         }
     }
+    
     
     if (aRequestID == kRequestNumberIndexCheckCardRequest) {
         if ([obj isKindOfClass:[NSDictionary class]]) {
@@ -423,22 +504,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self.tcRequestDic setObject:userInfo.ctel forKey:@"phone"];
             [self.tcRequestDic setObject:userInfo.clientid forKey:@"client_id"];
             [self.tcRequestDic setObject:[basicDic objectForKey:@"first_day_price"] forKey:@"first_day_price"];
-            [self.tcRequestDic setObject:[basicDic objectForKey:@"market_price"] forKey:@"day_price"];
+            [self.tcRequestDic setObject:[basicDic objectForKey:@"strike_price"] forKey:@"day_price"];
             [self.tcRequestDic setObject:[[self.orderDic objectForKey:@"order_fee_detail"] objectForKey:@"park_day"] forKey:@"park_day"];
             
             NSInteger totalFee = 0;
             NSInteger firstdayfee = [[basicDic objectForKey:@"first_day_price"] integerValue];
-            NSInteger dayfee = [[basicDic objectForKey:@"market_price"] integerValue];
+            NSInteger dayfee = [[basicDic objectForKey:@"strike_price"] integerValue];
             NSInteger days = -1;
             if ([orderFeeDetail objectForKey:@"park_day"]) {
                 days = [[orderFeeDetail objectForKey:@"park_day"] integerValue];
             }
-            if (days>=0) {
-                totalFee = firstdayfee + dayfee*days;
+            if (days>1) {
+                totalFee = firstdayfee + dayfee*(days-1);
             }else{
                 totalFee = firstdayfee;
             }
-            
             [self.tcRequestDic setObject:[NSNumber numberWithDouble:totalFee] forKey:@"park_fee"];
             [self tcCardRequest];
         }else{
@@ -589,25 +669,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSString *orderStatus = [self.orderDic objectForKey:@"order_status"];
     if ([orderStatus isEqualToString:@"park_appoint"]||
         [orderStatus isEqualToString:@"approve"]) {
-        //预约泊车成功
-        return @"预计费用";
+        return @"预计费用";//预约泊车成功
     }else if([orderStatus isEqualToString:@"park"]){
-        //泊车成功
-        return @"预计费用";
+        return @"预计费用";//泊车成功
     }else if ([orderStatus isEqualToString:@"pick_appoint"]){
-        //待取车
-        return @"预计费用";
+        return @"预计费用";//待取车
     }else if ([orderStatus isEqualToString:@"finish"]){
-        //服务结束
-        return @"订单总费用";
+        return @"订单总费用";//服务结束
     }
     else if ([orderStatus isEqualToString:@"payment_sure"]){
-        //已支付待确认
-        return @"订单总费用";
+        return @"订单总费用";//已支付待确认
     }
     else if ([orderStatus isEqualToString:@"pick_sure"]){
-        //已确认取车
-        return @"预计费用";
+        return @"预计费用";//已确认取车
     }
     return nil;
 }

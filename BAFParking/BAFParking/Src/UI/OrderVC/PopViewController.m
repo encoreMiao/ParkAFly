@@ -44,7 +44,7 @@
 
 - (void)setupView
 {
-    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSelf)];
     gesture.delegate = self;
     [self.view addGestureRecognizer:gesture];
     
