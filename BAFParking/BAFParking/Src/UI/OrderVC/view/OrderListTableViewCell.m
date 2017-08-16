@@ -59,7 +59,6 @@
         self.pickTime.text = @"";
     }
     
-    
     self.modifyButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.modifyButton.layer.borderWidth = 0.5f;
     self.cancelButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];

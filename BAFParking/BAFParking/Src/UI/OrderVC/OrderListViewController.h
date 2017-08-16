@@ -9,5 +9,5 @@
 #import "BAFBaseViewController.h"
 
 @interface OrderListViewController : BAFBaseViewController
-
+@property (nonatomic, assign) BOOL isFromLeftVC;
 @end

@@ -8,7 +8,7 @@
 
 #import "OrderServiceTableViewCell.h"
 
-@interface OrderServiceTableViewCell()
+@interface OrderServiceTableViewCell()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *serviceTitle;
 @property (weak, nonatomic) IBOutlet UILabel *couponLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serviceNotitionLabel;

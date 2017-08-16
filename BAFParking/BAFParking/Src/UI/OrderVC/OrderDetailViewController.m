@@ -147,7 +147,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else{
         //支付方式
         [mutArr addObject:[NSArray arrayWithObjects:@"支付方式",@"", nil]];
-        NSArray *payment_detailArr = [orderFeeDetail objectForKey:@"payment_detail"];
+        NSDictionary *payment_detailDic = [orderFeeDetail objectForKey:@"payment_detail"];
+        
         NSArray *discount_price = [orderFeeDetail objectForKey:@"discount_price"];
         if (![discount_price isEqual:[NSNull null]]&&discount_price!=nil) {
             if (discount_price.count>0) {
@@ -157,11 +158,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
         }
         
-        if (![payment_detailArr isEqual:[NSNull null]]&&payment_detailArr!=nil) {
-            if (payment_detailArr.count>0) {
-                for (NSDictionary *dic in payment_detailArr) {
+        if (![payment_detailDic isEqual:[NSNull null]]&&payment_detailDic!=nil) {
+            if (payment_detailDic.count>0) {
+                for (NSString *key in payment_detailDic) {
                     NSString *payStr = @"";
-                    NSString *pay_method = [dic objectForKey:@"pay_method"];
+                    NSString *pay_method = [[payment_detailDic objectForKey:key] objectForKey:@"pay_method"];
                     if ([pay_method isEqualToString:@"cash"]) {
                         payStr = @"现金支付";
                     }
@@ -183,7 +184,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                     if ([pay_method isEqualToString:@"activity_code"]) {
                         payStr = @"权益账户";
                     }
-                    [mutArr addObject:[NSArray arrayWithObjects:payStr,[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"pay_amount"] integerValue]/100], nil]];
+                    NSDictionary *paydic = [payment_detailDic objectForKey:key];
+                    NSString *payAmonut = [NSString stringWithFormat:@"-¥%ld",([[paydic objectForKey:@"pay_amount"] integerValue])/100];
+                    [mutArr addObject:[NSArray arrayWithObjects:payStr, payAmonut, nil]];
                 }
             }
         }

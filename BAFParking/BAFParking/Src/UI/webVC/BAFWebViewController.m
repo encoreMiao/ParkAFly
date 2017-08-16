@@ -10,6 +10,7 @@
 
 @interface BAFWebViewController ()<UIWebViewDelegate>
 @property(nonatomic, strong) UIWebView * myWebView;
+@property (nonatomic, strong) NSString *webTitle;
 @end
 
 
@@ -35,6 +36,7 @@
 {
     if ([url isKindOfClass:[NSURL class]]) {
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
+        self.webTitle = title;
         [self.myWebView loadRequest:request];
         [self setNavigationTitle:title];
     }
@@ -42,7 +44,12 @@
 
 - (void)backMethod:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.webTitle isEqualToString:@"会员"]) {
+        [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - webview delegate

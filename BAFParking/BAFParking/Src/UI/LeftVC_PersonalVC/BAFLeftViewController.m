@@ -135,6 +135,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             break;
         case 4:
             vc = [[OrderListViewController alloc]init];
+            ((OrderListViewController *)vc).isFromLeftVC = YES;
             break;
         case 5:
             vc = [[ShareViewController alloc]init];

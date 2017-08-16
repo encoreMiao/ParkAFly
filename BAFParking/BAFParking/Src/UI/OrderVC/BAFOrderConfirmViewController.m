@@ -280,10 +280,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 }
                 if (indexPath.row == 2) {
                     if ([self.orderDic objectForKey:OrderParamTypeGoTime]) {
-                        str = [self.orderDic objectForKey:OrderParamTypeGoTime];
+                        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+                        NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                        [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+                        NSDate *date =[dateFormat dateFromString:[self.orderDic objectForKey:OrderParamTypeGoTime]];
+                        str = [dateFormat1 stringFromDate:date];
+//                        str = [self.orderDic objectForKey:OrderParamTypeGoTime];
                     }else{
                         str = @"";
                     }
+                    
+                    
+                    
+                    
                     totalStr = [NSString stringWithFormat:@"停车时间：%@",str];
                 }
                 if (indexPath.row == 3){

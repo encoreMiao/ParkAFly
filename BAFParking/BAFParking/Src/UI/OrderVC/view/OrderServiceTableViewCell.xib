@@ -39,7 +39,7 @@
                         <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a35-wk-0Zl">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入返程航班号(可留空) " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a35-wk-0Zl">
                         <rect key="frame" x="20" y="63" width="295" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="YD9-dI-CLR"/>
@@ -47,6 +47,9 @@
                         <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="cu2-gy-hjE"/>
+                        </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uD5-3T-ULp">
                         <rect key="frame" x="293" y="14" width="22" height="22"/>
@@ -59,8 +62,8 @@
                             <action selector="checkButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gc3-EA-995"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWD-xP-pjD">
-                        <rect key="frame" x="20" y="40" width="295" height="164.5"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWD-xP-pjD">
+                        <rect key="frame" x="20" y="128" width="295" height="164.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UIf-og-hRW">
                                 <rect key="frame" x="0.0" y="0.0" width="295" height="0.5"/>

@@ -67,9 +67,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
+    if (self.isFromLeftVC) {
+        [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+//        [self.navigationController popViewControllerAnimated:YES];
+        for (UIViewController *tempVC in self.navigationController.viewControllers) {
+            if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
+                [self.navigationController popToViewController:tempVC animated:YES];
+            }
         }
     }
 }
@@ -139,13 +145,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     NSLog(@"%@",cell.orderDic);
     //修改时提交按钮为保存，泊车时间定位到当前时间两小时之后
-    
-    NSLog(@"车场端【确认取车】后可进行支付，点击跳转到订单支付");
-    PayOrderViewController  *vc = [[PayOrderViewController alloc]init];
-    vc.orderDic = cell.orderDic;
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-    
     switch (btnTag) {
         case kOrderListTableViewCellTypeModifyAll:
         {
