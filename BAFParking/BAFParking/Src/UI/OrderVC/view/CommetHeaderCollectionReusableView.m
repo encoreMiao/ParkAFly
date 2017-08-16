@@ -9,8 +9,12 @@
 #import "CommetHeaderCollectionReusableView.h"
 
 @interface CommetHeaderCollectionReusableView()
+@property (weak, nonatomic) IBOutlet UIView *paysucessLine;
+@property (weak, nonatomic) IBOutlet UILabel *paysuceessLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *paysuccessIMG;
 @property (weak, nonatomic) IBOutlet UILabel *parkNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *parkTimeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationTopConstraint;
 @end
 
 @implementation CommetHeaderCollectionReusableView
@@ -104,12 +108,25 @@
 - (void)setType:(CommetHeaderCollectionReusableViewType)type
 {
     _type = type;
+    self.paysuccessIMG.hidden = YES;
+    self.paysucessLine.hidden = YES;
+    self.paysuceessLabel.hidden = YES;
+    
     switch (type) {
         case CommetHeaderCollectionReusableViewTypeCheck:
             self.userInteractionEnabled = NO;
+            self.notificationTopConstraint.constant = 15;
             break;
         case CommetHeaderCollectionReusableViewTypeComment:
             self.userInteractionEnabled = YES;
+            self.notificationTopConstraint.constant = 15;
+            break;
+        case CommetHeaderCollectionReusableViewTypePay:
+            self.userInteractionEnabled = YES;
+            self.notificationTopConstraint.constant = 128;
+            self.paysuccessIMG.hidden = NO;
+            self.paysucessLine.hidden = NO;
+            self.paysuceessLabel.hidden = NO;
             break;
         default:
             break;

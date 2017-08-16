@@ -499,7 +499,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 }
 
 - (void)modifyHeadMenu {
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"拍照", nil),NSLocalizedString(@"用户相册", nil), nil];
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"用户相册", nil];
     [actionSheet showInView:self.view];
 }
 

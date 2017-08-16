@@ -204,7 +204,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
             MapViewController *vc = [[MapViewController alloc]init];
             vc.imageStr = weakself.parkDetailInfo.map_pic;
             vc.pointStr = weakself.parkDetailInfo.map_title;
-            vc.titleStr = weakself.parkDetailInfo.map_content;
+            vc.titleStr = weakself.parkDetailInfo.map_title;
             vc.detailStr = weakself.parkDetailInfo.map_address;
             CLLocationCoordinate2D coor;
             coor.latitude = weakself.parkDetailInfo.map_lon.doubleValue;

@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             NSDictionary *dic = [self.orderDic objectForKey:@"park"];
             vc.imageStr = [dic objectForKey:@"map_pic"];
             vc.pointStr = [dic objectForKey:@"map_title"];
-            vc.titleStr = [dic objectForKey:@"map_content"];
+            vc.titleStr = [dic objectForKey:@"map_title"];
             vc.detailStr = [dic objectForKey:@"map_address"];
             CLLocationCoordinate2D coor;
             coor.latitude = [[dic objectForKey:@"map_lon"] doubleValue];
@@ -688,7 +688,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
             if (indexPath.row == 3) {
                 if ([self.orderDic objectForKey:@"back_passenger_number"]&&(![[self.orderDic objectForKey:@"back_passenger_number"] isEqual:[NSNull null]])) {
-                    str =[NSString stringWithFormat:@"%@人", [self.orderDic objectForKey:@"back_passenger_number"]];
+                    str =[NSString stringWithFormat:@"%@人", [self.orderDic objectForKey:@"leave_passenger_number"]];
                 }else{
                     str = @"1人";
                 }

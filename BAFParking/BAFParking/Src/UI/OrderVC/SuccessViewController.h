@@ -23,5 +23,6 @@ typedef NS_ENUM(NSInteger,SuccessViewControllerType){
 
 
 @property (nonatomic, strong) NSString *rechargeMoneyStr;//充值金额
+
 @property (nonatomic, strong) NSString *rechargeTimeStr;//充值时间
 @end

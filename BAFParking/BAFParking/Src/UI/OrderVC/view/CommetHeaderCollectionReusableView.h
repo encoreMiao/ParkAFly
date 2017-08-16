@@ -14,6 +14,7 @@ typedef void (^CommetHeaderHandler) (NSInteger score);
 typedef NS_ENUM(NSInteger, CommetHeaderCollectionReusableViewType){
     CommetHeaderCollectionReusableViewTypeComment,
     CommetHeaderCollectionReusableViewTypeCheck,
+    CommetHeaderCollectionReusableViewTypePay,
 };
 
 @interface CommetHeaderCollectionReusableView : UICollectionReusableView

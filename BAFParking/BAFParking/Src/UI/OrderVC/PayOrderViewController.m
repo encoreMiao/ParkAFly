@@ -17,6 +17,8 @@
 #import "HRLOrderInterface.h"
 #import "CouponViewController.h"
 #import "WXApi.h"
+#import "SuccessViewController.h"
+#import "CommentViewController.h"
 
 #define PayOrderTableViewCellIdentifier  @"PayOrderTableViewCellIdentifier"
 #define PayOrderTcCard  @"PayOrderTcCard"
@@ -118,12 +120,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)paysuccess
 {
-    NSLog(@"hh支付成功");
+    CommentViewController  *vc = [[CommentViewController alloc]init];
+    vc.type = kCommentViewControllerTypePayComment;
+    vc.commentfinishHandler = ^(void){
+        //评价完成
+        //        [self segementSelect:self.finishedButton];
+    };
+    vc.orderDic = self.orderDic;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)payfailure
 {
-    NSLog(@"hh支付失败");
+    NSLog(@"支付失败");
 }
 
 
@@ -467,7 +476,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else if (self.selectAccount && (self.accountAmountShow >= chargeAmount)){
         //权益卡和优惠券不能点
         totalFee = totalFee - self.accountAmountShow;
+    }else if (self.tcCardFee && (self.tcCardFee.integerValue >=chargeAmount)){
+        //优惠券和余额不能点
+        totalFee = totalFee - self.tcCardFee.integerValue;
     }
+    else if (self.selectCouponinfo){
+        //权益卡和余额不能点
+        totalFee = totalFee - self.selectCouponinfo.price.integerValue;
+    }else if (self.selectAccount){
+        //权益卡和优惠券不能点
+        totalFee = totalFee - self.accountAmountShow;
+    }else if (self.tcCardFee){
+        //优惠券和余额不能点
+        totalFee = totalFee - self.tcCardFee.integerValue;
+    }
+    
     
     if (totalFee<=0) {
         totalFee = 0;
@@ -551,13 +574,30 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([obj isKindOfClass:[NSDictionary class]]) {
             obj = (NSDictionary *)obj;
         }
+        
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             NSString *payMethod = [[obj objectForKey:@"data"] objectForKey:@"pay_method"];
             //确认支付和微信支付调转页面相同 恭喜你支付成功（不用传金额）
             if ([payMethod isEqualToString:@"confirm"]){
                 //确认支付
+                CommentViewController  *vc = [[CommentViewController alloc]init];
+                vc.type = kCommentViewControllerTypePayComment;
+                vc.commentfinishHandler = ^(void){
+                    //评价完成
+                    //        [self segementSelect:self.finishedButton];
+                };
+                vc.orderDic = self.orderDic;
+                [self.navigationController pushViewController:vc animated:YES];
+                
             }else if ([payMethod isEqualToString:@"cash"]){
                 //现金支付 跳转到订单提交成功页面 温馨提示请将待支付金额到现场交给客户经理结算（要传金额）
+                SuccessViewController *successVC = [[SuccessViewController alloc]init];
+                successVC.type = kSuccessViewControllerTypePay;
+                successVC.orderId = [obj objectForKey:@"data"];
+                NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
+                [str stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+                successVC.rechargeMoneyStr = [NSString stringWithFormat:@"%.0f",str.integerValue/100.0f];
+                [self.navigationController pushViewController:successVC animated:YES];
                 
             }else if ([payMethod isEqualToString:@"wechat"]) {
                 //微信支付
@@ -593,7 +633,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             self.feeDic = [obj objectForKey:@"data"];
             NSUInteger basicTotalFee = [[[[obj objectForKey:@"data"]objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
-            NSString *feeText = [NSString stringWithFormat:@"预计费用：¥%ld",basicTotalFee/100];
+            NSString *feeText = [NSString stringWithFormat:@"订单费用：¥%ld",basicTotalFee/100];
             NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:feeText];
             [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeText rangeOfString:[NSString stringWithFormat:@"¥%ld",basicTotalFee/100]]];
             self.orderFeeLabel.attributedText = mutStr;

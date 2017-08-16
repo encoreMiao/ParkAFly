@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             MapViewController *vc = [[MapViewController alloc]init];
             vc.imageStr = cell.parkinfo.map_pic;
             vc.pointStr = cell.parkinfo.map_title;
-            vc.titleStr = cell.parkinfo.map_content;
+            vc.titleStr = cell.parkinfo.map_title;
             vc.detailStr = cell.parkinfo.map_address;
             CLLocationCoordinate2D coor;
             coor.latitude = cell.parkinfo.map_lon.doubleValue;

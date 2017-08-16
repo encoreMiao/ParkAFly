@@ -139,6 +139,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 {
     NSLog(@"%@",cell.orderDic);
     //修改时提交按钮为保存，泊车时间定位到当前时间两小时之后
+    
+    NSLog(@"车场端【确认取车】后可进行支付，点击跳转到订单支付");
+    PayOrderViewController  *vc = [[PayOrderViewController alloc]init];
+    vc.orderDic = cell.orderDic;
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
+    
     switch (btnTag) {
         case kOrderListTableViewCellTypeModifyAll:
         {

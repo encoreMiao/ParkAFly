@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self.view addSubview:self.mycollectionview];
     
     [self.mycollectionview registerNib:[UINib nibWithNibName:@"CommetHeaderCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
-    self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180);
+    
     
     self.selectIndexPath = nil;
     self.score = 5;
@@ -77,8 +77,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     
     self.mycollectionview.frame = CGRectMake(0,0, screenWidth, screenHeight);
+    self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180);
+    if (self.type == kCommentViewControllerTypePayComment) {
+        self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180+112);
+    }
     
-    if (self.type == kCommentViewControllerTypeComment) {
+    if (self.type == kCommentViewControllerTypeComment||kCommentViewControllerTypePayComment == self.type) {
         [self commentTagRequest];
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
@@ -207,7 +211,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else{
             [cell  setCommentCollectionSelected:NO];
         }
-    }else if (self.type == kCommentViewControllerTypeComment){
+    }else if (self.type == kCommentViewControllerTypeComment||self.type == kCommentViewControllerTypePayComment){
         cell.userInteractionEnabled = YES;
     }
     return cell;
@@ -240,12 +244,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else if (self.type == kCommentViewControllerTypeCommentCheck){
             headerView.score = [self.commentDic objectForKey:@"score"];
             headerView.type = CommetHeaderCollectionReusableViewTypeCheck;
+        }else if (self.type == kCommentViewControllerTypePayComment){
+            headerView.type = CommetHeaderCollectionReusableViewTypePay;
         }
         reusableView = headerView;
     }
     if (kind == UICollectionElementKindSectionFooter)
     {
-        if (self.type == kCommentViewControllerTypeComment) {
+        if (self.type == kCommentViewControllerTypeComment||self.type == kCommentViewControllerTypePayComment) {
             CommentFooterCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
             footerView.handler = ^(NSString *remark){
                 [self commentAction:remark];

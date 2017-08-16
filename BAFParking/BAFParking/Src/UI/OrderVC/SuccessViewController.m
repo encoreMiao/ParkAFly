@@ -30,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *pickTimeL;
 @property (weak, nonatomic) IBOutlet UILabel *parkDayL;
 @property (weak, nonatomic) IBOutlet UILabel *feeL;
+
+@property (nonatomic, strong) IBOutlet UILabel *payMoneyLabel;//支付金额
 @end
 
 @implementation SuccessViewController
@@ -71,6 +73,13 @@
             self.payView.hidden = NO;
             [self.view addSubview:self.buttonView];
             self.buttonView.hidden = NO;
+            NSString *str = [NSString stringWithFormat:@"待支付：%@",self.rechargeMoneyStr];
+            NSMutableAttributedString *mutAtr = [[NSMutableAttributedString alloc]initWithString:str];
+            [mutAtr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:self.rechargeMoneyLabel.font} range:[str rangeOfString:self.rechargeMoneyStr]];
+            self.payMoneyLabel.attributedText = mutAtr;
+            
+            
+            
             [self.buttonView setFrame:CGRectMake(0, CGRectGetMaxY(self.payView.frame), screenWidth, 100)];
         }
             break;

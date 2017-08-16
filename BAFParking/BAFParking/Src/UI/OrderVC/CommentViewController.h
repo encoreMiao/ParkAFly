@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger,CommentViewControllerType)
 {
     kCommentViewControllerTypeCommentCheck,
     kCommentViewControllerTypeComment,
+    kCommentViewControllerTypePayComment,//支付成功页面
 };
 
 @interface CommentViewController : BAFBaseViewController
