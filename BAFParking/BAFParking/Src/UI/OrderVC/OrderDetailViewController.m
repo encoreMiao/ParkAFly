@@ -100,15 +100,30 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSInteger firstdayfee = [[basicDic objectForKey:@"first_day_price"] integerValue];
     NSInteger dayfee = [[basicDic objectForKey:@"strike_price"] integerValue];//market_price
     NSInteger days = -1;
-    if ([orderFeeDetail objectForKey:@"park_day"]) {
-        days = [[orderFeeDetail objectForKey:@"park_day"] integerValue];
+    
+    BOOL willHaveParkFee = NO;
+    if ([[self.orderDic objectForKey:@"actual_pick_time"] isEqualToString:@"0000-00-00 00:00:00"]) {
+        if ([[self.orderDic objectForKey:@"plan_pick_time"] isEqualToString:@"0000-00-00 00:00:00"]){
+            willHaveParkFee = NO;
+        }else{
+            willHaveParkFee = YES;
+        }
+    }else {
+        willHaveParkFee = YES;
     }
-    days = days-1;
-    if (days>=0) {
-        totalFee = firstdayfee + dayfee*days;
-    }else{
-        totalFee = firstdayfee;
+    
+    if(willHaveParkFee){
+        if ([orderFeeDetail objectForKey:@"park_day"]) {
+            days = [[orderFeeDetail objectForKey:@"park_day"] integerValue];
+        }
+        days = days-1;
+        if (days>=0) {
+            totalFee = firstdayfee + dayfee*days;
+        }else{
+            totalFee = firstdayfee;
+        }
     }
+    
     
     if ([orderPrice objectForKey:@"single"]) {
         for (NSString *str in self.serviceArr) {
@@ -122,10 +137,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     [mutArr addObject:[NSArray arrayWithObjects:[self orderFeeStr],[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
 
-    if (days>0) {
-        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld",(firstdayfee + dayfee*days)/100], nil]];
-    }else{
-        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld",firstdayfee/100], nil]];
+    if (willHaveParkFee) {
+        if (days>0) {
+            [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld",(firstdayfee + dayfee*days)/100], nil]];
+        }else{
+            [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld",firstdayfee/100], nil]];
+        }
     }
 
     if (self.serviceArr.count>0) {

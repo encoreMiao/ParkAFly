@@ -315,13 +315,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
             [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
         }else{
-            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
         }
     }else if(self.type == kBAFOrderViewControllerTypeModifyPart){
         if (indexPath.section != 1&&indexPath.section != 0) {
             [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
         }else{
-            [self showTipsInView:self.view message:@"如需更改，请取消订单充新下单" offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
         }
     }
 
@@ -369,7 +369,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 }
                 NSTimeInterval time = [_backDate timeIntervalSinceDate:_goDate];
                 //开始时间和结束时间的中间相差的时间
-                days = ((int)time)/(3600*24);  //一天是24小时*3600秒
+                days = ceil(((int)time)/(3600*24));  //一天是24小时*3600秒
             }
             [_dicDatasource setObject:[NSString stringWithFormat:@"%d",days] forKey:OrderParamTypePark_day];
             

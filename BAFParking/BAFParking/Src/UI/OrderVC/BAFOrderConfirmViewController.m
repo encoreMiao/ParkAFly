@@ -109,15 +109,18 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSInteger firstdayfee = [[self.orderDic objectForKey:OrderParamTypeParkFeeFirstDay] integerValue];
     NSInteger dayfee = [[self.orderDic objectForKey:OrderParamTypeParkFeeDay] integerValue];
     NSInteger days = -1;
-    if ([self.orderDic objectForKey:OrderParamTypePark_day]) {
-        days = [[self.orderDic objectForKey:OrderParamTypePark_day] integerValue];
+    if ([self.orderDic objectForKey:OrderParamTypeTime]) {
+        if ([self.orderDic objectForKey:OrderParamTypePark_day]) {
+            days = [[self.orderDic objectForKey:OrderParamTypePark_day] integerValue];
+        }
+        days = days-1;
+        if (days>=0) {
+            totalFee = firstdayfee + dayfee*days;
+        }else{
+            totalFee = firstdayfee;
+        }
     }
-    days = days-1;
-    if (days>=0) {
-        totalFee = firstdayfee + dayfee*days;
-    }else{
-        totalFee = firstdayfee;
-    }
+    
     if ([self.orderDic objectForKey:OrderParamTypeService]&&![[self.orderDic objectForKey:OrderParamTypeService] isEqualToString:@""]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
         self.serviceArr = [NSMutableArray arrayWithArray:arr];
@@ -130,6 +133,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
         }
     }
+    
+    if (totalFee<0) {
+        totalFee = 0;
+    }
+    
     NSString *feeStr = [NSString stringWithFormat:@"预计费用：¥%ld",totalFee/100];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:feeStr];
      [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeStr rangeOfString:[NSString stringWithFormat:@"¥%ld",totalFee/100]]];
@@ -137,11 +145,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     [mutArr addObject:[NSArray arrayWithObjects:@"预计费用",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
     
-    if (days>0) {
-        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld元",(firstdayfee + dayfee*days)/100], nil]];
-    }else{
-        [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld",firstdayfee/100], nil]];
+    if ([self.orderDic objectForKey:OrderParamTypeTime]) {
+        if (days>0) {
+            [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元+%ld元*%ld天)",firstdayfee/100,dayfee/100,days],[NSString stringWithFormat:@"¥%ld",(firstdayfee + dayfee*days)/100], nil]];
+        }else{
+            [mutArr addObject:[NSArray arrayWithObjects:[NSString stringWithFormat:@"车位费(首日%ld元)",firstdayfee/100],[NSString stringWithFormat:@"¥%ld",firstdayfee/100], nil]];
+        }
     }
+    
     
     if ([self.orderDic objectForKey:OrderParamTypeService]&&![[self.orderDic objectForKey:OrderParamTypeService] isEqualToString:@""]) {
         NSArray *arr = [[self.orderDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];

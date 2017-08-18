@@ -96,7 +96,7 @@
         //已自动分派取车经理
         self.modifyButton.hidden = YES;
         self.cancelButton.hidden = NO;
-        [self.cancelButton setTitle:@"取车" forState:UIControlStateNormal];
+        [self.cancelButton setTitle:@"修改" forState:UIControlStateNormal];
         self.cancelButton.tag = kOrderListTableViewCellTypeModifyPart;
         
         [self.orderstatus setTitle:@"停车完成" forState:UIControlStateNormal];
