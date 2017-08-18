@@ -141,7 +141,7 @@
 {
     if (!_bottomeTitleLabel) {
         _bottomeTitleLabel = [[UILabel alloc]init];
-        _bottomeTitleLabel.frame = CGRectMake(62*1.5+12+12,12, self.bottomView.frame.size.width-94, 20);
+        _bottomeTitleLabel.frame = CGRectMake(62*1.5+12+12,12, self.bottomView.frame.size.width-117-10, 20);
         _bottomeTitleLabel.font = [UIFont systemFontOfSize:16];
         _bottomeTitleLabel.textColor = [UIColor colorWithHex:0x323232];
     }
@@ -151,7 +151,7 @@
 - (UILabel *)detailLabel{
     if (!_detailLabel) {
         _detailLabel = [[UILabel alloc]init];
-        _detailLabel.frame = CGRectMake(62*1.5+12+12,32, self.bottomView.frame.size.width-94, 44);
+        _detailLabel.frame = CGRectMake(62*1.5+12+12,32, self.bottomView.frame.size.width-117-10, 44);
         _detailLabel.font = [UIFont systemFontOfSize:14];
         _detailLabel.numberOfLines = 0;
         _detailLabel.textColor = [UIColor colorWithHex:0x969696];

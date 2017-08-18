@@ -114,10 +114,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         //修改
         [self.footerView.nextBtn setTitle:@"保存" forState:UIControlStateNormal];
         self.footerView.tipsLabel.text = @"修改订单不支持更改出发航站楼和停车场，如需更改信息请取消订单后重新下单。";
-        
         //根据cityid获取城市名称？？？
         [self parkAirRequestWithCityId:[self.orderDicForModify objectForKey:@"city_id"]];//城市默认北京
-        
         [self orderDetailRequestWithOrdersid:[self.orderDicForModify objectForKey:@"id"]];
     }
     
@@ -682,6 +680,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if ([resultDic objectForKey:@"leave_terminal_name"]&&![[resultDic objectForKey:@"leave_terminal_name"] isEqual:[NSNull null]]) {
                 NSString *str = [NSString stringWithFormat:@"%@&%@",[resultDic objectForKey:@"leave_terminal_name"],[resultDic objectForKey:@"leave_terminal_id"]];
                 [self.dicDatasource setObject:str forKey:@"leave_terminal_id"];
+                
+                [self getParkByAid:[resultDic objectForKey:@"leave_terminal_id"]];
             }
             
             if ([resultDic objectForKey:@"back_terminal_name"]&&![[resultDic objectForKey:@"back_terminal_name"] isEqual:[NSNull null]]) {
@@ -692,6 +692,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if ([self.orderDicForModify objectForKey:@"park_name"]&&![[self.orderDicForModify objectForKey:@"park_name"] isEqual:[NSNull null]]) {
                 NSString *str = [NSString stringWithFormat:@"%@&%@",[self.orderDicForModify objectForKey:@"park_name"],[resultDic objectForKey:@"park_id"]];
                 [self.dicDatasource setObject:str forKey:@"park_id"];
+            
             }
             
             [self.mainTableView reloadData];

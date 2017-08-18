@@ -63,6 +63,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"我的订单"];
+    
+    
 }
 
 - (void)backMethod:(id)sender
@@ -151,6 +153,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             NSLog(@"实际未停车，锁定出发航站楼、停车场项，其他信息可修改(如需修改，需联系客服或重新下单)");
             BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
             orderVC.handler = ^(void){
+                [self orderListRequestWithOrderstatus:@"1"];
                 [self segementSelect:self.ongoingButton];
             };
             orderVC.type = kBAFOrderViewControllerTypeModifyAll;
@@ -163,6 +166,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             NSLog(@"实际已停车，修改时锁定泊车时间、出发航站楼、停车场项，只能修改取车时间、返程航站楼，保存后提交");
             BAFOrderViewController  *orderVC = [[BAFOrderViewController alloc]init];
             orderVC.handler = ^(void){
+                [self orderListRequestWithOrderstatus:@"1"];
                 [self segementSelect:self.ongoingButton];
             };
             orderVC.type = kBAFOrderViewControllerTypeModifyPart;

@@ -218,6 +218,7 @@
 		8DE433581EED28E8009379ED /* BAFParkAir.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433571EED28E8009379ED /* BAFParkAir.m */; };
 		8DE4335B1EED28F4009379ED /* BAFParkCharge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4335A1EED28F4009379ED /* BAFParkCharge.m */; };
 		8DE4335E1EED5A42009379ED /* BAFParkServiceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */; };
+		8DF94F691F473E8D004C844D /* app_icon_29.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF94F681F473E8D004C844D /* app_icon_29.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -612,6 +613,7 @@
 		8DE4335A1EED28F4009379ED /* BAFParkCharge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkCharge.m; sourceTree = "<group>"; };
 		8DE4335C1EED5A42009379ED /* BAFParkServiceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkServiceInfo.h; sourceTree = "<group>"; };
 		8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkServiceInfo.m; sourceTree = "<group>"; };
+		8DF94F681F473E8D004C844D /* app_icon_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_29.png; sourceTree = "<group>"; };
 		F3CE4BA856D06DE9C2D3CF10 /* Pods-BAFParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1288,6 +1290,7 @@
 		00F55B931F217DF60044209A /* welcomeimage */ = {
 			isa = PBXGroup;
 			children = (
+				8DF94F681F473E8D004C844D /* app_icon_29.png */,
 				8DB6C9511F31F56600012746 /* Welcome750.png */,
 				8DB6C9531F31F56F00012746 /* Welcome1242.png */,
 				8D945A811F387DF3005D87B1 /* Guide_image1_640*960.png */,
@@ -1590,6 +1593,7 @@
 				8D3498271F0A3460009D723C /* PayOrderTableViewCell.xib in Resources */,
 				8D56DD3D1F1272B9000E3D99 /* OrderDetailStatusTableViewCell.xib in Resources */,
 				8D575E4D1EF4F70B0061474D /* CompanyAccountViewController.xib in Resources */,
+				8DF94F691F473E8D004C844D /* app_icon_29.png in Resources */,
 				00214B381ECFDAC100FF6FDE /* Info.plist in Resources */,
 				8DB6C94E1F31F34600012746 /* Guide_image3_1242.png in Resources */,
 				8D575E431EF4F6A70061474D /* CouponViewController.xib in Resources */,

@@ -60,10 +60,10 @@
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = @"泊安飞，不一样的机场停车";
     message.description = @"致力于为自驾往来机场的航空旅客提供更低价格，更多服务的机场停车服务商";
-    [message setThumbImage:[UIImage imageNamed:@"AppIcon"]];
+    [message setThumbImage:[UIImage imageNamed:@"app_icon_29"]];
     
     WXWebpageObject *ext = [WXWebpageObject object];
-    ext.webpageUrl = @"www.parknfly.cn";
+    ext.webpageUrl = @"http://parknfly.cn/Wap/Index/download";
     
     message.mediaObject = ext;
     

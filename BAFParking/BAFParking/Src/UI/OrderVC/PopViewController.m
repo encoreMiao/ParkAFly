@@ -239,6 +239,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;//文字居中
             cell.textLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -258,6 +259,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;//文字居中
             cell.textLabel.text = ((BAFParkAir *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
 
             if (self.selectedIndex == indexPath) {
@@ -278,6 +280,7 @@
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
 //            cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;//文字居中
             cell.textLabel.text = [NSString stringWithFormat:@"%@人",[self.arrDatasource objectAtIndex:indexPath.row]];
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -296,6 +299,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;//文字居中
             cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -314,6 +318,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;//文字居中
             cell.textLabel.text = [self.arrDatasource objectAtIndex:indexPath.row];
             if (self.selectedIndex == indexPath) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -378,6 +383,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             }
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;//文字居中
             cell.textLabel.text = ((BAFTcCardInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).type_name;
             
             if (self.selectedIndex == indexPath) {
@@ -632,7 +638,7 @@
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cancelButton setTitle:@"确认" forState:UIControlStateNormal];
-        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15.0f]];
+        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
         [_cancelButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
         [_cancelButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
         [_cancelButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
@@ -645,7 +651,7 @@
     if (!_confirmButton) {
         _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_confirmButton setTitle:@"取消" forState:UIControlStateNormal];
-        [_confirmButton.titleLabel setFont:[UIFont systemFontOfSize:15.0f]];
+        [_confirmButton.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
         [_confirmButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
         [_confirmButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
         [_confirmButton addTarget:self action:@selector(dismissSelf) forControlEvents:UIControlEventTouchUpInside];
