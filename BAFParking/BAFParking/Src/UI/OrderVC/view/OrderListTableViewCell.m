@@ -116,14 +116,14 @@
     else if ([orderStatus isEqualToString:@"payment_sure"]){
         //已支付待确认
         self.modifyButton.hidden = YES;
-        self.cancelButton.hidden = NO;
-        if ([[self.orderDic objectForKey:@"is_comment"] integerValue]>0) {
-            [self.cancelButton setTitle:@"查看评价" forState:UIControlStateNormal];
-            self.cancelButton.tag = kOrderListTableViewCellTypeCheckComment;
-        }else{
-            [self.cancelButton setTitle:@"评价" forState:UIControlStateNormal];
-            self.cancelButton.tag = kOrderListTableViewCellTypeComment;
-        }
+        self.cancelButton.hidden = YES;
+//        if ([[self.orderDic objectForKey:@"is_comment"] integerValue]>0) {
+//            [self.cancelButton setTitle:@"查看评价" forState:UIControlStateNormal];
+//            self.cancelButton.tag = kOrderListTableViewCellTypeCheckComment;
+//        }else{
+//            [self.cancelButton setTitle:@"评价" forState:UIControlStateNormal];
+//            self.cancelButton.tag = kOrderListTableViewCellTypeComment;
+//        }
         [self.orderstatus setTitle:@"支付待确认" forState:UIControlStateNormal];
     }
     else if ([orderStatus isEqualToString:@"pick_sure"]){

@@ -71,19 +71,22 @@
     }else if ([orderStatus isEqualToString:@"pick_sure"]||
               [orderStatus isEqualToString:@"payment_sure"]||
               [orderStatus isEqualToString:@"finish"]){
-        //取车成功
-        self.getCarSuccessIV.image = [UIImage imageNamed:@"home_order_blue1"];
-        self.getCarSuccessL.textColor = [UIColor colorWithHex:0x3492e9];
         if ([orderStatus isEqualToString:@"finish"]){
             //服务结束
+            self.getCarSuccessIV.image = [UIImage imageNamed:@"home_order_blue1"];
+            self.getCarSuccessL.textColor = [UIColor colorWithHex:0x3492e9];
             self.statusLabel.text = @"已完成";
         }
         else if ([orderStatus isEqualToString:@"payment_sure"]){
             //已支付待确认
+            self.waitToGetCarIV.image = [UIImage imageNamed:@"home_order_blue1"];
+            self.waitToGetCarL.textColor = [UIColor colorWithHex:0x3492e9];
             self.statusLabel.text = @"支付待确认";
         }
         else if ([orderStatus isEqualToString:@"pick_sure"]){
             //已确认取车
+            self.waitToGetCarIV.image = [UIImage imageNamed:@"home_order_blue1"];
+            self.waitToGetCarL.textColor = [UIColor colorWithHex:0x3492e9];
             self.statusLabel.text = @"待支付";
         }
         

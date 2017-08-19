@@ -41,10 +41,10 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGf-1J-u9j">
-                            <rect key="frame" x="135" y="10" width="105" height="42"/>
+                            <rect key="frame" x="140" y="10" width="125" height="42"/>
                             <color key="backgroundColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="105" id="8He-S2-ZQu"/>
+                                <constraint firstAttribute="width" constant="125" id="8He-S2-ZQu"/>
                                 <constraint firstAttribute="height" constant="42" id="KUL-tr-0mw"/>
                             </constraints>
                             <state key="normal" title="微信支付">
@@ -55,10 +55,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaM-jH-cM8">
-                            <rect key="frame" x="250" y="10.5" width="105" height="42"/>
+                            <rect key="frame" x="275" y="10.5" width="80" height="42"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="105" id="DKm-2v-5Fh"/>
+                                <constraint firstAttribute="width" constant="80" id="DKm-2v-5Fh"/>
                                 <constraint firstAttribute="height" constant="42" id="Vy3-Dw-2VA"/>
                             </constraints>
                             <state key="normal" title="现金支付">
@@ -82,7 +82,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hhh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeI-vX-tvP">
-                            <rect key="frame" x="88.5" y="11" width="26.5" height="15"/>
+                            <rect key="frame" x="81.5" y="11" width="26.5" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="nsU-Z9-lzj"/>
                             </constraints>
@@ -104,7 +104,7 @@
                     <constraints>
                         <constraint firstItem="xaM-jH-cM8" firstAttribute="centerY" secondItem="uGf-1J-u9j" secondAttribute="centerY" id="2xY-s1-PZv"/>
                         <constraint firstAttribute="trailing" secondItem="xaM-jH-cM8" secondAttribute="trailing" constant="20" id="7eQ-c9-cIT"/>
-                        <constraint firstItem="QeI-vX-tvP" firstAttribute="leading" secondItem="Nse-UO-jp6" secondAttribute="trailing" constant="7" id="JQu-8Q-EH0"/>
+                        <constraint firstItem="QeI-vX-tvP" firstAttribute="leading" secondItem="Nse-UO-jp6" secondAttribute="trailing" id="JQu-8Q-EH0"/>
                         <constraint firstAttribute="trailing" secondItem="IrG-iV-Vr2" secondAttribute="trailing" id="JYK-d0-UXu"/>
                         <constraint firstItem="WNa-kb-uT5" firstAttribute="leading" secondItem="tre-cd-Zun" secondAttribute="leading" constant="20" id="NGn-5M-lcf"/>
                         <constraint firstAttribute="height" constant="62" id="Qr9-TI-dp2"/>

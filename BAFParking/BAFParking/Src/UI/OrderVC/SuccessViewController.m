@@ -136,9 +136,18 @@
 
 - (void)backMethod:(id)sender
 {
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
-            [self.navigationController popToViewController:tempVC animated:YES];
+    if (self.type != kSuccessViewControllerTypePay) {
+        for (UIViewController *tempVC in self.navigationController.viewControllers) {
+            if ([tempVC isKindOfClass:[BAFCenterViewController class]]) {
+                [self.navigationController popToViewController:tempVC animated:YES];
+            }
+        }
+    }else{
+        for (UIViewController *tempVC in self.navigationController.viewControllers) {
+            if ([tempVC isKindOfClass:[OrderListViewController class]]) {
+                ((OrderListViewController *)tempVC).isNeedtoRefresh = YES;
+                [self.navigationController popToViewController:tempVC animated:YES];
+            }
         }
     }
 }

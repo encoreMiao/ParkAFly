@@ -10,4 +10,5 @@
 
 @interface OrderListViewController : BAFBaseViewController
 @property (nonatomic, assign) BOOL isFromLeftVC;
+@property (nonatomic, assign) BOOL isNeedtoRefresh;//是否需要刷新
 @end

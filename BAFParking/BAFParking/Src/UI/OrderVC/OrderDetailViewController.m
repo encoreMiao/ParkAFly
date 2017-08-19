@@ -166,11 +166,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [mutArr addObject:[NSArray arrayWithObjects:@"支付方式",@"", nil]];
         NSDictionary *payment_detailDic = [orderFeeDetail objectForKey:@"payment_detail"];
         
-        NSArray *discount_price = [orderFeeDetail objectForKey:@"discount_price"];
+        NSDictionary *discount_price = [orderFeeDetail objectForKey:@"discount_price"];
         if (![discount_price isEqual:[NSNull null]]&&discount_price!=nil) {
             if (discount_price.count>0) {
-                for (NSDictionary *dic in discount_price) {
-                    [mutArr addObject:[NSArray arrayWithObjects:@"vip抵扣",[NSString stringWithFormat:@"-¥%ld",[[dic objectForKey:@"discount_total"] integerValue]/100], nil]];
+                for (NSString *key in discount_price) {
+                    NSArray *discount_info_dic = [discount_price objectForKey:key];
+                    if (discount_info_dic.count>0) {
+                        NSLog(@"%@",discount_info_dic);
+                        NSString *title = [discount_info_dic[0] objectForKey:@"title"];
+                        NSString *total = [discount_info_dic[0] objectForKey:@"total"];
+                        [mutArr addObject:[NSArray arrayWithObjects:title, [NSString stringWithFormat:@"-¥%ld",[total integerValue]/100], nil]];
+                    }
                 }
             }
         }
@@ -887,7 +893,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     else if ([orderStatus isEqualToString:@"pick_sure"]){
         //已确认取车
-        return @"预计费用";
+        return @"订单总费用";
     }
     return nil;
 }

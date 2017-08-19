@@ -65,7 +65,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"我的订单"];
     
-    
+    if (_isNeedtoRefresh) {
+        [self orderListRequestWithOrderstatus:@"1"];//进行中
+    }
 }
 
 - (void)backMethod:(id)sender

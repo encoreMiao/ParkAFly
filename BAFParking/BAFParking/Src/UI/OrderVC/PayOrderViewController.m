@@ -123,8 +123,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     CommentViewController  *vc = [[CommentViewController alloc]init];
     vc.type = kCommentViewControllerTypePayComment;
     vc.commentfinishHandler = ^(void){
-        //评价完成
-        //        [self segementSelect:self.finishedButton];
+        //微信支付成功，评价完成，并不改变任何状态。
     };
     vc.orderDic = self.orderDic;
     [self.navigationController pushViewController:vc animated:YES];
@@ -267,9 +266,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             cell.moneyLabel.attributedText = mutStr;
             [cell setShow: YES];
         }else{
-            NSString *moneyStr = [NSString stringWithFormat:@"¥%.0f",userinfo.account.integerValue/100.0f];
+            NSString *moneyStr = [NSString stringWithFormat:@"余额¥%.0f",userinfo.account.integerValue/100.0f];
             NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:moneyStr];
-            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[moneyStr rangeOfString:[NSString stringWithFormat:@"¥%.0f",userinfo.account.integerValue/100.0f]]];
+            [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:14]} range:[moneyStr rangeOfString:[NSString stringWithFormat:@"余额¥%.0f",userinfo.account.integerValue/100.0f]]];
             cell.moneyLabel.attributedText = mutStr;
             [cell setShow:NO];
         }
@@ -498,7 +497,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     if (self.selectAccount) {
         if (totalFee == 0) {
-            self.accountAmountShow = (totalFee - self.tcCardFee.integerValue - self.selectCouponinfo.price.integerValue);
+            NSInteger after_discount_total_price = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"after_discount_total_price"] integerValue];
+            self.accountAmountShow = (after_discount_total_price - self.tcCardFee.integerValue - self.selectCouponinfo.price.integerValue);
         }
     }
     if (self.accountAmountShow<=0) {
@@ -579,16 +579,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             NSString *payMethod = [[obj objectForKey:@"data"] objectForKey:@"pay_method"];
             //确认支付和微信支付调转页面相同 恭喜你支付成功（不用传金额）
             if ([payMethod isEqualToString:@"confirm"]){
-                //确认支付
-                CommentViewController  *vc = [[CommentViewController alloc]init];
-                vc.type = kCommentViewControllerTypePayComment;
-                vc.commentfinishHandler = ^(void){
-                    //评价完成
-                    //        [self segementSelect:self.finishedButton];
-                };
-                vc.orderDic = self.orderDic;
-                [self.navigationController pushViewController:vc animated:YES];
-                
+                //确认支付 支付成功页面
+                [self paysuccess];
             }else if ([payMethod isEqualToString:@"cash"]){
                 //现金支付 跳转到订单提交成功页面 温馨提示请将待支付金额到现场交给客户经理结算（要传金额）
                 SuccessViewController *successVC = [[SuccessViewController alloc]init];
@@ -605,7 +597,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 NSMutableDictionary *param = [NSMutableDictionary dictionary];
                 [param setObject:[NSString stringWithFormat:@"%@",orderID] forKey:@"out_trade_no"];
                 NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
-                [param setObject:[str stringByReplacingOccurrencesOfString:@"¥" withString:@""] forKey:@"total_fee"];
+                NSString *str1 = [str stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+                [param setObject:[NSString stringWithFormat:@"%ld",str1.integerValue*100] forKey:@"total_fee"];
                 [param setObject:@"payment" forKey:@"pay_type"];
                 [self createSignWithParam:param];
             }
@@ -799,7 +792,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else if ([orderStatus isEqualToString:@"payment_sure"]){
         return @"订单总费用";//已支付待确认
     }else if ([orderStatus isEqualToString:@"pick_sure"]){
-        return @"预计费用";//已确认取车
+        return @"订单总费用";//已确认取车
     }
     return nil;
 }

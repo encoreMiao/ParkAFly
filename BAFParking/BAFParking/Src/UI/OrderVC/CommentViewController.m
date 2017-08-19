@@ -16,6 +16,7 @@
 #import "CommentFooterCollectionReusableView.h"
 #import "CommentCheckCollectionReusableView.h"
 #import <IQKeyboardManager.h>
+#import "OrderListViewController.h"
 
 #define CommentViewControllerCellIdentifier        @"CommentViewControllerCellIdentifier"
 
@@ -118,7 +119,16 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)backMethod:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.type !=kCommentViewControllerTypePayComment) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        for (UIViewController *tempVC in self.navigationController.viewControllers) {
+            if ([tempVC isKindOfClass:[OrderListViewController class]]) {
+                ((OrderListViewController *)tempVC).isNeedtoRefresh = YES;
+                [self.navigationController popToViewController:tempVC animated:YES];
+            }
+        }
+    }
 }
 
 #pragma mark - request

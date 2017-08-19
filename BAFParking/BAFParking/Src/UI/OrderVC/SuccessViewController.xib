@@ -166,19 +166,19 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NaU-5V-LQ4">
                             <rect key="frame" x="0.0" y="259" width="375" height="141"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="说明：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22M-tT-QQi">
-                                    <rect key="frame" x="20" y="15" width="335" height="15"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="15" id="0wl-og-N5l"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWh-Mh-V13">
-                                    <rect key="frame" x="20" y="30" width="335" height="111"/>
+                                    <rect key="frame" x="20" y="15" width="335" height="117"/>
                                     <attributedString key="attributedText">
-                                        <fragment content="1.">
+                                        <fragment content="说明：">
+                                            <attributes>
+                                                <color key="NSColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">
+1.</string>
                                             <attributes>
                                                 <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <font key="NSFont" metaFont="system"/>
@@ -226,11 +226,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="22M-tT-QQi" firstAttribute="leading" secondItem="NaU-5V-LQ4" secondAttribute="leading" constant="20" id="AfB-b5-3uY"/>
-                                <constraint firstItem="kWh-Mh-V13" firstAttribute="top" secondItem="22M-tT-QQi" secondAttribute="bottom" id="DXn-mJ-EEu"/>
-                                <constraint firstItem="22M-tT-QQi" firstAttribute="top" secondItem="NaU-5V-LQ4" secondAttribute="top" constant="15" id="DpO-9L-POq"/>
-                                <constraint firstAttribute="bottom" secondItem="kWh-Mh-V13" secondAttribute="bottom" id="H6A-O2-rcY"/>
-                                <constraint firstAttribute="trailing" secondItem="22M-tT-QQi" secondAttribute="trailing" constant="20" id="Hgh-nz-3lo"/>
+                                <constraint firstItem="kWh-Mh-V13" firstAttribute="top" secondItem="NaU-5V-LQ4" secondAttribute="top" constant="15" id="caA-7b-LFX"/>
                                 <constraint firstAttribute="trailing" secondItem="kWh-Mh-V13" secondAttribute="trailing" constant="20" id="g9U-Yz-9F7"/>
                                 <constraint firstItem="kWh-Mh-V13" firstAttribute="leading" secondItem="NaU-5V-LQ4" secondAttribute="leading" constant="20" id="u8G-HY-eIr"/>
                             </constraints>

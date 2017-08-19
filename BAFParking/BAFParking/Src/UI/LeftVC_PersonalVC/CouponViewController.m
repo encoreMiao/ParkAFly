@@ -96,7 +96,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (self.handler) {
         self.handler(self.selectCouponInfo);
     }
-    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    
+    if (self.type == kCouponViewControllerTypeCommon) {
+        [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
