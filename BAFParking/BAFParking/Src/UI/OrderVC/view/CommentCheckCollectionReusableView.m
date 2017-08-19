@@ -41,13 +41,20 @@
     
     CGFloat height = 30;
     if ([commentDic objectForKey:@"remark"]&&![[commentDic objectForKey:@"remark"] isEqual:[NSNull null]]) {
-        self.commentLabel.text = [commentDic objectForKey:@"remark"];
+        NSString *str = [NSString stringWithFormat:@"评价内容:\n%@",[commentDic objectForKey:@"remark"]];
+        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:str];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        [mutStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, str.length)];
         
-        CGSize titleSize = [self.commentLabel.text boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+        CGSize titleSize = [str boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
                                              options:NSStringDrawingUsesLineFragmentOrigin
-                                          attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}
+                                          attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
                                              context:nil].size;
         self.commentLabel.frame = CGRectMake(20, height, screenWidth-40,titleSize.height);
+
+        [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[str rangeOfString:@"评价内容:"]];
+        self.commentLabel.attributedText = mutStr;
         height += titleSize.height+20;
     }
     self.lineView.frame = CGRectMake(0, height, screenWidth, 0.5);
@@ -60,9 +67,14 @@
         if (![[commentDic objectForKey:@"reply"] isEqualToString:@""]) {
             NSString *str = [NSString stringWithFormat:@"泊安飞回复:\n%@",[commentDic objectForKey:@"reply"]];
             NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:str];
+            
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            [paragraphStyle setLineSpacing:6];
+            [mutStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, str.length)];
+            
             CGSize titleSize = [str boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
                                                  options:NSStringDrawingUsesLineFragmentOrigin
-                                              attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}
+                                              attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:14.0f],NSParagraphStyleAttributeName:paragraphStyle}
                                                  context:nil].size;
             self.backCommentLabel.frame = CGRectMake(20, 10, screenWidth-40,titleSize.height);
             self.whiteView.frame = CGRectMake(0, 10, screenWidth, titleSize.height+20);

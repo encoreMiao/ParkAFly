@@ -38,20 +38,21 @@
     UITapGestureRecognizer* gesture5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapStarScore5)];
     [self.star5 addGestureRecognizer:gesture5];
     
-    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+//    pingj_star2
+    self.star1.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star2.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star3.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star4.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star5.image = [UIImage imageNamed:@"pingj_star2"];
 }
 
 - (void)tapStarScore1
 {
-    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    self.star1.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star2.image = [UIImage imageNamed:@"pingj_star1"];
+    self.star3.image = [UIImage imageNamed:@"pingj_star1"];
+    self.star4.image = [UIImage imageNamed:@"pingj_star1"];
+    self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     if (self.handler) {
         self.handler(1);
     }
@@ -59,11 +60,11 @@
 
 - (void)tapStarScore2
 {
-    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    self.star1.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star2.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star3.image = [UIImage imageNamed:@"pingj_star1"];
+    self.star4.image = [UIImage imageNamed:@"pingj_star1"];
+    self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     if (self.handler) {
         self.handler(2);
     }
@@ -71,11 +72,11 @@
 
 - (void)tapStarScore3
 {
-    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    self.star1.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star2.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star3.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star4.image = [UIImage imageNamed:@"pingj_star1"];
+    self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     if (self.handler) {
         self.handler(3);
     }
@@ -83,11 +84,11 @@
 
 - (void)tapStarScore4
 {
-    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+    self.star1.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star2.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star3.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star4.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     if (self.handler) {
         self.handler(4);
     }
@@ -95,11 +96,11 @@
 
 - (void)tapStarScore5
 {
-    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+    self.star1.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star2.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star3.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star4.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star5.image = [UIImage imageNamed:@"pingj_star2"];
     if (self.handler) {
         self.handler(5);
     }
@@ -151,25 +152,25 @@
 - (void)setScore:(NSString *)score
 {
     _score = score;
-    self.star1.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star2.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star3.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star4.image = [UIImage imageNamed:@"parking_xiangq_star2"];
-    self.star5.image = [UIImage imageNamed:@"parking_xiangq_star2"];
+    self.star1.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star2.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star3.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star4.image = [UIImage imageNamed:@"pingj_star2"];
+    self.star5.image = [UIImage imageNamed:@"pingj_star2"];
     if(score.integerValue == 1){
-        self.star2.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-        self.star3.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-        self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star2.image = [UIImage imageNamed:@"pingj_star1"];
+        self.star3.image = [UIImage imageNamed:@"pingj_star1"];
+        self.star4.image = [UIImage imageNamed:@"pingj_star1"];
+        self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     }else if(score.integerValue == 2){
-        self.star3.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-        self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star3.image = [UIImage imageNamed:@"pingj_star1"];
+        self.star4.image = [UIImage imageNamed:@"pingj_star1"];
+        self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     }else if(score.integerValue == 3){
-        self.star4.image = [UIImage imageNamed:@"parking_xiangq_star1"];
-        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star4.image = [UIImage imageNamed:@"pingj_star1"];
+        self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     }else if(score.integerValue == 4){
-        self.star5.image = [UIImage imageNamed:@"parking_xiangq_star1"];
+        self.star5.image = [UIImage imageNamed:@"pingj_star1"];
     }
 }
 @end
