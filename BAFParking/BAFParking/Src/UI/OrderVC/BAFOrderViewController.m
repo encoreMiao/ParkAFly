@@ -663,6 +663,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if (self.handler) {
                 self.handler();
             }
+            
+            [[NSUserDefaults standardUserDefaults]setObject:_dicDatasource forKey:OrderDefaults];
+            
+            [self showTipsInView:self.view message:@"预约成功" offset:self.view.center.x+100];
+            SuccessViewController *successVC = [[SuccessViewController alloc]init];
+            successVC.type = kSuccessViewControllerTypeSuccess;
+            successVC.orderId = [self.orderDicForModify objectForKey:@"id"];
+            [self.navigationController pushViewController:successVC animated:YES];
+            
         }else{
             [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }

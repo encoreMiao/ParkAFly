@@ -32,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *feeL;
 
 @property (nonatomic, strong) IBOutlet UILabel *payMoneyLabel;//支付金额
+
+
+
+@property (assign, nonatomic) NSInteger daystochange;
 @end
 
 @implementation SuccessViewController
@@ -42,6 +46,8 @@
     self.contactBtn.layer.borderWidth = 0.5f;
     self.checktBtn.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.checktBtn.layer.borderWidth = 0.5f;
+    
+    self.daystochange = 0;
 }
 - (IBAction)contactClicked:(id)sender {
     [self callPhoneNumber:@"4008138666"];
@@ -196,31 +202,47 @@
     [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
     
     NSString *str;
+    NSDate *goDate = nil;
+    NSDate *backDate = nil;
     if ([mutDic objectForKey:OrderParamTypeGoTime]) {
-        NSDate *date =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeGoTime]];
-        str = [dateFormat1 stringFromDate:date];
+        goDate =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeGoTime]];
+        str = [dateFormat1 stringFromDate:goDate];
     }else{
         str = @"";
     }
     self.parkTimeL.text = [NSString stringWithFormat:@"预计停车时间：%@",str];
     
     if ([mutDic objectForKey:OrderParamTypeTime]) {
-        NSDate *date =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeTime]];
-        str = [dateFormat1 stringFromDate:date];
+        backDate =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeTime]];
+        if (backDate) {
+            str = [dateFormat1 stringFromDate:backDate];
+        }else{
+            str = @"";
+        }
     }else{
         str = @"";
     }
     self.pickTimeL.text = [NSString stringWithFormat:@"预计取车时间：%@",str];
  
-    NSInteger days = -1;
-    if ([mutDic objectForKey:OrderParamTypePark_day]) {
-        days = [[mutDic objectForKey:OrderParamTypePark_day] integerValue];
-    }
-    if (days<0) {
-        self.parkDayL.text = @"预计停车天数：";
+    if ([mutDic objectForKey:OrderParamTypeTime]) {
+        NSInteger days = -1;
+        if ([mutDic objectForKey:OrderParamTypePark_day]) {
+            days = [[mutDic objectForKey:OrderParamTypePark_day] integerValue];
+        }else if(goDate && backDate){
+            NSTimeInterval time = [backDate timeIntervalSinceDate:goDate];
+            //开始时间和结束时间的中间相差的时间
+            days = ceil(((int)time)/(3600*24));  //一天是24小时*3600秒
+            self.daystochange = days;
+        }
+        if (days<0) {
+            self.parkDayL.text = @"预计停车天数：";
+        }else{
+            self.parkDayL.text = [NSString stringWithFormat:@"预计停车天数：%ld天",days];
+        }
     }else{
-        self.parkDayL.text = [NSString stringWithFormat:@"预计停车天数：%ld天",days];
+        self.parkDayL.text = @"预计停车天数：";
     }
+    
     
     [self configTotalFees];
 }
@@ -233,20 +255,30 @@
     NSInteger firstdayfee = [[mutDic objectForKey:OrderParamTypeParkFeeFirstDay] integerValue];
     NSInteger dayfee = [[mutDic objectForKey:OrderParamTypeParkFeeDay] integerValue];
     NSInteger days = -1;
-    if ([mutDic objectForKey:OrderParamTypePark_day]) {
-        days = [[mutDic objectForKey:OrderParamTypePark_day] integerValue];
+    if ([mutDic objectForKey:OrderParamTypeTime]) {
+        if ([mutDic objectForKey:OrderParamTypePark_day]) {
+            days = [[mutDic objectForKey:OrderParamTypePark_day] integerValue];
+        }else {
+            days = self.daystochange;
+        }
+        days = days-1;
+        if (days>=0) {
+            totalFee = firstdayfee + dayfee*days;
+        }else{
+            totalFee = firstdayfee;
+        }
     }
-    if (days>=0) {
-        totalFee = firstdayfee + dayfee*days;
-    }else{
-        totalFee = firstdayfee;
-    }
+    
     if ([mutDic objectForKey:OrderParamTypeService]) {
         NSArray *arr = [[mutDic objectForKey:OrderParamTypeService] componentsSeparatedByString:@"&"];
         NSMutableArray *serviceArr = [NSMutableArray arrayWithArray:arr];
         for (NSString *str in serviceArr) {
             NSArray *detailArr = [str componentsSeparatedByString:@"=>"];
-            totalFee += [detailArr[3] integerValue];
+            if ([str containsString:@"自行往返航站楼"]) {
+                totalFee -= [detailArr[3] integerValue];
+            }else{
+                totalFee += [detailArr[3] integerValue];
+            }
         }
     }
     self.feeL.text = [NSString stringWithFormat:@"¥%ld",totalFee/100];
