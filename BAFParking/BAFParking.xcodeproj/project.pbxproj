@@ -219,6 +219,7 @@
 		8DE4335B1EED28F4009379ED /* BAFParkCharge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4335A1EED28F4009379ED /* BAFParkCharge.m */; };
 		8DE4335E1EED5A42009379ED /* BAFParkServiceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */; };
 		8DF94F691F473E8D004C844D /* app_icon_29.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF94F681F473E8D004C844D /* app_icon_29.png */; };
+		8DF94F6B1F482B65004C844D /* app_icon_60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF94F6A1F482B65004C844D /* app_icon_60@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -614,6 +615,7 @@
 		8DE4335C1EED5A42009379ED /* BAFParkServiceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAFParkServiceInfo.h; sourceTree = "<group>"; };
 		8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkServiceInfo.m; sourceTree = "<group>"; };
 		8DF94F681F473E8D004C844D /* app_icon_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_29.png; sourceTree = "<group>"; };
+		8DF94F6A1F482B65004C844D /* app_icon_60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon_60@2x.png"; sourceTree = "<group>"; };
 		F3CE4BA856D06DE9C2D3CF10 /* Pods-BAFParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1290,6 +1292,7 @@
 		00F55B931F217DF60044209A /* welcomeimage */ = {
 			isa = PBXGroup;
 			children = (
+				8DF94F6A1F482B65004C844D /* app_icon_60@2x.png */,
 				8DF94F681F473E8D004C844D /* app_icon_29.png */,
 				8DB6C9511F31F56600012746 /* Welcome750.png */,
 				8DB6C9531F31F56F00012746 /* Welcome1242.png */,
@@ -1570,6 +1573,7 @@
 				8D575E521EF4F72B0061474D /* RightsViewController.xib in Resources */,
 				8D575E811EF6B48C0061474D /* AccountDetailTableViewCell.xib in Resources */,
 				8DE4334F1EED00A9009379ED /* ParkListViewController.xib in Resources */,
+				8DF94F6B1F482B65004C844D /* app_icon_60@2x.png in Resources */,
 				002093601EDC4FEC00C26176 /* OrderConfirmTableViewCell.xib in Resources */,
 				8DAA924D1F1E59A800FCF348 /* OrderDetailFeeTableViewCell.xib in Resources */,
 				8D575E341EF4F2BD0061474D /* OrderListViewController.xib in Resources */,
