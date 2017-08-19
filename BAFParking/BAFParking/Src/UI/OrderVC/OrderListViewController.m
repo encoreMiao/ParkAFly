@@ -16,6 +16,7 @@
 #import "CommentViewController.h"
 #import "PayOrderViewController.h"
 #import "OrderDetailViewController.h"
+#import "SuccessViewController.h"
 
 #define OrderListTableViewCellIdentifier   @"OrderListTableViewCellIdentifier"
 
@@ -145,6 +146,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 #pragma mark - OrderListTableViewCellDelegate
 - (void)orderBtnActionTag:(NSInteger)btnTag cell:(OrderListTableViewCell *)cell
 {
+//    PayOrderViewController  *vc = [[PayOrderViewController alloc]init];
+//    vc.orderDic = cell.orderDic;
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
+    
     NSLog(@"%@",cell.orderDic);
     //修改时提交按钮为保存，泊车时间定位到当前时间两小时之后
     switch (btnTag) {

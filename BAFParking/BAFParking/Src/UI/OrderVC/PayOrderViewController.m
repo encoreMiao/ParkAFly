@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
     [param setObject:[str stringByReplacingOccurrencesOfString:@"¥" withString:@""] forKey:@"actual_pay_money"];//微信支付或现金支付部分
-    
+
     id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
     [orderReq orderPaymentSetWithNumberIndex:kRequestNumberIndexOrderPaymentSet delegte:self param:param];
 }
@@ -595,8 +595,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 successVC.type = kSuccessViewControllerTypePay;
                 successVC.orderId = [obj objectForKey:@"data"];
                 NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
-                [str stringByReplacingOccurrencesOfString:@"¥" withString:@""];
-                successVC.rechargeMoneyStr = [NSString stringWithFormat:@"%.0f",str.integerValue/100.0f];
+                NSString *str1 = [str stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+                successVC.rechargeMoneyStr = [NSString stringWithFormat:@"%ld",str1.integerValue];
                 [self.navigationController pushViewController:successVC animated:YES];
                 
             }else if ([payMethod isEqualToString:@"wechat"]) {

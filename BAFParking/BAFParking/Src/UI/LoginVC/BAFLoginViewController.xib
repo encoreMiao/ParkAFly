@@ -97,14 +97,26 @@
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dom-3u-6wq">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dom-3u-6wq">
                     <rect key="frame" x="20" y="403" width="335" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="3kH-Ew-mDB"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="点击提交，即视为您同意《泊安飞服务协议》">
-                        <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <attributedString key="attributedTitle">
+                            <fragment content="点击提交，即视为您同意">
+                                <attributes>
+                                    <color key="NSColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="《泊安飞服务协议》">
+                                <attributes>
+                                    <color key="NSColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                     </state>
                     <connections>
                         <action selector="boanfeiProtocal:" destination="-1" eventType="touchUpInside" id="SEA-PK-L5O"/>

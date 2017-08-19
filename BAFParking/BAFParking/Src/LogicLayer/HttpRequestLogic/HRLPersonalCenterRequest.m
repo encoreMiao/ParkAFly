@@ -625,8 +625,8 @@
     NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from",
                                   [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token", nil];
     NSMutableDictionary *paramters = [NSMutableDictionary dictionaryWithDictionary:param];
-    //GET请求
-    [self getRequestWithUrl:REQURL(@"api/pay/recharge_order") parameters:paramters headerFields:headerFields object:nil style:0 success:^(id operation,id responseObject){
+    //GET请求 应该为post请求
+    [self postRequestWithUrl:REQURL(@"api/pay/recharge_order") parameters:nil headerFields:headerFields body:paramters object:workThread style:0 success:^(id operation, id responseObject) {
         NSLog(@"JSON = %@", responseObject);
         if ([workThread respondsToSelector:@selector(onJobComplete:Object:)]) {
             [workThread onJobComplete:numberIndex Object:(id)responseObject];
