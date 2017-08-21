@@ -11,8 +11,11 @@
 #import "BAFParkAir.h"
 #import "PopFeeShowTableViewCell.h"
 #import "BAFTcCardInfo.h"
+#import "CityCollectionViewCell.h"
 
-@interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
+#define CityCollectionViewCellIdentifier  @"CityCollectionViewCellIdentifier"
+
+@interface PopViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic, assign) PopViewControllerType    type;
 @property (nonatomic, retain) UIView        *bgView;
 @property (nonatomic, retain) UITableView   *tableView;
@@ -26,6 +29,11 @@
 @property (nonatomic, retain) NSMutableArray *arrDatasource;
 
 @property (nonatomic, retain) UIScrollView *scrollView;
+
+
+
+@property (strong, nonatomic) UICollectionView              *cityCollectionview;
+@property (nonatomic, strong) UICollectionViewFlowLayout    *layoutForCityCollection;
 @end
 
 
@@ -60,6 +68,15 @@
     [self.bgView addSubview:self.tableView];
     [self.bgView addSubview:self.scrollView];
     [self.scrollView addSubview:self.detailLabel];
+    
+    
+    self.cityCollectionview = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layoutForCityCollection];
+    _cityCollectionview.scrollEnabled = NO;
+    _cityCollectionview.backgroundColor = [UIColor clearColor];
+    [_cityCollectionview registerNib:[UINib nibWithNibName:@"CityCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:CityCollectionViewCellIdentifier];
+    self.cityCollectionview.delegate = self;
+    self.cityCollectionview.dataSource = self;
+    [self.bgView addSubview:self.cityCollectionview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -95,6 +112,7 @@
             self.tableView.hidden = YES;
             self.scrollView.hidden = NO;
             self.confirmButton.hidden = YES;
+            self.cityCollectionview.hidden = YES;
             
         }
             break;
@@ -106,8 +124,9 @@
                 height = 320;
             }
             self.popTitleLabel.text = @"请选择城市";
-            self.tableView.hidden = NO;
+            self.tableView.hidden = YES;
             self.scrollView.hidden = YES;
+            self.cityCollectionview.hidden = NO;
         }
             break;
         case kPopViewControllerTypeSelecGoTerminal:
@@ -125,6 +144,7 @@
 
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cityCollectionview.hidden = YES;
         }
             break;
         case kPopViewControllerTypeTipsshow:
@@ -133,6 +153,7 @@
             self.popTitleLabel.text = @"费用明细";
             self.confirmButton.hidden = YES;
             self.scrollView.hidden = YES;
+            self.cityCollectionview.hidden = YES;
         }
             break;
         case kPopViewControllerTypeCompany:
@@ -144,6 +165,7 @@
             self.popTitleLabel.text = @"请选择同行人数";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cityCollectionview.hidden = YES;
         }
             break;
         case kPopViewControllerTypeSelecSex:
@@ -155,6 +177,7 @@
             self.popTitleLabel.text = @"请选择性别";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cityCollectionview.hidden = YES;
         }
             break;
         case kPopViewControllerTypeSelecColor:
@@ -166,6 +189,7 @@
             self.popTitleLabel.text = @"请选择车辆颜色";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cityCollectionview.hidden = YES;
         }
             break;
         case kPopViewControllerTypeGoTime:
@@ -176,6 +200,7 @@
             [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
             [self.bgView addSubview:self.datePicker];
             self.tableView.hidden = YES;
+            self.cityCollectionview.hidden = YES;
         }
             break;
         case kPopViewControllerTypeTcCard:
@@ -187,6 +212,7 @@
             self.popTitleLabel.text = @"请选择权益账户";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cityCollectionview.hidden = YES;
         }
             break;
         default:
@@ -199,6 +225,7 @@
     self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-64,0, 64, 44);
     self.confirmButton.frame = CGRectMake(0,0, 64, 44);
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, height-CGRectGetHeight(self.headerView.frame));
+     self.cityCollectionview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), screenWidth, height-CGRectGetHeight(self.headerView.frame));
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:7];
@@ -600,6 +627,52 @@
     }
 }
 
+#pragma mark - collectiondelegate
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    if (self.type == kPopViewControllerTypeSelecCity) {
+        return 1;
+    }
+    return 0;
+    
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    if (self.type == kPopViewControllerTypeSelecCity) {
+        return self.arrDatasource.count;
+    }
+    return 0;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.type == kPopViewControllerTypeSelecCity) {
+        CityCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CityCollectionViewCellIdentifier forIndexPath:indexPath];
+        cell.cityLabel.text = ((BAFCityInfo *)[self.arrDatasource objectAtIndex:indexPath.row]).title;
+        cell.cityLabel.font = [UIFont systemFontOfSize:15.0f];
+        cell.cityLabel.textAlignment = NSTextAlignmentCenter;//文字居中
+        if (self.selectedIndex == indexPath) {
+            [cell setCityCollectionSelected:YES];
+        }else{
+            [cell setCityCollectionSelected:NO];
+        }
+        return cell;
+    }
+    return nil;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CityCollectionViewCell *cell = (CityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setCityCollectionSelected:YES];
+    self.selectedIndex = indexPath;
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CityCollectionViewCell *cell = (CityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setCityCollectionSelected:NO];
+}
+
+
 #pragma mark - setter&getter
 - (UIView*)bgView
 {
@@ -716,5 +789,20 @@
         _scrollView.backgroundColor = [UIColor whiteColor];
     }
     return _scrollView;
+}
+
+- (UICollectionViewFlowLayout *)layoutForCityCollection
+{
+    if (!_layoutForCityCollection) {
+        CGFloat itemTotolWidth = screenWidth-30-30;
+        CGFloat itemWidth = itemTotolWidth/3.0f;
+        CGFloat itemHeight  = 40.0f;
+        _layoutForCityCollection = [[UICollectionViewFlowLayout alloc] init];
+        _layoutForCityCollection.minimumLineSpacing = 18;
+        _layoutForCityCollection.minimumInteritemSpacing = 15;
+        _layoutForCityCollection.itemSize = CGSizeMake(itemWidth, itemHeight);
+        _layoutForCityCollection.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
+    }
+    return _layoutForCityCollection;
 }
 @end

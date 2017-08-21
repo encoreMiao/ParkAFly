@@ -220,6 +220,8 @@
 		8DE4335E1EED5A42009379ED /* BAFParkServiceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */; };
 		8DF94F691F473E8D004C844D /* app_icon_29.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF94F681F473E8D004C844D /* app_icon_29.png */; };
 		8DF94F6B1F482B65004C844D /* app_icon_60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF94F6A1F482B65004C844D /* app_icon_60@2x.png */; };
+		8DF94F6F1F4A93EA004C844D /* CityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DF94F6D1F4A93EA004C844D /* CityCollectionViewCell.m */; };
+		8DF94F701F4A93EA004C844D /* CityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DF94F6E1F4A93EA004C844D /* CityCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -616,6 +618,9 @@
 		8DE4335D1EED5A42009379ED /* BAFParkServiceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAFParkServiceInfo.m; sourceTree = "<group>"; };
 		8DF94F681F473E8D004C844D /* app_icon_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_29.png; sourceTree = "<group>"; };
 		8DF94F6A1F482B65004C844D /* app_icon_60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon_60@2x.png"; sourceTree = "<group>"; };
+		8DF94F6C1F4A93EA004C844D /* CityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCollectionViewCell.h; sourceTree = "<group>"; };
+		8DF94F6D1F4A93EA004C844D /* CityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityCollectionViewCell.m; sourceTree = "<group>"; };
+		8DF94F6E1F4A93EA004C844D /* CityCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityCollectionViewCell.xib; sourceTree = "<group>"; };
 		F3CE4BA856D06DE9C2D3CF10 /* Pods-BAFParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAFParking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAFParking/Pods-BAFParking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -758,6 +763,9 @@
 				002093681EDD2CE300C26176 /* SuccessViewController.xib */,
 				8D6058F41EE438C30066289C /* PopViewController.h */,
 				8D6058F51EE438C30066289C /* PopViewController.m */,
+				8DF94F6C1F4A93EA004C844D /* CityCollectionViewCell.h */,
+				8DF94F6D1F4A93EA004C844D /* CityCollectionViewCell.m */,
+				8DF94F6E1F4A93EA004C844D /* CityCollectionViewCell.xib */,
 				8D575E301EF4F2BD0061474D /* OrderListViewController.h */,
 				8D575E311EF4F2BD0061474D /* OrderListViewController.m */,
 				8D575E321EF4F2BD0061474D /* OrderListViewController.xib */,
@@ -1552,6 +1560,7 @@
 				0020934E1EDBFBA600C26176 /* BAFOrderServiceViewController.xib in Resources */,
 				8DB6C9561F31F71800012746 /* Images.xcassets in Resources */,
 				002093651EDC501600C26176 /* ServiceConfirmTableViewCell.xib in Resources */,
+				8DF94F701F4A93EA004C844D /* CityCollectionViewCell.xib in Resources */,
 				8D6521D61F2B0CAA00679596 /* OrderMoreCollectionViewCell.xib in Resources */,
 				8DB6C9461F31F33C00012746 /* Guide_image1_750.png in Resources */,
 				8D3498081F08FC07009D723C /* CommentCollectionViewCell.xib in Resources */,
@@ -1797,6 +1806,7 @@
 				8DE433581EED28E8009379ED /* BAFParkAir.m in Sources */,
 				0001CDDB1ED05179000889CE /* PersonalCenterFooterView.m in Sources */,
 				00D13EDD1EB5927800B0D766 /* HRLLoginRequest.m in Sources */,
+				8DF94F6F1F4A93EA004C844D /* CityCollectionViewCell.m in Sources */,
 				00D13ED41EB4C60C00B0D766 /* BAFGlobalMananger.m in Sources */,
 				002093491EDBF89A00C26176 /* OrderFooterView.m in Sources */,
 				8DE433541EED0121009379ED /* ParkListTableViewCell.m in Sources */,
