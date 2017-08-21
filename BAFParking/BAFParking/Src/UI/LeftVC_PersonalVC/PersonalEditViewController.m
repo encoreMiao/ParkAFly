@@ -463,7 +463,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 //            [self getAccountInfo];
             [self backMethod:nil];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"缺少参数";
+                    break;
+                case 2:
+                    failureStr = @"车牌号格式不正确";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
         }
     }
     

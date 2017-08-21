@@ -158,7 +158,28 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             
         }
         else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+//            1.手机号格式错误;2.随机数格式错误;3.密钥错误;4.频繁请求
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"手机号格式错误";
+                    break;
+                case 2:
+                    failureStr = @"随机数格式错误";
+                    break;
+                case 3:
+                    failureStr = @"密钥错误";
+                    break;
+                case 4:
+                    failureStr = @"频繁请求";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
         }
     }
     
@@ -183,7 +204,27 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"手机号格式错误";
+                    break;
+                case 2:
+                    failureStr = @"短信验证码错误";
+                    break;
+                case 3:
+                    failureStr = @"短信验证码失效";
+                    break;
+                case 4:
+                    failureStr = @"缺少手机设备号参数";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
         }
     }
     

@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             self.rechargeListArr = [BAFClientPatrInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
             [self.mainTableView reloadData];
         }else{
-            
+
         }
     }
 
@@ -113,7 +113,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
 {
-//    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 
 

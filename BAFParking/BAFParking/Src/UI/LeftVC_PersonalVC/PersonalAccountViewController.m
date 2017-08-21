@@ -380,18 +380,42 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self showTipsInView:self.view message:@"充值成功" offset:self.view.center.x+100];
-            
             [self.mycollectionview reloadData];//清空之前的充值数据。
-            
             [self getAccountInfo];
-//            SuccessViewController *successVC = [[SuccessViewController alloc]init];
-//            successVC.type = kSuccessViewControllerTypeRechargeSuccess;
-//            successVC.rechargeMoneyStr = @"300元";
-//            successVC.rechargeTimeStr = @"2016-03-15 15:00";
-//            [self.navigationController pushViewController:successVC animated:YES];
-            
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"卡号格式错误";
+                    break;
+                case 2:
+                    failureStr = @"卡密格式错误";
+                    break;
+                case 3:
+                    failureStr = @"缺少参数";
+                    break;
+                case 4:
+                    failureStr = @"充值卡不存在";
+                    break;
+                case 5:
+                    failureStr = @"充值卡已使用";
+                    break;
+                case 6:
+                    failureStr = @"充值卡无效";
+                    break;
+                case 7:
+                    failureStr = @"充值卡未售出";
+                    break;
+                case 8:
+                    failureStr = @"充值失败";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
             [self getAccountInfo];
         }
     }
@@ -432,7 +456,22 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self getwechatpay:[obj objectForKey:@"data"]];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"缺少参数";
+                    break;
+                case 0:
+                    failureStr = @"缺少参数";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
+        
         }
     }
 }

@@ -665,15 +665,59 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
             
             [[NSUserDefaults standardUserDefaults]setObject:_dicDatasource forKey:OrderDefaults];
-            
-            [self showTipsInView:self.view message:@"预约成功" offset:self.view.center.x+100];
             SuccessViewController *successVC = [[SuccessViewController alloc]init];
             successVC.type = kSuccessViewControllerTypeSuccess;
             successVC.orderId = [self.orderDicForModify objectForKey:@"id"];
             [self.navigationController pushViewController:successVC animated:YES];
             
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+//            1.订单不存在;2. 订单状态异常;3.已确认取车，不可修改;4.停车时间格式错误 5.代客泊车必须提前两小时预约;6.停车场不支持出发航站楼;7.取车时间格式错误 8.取车时间必须晚于停车时间;9.取车时间必须晚于停车时间(数据库);
+//            10.取车时间格式错误;11.代客泊车必须提前两小时预约;12. 停车场不支持回程航站楼;
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"订单不存在";
+                    break;
+                case 2:
+                    failureStr = @"订单状态异常";
+                    break;
+                case 3:
+                    failureStr = @"已确认取车，不可修改";
+                    break;
+                case 4:
+                    failureStr = @"停车时间格式错误";
+                    break;
+                case 5:
+                    failureStr = @"代客泊车必须提前两小时预约";
+                    break;
+                case 6:
+                    failureStr = @"停车场不支持出发航站楼";
+                    break;
+                case 7:
+                    failureStr = @"取车时间格式错误";
+                    break;
+                case 8:
+                    failureStr = @"取车时间必须晚于停车时间";
+                    break;
+                case 9:
+                    failureStr = @"取车时间必须晚于停车时间";
+                    break;
+                case 10:
+                    failureStr = @"取车时间格式错误";
+                    break;
+                case 11:
+                    failureStr = @"代客泊车必须提前两小时预约";
+                    break;
+                case 12:
+                    failureStr = @"停车场不支持回程航站楼";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
         }
     }
     
@@ -706,7 +750,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             
             [self.mainTableView reloadData];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"缺少参数";
+                    break;
+                case 2:
+                    failureStr = @"订单不存在";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
         }
     }
     

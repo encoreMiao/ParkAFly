@@ -633,7 +633,21 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self getwechatpay:[obj objectForKey:@"data"]];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"缺少参数";
+                    break;
+                case 0:
+                    failureStr = @"缺少参数";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
         }
     }
     

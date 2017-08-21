@@ -177,7 +177,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            [self showTipsInView:self.view message:@"评价发表失败!" offset:self.view.center.x+100];
         }
     }
     
@@ -189,7 +189,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             self.commentDic = [obj objectForKey:@"data"];
             [self commentTagRequest];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
         }
     }
 }

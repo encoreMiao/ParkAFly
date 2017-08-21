@@ -528,7 +528,86 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             successVC.orderId = [obj objectForKey:@"data"];
             [self.navigationController pushViewController:successVC animated:YES];
         }else{
-            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+//            1. 订单来源必填;2.手机号必填;3.车牌号必填;4.预计停车时间必填;5.泊车城市必填; 6. 停车场必填;7. 出发航站楼必填;19. 用户已被冻结;20. 未定义的下单来源;
+//            21. 手机号格式错误;22. 车牌号格式错误;23.停车时间格式错误;
+//            24. 停车时间必须晚于当前时间;25.代客泊车必须提前两小时预约;26.取车时间格式错误; 27. 取车时间必须晚于停车时间;28.未定义的联系人性别;29.停车场停止服务; 30.城市未运营停车场;31.停车场不支持出发航站楼;32. 停车场不支持回程航站楼;
+//            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
+            NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
+            NSString *failureStr = nil;
+            switch (failureCode) {
+                case 1:
+                    failureStr = @"订单来源必填";
+                    break;
+                case 2:
+                    failureStr = @"手机号必填";
+                    break;
+                case 3:
+                    failureStr = @"车牌号必填";
+                    break;
+                case 4:
+                    failureStr = @"预计停车时间必填";
+                    break;
+                case 5:
+                    failureStr = @"泊车城市必填";
+                    break;
+                case 6:
+                    failureStr = @"停车场必填";
+                    break;
+                case 7:
+                    failureStr = @"出发航站楼必填";
+                    break;
+                case 8:
+                    failureStr = @"缺少手机设备号参数";
+                    break;
+                case 19:
+                    failureStr = @"用户已被冻结";
+                    break;
+                case 20:
+                    failureStr = @"未定义的下单来源";
+                    break;
+                case 21:
+                    failureStr = @"手机号格式错误";
+                    break;
+                case 22:
+                    failureStr = @"车牌号格式错误";
+                    break;
+                case 23:
+                    failureStr = @"停车时间格式错误";
+                    break;
+                case 24:
+                    failureStr = @"停车时间必须晚于当前时间";
+                    break;
+                case 25:
+                    failureStr = @"代客泊车必须提前两小时预约";
+                    break;
+                case 26:
+                    failureStr = @"取车时间格式错误";
+                    break;
+                case 27:
+                    failureStr = @"取车时间必须晚于停车时间";
+                    break;
+                case 28:
+                    failureStr = @"未定义的联系人性别";
+                    break;
+                case 29:
+                    failureStr = @"停车场停止服务";
+                    break;
+                case 30:
+                    failureStr = @"城市未运营停车场";
+                    break;
+                case 31:
+                    failureStr = @"停车场不支持出发航站楼";
+                    break;
+                case 32:
+                    failureStr = @"停车场不支持回程航站楼";
+                    break;
+                default:
+                    break;
+            }
+            if (failureStr) {
+                [self showTipsInView:self.view message:failureStr offset:self.view.center.x+100];
+            }
+            
             SuccessViewController *successVC = [[SuccessViewController alloc]init];
             successVC.type = kSuccessViewControllerTypeFailure;
             [self.navigationController pushViewController:successVC animated:YES];

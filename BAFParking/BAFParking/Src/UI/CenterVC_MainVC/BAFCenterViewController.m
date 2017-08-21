@@ -224,7 +224,6 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 
 -(void)onJobTimeout:(int)aRequestID Error:(NSString*)message
 {
-//    [self showTipsInView:self.view message:@"网络请求失败" offset:self.view.center.x+100];
 }
 
 #pragma mark - BMKLocationServiceDelegate
