@@ -137,7 +137,13 @@
 - (void)setOrderDic:(NSDictionary *)orderDic
 {
     _orderDic = orderDic;
-    self.parkNameLabel.text = [_orderDic objectForKey:@"park_name"];
+    if ([_orderDic objectForKey:@"park_name"]) {
+        self.parkNameLabel.text = [_orderDic objectForKey:@"park_name"];
+    }else if([_orderDic objectForKey:@"park"]){
+        NSString *title = [[_orderDic objectForKey:@"park"] objectForKey:@"map_title"];
+        self.parkNameLabel.text = title;
+    }
+    
     
     NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式

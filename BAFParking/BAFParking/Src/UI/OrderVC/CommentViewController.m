@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     self.mycollectionview = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layoutForComment];
     self.mycollectionview.backgroundColor = [UIColor whiteColor];
-    _mycollectionview.scrollEnabled = NO;
+    _mycollectionview.scrollEnabled = YES;
     [_mycollectionview registerNib:[UINib nibWithNibName:@"CommentCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:CommentViewControllerCellIdentifier];
     self.mycollectionview.delegate = self;
     self.mycollectionview.dataSource = self;
@@ -73,17 +73,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     
-    [self setNavigationTitle:@"评价"];
+    
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     
     
     self.mycollectionview.frame = CGRectMake(0,0, screenWidth, screenHeight);
     self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180);
     if (self.type == kCommentViewControllerTypePayComment) {
+        [self setNavigationTitle:@"支付提示"];
         self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180+112);
     }
     
     if (self.type == kCommentViewControllerTypeComment||kCommentViewControllerTypePayComment == self.type) {
+        [self setNavigationTitle:@"评价"];
         [self commentTagRequest];
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];

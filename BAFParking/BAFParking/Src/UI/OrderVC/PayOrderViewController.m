@@ -121,11 +121,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 - (void)paysuccess
 {
     CommentViewController  *vc = [[CommentViewController alloc]init];
+    vc.orderDic = self.orderDic;
     vc.type = kCommentViewControllerTypePayComment;
     vc.commentfinishHandler = ^(void){
         //微信支付成功，评价完成，并不改变任何状态。
     };
-    vc.orderDic = self.orderDic;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -411,9 +411,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     BAFUserInfo *userinfo = [[BAFUserModelManger sharedInstance] userInfo];
     NSInteger accountAmount = userinfo.account.integerValue;//账户余额
     
-    if (self.tcCardFee && self.selectCouponinfo) {
-        //余额不能点
-        if (indexpath.row == 2) {
+    if (self.tcCardFee) {
+        //优惠券不能点
+        if (indexpath.row == 1) {
+            return NO;
+        }
+    }
+    else if (self.selectCouponinfo) {
+        //权益账户不能点
+        if (indexpath.row == 0) {
             return NO;
         }
     }else if (self.tcCardFee && self.selectAccount){
