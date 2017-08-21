@@ -94,7 +94,10 @@
     
     self.orderNoLabel.text = [orderDic objectForKey:@"order_no"];
     
-    self.nameDetailLabel.text = [NSString stringWithFormat:@"%@     %@      %@",[orderDic objectForKey:@"contact_name"],[orderDic objectForKey:@"contact_phone"],[orderDic objectForKey:@"car_license_no"]];
+    
+    if ([orderDic objectForKey:@"contact_name"]&&(![[orderDic objectForKey:@"contact_name"] isEqual:[NSNull null]])) {
+        self.nameDetailLabel.text = [NSString stringWithFormat:@"%@     %@      %@",[orderDic objectForKey:@"contact_name"],[orderDic objectForKey:@"contact_phone"],[orderDic objectForKey:@"car_license_no"]];
+    }
 }
 
 @end

@@ -71,6 +71,11 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
     [self getADPhoto];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [_rollingBannerVC stopRolling];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

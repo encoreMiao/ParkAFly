@@ -71,6 +71,27 @@
     [self.navigationController  popViewControllerAnimated:YES];
 }
 
+- (void)openMapUrl
+{
+    //打开地图导航
+//    1.苹果自带地图（不需要检测，所以不需要URL Scheme）
+//    2.百度地图 ：baidumap://
+//    3.高德地图 ：iosamap://
+//    4.谷歌地图 ：comgooglemaps:/
+    [self baiduMap:nil];
+}
+
+- (void)baiduMap:(id)sender
+{
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]])
+    {
+        NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name=目的地&mode=driving&coord_type=gcj02",self.coor.latitude, self.coor.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    }else{
+//        NSLog(@"您的iPhone未安装百度地图，请先进行安装");
+        [self showTipsInView:self.view message:@"您的iPhone未安装百度地图，请先进行安装" offset:self.view.center.x+100];
+    }
+}
 //添加标注
 - (void)addPointAnnotation
 {
@@ -124,6 +145,7 @@
         _bottomButton.backgroundColor = [UIColor colorWithHex:0x3492e9];
         _bottomButton.frame = CGRectMake(20, screenHeight-50-64-40, screenWidth-40, 40);
         [_bottomButton setTitle:@"开始导航" forState:UIControlStateNormal];
+        [_bottomButton addTarget:self action:@selector(openMapUrl) forControlEvents:UIControlEventTouchUpInside];
     }
     return _bottomButton;
 }
