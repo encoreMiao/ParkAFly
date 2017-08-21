@@ -182,10 +182,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (IBAction)paymentConfirmWithSender:(UIButton *)sender
 {
-    [self paysuccess];
-    return;
-    
-    
     //支付方式:cash.现金支付;confirm. 确认支付;wechat.微信支付
     NSString *paymode;
     if ([sender.titleLabel.text isEqualToString:@"现金支付"]) {
