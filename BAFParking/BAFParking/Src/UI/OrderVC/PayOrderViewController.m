@@ -756,10 +756,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     
     
-    if ([[self orderFeeStr] isEqualToString:@"预计费用"]) {
-        //应支付
-        [mutArr addObject:[NSArray arrayWithObjects:@"应支付",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
-    }else{
+//    if ([[self orderFeeStr] isEqualToString:@"预计费用"]) {
+//        //应支付
+//        [mutArr addObject:[NSArray arrayWithObjects:@"应支付",[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
+//    }else{
         //支付方式
         [mutArr addObject:[NSArray arrayWithObjects:@"支付方式",@"", nil]];
         NSString *payStr;
@@ -779,7 +779,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             payMoney = [NSString stringWithFormat:@"-¥%.0f",self.tcCardFee.integerValue/100.0f];
             [mutArr addObject:[NSArray arrayWithObjects:payStr,payMoney, nil]];
         }
-    }
+//    }
+
+//    NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
+//    NSString *feeStr =[str stringByReplacingOccurrencesOfString:@"¥" withString:@""];//微信支付或现金支付部分
+    [mutArr addObject:[NSArray arrayWithObjects:@"应支付",self.totalFeeLabel.text, nil]];
+    
     return mutArr;
 }
 
