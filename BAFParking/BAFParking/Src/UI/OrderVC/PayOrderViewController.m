@@ -145,7 +145,19 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.orderNo.text = [dic objectForKey:@"order_no"];
     self.detailLabel.text = [NSString stringWithFormat:@"%@     %@      %@",[dic objectForKey:@"contact_name"],[dic objectForKey:@"contact_phone"],[dic objectForKey:@"car_license_no"]];
     self.parkLabel.text = [dic objectForKey:@"park_name"];
-    self.parkTimeLabel.text = [dic objectForKey:@"plan_park_time"];
+    
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *datepark = nil;
+    datepark =[dateFormat dateFromString:[dic objectForKey:@"actual_park_time"]];
+    if (!datepark) {
+        datepark =[dateFormat dateFromString:[dic objectForKey:@"plan_park_time"]];
+    }
+    NSString *strpark = [dateFormat1 stringFromDate:datepark];
+    
+    self.parkTimeLabel.text = strpark;
 }
 
 - (void)popTcCard
@@ -170,6 +182,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (IBAction)paymentConfirmWithSender:(UIButton *)sender
 {
+    [self paysuccess];
+    return;
+    
+    
     //支付方式:cash.现金支付;confirm. 确认支付;wechat.微信支付
     NSString *paymode;
     if ([sender.titleLabel.text isEqualToString:@"现金支付"]) {

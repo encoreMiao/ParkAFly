@@ -150,7 +150,12 @@
     NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
     [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
     
-    NSDate *datepark =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];//actual_park_time
+    //优先显示实际停车时间
+    NSDate *datepark = nil;
+    datepark =[dateFormat dateFromString:[orderDic objectForKey:@"actual_park_time"]];
+    if (!datepark) {
+        datepark =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];
+    }
     NSString *strpark = [dateFormat1 stringFromDate:datepark];
     self.parkTimeLabel.text = strpark;
 }

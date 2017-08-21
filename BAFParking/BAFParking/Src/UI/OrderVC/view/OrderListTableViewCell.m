@@ -43,11 +43,17 @@
     NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
     [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
     
-    NSDate *datepark =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];
-    NSDate *datepick =[dateFormat dateFromString:[orderDic objectForKey:@"plan_pick_time"]];
+    NSDate *datepark =[dateFormat dateFromString:[orderDic objectForKey:@"actual_park_time"]];
+    NSDate *datepick =[dateFormat dateFromString:[orderDic objectForKey:@"actual_pick_time"]];
+    if (!datepark) {
+        datepark =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];
+    }
+    if (!datepick) {
+        datepick =[dateFormat dateFromString:[orderDic objectForKey:@"plan_pick_time"]];
+    }
+    
     NSString *strpark = [dateFormat1 stringFromDate:datepark];
     NSString *strpick = [dateFormat1 stringFromDate:datepick];
-    
     
     self.parkTime.text = [NSString stringWithFormat:@"%@",strpark];
     self.carlicenseL.text = [orderDic objectForKey:@"car_license_no"];
