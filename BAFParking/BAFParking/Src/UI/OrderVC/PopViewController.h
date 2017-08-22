@@ -37,4 +37,8 @@ typedef NS_ENUM(NSInteger,PopViewControllerType){
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type;
 
 @property (nonatomic, strong) NSString *detailStr;
+
+
+@property (nonatomic, strong) NSString *selectedStr;
+
 @end

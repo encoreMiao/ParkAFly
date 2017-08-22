@@ -313,7 +313,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             self.feeDic = [obj objectForKey:@"data"];
-            
+            [self configTotalFees];
         }else{
             
         }

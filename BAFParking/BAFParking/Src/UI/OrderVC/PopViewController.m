@@ -84,6 +84,13 @@
     [super viewWillAppear:animated];
 }
 
+- (void)setSelectedStr:(NSString *)selectedStr
+{
+    _selectedStr = selectedStr;
+    [self.tableView reloadData];
+    [self.cityCollectionview reloadData];
+}
+
 - (void)configViewWithData:(NSArray *)arr type:(PopViewControllerType)type
 {
     _type = type;
@@ -451,6 +458,7 @@
             self.selectedIndex = indexPath;
             [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:self.selectedIndex, oldIndex, nil] withRowAnimation:UITableViewRowAnimationNone];
         }
+        [self confirmAction];
     }
 }
 
@@ -535,7 +543,7 @@
         {
             if (!self.selectedIndex) {
                 CSToastStyle *toastStyle = [CSToastManager sharedStyle];
-                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择停车场" duration:2.5 position:@(100) style:toastStyle];
+                [[UIApplication sharedApplication].keyWindow makeToast:@"还未选择航站楼" duration:2.5 position:@(100) style:toastStyle];
                 return;
             }
         }
@@ -657,7 +665,15 @@
         if (self.selectedIndex == indexPath) {
             [cell setCityCollectionSelected:YES];
         }else{
-            [cell setCityCollectionSelected:NO];
+            if (self.selectedIndex) {
+                [cell setCityCollectionSelected:NO];
+            }else{
+                if ([cell.cityLabel.text isEqualToString:self.selectedStr]) {
+                    [cell setCityCollectionSelected:YES];
+                    self.selectedIndex = indexPath;
+                }
+            }
+            
         }
         return cell;
     }
@@ -669,6 +685,8 @@
     CityCollectionViewCell *cell = (CityCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     [cell setCityCollectionSelected:YES];
     self.selectedIndex = indexPath;
+    
+    [self confirmAction];
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -712,15 +730,16 @@
 
 - (UIButton *)cancelButton
 {
-    if (!_cancelButton) {
-        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelButton setTitle:@"确认" forState:UIControlStateNormal];
-        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
-        [_cancelButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
-        [_cancelButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
-        [_cancelButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _cancelButton;
+//    if (!_cancelButton) {
+//        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_cancelButton setTitle:@"确认" forState:UIControlStateNormal];
+//        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
+//        [_cancelButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
+//        [_cancelButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
+//        [_cancelButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _cancelButton;
+    return nil;
 }
 
 - (UIButton *)confirmButton

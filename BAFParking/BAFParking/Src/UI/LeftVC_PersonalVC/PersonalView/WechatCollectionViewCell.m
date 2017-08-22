@@ -73,13 +73,16 @@
          [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:12]} range:[str rangeOfString:@"赠"]];
          self.chargeLabel.attributedText = mutStr;
      }else{
-         NSString *str = [NSString stringWithFormat:@"%0.f元",chargeInfo.money.integerValue/100.0f];
-         self.chargeLabel.text = str;
+         if ([_chargeInfo.discount isEqualToString:@""]||[_chargeInfo.discount isEqual:[NSNull null]]) {
+             NSString *str = [NSString stringWithFormat:@"%0.f元",chargeInfo.money.integerValue/100.0f];
+             self.chargeLabel.text = str;
+         }else{
+             NSString *str = [NSString stringWithFormat:@"%0.f元\n%.1f折",chargeInfo.money.integerValue/100.0f,_chargeInfo.discount.integerValue/10.0f];
+             NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:str];
+             [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9],NSFontAttributeName:[UIFont systemFontOfSize:12]} range:[str rangeOfString:[NSString stringWithFormat:@"%.1f折",_chargeInfo.discount.integerValue/10.0f]]];
+             self.chargeLabel.attributedText = mutStr;
+         }
+         
      }
-    
-    
-    
 }
-
-
 @end

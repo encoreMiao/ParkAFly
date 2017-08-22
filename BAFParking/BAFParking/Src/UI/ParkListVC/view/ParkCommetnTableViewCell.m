@@ -27,6 +27,10 @@
     _commentInfo = commentInfo;
     NSString *totalUrl = [NSString stringWithFormat:@"%@%@",Server_Url, commentInfo.avatar];
 //    http://parknfly.cn
+    self.headImageView.layer.cornerRadius = 44.0/2;
+    self.headImageView.layer.borderColor = [[UIColor clearColor] CGColor];
+    self.headImageView.layer.borderWidth = 0.0f;
+    self.headImageView.clipsToBounds = YES;
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:totalUrl] placeholderImage:[UIImage imageNamed:@"btn_img"]];
     
     self.phoneLabel.text = [self numberSuitScanf:commentInfo.contact_phone];

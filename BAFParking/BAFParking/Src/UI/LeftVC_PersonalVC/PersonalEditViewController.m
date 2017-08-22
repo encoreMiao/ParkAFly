@@ -338,6 +338,20 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.definesPresentationContext = YES;
         popView.delegate = self;
         [popView configViewWithData:self.cityArr type:kPopViewControllerTypeSelecCity];
+        BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+        NSString *cityStr = nil;
+        if (self.clientDic &&[self.clientDic objectForKey:baf_caddr]) {
+            NSArray *arr = [[self.clientDic objectForKey:baf_caddr] componentsSeparatedByString:@"&"];
+            cityStr = arr[0];
+        }else{
+            if (userInfo.city_name && ![userInfo.city_name isEqual:[NSNull null]]) {
+                [self.clientDic setObject:[NSString stringWithFormat:@"%@&%@", userInfo.city_name,userInfo.caddr] forKey:baf_caddr];
+                cityStr = userInfo.city_name;
+            }
+        }
+        if (cityStr) {
+            popView.selectedStr = cityStr;
+        }
         [self presentViewController:popView animated:NO completion:nil];
     }else if (indexPath.row == 1&&indexPath.section == 1) {
         //选择车辆颜色

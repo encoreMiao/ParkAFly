@@ -129,6 +129,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (void)rightBtnClicked:(id)sender
 {
+    UIButton *button = (UIButton *)sender;
     if (self.type == kBAFOrderViewControllerTypeOrder) {
         PopViewController *popView = [[PopViewController alloc] init];
         popView.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
@@ -136,6 +137,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.definesPresentationContext = YES;
         popView.delegate = self;
         [popView configViewWithData:self.cityArr type:kPopViewControllerTypeSelecCity];
+        if (button.titleLabel.text) {
+            popView.selectedStr = button.titleLabel.text;
+        }
         [self presentViewController:popView animated:NO completion:nil];
     }else{
         //城市固定不能选择

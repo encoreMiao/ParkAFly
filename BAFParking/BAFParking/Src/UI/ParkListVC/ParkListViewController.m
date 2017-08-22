@@ -73,6 +73,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else{
             if (self.type == kParkListViewControllerTypeShow) {
                 [self setNavigationRightButtonWithText:@"北京" image:[UIImage imageNamed:@"parking_cbb"] method:@selector(rightBtnClicked:)];
+                self.currentCityTitle = @"北京";
             }
             [self parkListRequestWithCityId:@"1"];//城市默认北京
         }
@@ -108,6 +109,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.definesPresentationContext = YES;
     popView.delegate = self;
     [popView configViewWithData:self.cityArr type:kPopViewControllerTypeSelecCity];
+    if (self.currentCityTitle) {
+        popView.selectedStr = _currentCityTitle;
+    }
     [self presentViewController:popView animated:NO completion:nil];
     
 }
