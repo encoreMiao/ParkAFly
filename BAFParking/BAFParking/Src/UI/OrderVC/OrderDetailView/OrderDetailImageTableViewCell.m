@@ -76,7 +76,8 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     ParkCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:ParkCollectionViewCellIdentifier forIndexPath:indexPath];
-    [cell setParkImage:self.imageArr[indexPath.row]];
+    NSDictionary *imageDic = self.imageArr[indexPath.row];
+    [cell setParkImage:[imageDic objectForKey:@"name"]];
     return cell;
 }
 @end

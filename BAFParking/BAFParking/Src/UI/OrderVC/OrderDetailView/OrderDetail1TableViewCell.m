@@ -58,16 +58,11 @@
         self.orderSuccessL.textColor = [UIColor colorWithHex:0x3492e9];
         
         self.statusLabel.text = @"预约成功";
-    }else if([orderStatus isEqualToString:@"park"]){
+    }else if([orderStatus isEqualToString:@"park"]||[orderStatus isEqualToString:@"pick_appoint"]){
         //泊车成功
         self.parkFinishedIV.image = [UIImage imageNamed:@"home_order_blue1"];
         self.parkFinishedL.textColor = [UIColor colorWithHex:0x3492e9];
-        self.statusLabel.text = @"停车完成";
-    }else if ([orderStatus isEqualToString:@"pick_appoint"]){
-        //待取车
-        self.waitToGetCarIV.image = [UIImage imageNamed:@"home_order_blue1"];
-        self.waitToGetCarL.textColor = [UIColor colorWithHex:0x3492e9];
-        self.statusLabel.text = @"停车完成";
+        self.statusLabel.text = @"泊车完成";
     }else if ([orderStatus isEqualToString:@"pick_sure"]||
               [orderStatus isEqualToString:@"payment_sure"]||
               [orderStatus isEqualToString:@"finish"]){
@@ -81,7 +76,7 @@
             //已支付待确认
             self.waitToGetCarIV.image = [UIImage imageNamed:@"home_order_blue1"];
             self.waitToGetCarL.textColor = [UIColor colorWithHex:0x3492e9];
-            self.statusLabel.text = @"支付待确认";
+            self.statusLabel.text = @"支付中";
         }
         else if ([orderStatus isEqualToString:@"pick_sure"]){
             //已确认取车

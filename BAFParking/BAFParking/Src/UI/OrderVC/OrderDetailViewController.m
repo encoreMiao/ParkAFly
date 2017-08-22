@@ -327,10 +327,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if (self.serviceArr.count >0) {
             if ([self.orderDic objectForKey:@"picture"]) {
                 NSDictionary *dic = [self.orderDic objectForKey:@"picture"];
-                if ([dic objectForKey:@"pick"]&&[[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
+                if ([dic objectForKey:@"pick"]&&![[dic objectForKey:@"pick"] isEqual:[NSNull null]]) {
                     return 100.0f;
                 }
-                else if ([dic objectForKey:@"park"]&&[[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
+                else if ([dic objectForKey:@"park"]&&![[dic objectForKey:@"park"] isEqual:[NSNull null]]) {
                     return 100.0f;
                 }else{
                     return [self heightForStatusRow:indexPath.row];

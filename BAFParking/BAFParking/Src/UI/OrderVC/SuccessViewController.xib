@@ -387,7 +387,7 @@
                                         <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
                                     </attributes>
                                 </fragment>
-                                <fragment content="您当前选择现金支付，可请根据订单金额交付现金给现场工作人员。">
+                                <fragment content="您当前选择现金支付，请根据订单金额交付现金给现场工作人员。">
                                     <attributes>
                                         <color key="NSColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="14" name=".PingFangSC-Regular"/>

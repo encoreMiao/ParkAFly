@@ -49,20 +49,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     self.commentTagArr = [NSMutableArray array];
     self.commentDic = [NSMutableDictionary dictionary];
+    self.selectIndexPath = nil;
+    self.score = 5;
     
     self.mycollectionview = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layoutForComment];
     self.mycollectionview.backgroundColor = [UIColor whiteColor];
-    _mycollectionview.scrollEnabled = YES;
-    [_mycollectionview registerNib:[UINib nibWithNibName:@"CommentCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:CommentViewControllerCellIdentifier];
+    [self.mycollectionview registerNib:[UINib nibWithNibName:@"CommentCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:CommentViewControllerCellIdentifier];
+    [self.mycollectionview registerNib:[UINib nibWithNibName:@"CommetHeaderCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     self.mycollectionview.delegate = self;
     self.mycollectionview.dataSource = self;
     [self.view addSubview:self.mycollectionview];
-    
-    [self.mycollectionview registerNib:[UINib nibWithNibName:@"CommetHeaderCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
-    
-    
-    self.selectIndexPath = nil;
-    self.score = 5;
+    self.mycollectionview.scrollEnabled = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,29 +69,28 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.view.backgroundColor = [UIColor colorWithHex:0xffffff];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
-    
-    
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
-    
     
     self.mycollectionview.frame = CGRectMake(0,0, screenWidth, screenHeight);
     self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180);
     if (self.type == kCommentViewControllerTypePayComment) {
         [self setNavigationTitle:@"支付提示"];
         self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180+112);
-    }
-    
-    if (self.type == kCommentViewControllerTypeComment||kCommentViewControllerTypePayComment == self.type) {
+        [self commentTagRequest];
+        self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
+        [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
+        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (2*screenHeight)/3);
+    }else if (self.type == kCommentViewControllerTypeComment) {
         [self setNavigationTitle:@"评价"];
         [self commentTagRequest];
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, 220);
-    }else{
+        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (2*screenHeight)/3);
+    }else if (self.type == kCommentViewControllerTypeCommentCheck){
+        [self setNavigationTitle:@"查看评价"];
         self.commentcheckfooterView = [[CommentCheckCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         [self.mycollectionview registerClass:[CommentCheckCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, screenHeight);
-    
+        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (2*screenHeight)/3);
         [self viewCommentRequestWithOrderId:[self.orderDic objectForKey:@"id"]];
     }
 }
@@ -124,6 +120,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (self.type !=kCommentViewControllerTypePayComment) {
         [self.navigationController popViewControllerAnimated:YES];
     }else{
+        //支付完成跳转评价的时候，需要刷新列表页面
         for (UIViewController *tempVC in self.navigationController.viewControllers) {
             if ([tempVC isKindOfClass:[OrderListViewController class]]) {
                 ((OrderListViewController *)tempVC).isNeedtoRefresh = YES;
@@ -172,9 +169,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self showTipsInView:self.view message:@"感谢您的评价，发表成功!" offset:self.view.center.x+100];
 
-            if (self.commentfinishHandler) {
-                self.commentfinishHandler();
-            }
+//            if (self.commentfinishHandler) {
+//                self.commentfinishHandler();
+//            }
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [self showTipsInView:self.view message:@"评价发表失败!" offset:self.view.center.x+100];
@@ -295,7 +292,4 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }
     return _layoutForComment;
 }
-
-
-
 @end

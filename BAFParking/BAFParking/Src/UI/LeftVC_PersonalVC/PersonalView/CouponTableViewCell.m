@@ -17,6 +17,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *validateDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *detailBtn;
 @property (assign, nonatomic) BOOL isCouponSelected;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *couponLeadConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *couponWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailbtnConstraint;
+
 @end
 
 
@@ -41,6 +46,8 @@
         case kCouponTableViewCellTypeCommonCell1:
             self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg"];
             self.selectButton.hidden = YES;
+            self.couponLeadConstraint.constant = -10;
+            self.detailbtnConstraint.constant = 0;
             break;
         case kCouponTableViewCellTypeCommonCell2:
             //灰色
@@ -50,6 +57,8 @@
             self.couponDetailLabel.textColor = [UIColor colorWithHex:0x969696];
             self.validateDateLabel.textColor = [UIColor colorWithHex:0x969696];
             self.detailBtn.hidden =YES;
+            self.detailbtnConstraint.constant = -22;
+            self.couponLeadConstraint.constant = -10;
             break;
         case kCouponTableViewCellTypeCommonCell3:
             //灰色
@@ -59,12 +68,15 @@
             self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg2"];
             self.detailBtn.hidden = YES;
             self.selectButton.hidden = YES;
+            self.detailbtnConstraint.constant = -22;
+            self.couponLeadConstraint.constant = -10;
             break;
-            
             
         case kCouponViewControllerTypeUseCell1:
             self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg"];
             self.selectButton.hidden = NO;
+            self.detailbtnConstraint.constant = 0;
+            self.couponLeadConstraint.constant = 5;
             break;
         case kCouponViewControllerTypeUseCell2:
             self.bgImageView.image = [UIImage imageNamed:@"leftbar_youhuiq_bg4"];
@@ -73,6 +85,8 @@
             self.validateDateLabel.textColor = [UIColor colorWithHex:0x969696];
             self.selectButton.hidden = YES;
             self.detailBtn.hidden = YES;
+            self.detailbtnConstraint.constant = -22;
+            self.couponLeadConstraint.constant = -10;
             break;
             
         default:
@@ -106,11 +120,17 @@
     
     NSString *price = [NSString stringWithFormat:@"%ld",couponInfo.price.integerValue/100];
     NSString *pricestr = [NSString stringWithFormat:@"¥%@",price];
+    
+    CGSize couponSize = [pricestr boundingRectWithSize:CGSizeMake(screenWidth-40, MAXFLOAT)
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:43.0f]}
+                                         context:nil].size;
+    
     NSMutableAttributedString *mutpriceStr = [[NSMutableAttributedString alloc]initWithString:pricestr];
     [mutpriceStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:21]} range:[pricestr rangeOfString:@"¥"]];
     [mutpriceStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xFB694B],NSFontAttributeName:[UIFont systemFontOfSize:43]} range:[pricestr rangeOfString:price]];
     self.couponLabel.attributedText = mutpriceStr;
-    
+    self.couponWidthConstraint.constant = couponSize.width;
     
     self.validateDateLabel.text = [NSString stringWithFormat:@"有效期：%@ - %@",[self getTimeWithTime:couponInfo.starttime],[self getTimeWithTime:couponInfo.endtime]];
     

@@ -558,9 +558,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.headerImage = tempImage;
     NSData *data = UIImageJPEGRepresentation(tempImage, 0.5);
     //    NSString *imgStr =[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];//为什么没转换过来data中有非utf8的数据
+    BAFUserInfo *userInfo = [[BAFUserModelManger sharedInstance] userInfo];
+    
     NSString *imgExt = [NSString typeForImageData:data];//文件扩展名
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"7296",@"client_id",
+                         userInfo.clientid,@"client_id",
                          [data base64Encoding],@"avatar_data",
                          @".jpeg",@"avatar_ext",
                          nil];

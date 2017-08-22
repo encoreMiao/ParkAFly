@@ -72,9 +72,9 @@
     [self.parkImageView sd_setImageWithURL:[NSURL URLWithString:totalUrl] placeholderImage:[UIImage imageNamed:@"parking_loading_img"]];
     self.locationLabel.text = parkinfo.map_address;
     self.parkLabel.text = [NSString stringWithFormat:@"%@",parkinfo.map_title];
-    NSString *carFee = [NSString stringWithFormat:@"车位费：%ld元",parkinfo.map_charge.strike_price.integerValue/100];
+    NSString *carFee = [NSString stringWithFormat:@"车位费：%ld元",parkinfo.map_charge.first_day_price.integerValue/100];
     NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:carFee];
-    [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[carFee rangeOfString:[NSString stringWithFormat:@"%ld元",parkinfo.map_charge.strike_price.integerValue/100]]];
+    [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:14.0f]} range:[carFee rangeOfString:[NSString stringWithFormat:@"%ld元",parkinfo.map_charge.first_day_price.integerValue/100]]];
     self.carFeeLabel.attributedText = mutStr;
     switch (type) {
         case kParkListTableViewCellTypeShow:

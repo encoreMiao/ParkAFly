@@ -528,10 +528,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             successVC.orderId = [obj objectForKey:@"data"];
             [self.navigationController pushViewController:successVC animated:YES];
         }else{
-//            1. 订单来源必填;2.手机号必填;3.车牌号必填;4.预计停车时间必填;5.泊车城市必填; 6. 停车场必填;7. 出发航站楼必填;19. 用户已被冻结;20. 未定义的下单来源;
-//            21. 手机号格式错误;22. 车牌号格式错误;23.停车时间格式错误;
-//            24. 停车时间必须晚于当前时间;25.代客泊车必须提前两小时预约;26.取车时间格式错误; 27. 取车时间必须晚于停车时间;28.未定义的联系人性别;29.停车场停止服务; 30.城市未运营停车场;31.停车场不支持出发航站楼;32. 停车场不支持回程航站楼;
-//            [self showTipsInView:self.view message:[obj objectForKey:@"message"] offset:self.view.center.x+100];
             NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
             NSString *failureStr = nil;
             switch (failureCode) {

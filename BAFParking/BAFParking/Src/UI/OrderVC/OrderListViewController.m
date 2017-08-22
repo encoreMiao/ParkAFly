@@ -51,6 +51,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.ongoingButton.selected = YES;
     self.buttonView.frame = CGRectMake(0,CGRectGetMaxY(self.ongoingButton.frame), screenWidth/2, 2);
     [self orderListRequestWithOrderstatus:@"1"];//进行中
+    self.isNeedtoRefresh = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +66,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     [self setNavigationTitle:@"我的订单"];
     
-    if (_isNeedtoRefresh) {
+    if (self.isNeedtoRefresh) {
+        self.ongoingButton.selected = YES;
+        self.buttonView.frame = CGRectMake(0,CGRectGetMaxY(self.ongoingButton.frame), screenWidth/2, 2);
         [self orderListRequestWithOrderstatus:@"1"];//进行中
     }
 }
@@ -203,10 +206,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             NSLog(@"已完成订单评价：支付完成的订单可进行评价(线上支付完成的当时即可评价)");
             CommentViewController  *vc = [[CommentViewController alloc]init];
             vc.type = kCommentViewControllerTypeComment;
-            vc.commentfinishHandler = ^(void){
-                //评价完成
-                [self segementSelect:self.finishedButton];
-            };
+//            vc.commentfinishHandler = ^(void){
+//                //评价完成
+//                [self segementSelect:self.finishedButton];
+//            };
             vc.orderDic = cell.orderDic;
             [self.navigationController pushViewController:vc animated:YES];
         }

@@ -26,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEp-Hg-jJ1">
-                        <rect key="frame" x="154" y="35" width="250" height="53"/>
+                        <rect key="frame" x="149" y="35" width="255" height="53"/>
                         <attributedString key="attributedText">
                             <fragment content="201616161212">
                                 <attributes>
@@ -70,7 +70,7 @@ Cg
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期：2016.03.5 12:30 - 2016.03.12 11:59" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrs-oO-1XE">
-                        <rect key="frame" x="25" y="104" width="350" height="22"/>
+                        <rect key="frame" x="25" y="104" width="355" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="jPd-mO-46Q"/>
                         </constraints>
@@ -90,10 +90,10 @@ Cg
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-Rk-3Hs">
-                        <rect key="frame" x="49" y="44" width="105" height="35"/>
+                        <rect key="frame" x="49" y="44" width="100" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="9a2-Ik-EC8"/>
-                            <constraint firstAttribute="width" constant="105" id="aP3-l2-0Qg"/>
+                            <constraint firstAttribute="width" constant="100" id="aP3-l2-0Qg"/>
                         </constraints>
                         <attributedString key="attributedText">
                             <fragment content="¥">
@@ -102,7 +102,7 @@ Cg
                                     <font key="NSFont" size="21" name=".SFNSDisplay"/>
                                 </attributes>
                             </fragment>
-                            <fragment content="659">
+                            <fragment content="65">
                                 <attributes>
                                     <color key="NSColor" red="0.98431372549019602" green="0.41176470588235292" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                     <font key="NSFont" metaFont="system" size="43"/>
@@ -132,7 +132,7 @@ Cg
                     <constraint firstItem="2WN-09-eXF" firstAttribute="leading" secondItem="Pha-ht-SOi" secondAttribute="leading" constant="5" id="FUi-oz-RDQ"/>
                     <constraint firstItem="oEp-Hg-jJ1" firstAttribute="centerY" secondItem="DYe-Rk-3Hs" secondAttribute="centerY" id="GTM-ma-Gcm"/>
                     <constraint firstItem="yrs-oO-1XE" firstAttribute="top" secondItem="2WN-09-eXF" secondAttribute="bottom" constant="25" id="P7R-o2-WAn"/>
-                    <constraint firstItem="sqI-MA-pcE" firstAttribute="leading" secondItem="yrs-oO-1XE" secondAttribute="trailing" constant="5" id="QFF-FC-73k"/>
+                    <constraint firstItem="sqI-MA-pcE" firstAttribute="leading" secondItem="yrs-oO-1XE" secondAttribute="trailing" id="QFF-FC-73k"/>
                     <constraint firstItem="sqI-MA-pcE" firstAttribute="bottom" secondItem="Pha-ht-SOi" secondAttribute="bottom" constant="-8" id="R3C-e1-YyZ"/>
                     <constraint firstItem="sqI-MA-pcE" firstAttribute="trailing" secondItem="Pha-ht-SOi" secondAttribute="trailing" constant="-10" id="Sd3-jB-qNC"/>
                     <constraint firstItem="Pha-ht-SOi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ZBO-ZD-ENQ"/>
@@ -148,7 +148,10 @@ Cg
                 <outlet property="bgImageView" destination="Pha-ht-SOi" id="Ptj-Xm-XI0"/>
                 <outlet property="couponDetailLabel" destination="oEp-Hg-jJ1" id="Eh4-8H-6Lp"/>
                 <outlet property="couponLabel" destination="DYe-Rk-3Hs" id="wEX-AJ-VKO"/>
+                <outlet property="couponLeadConstraint" destination="edr-dg-1Ux" id="FeS-Ob-AJf"/>
+                <outlet property="couponWidthConstraint" destination="aP3-l2-0Qg" id="1rq-fv-jQB"/>
                 <outlet property="detailBtn" destination="sqI-MA-pcE" id="rpe-2N-x9x"/>
+                <outlet property="detailbtnConstraint" destination="QFF-FC-73k" id="6by-LR-ppK"/>
                 <outlet property="selectButton" destination="2WN-09-eXF" id="ke4-Sf-xHX"/>
                 <outlet property="validateDateLabel" destination="yrs-oO-1XE" id="pbL-N3-HPf"/>
             </connections>

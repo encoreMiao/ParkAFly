@@ -267,7 +267,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     DLog(@"泊安飞服务协议");
     BAFWebViewController  *webview = [[BAFWebViewController alloc]init];
     [self.navigationController pushViewController:webview animated:YES];
-    [webview loadTargetURL:[NSURL URLWithString:@"http://www.parknfly.cn/Wap/ Index/baf_agreement"] title:@"泊安飞服务协议"];
+    [webview loadTargetURL:[NSURL URLWithString:@"http://www.parknfly.cn/Wap/Index/baf_agreement"] title:@"泊安飞服务协议"];
 }
 
 @end

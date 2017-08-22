@@ -671,8 +671,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self.navigationController pushViewController:successVC animated:YES];
             
         }else{
-//            1.订单不存在;2. 订单状态异常;3.已确认取车，不可修改;4.停车时间格式错误 5.代客泊车必须提前两小时预约;6.停车场不支持出发航站楼;7.取车时间格式错误 8.取车时间必须晚于停车时间;9.取车时间必须晚于停车时间(数据库);
-//            10.取车时间格式错误;11.代客泊车必须提前两小时预约;12. 停车场不支持回程航站楼;
             NSUInteger failureCode =[[obj objectForKey:@"code"] integerValue];
             NSString *failureStr = nil;
             switch (failureCode) {

@@ -11,6 +11,12 @@
 #import "BAFOrderViewController.h"
 #import "BAFOrderServiceViewController.h"
 #import "OrderListViewController.h"
+#import "HRLOrderInterface.h"
+#import "HRLogicManager.h"
+
+typedef NS_ENUM(NSInteger,RequestNumberIndex){
+    kRequestNumberIndexOrderFeeRequest,
+};
 
 @interface SuccessViewController ()
 @property (nonatomic, strong) IBOutlet UIView *successView;
@@ -32,7 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *feeL;
 
 @property (nonatomic, strong) IBOutlet UILabel *payMoneyLabel;//支付金额
-
+@property (strong, nonatomic) NSDictionary      *feeDic;
 
 
 @property (assign, nonatomic) NSInteger daystochange;
@@ -48,7 +54,9 @@
     self.checktBtn.layer.borderWidth = 0.5f;
     
     self.daystochange = 0;
+    self.feeDic = [NSMutableDictionary dictionary];
 }
+
 - (IBAction)contactClicked:(id)sender {
     [self callPhoneNumber:@"4008138666"];
 }
@@ -133,6 +141,10 @@
             [self.buttonView setFrame:CGRectMake(0, CGRectGetMaxY(self.successView.frame), screenWidth, 100)];
             
             [self configSuccessView];
+            
+            if (self.orderId) {
+                [self orderFeeRequest];
+            }
         }
             break;
         default:
@@ -242,9 +254,6 @@
     }else{
         self.parkDayL.text = @"预计停车天数：";
     }
-    
-    
-    [self configTotalFees];
 }
 
 - (void)configTotalFees
@@ -280,7 +289,34 @@
                 totalFee += [detailArr[3] integerValue];
             }
         }
+    }else{
+        totalFee = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
+//        NSString *feeText = [NSString stringWithFormat:@"订单费用：¥%ld",basicTotalFee/100];
+//        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:feeText];
+//        [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeText rangeOfString:[NSString stringWithFormat:@"¥%ld",basicTotalFee/100]]];
     }
     self.feeL.text = [NSString stringWithFormat:@"¥%ld",totalFee/100];
+}
+
+- (void)orderFeeRequest
+{
+    id <HRLOrderInterface> orderReq = [[HRLogicManager sharedInstance] getOrderReqest];
+    [orderReq orderFeeRequestWithNumberIndex:kRequestNumberIndexOrderFeeRequest delegte:self order_id:self.orderId];
+}
+
+#pragma mark - REQUEST
+-(void)onJobComplete:(int)aRequestID Object:(id)obj
+{
+    if (aRequestID == kRequestNumberIndexOrderFeeRequest) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]== 200) {
+            self.feeDic = [obj objectForKey:@"data"];
+            
+        }else{
+            
+        }
+    }
 }
 @end

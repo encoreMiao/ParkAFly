@@ -140,6 +140,7 @@
                 <outlet property="carLicenseImageView" destination="OXo-bV-uoU" id="mZz-lJ-p7J"/>
                 <outlet property="carNumberLabel" destination="4Sm-Vh-ubc" id="Uhr-Od-Xdz"/>
                 <outlet property="headerImage" destination="E95-gg-Jee" id="xXj-Ak-Szg"/>
+                <outlet property="levelButton" destination="FkK-x5-c4l" id="GEw-Jd-Vx5"/>
                 <outlet property="phoneNumberLabel" destination="rUa-d4-8ZC" id="Kh2-Kg-CTR"/>
             </connections>
             <point key="canvasLocation" x="349.5" y="-237.5"/>

@@ -107,17 +107,16 @@
             //预约泊车成功
             self.orderSuccessIV.image = [UIImage imageNamed:@"home_order_blue1"];
             self.orderSuccessL.textColor = [UIColor colorWithHex:0x3492e9];
-        }else if([orderStatus isEqualToString:@"park"]){
+        }else if([orderStatus isEqualToString:@"park"]||[orderStatus isEqualToString:@"pick_appoint"]){
             //泊车成功
             self.parkFinishedIV.image = [UIImage imageNamed:@"home_order_blue1"];
             self.parkFinishedL.textColor = [UIColor colorWithHex:0x3492e9];
-        }else if ([orderStatus isEqualToString:@"pick_appoint"]){
+        }else if ([orderStatus isEqualToString:@"pick_sure"]||
+                  [orderStatus isEqualToString:@"payment_sure"]){
             //待取车
             self.waitToGetCarIV.image = [UIImage imageNamed:@"home_order_blue1"];
             self.waitToGetCarL.textColor = [UIColor colorWithHex:0x3492e9];
-        }else if ([orderStatus isEqualToString:@"pick_sure"]||
-                  [orderStatus isEqualToString:@"payment_sure"]||
-                  [orderStatus isEqualToString:@"finish"]){
+        }else if ([orderStatus isEqualToString:@"finish"]){
             //取车成功
             self.getCarSuccessIV.image = [UIImage imageNamed:@"home_order_blue1"];
             self.getCarSuccessL.textColor = [UIColor colorWithHex:0x3492e9];
