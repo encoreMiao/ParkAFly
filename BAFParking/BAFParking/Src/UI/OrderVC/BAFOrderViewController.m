@@ -115,8 +115,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self.footerView.nextBtn setTitle:@"保存" forState:UIControlStateNormal];
         self.footerView.tipsLabel.text = @"修改订单不支持更改出发航站楼和停车场，如需更改信息请取消订单后重新下单。";
         //根据cityid获取城市名称？？？
-        [self parkAirRequestWithCityId:[self.orderDicForModify objectForKey:@"city_id"]];//城市默认北京
-        [self orderDetailRequestWithOrdersid:[self.orderDicForModify objectForKey:@"id"]];
+        if (self.dicDatasource.count>0) {
+            [self.mainTableView reloadData];
+        }else{
+            [self parkAirRequestWithCityId:[self.orderDicForModify objectForKey:@"city_id"]];//城市默认北京
+            [self orderDetailRequestWithOrdersid:[self.orderDicForModify objectForKey:@"id"]];
+        }
+        
     }
     
 }
@@ -312,11 +317,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (self.type == kBAFOrderViewControllerTypeOrder) {
         [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
     }else if(self.type == kBAFOrderViewControllerTypeModifyAll){
-        if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
+//        if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
             [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-        }else{
-            [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
-        }
+//        }else{
+//            [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
+//        }
     }else if(self.type == kBAFOrderViewControllerTypeModifyPart){
         if (indexPath.section != 1&&indexPath.section != 0) {
             [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
@@ -741,6 +746,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             if ([resultDic objectForKey:@"back_terminal_name"]&&![[resultDic objectForKey:@"back_terminal_name"] isEqual:[NSNull null]]) {
                 NSString *str = [NSString stringWithFormat:@"%@&%@",[resultDic objectForKey:@"back_terminal_name"],[resultDic objectForKey:@"back_terminal_id"]];
                 [self.dicDatasource setObject:str forKey:@"back_terminal_id"];
+            }
+            
+            if ([resultDic objectForKey:@"city_id"]&&![[resultDic objectForKey:@"city_id"] isEqual:[NSNull null]]) {
+                NSString *str = [NSString stringWithFormat:@"城市&%@",[resultDic objectForKey:@"city_id"]];
+                [self.dicDatasource setObject:str forKey:@"city_id"];
             }
             
             if ([self.orderDicForModify objectForKey:@"park_name"]&&![[self.orderDicForModify objectForKey:@"park_name"] isEqual:[NSNull null]]) {

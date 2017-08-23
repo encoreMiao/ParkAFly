@@ -182,9 +182,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (IBAction)paymentConfirmWithSender:(UIButton *)sender
 {
-    [self paysuccess];
-    return;
-    
     //支付方式:cash.现金支付;confirm. 确认支付;wechat.微信支付
     NSString *paymode;
     if ([sender.titleLabel.text isEqualToString:@"现金支付"]) {
@@ -610,6 +607,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 //                NSMutableString *str = [NSMutableString stringWithFormat:@"%@",self.totalFeeLabel.text];
 //                NSString *str1 = [str stringByReplacingOccurrencesOfString:@"¥" withString:@""];
 //                successVC.rechargeMoneyStr = [NSString stringWithFormat:@"%ld",str1.integerValue];
+                
                 successVC.rechargeMoneyStr = self.totalFeeLabel.text;
                 [self.navigationController pushViewController:successVC animated:YES];
                 

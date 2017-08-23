@@ -81,12 +81,12 @@
                                 <action selector="detailAction:" destination="-1" eventType="touchUpInside" id="iMS-su-nf1"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hhh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeI-vX-tvP">
-                            <rect key="frame" x="81.5" y="11" width="26.5" height="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeI-vX-tvP">
+                            <rect key="frame" x="81.5" y="11" width="0.0" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="nsU-Z9-lzj"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <color key="textColor" red="0.98431372549019602" green="0.41176470588235292" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

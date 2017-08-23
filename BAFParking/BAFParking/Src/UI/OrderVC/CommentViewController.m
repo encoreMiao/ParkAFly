@@ -69,7 +69,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.view.backgroundColor = [UIColor colorWithHex:0xffffff];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
-    [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     
     self.mycollectionview.frame = CGRectMake(0,0, screenWidth, screenHeight);
     self.layoutForComment.headerReferenceSize = CGSizeMake(screenWidth, 180);
@@ -80,17 +79,22 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
         self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (2*screenHeight)/3);
+        
+        self.navigationItem.hidesBackButton = YES;
+        [self setNavigationRightButtonWithText:@"完成" method:@selector(backMethod:)];
     }else if (self.type == kCommentViewControllerTypeComment) {
         [self setNavigationTitle:@"评价"];
         [self commentTagRequest];
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
         self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (2*screenHeight)/3);
+        [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     }else if (self.type == kCommentViewControllerTypeCommentCheck){
         [self setNavigationTitle:@"查看评价"];
         self.commentcheckfooterView = [[CommentCheckCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         [self.mycollectionview registerClass:[CommentCheckCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
         self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (2*screenHeight)/3);
+        [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
         [self viewCommentRequestWithOrderId:[self.orderDic objectForKey:@"id"]];
     }
 }
@@ -169,10 +173,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             [self showTipsInView:self.view message:@"感谢您的评价，发表成功!" offset:self.view.center.x+100];
 
-//            if (self.commentfinishHandler) {
-//                self.commentfinishHandler();
-//            }
-            [self.navigationController popViewControllerAnimated:YES];
+                [self backMethod:nil];
         }else{
             [self showTipsInView:self.view message:@"评价发表失败!" offset:self.view.center.x+100];
         }

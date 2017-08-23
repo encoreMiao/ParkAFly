@@ -72,6 +72,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.hidesBackButton  = YES;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     self.navigationItem.hidesBackButton = YES;
     [self setNavigationRightButtonWithText:@"完成" method:@selector(rightBtnClicked:)];
@@ -294,6 +295,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }else{
         totalFee = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
+    }
+    
+    if (totalFee<=0) {
+        totalFee = 0;
     }
     self.feeL.text = [NSString stringWithFormat:@"¥%ld",totalFee/100];
 }

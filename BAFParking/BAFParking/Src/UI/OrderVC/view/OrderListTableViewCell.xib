@@ -103,11 +103,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFR-rO-06O">
-                                <rect key="frame" x="167" y="135.5" width="80" height="28"/>
+                                <rect key="frame" x="167" y="135.5" width="80" height="32"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="jCM-mH-2PZ"/>
-                                    <constraint firstAttribute="height" constant="28" id="tVX-oW-PDP"/>
+                                    <constraint firstAttribute="height" constant="32" id="tVX-oW-PDP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="修改">
@@ -118,10 +118,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-wu-iPv">
-                                <rect key="frame" x="257" y="135.5" width="80" height="28"/>
+                                <rect key="frame" x="257" y="135.5" width="80" height="32"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="8Va-Fg-6aU"/>
+                                    <constraint firstAttribute="height" constant="32" id="8Va-Fg-6aU"/>
                                     <constraint firstAttribute="width" constant="80" id="bcn-Qw-4ig"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>

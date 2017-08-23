@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 @property (strong, nonatomic) NSString *pickPhone;
 @property (strong, nonatomic) NSString *parkPhone;
+
+@property (strong, nonatomic) NSString *totalFeeStr;
 @end
 
 @implementation OrderDetailViewController
@@ -49,6 +51,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.operatorArr = [NSMutableArray array];
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.myTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
+    self.totalFeeStr = @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,6 +138,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
         }
     }
+    self.totalFeeStr = [NSString stringWithFormat:@"¥%ld",totalFee/100];
     [mutArr addObject:[NSArray arrayWithObjects:[self orderFeeStr],[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
 
     if (willHaveParkFee) {
@@ -766,7 +770,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             return cell;
         }
         cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
-        cell.serviceTitleLabel.text = [self orderFeeStr];
+        
+        NSString *feeStr = [NSString stringWithFormat:@"%@ %@",[self orderFeeStr],self.totalFeeStr];
+        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:feeStr];
+        [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeStr rangeOfString:self.totalFeeStr]];
+        cell.serviceTitleLabel.attributedText = attributeStr;
+        
         return cell;//订单费用
     }
     
@@ -778,7 +787,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
-            cell.serviceTitleLabel.text = [self orderFeeStr];
+//            cell.serviceTitleLabel.text = [self orderFeeStr];
+            NSString *feeStr = [NSString stringWithFormat:@"%@ %@",[self orderFeeStr],self.totalFeeStr];
+            NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:feeStr];
+            [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeStr rangeOfString:self.totalFeeStr]];
+            cell.serviceTitleLabel.attributedText = attributeStr;
+            
             return cell;
         }else{
             OrderDetailImageTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:OrderDetailImageTableViewCellIdentifier];
