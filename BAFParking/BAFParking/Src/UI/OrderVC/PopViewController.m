@@ -119,6 +119,7 @@
             self.tableView.hidden = YES;
             self.scrollView.hidden = NO;
             self.confirmButton.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = YES;
             
         }
@@ -133,6 +134,7 @@
             self.popTitleLabel.text = @"请选择城市";
             self.tableView.hidden = YES;
             self.scrollView.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = NO;
         }
             break;
@@ -151,6 +153,7 @@
 
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = YES;
         }
             break;
@@ -160,6 +163,7 @@
             self.popTitleLabel.text = @"费用明细";
             self.confirmButton.hidden = YES;
             self.scrollView.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = YES;
         }
             break;
@@ -172,6 +176,7 @@
             self.popTitleLabel.text = @"请选择同行人数";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = YES;
         }
             break;
@@ -184,6 +189,7 @@
             self.popTitleLabel.text = @"请选择性别";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = YES;
         }
             break;
@@ -196,6 +202,7 @@
             self.popTitleLabel.text = @"请选择车辆颜色";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = YES;
         }
             break;
@@ -207,6 +214,7 @@
             [self.datePicker setFrame:CGRectMake(0, 44, screenWidth, 260-44)];
             [self.bgView addSubview:self.datePicker];
             self.tableView.hidden = YES;
+            self.cancelButton.hidden = NO;
             self.cityCollectionview.hidden = YES;
         }
             break;
@@ -219,6 +227,7 @@
             self.popTitleLabel.text = @"请选择权益账户";
             self.tableView.hidden = NO;
             self.scrollView.hidden = YES;
+            self.cancelButton.hidden = YES;
             self.cityCollectionview.hidden = YES;
         }
             break;
@@ -226,7 +235,6 @@
             break;
     }
 
-    
     self.headerView.frame = CGRectMake(0, 0, screenWidth, 44);
     self.popTitleLabel.frame = self.headerView.frame;
     self.cancelButton.frame = CGRectMake(CGRectGetWidth(self.popTitleLabel.frame)-64,0, 64, 44);
@@ -730,16 +738,16 @@
 
 - (UIButton *)cancelButton
 {
-//    if (!_cancelButton) {
-//        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_cancelButton setTitle:@"确认" forState:UIControlStateNormal];
-//        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
-//        [_cancelButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
-//        [_cancelButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
-//        [_cancelButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    return _cancelButton;
-    return nil;
+    if (!_cancelButton) {
+        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cancelButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
+        [_cancelButton setTitleColor:HexRGB(kBAFCommonColor) forState:UIControlStateNormal];
+        [_cancelButton setBackgroundColor:[UIColor colorWithHex:0xffffff]];
+        [_cancelButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cancelButton;
+//    return nil;
 }
 
 - (UIButton *)confirmButton

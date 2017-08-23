@@ -235,14 +235,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
                 [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
                 
-                id strDate = [_dicDatasource objectForKey:OrderParamTypeGoTime];
-                if ([strDate isKindOfClass:[NSDate class]]) {
-                    [cell setOrderTFText:[dateFormat1 stringFromDate:strDate]];
+                NSDate *datepark =[dateFormat dateFromString:[_dicDatasource objectForKey:@"actual_park_time"]];
+                if (!datepark) {
+                    datepark =[dateFormat dateFromString:[_dicDatasource objectForKey:@"plan_park_time"]];
                 }
-                if ([strDate isKindOfClass:[NSString class]]) {
-                    NSDate *date =[dateFormat dateFromString:strDate];
-                    NSString *str = [dateFormat1 stringFromDate:date];
-                    [cell setOrderTFText:str];
+                if ([datepark isKindOfClass:[NSDate class]]) {
+                    [cell setOrderTFText:[dateFormat1 stringFromDate:datepark]];
                 }
             }
         }else if(row == 1){
@@ -671,6 +669,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [[NSUserDefaults standardUserDefaults]setObject:_dicDatasource forKey:OrderDefaults];
             SuccessViewController *successVC = [[SuccessViewController alloc]init];
             successVC.type = kSuccessViewControllerTypeSuccess;
+            successVC.isEdit = YES;
             successVC.orderId = [self.orderDicForModify objectForKey:@"id"];
             [self.navigationController pushViewController:successVC animated:YES];
             

@@ -131,7 +131,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             break;
         case kSuccessViewControllerTypeSuccess:
         {
-            [self setNavigationTitle:@"预约成功"];
+            if (self.isEdit) {
+                [self setNavigationTitle:@"修改成功"];
+            }else{
+                [self setNavigationTitle:@"预约成功"];
+            }
             self.successView.hidden = NO;
             self.failureView.hidden = YES;
             self.rechargeSuccessView.hidden = YES;
@@ -208,51 +212,50 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     mutDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
     self.contentL.text = [NSString stringWithFormat:@"%@     %@      %@",[mutDic objectForKey:OrderParamTypeContact_name],[mutDic objectForKey:OrderParamTypeContact_phone],[mutDic objectForKey:OrderParamTypeCar_license_no]];
     
+    
     NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
     NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
     [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
     
-    NSString *str;
-    NSDate *goDate = nil;
-    NSDate *backDate = nil;
-    if ([mutDic objectForKey:OrderParamTypeGoTime]) {
-        goDate =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeGoTime]];
-        str = [dateFormat1 stringFromDate:goDate];
-    }else{
-        str = @"";
+    NSDate *datepark =[dateFormat dateFromString:[mutDic objectForKey:@"actual_park_time"]];
+    NSDate *datepick =[dateFormat dateFromString:[mutDic objectForKey:@"actual_pick_time"]];
+    BOOL isActualParkTime = YES;
+    BOOL isActualPickTime = YES;
+    if (!datepark) {
+        datepark =[dateFormat dateFromString:[mutDic objectForKey:@"plan_park_time"]];
+        isActualParkTime = NO;
     }
-    self.parkTimeL.text = [NSString stringWithFormat:@"预计停车时间：%@",str];
+    if (!datepick) {
+        datepick =[dateFormat dateFromString:[mutDic objectForKey:@"plan_pick_time"]];
+        isActualPickTime = NO;
+    }
     
-    if ([mutDic objectForKey:OrderParamTypeTime]) {
-        backDate =[dateFormat dateFromString:[mutDic objectForKey:OrderParamTypeTime]];
-        if (backDate) {
-            str = [dateFormat1 stringFromDate:backDate];
-        }else{
-            str = @"";
-        }
+    NSString *strpark;
+    if (datepark) {
+        strpark = [dateFormat1 stringFromDate:datepark];
     }else{
-        str = @"";
+        strpark = @"";
     }
-    self.pickTimeL.text = [NSString stringWithFormat:@"预计取车时间：%@",str];
- 
-    if ([mutDic objectForKey:OrderParamTypeTime]) {
-        NSInteger days = -1;
-        if ([mutDic objectForKey:OrderParamTypePark_day]) {
-            days = [[mutDic objectForKey:OrderParamTypePark_day] integerValue];
-        }else if(goDate && backDate){
-            NSTimeInterval time = [backDate timeIntervalSinceDate:goDate];
-            //开始时间和结束时间的中间相差的时间
-            days = ceil(((int)time)/(3600*24));  //一天是24小时*3600秒
-            self.daystochange = days;
-        }
-        if (days<0) {
-            self.parkDayL.text = @"预计停车天数：";
-        }else{
-            self.parkDayL.text = [NSString stringWithFormat:@"预计停车天数：%ld天",days];
-        }
+    
+    NSString *strpick;
+    if (datepick) {
+        strpick = [dateFormat1 stringFromDate:datepick];
     }else{
-        self.parkDayL.text = @"预计停车天数：";
+        strpick = @"";
+    }
+    
+
+    if (isActualParkTime) {
+        self.parkTimeL.text = [NSString stringWithFormat:@"实际泊车时间：%@",strpark];
+    }else{
+        self.parkTimeL.text = [NSString stringWithFormat:@"预计泊车时间：%@",strpark];
+    }
+    
+    if (isActualPickTime) {
+        self.pickTimeL.text = [NSString stringWithFormat:@"实际取车时间：%@",strpick];
+    }else{
+        self.pickTimeL.text = [NSString stringWithFormat:@"预计取车时间：%@",strpick];
     }
 }
 
@@ -291,9 +294,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
     }else{
         totalFee = [[[self.feeDic objectForKey:@"order_price"]objectForKey:@"before_discount_total_price"] integerValue];
-//        NSString *feeText = [NSString stringWithFormat:@"订单费用：¥%ld",basicTotalFee/100];
-//        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:feeText];
-//        [mutStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeText rangeOfString:[NSString stringWithFormat:@"¥%ld",basicTotalFee/100]]];
     }
     self.feeL.text = [NSString stringWithFormat:@"¥%ld",totalFee/100];
 }
@@ -313,6 +313,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             self.feeDic = [obj objectForKey:@"data"];
+            NSInteger days = [[self.feeDic objectForKey:@"park_day"] integerValue];
+            if (days<=0) {
+                self.parkDayL.text = @"预计停车天数：";
+            }else{
+                self.parkDayL.text = [NSString stringWithFormat:@"预计停车天数：%ld天",days];
+            }
+
+            
             [self configTotalFees];
         }else{
             

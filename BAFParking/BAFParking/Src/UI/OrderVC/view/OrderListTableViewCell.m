@@ -45,25 +45,36 @@
     
     NSDate *datepark =[dateFormat dateFromString:[orderDic objectForKey:@"actual_park_time"]];
     NSDate *datepick =[dateFormat dateFromString:[orderDic objectForKey:@"actual_pick_time"]];
+    BOOL isActualParkTime = YES;
+    BOOL isActualPickTime = YES;
     if (!datepark) {
         datepark =[dateFormat dateFromString:[orderDic objectForKey:@"plan_park_time"]];
+        isActualParkTime = NO;
     }
     if (!datepick) {
         datepick =[dateFormat dateFromString:[orderDic objectForKey:@"plan_pick_time"]];
+        isActualPickTime = NO;
     }
     
-    NSString *strpark = [dateFormat1 stringFromDate:datepark];
-    NSString *strpick = [dateFormat1 stringFromDate:datepick];
+    NSString *strpark;
+    if (datepark) {
+        strpark = [dateFormat1 stringFromDate:datepark];
+    }else{
+        strpark = @"";
+    }
+    
+    NSString *strpick;
+    if (datepick) {
+        strpick = [dateFormat1 stringFromDate:datepick];
+    }else{
+        strpick = @"";
+    }
     
     self.parkTime.text = [NSString stringWithFormat:@"%@",strpark];
     self.carlicenseL.text = [orderDic objectForKey:@"car_license_no"];
     self.parkL.text = [orderDic objectForKey:@"park_name"];
+    self.pickTime.text =  [NSString stringWithFormat:@"%@",strpick];
     
-    if (![[orderDic objectForKey:@"plan_pick_time"]isEqualToString:@"0000-00-00 00:00:00"]) {
-        self.pickTime.text = [NSString stringWithFormat:@"%@",strpick];
-    }else{
-        self.pickTime.text = @"";
-    }
     
     self.modifyButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.modifyButton.layer.borderWidth = 0.5f;
@@ -88,24 +99,20 @@
         
         [self.orderstatus setTitle:@"预约成功" forState:UIControlStateNormal];
     }
-    else if([orderStatus isEqualToString:@"park"]){
-        //泊车成功
-        //只能修改取车信息3
-        self.modifyButton.hidden = YES;
-        self.cancelButton.hidden = NO;
-        [self.cancelButton setTitle:@"修改" forState:UIControlStateNormal];
-        self.cancelButton.tag = kOrderListTableViewCellTypeModifyPart;
-        
-        [self.orderstatus setTitle:@"停车完成" forState:UIControlStateNormal];
-        
-    }else if ([orderStatus isEqualToString:@"pick_appoint"]){
+    else if ([orderStatus isEqualToString:@"pick_appoint"]||[orderStatus isEqualToString:@"park"]){
         //已自动分派取车经理
         self.modifyButton.hidden = YES;
         self.cancelButton.hidden = NO;
-        [self.cancelButton setTitle:@"修改" forState:UIControlStateNormal];
+        
+        if ([strpick isEqualToString:@""]) {
+            [self.cancelButton setTitle:@"取车" forState:UIControlStateNormal];
+        }else{
+            [self.cancelButton setTitle:@"修改" forState:UIControlStateNormal];
+        }
+        
         self.cancelButton.tag = kOrderListTableViewCellTypeModifyPart;
         
-        [self.orderstatus setTitle:@"停车完成" forState:UIControlStateNormal];
+        [self.orderstatus setTitle:@"泊车完成" forState:UIControlStateNormal];
     }else if ([orderStatus isEqualToString:@"finish"]){
         //服务结束
         self.modifyButton.hidden = YES;
@@ -123,13 +130,6 @@
         //已支付待确认
         self.modifyButton.hidden = YES;
         self.cancelButton.hidden = YES;
-//        if ([[self.orderDic objectForKey:@"is_comment"] integerValue]>0) {
-//            [self.cancelButton setTitle:@"查看评价" forState:UIControlStateNormal];
-//            self.cancelButton.tag = kOrderListTableViewCellTypeCheckComment;
-//        }else{
-//            [self.cancelButton setTitle:@"评价" forState:UIControlStateNormal];
-//            self.cancelButton.tag = kOrderListTableViewCellTypeComment;
-//        }
         [self.orderstatus setTitle:@"支付待确认" forState:UIControlStateNormal];
     }
     else if ([orderStatus isEqualToString:@"pick_sure"]){
