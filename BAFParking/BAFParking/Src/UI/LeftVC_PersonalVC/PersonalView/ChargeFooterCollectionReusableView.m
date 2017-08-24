@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.chargeBtn.clipsToBounds = YES;
+    self.chargeBtn.layer.cornerRadius = 3.0f;
 }
 
 - (IBAction)chargeAction:(id)sender

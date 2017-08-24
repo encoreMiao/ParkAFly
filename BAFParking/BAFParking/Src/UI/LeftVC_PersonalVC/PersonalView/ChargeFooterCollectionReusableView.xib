@@ -52,6 +52,7 @@
                 <constraint firstAttribute="trailing" secondItem="MNf-5d-g3o" secondAttribute="trailing" constant="20" id="pFU-0I-VsE"/>
             </constraints>
             <connections>
+                <outlet property="chargeBtn" destination="K4m-V7-Xsy" id="Uqx-bf-nJj"/>
                 <outlet property="label" destination="MNf-5d-g3o" id="C70-am-7ii"/>
             </connections>
             <point key="canvasLocation" x="-26" y="-25"/>

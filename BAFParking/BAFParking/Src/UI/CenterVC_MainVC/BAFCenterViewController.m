@@ -58,6 +58,7 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self getADPhoto];
     _locService.delegate = self;
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.navigationBar.translucent = YES;
@@ -67,8 +68,6 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
     if (userInfo.clientid) {
         [self latestOrderWithClientId:userInfo.clientid];
     }
-    
-    [self getADPhoto];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -96,9 +95,9 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 {
     _rollingBannerVC = [DYMRollingBannerVC new];
     [_rollingBannerVC.view setFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(self.headerScrollerView.frame))];
-//    _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
-//                                       ,[UIImage imageNamed:@"home_banner4"]
-//                                       ];
+    _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
+                                       ,[UIImage imageNamed:@"home_banner4"]
+                                       ];
     
     // Set the placeholder image (optional, the default place holder is nil)
     _rollingBannerVC.placeHolderImage = [UIImage imageNamed:@"home_banner3"];

@@ -28,6 +28,8 @@
     self.settingListArr = @[@"用户协议",@"关于我们",@"帮助说明",@"常见问题"];
     self.quitButton.layer.borderColor = [[UIColor colorWithHex:0x3492e9] CGColor];
     self.quitButton.layer.borderWidth = 0.5;
+    self.quitButton.clipsToBounds = YES;
+    self.quitButton.layer.cornerRadius = 3.0f;
     self.mytableview.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
     self.mytableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }

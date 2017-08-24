@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSTimer     *timer;
 }
 @property (weak, nonatomic) IBOutlet UIButton       *codeBtn;
+@property (weak, nonatomic) IBOutlet UIButton       *loginBtn;
 @property (weak, nonatomic) IBOutlet UITextField    *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField    *codeTF;
 @end
@@ -37,6 +38,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     [super viewDidLoad];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;//点击背景收回键盘
     [self.phoneTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.codeBtn.clipsToBounds = YES;
+    self.codeBtn.layer.cornerRadius = 3.0f;
+    self.loginBtn.clipsToBounds = YES;
+    self.loginBtn.layer.cornerRadius = 3.0f;
 }
 
 - (void)viewWillAppear:(BOOL)animated

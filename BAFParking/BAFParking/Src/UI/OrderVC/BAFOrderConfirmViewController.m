@@ -322,7 +322,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }else{
             if (indexPath.row == 0) {
                 if ([self.orderDic objectForKey:OrderParamTypeTime]) {
-                    str = [self.orderDic objectForKey:OrderParamTypeTime];
+                    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+                    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+                    [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+                    NSDate *date =[dateFormat dateFromString:[self.orderDic objectForKey:OrderParamTypeTime]];
+                    str = [dateFormat1 stringFromDate:date];
                 }else{
                     str = @"";
                 }

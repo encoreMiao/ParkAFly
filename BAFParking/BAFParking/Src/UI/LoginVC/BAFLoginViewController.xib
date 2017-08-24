@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="codeBtn" destination="fmN-sb-7SM" id="KLy-Ki-4gs"/>
                 <outlet property="codeTF" destination="g7S-zV-iSj" id="zgV-O2-m9a"/>
+                <outlet property="loginBtn" destination="t9s-C5-hXv" id="Ppr-BH-R7O"/>
                 <outlet property="phoneTF" destination="zlj-VA-S8q" id="SPp-XQ-L3N"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

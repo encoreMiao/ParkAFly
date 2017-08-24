@@ -78,8 +78,12 @@
     
     self.modifyButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.modifyButton.layer.borderWidth = 0.5f;
+    self.modifyButton.clipsToBounds = YES;
+    self.modifyButton.layer.cornerRadius = 3.0f;
     self.cancelButton.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.cancelButton.layer.borderWidth = 0.5f;
+    self.cancelButton.clipsToBounds = YES;
+    self.cancelButton.layer.cornerRadius = 3.0f;
     [self.modifyButton setTitleColor:[UIColor colorWithHex:0x323232] forState:UIControlStateNormal];
     [self.cancelButton setTitleColor:[UIColor colorWithHex:0x323232] forState:UIControlStateNormal];
     self.modifyButton.backgroundColor = [UIColor whiteColor];

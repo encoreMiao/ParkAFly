@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UILabel *bottomeTitleLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
 @property (nonatomic, strong) UIButton *bottomButton;
+@property (nonatomic, strong) UILabel *bottomTipsLabel;
 @end
 
 @implementation MapViewController
@@ -34,6 +35,8 @@
     [self.bottomView addSubview:self.bottomeTitleLabel];
     [self.bottomView addSubview:self.detailLabel];
     [self.view addSubview:self.bottomButton];
+    [self.view addSubview:self.bottomTipsLabel];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,6 +148,8 @@
         _bottomButton.backgroundColor = [UIColor colorWithHex:0x3492e9];
         _bottomButton.frame = CGRectMake(20, screenHeight-50-64-40, screenWidth-40, 40);
         [_bottomButton setTitle:@"开始导航" forState:UIControlStateNormal];
+        _bottomButton.clipsToBounds = YES;
+        _bottomButton.layer.cornerRadius = 3.0f;
         [_bottomButton addTarget:self action:@selector(openMapUrl) forControlEvents:UIControlEventTouchUpInside];
     }
     return _bottomButton;
@@ -181,4 +186,17 @@
     return _detailLabel;
 }
 
+
+- (UILabel *)bottomTipsLabel{
+    if (!_bottomTipsLabel) {
+        _bottomTipsLabel = [[UILabel alloc]init];
+        _bottomTipsLabel.frame = CGRectMake(20,screenHeight-40-64, screenWidth-40, 20);
+        _bottomTipsLabel.font = [UIFont systemFontOfSize:14];
+        _bottomTipsLabel.numberOfLines = 1;
+        _bottomTipsLabel.textAlignment = NSTextAlignmentCenter;
+        _bottomTipsLabel.text = @"使用高德地图请搜索'车场地址'进行导航。";
+        _bottomTipsLabel.textColor = [UIColor colorWithHex:0x969696];
+    }
+    return _bottomTipsLabel;
+}
 @end

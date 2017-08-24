@@ -34,6 +34,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     self.cardView.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.cardView.layer.borderWidth = 0.5f;
+    
+    
+    self.cardView.clipsToBounds = YES;
+    self.cardView.layer.cornerRadius = 3.0f;
+    self.codeView.clipsToBounds = YES;
+    self.codeView.layer.cornerRadius = 3.0f;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,6 +84,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [_confirmButton setTitle:@"绑定" forState:UIControlStateNormal];
         [_confirmButton setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateNormal];
         [_confirmButton setBackgroundImage:[UIImage createImageWithColor:HexRGB(kBAFCommonColor)] forState:UIControlStateNormal];
+        _confirmButton.clipsToBounds = YES;
+        _confirmButton.layer.cornerRadius = 3.0f;
         _confirmButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [_confirmButton setBackgroundColor:[UIColor clearColor]];
         [_confirmButton addTarget:self action:@selector(combineMethod) forControlEvents:UIControlEventTouchUpInside];

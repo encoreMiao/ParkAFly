@@ -371,6 +371,7 @@
                     </constraints>
                     <connections>
                         <outlet property="car_license_noL" destination="a9f-pK-tA9" id="v5E-3P-uuW"/>
+                        <outlet property="checkBtn" destination="bZI-91-ZHn" id="hKN-ed-12G"/>
                         <outlet property="getCarSuccessIV" destination="LNQ-6d-Ete" id="lfl-gK-qji"/>
                         <outlet property="getCarSuccessL" destination="ZUl-tp-Obe" id="ewX-Bi-4Y8"/>
                         <outlet property="goingView" destination="Ln6-T2-Zht" id="9vI-hs-sbF"/>

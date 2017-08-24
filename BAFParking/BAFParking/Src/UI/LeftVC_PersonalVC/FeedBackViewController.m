@@ -139,6 +139,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         _confirmButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         [_confirmButton setTitle:@"提交意见" forState:UIControlStateNormal];
         [_confirmButton setTitleColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateNormal];
+        _confirmButton.clipsToBounds = YES;
+        _confirmButton.layer.cornerRadius = 3.0f;
 //        [_confirmButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0xd7d7d7]] forState:UIControlStateDisabled];
         [_confirmButton setBackgroundImage:[UIImage createImageWithColor:HexRGB(kBAFCommonColor)] forState:UIControlStateNormal];
 //        [_confirmButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0xcc4d3d]] forState:UIControlStateHighlighted];

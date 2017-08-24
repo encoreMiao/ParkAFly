@@ -26,6 +26,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *parkFinishedL;
 @property (nonatomic, weak) IBOutlet UILabel *waitToGetCarL;
 @property (nonatomic, weak) IBOutlet UILabel *getCarSuccessL;
+
+@property (nonatomic, weak) IBOutlet UIButton *checkBtn;
 @end
 
 
@@ -33,6 +35,8 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
+        _checkBtn.clipsToBounds = YES;
+        _checkBtn.layer.cornerRadius = 3.0f;
     }
     return self;
 }
@@ -42,6 +46,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _checkBtn.clipsToBounds = YES;
+        _checkBtn.layer.cornerRadius = 3.0f;
 //        [self addGestureOnBGView];
     }
     return self;
@@ -52,6 +58,8 @@
 {
     self = [super initWithCoder: aDecoder];
     if (self) {
+        _checkBtn.clipsToBounds = YES;
+        _checkBtn.layer.cornerRadius = 3.0f;
 //        [self addGestureOnBGView];
     }
     return self;
@@ -60,6 +68,8 @@
 - (void)setType:(BAFCenterOrderViewType)type
 {
     _type = type;
+    _checkBtn.clipsToBounds = YES;
+    _checkBtn.layer.cornerRadius = 3.0f;
     switch (_type) {
         case kBAFCenterOrderViewTypeNone:
         {

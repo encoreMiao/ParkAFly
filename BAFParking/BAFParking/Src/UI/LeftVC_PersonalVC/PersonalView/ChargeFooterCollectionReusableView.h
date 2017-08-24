@@ -17,4 +17,5 @@
 - (IBAction)chargeAction:(id)sender;
 @property (nonatomic, weak) id<ChargeFooterCollectionReusableViewDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *label;
+@property (nonatomic, strong) IBOutlet UIButton *chargeBtn;
 @end
