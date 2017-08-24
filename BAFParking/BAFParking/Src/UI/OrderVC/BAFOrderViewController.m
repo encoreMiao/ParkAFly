@@ -317,11 +317,11 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (self.type == kBAFOrderViewControllerTypeOrder) {
         [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
     }else if(self.type == kBAFOrderViewControllerTypeModifyAll){
-//        if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
+        if (indexPath.section == 2||indexPath.section == 3 ||(indexPath.section == 0&&indexPath.row == 0)) {
             [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
-//        }else{
-//            [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
-//        }
+        }else{
+            [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
+        }
     }else if(self.type == kBAFOrderViewControllerTypeModifyPart){
         if (indexPath.section != 1&&indexPath.section != 0) {
             [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
