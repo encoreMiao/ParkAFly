@@ -84,6 +84,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         
         [self cityListRequest];
         if ([_dicDatasource objectForKey:OrderParamTypePark]) {
+            if (self.selectedParkinfo) {
+                _chargeRemark = [NSString stringWithFormat:@"该车场收费标准为：%@",self.selectedParkinfo.map_price];
+                self.selectedParkinfo = nil;
+            }
             [self.mainTableView reloadData];
         }
         

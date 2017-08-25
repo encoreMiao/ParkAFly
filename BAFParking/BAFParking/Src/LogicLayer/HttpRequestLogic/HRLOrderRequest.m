@@ -235,7 +235,7 @@
  plan_park_time 预计停车时间如:2017-03-22 15:22
  plan_pick_time
  back_terminal_id
- leave_passenger_number 触发通行人数
+ leave_passenger_number 出发通行人数
  
  
  1.订单不存在;2. 订单状态异常;3.已确认取车，不可修改;4.停车时间格式错误 5.代客泊车必须提前两小时预约;6.停车场不支持出发航站楼;7.取车时间格式错误 8.取车时间必须晚于停车时间;9.取车时间必须晚于停车时间(数据库);

@@ -7,6 +7,7 @@
 //
 
 #import "BAFBaseViewController.h"
+#import "BAFParkInfo.h"
 //预约内容&id组合
 #define OrderParamTypeGoTime            @"plan_park_time"
 #define OrderParamTypeTime              @"plan_pick_time"
@@ -34,4 +35,5 @@ typedef NS_ENUM(NSInteger,BAFOrderViewControllerType){
 @property (nonatomic, assign) BAFOrderViewControllerType type;
 @property (nonatomic, strong) NSDictionary              *orderDicForModify;
 @property (nonatomic, copy)   ModifySucessHandler        handler;
+@property (nonatomic, strong) BAFParkInfo               *selectedParkinfo;
 @end

@@ -196,6 +196,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 for (UIViewController *tempVC in self.navigationController.viewControllers) {
                     if ([tempVC isKindOfClass:[BAFOrderViewController class]]) {
                         ((BAFOrderViewController *)tempVC).dicDatasource = _dicDatasource;
+                        ((BAFOrderViewController *)tempVC).selectedParkinfo = cell.parkinfo;
                         [self.navigationController popToViewController:tempVC animated:YES];
                     }
                 }
