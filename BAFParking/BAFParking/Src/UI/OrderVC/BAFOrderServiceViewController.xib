@@ -65,6 +65,9 @@
                 <constraint firstItem="CZY-d6-xfN" firstAttribute="leading" secondItem="Jue-Jv-J6g" secondAttribute="leading" constant="20" id="xG9-Xr-J0L"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="nextBtn" destination="CZY-d6-xfN" id="hbv-Cf-Kuf"/>
+            </connections>
             <point key="canvasLocation" x="491" y="-96"/>
         </view>
         <view contentMode="scaleToFill" id="4XL-um-vUz" customClass="OrderServiceHeaderView">

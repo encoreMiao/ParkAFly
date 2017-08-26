@@ -36,6 +36,8 @@
         commentBtn.layer.cornerRadius = 3.0f;
         [commentBtn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
         commentBtn.frame = CGRectMake(20, CGRectGetMaxY(self.fTextView.frame)+30, screenWidth-40, 40);
+        commentBtn.clipsToBounds = YES;
+        commentBtn.layer.cornerRadius = 3.0f;
         [self addSubview:commentBtn];
     }
     return self;

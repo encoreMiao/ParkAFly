@@ -28,6 +28,9 @@
     [super viewDidLoad];
     [self setupView];
     self.dicDatasource = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:OrderDefaults]];
+    
+    self.footerView.nextBtn.clipsToBounds = YES;
+    self.footerView.nextBtn.layer.cornerRadius = 3.0f;
 }
 
 - (void)didReceiveMemoryWarning {

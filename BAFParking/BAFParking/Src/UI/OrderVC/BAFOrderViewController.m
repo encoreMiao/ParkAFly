@@ -61,6 +61,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.mainTableView.tableFooterView = self.footerView;
     self.mainTableView.backgroundColor = [UIColor colorWithHex:0xf5f5f5];
     self.mainTableView.separatorColor = [UIColor colorWithHex:0xc9c9c9];
+    
+    
+    self.footerView.nextBtn.clipsToBounds = YES;
+    self.footerView.nextBtn.layer.cornerRadius = 3.0f;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -327,7 +331,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
         }
     }else if(self.type == kBAFOrderViewControllerTypeModifyPart){
-        if (indexPath.section != 1&&indexPath.section != 0) {
+        if (indexPath.section != 1&&indexPath.section != 0 && indexPath.section !=3) {
             [self orderCellClickedDelegate:[tableView cellForRowAtIndexPath:indexPath]];
         }else{
             [self showTipsInView:self.view message:@"如需更改，请取消订单重新下单" offset:self.view.center.x+100];
@@ -391,27 +395,32 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [self.navigationController pushViewController:orderServiceVC animated:YES];
         }
     }else{
+        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+        NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
+        [dateFormat1 setDateFormat:@"yyyy-MM-dd HH:mm"];
+        
+        NSDate *datepick =[dateFormat dateFromString:[_dicDatasource objectForKey:@"plan_pick_time"]];
         NSString *str = [_dicDatasource objectForKey:OrderParamTypeBackTerminal];
-        if ([[_dicDatasource objectForKey:OrderParamTypeTime] isEqualToString:@"0000-00-00 00:00:00"]&&(str.length>1)) {
+        if (!datepick && (str.length>1)) {
             [self showTipsInView:self.view message:@"请选择取车时间" offset:self.view.center.x+100];
             return;
         }
         
-        if ((![[_dicDatasource objectForKey:OrderParamTypeTime] isEqualToString:@"0000-00-00 00:00:00"])&&(str.length<=1)) {
+        if (datepick &&(str.length<=1)) {
             [self showTipsInView:self.view message:@"请选择返程航站楼" offset:self.view.center.x+100];
             return;
         }
-        
-        id strDate = [_dicDatasource objectForKey:OrderParamTypeTime];
-        if ([strDate isKindOfClass:[NSString class]]) {
-            if (![strDate isEqualToString:@"0000-00-00 00:00:00"]) {
-                NSDate *gotime = [_dicDatasource objectForKey:OrderParamTypeGoTime];
-                NSDate *backtime = [_dicDatasource objectForKey:OrderParamTypeTime];
-                NSComparisonResult result = [gotime compare:backtime];
-                if (result != NSOrderedAscending) {
-                    [self showTipsInView:self.view message:@"取车时间不能小于泊车时间" offset:self.view.center.x+100];
-                    return;
-                }
+
+        NSDate *datepark =[dateFormat dateFromString:[_dicDatasource objectForKey:@"actual_park_time"]];
+        if (!datepark) {
+            datepark =[dateFormat dateFromString:[_dicDatasource objectForKey:@"plan_park_time"]];
+        }
+        if (datepick) {
+            NSComparisonResult result = [datepark compare:datepick];
+            if (result != NSOrderedAscending) {
+                [self showTipsInView:self.view message:@"取车时间不能小于泊车时间" offset:self.view.center.x+100];
+                return;
             }
         }
         [self editOrder];

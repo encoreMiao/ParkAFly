@@ -138,8 +138,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
         }
     }
+    if (totalFee<=0) {
+        totalFee = 0;
+    }
     self.totalFeeStr = [NSString stringWithFormat:@"¥%ld",totalFee/100];
     [mutArr addObject:[NSArray arrayWithObjects:[self orderFeeStr],[NSString stringWithFormat:@"¥%ld",totalFee/100], nil]];
+    
+    
 
     if (willHaveParkFee) {
         if (days>0) {
@@ -354,7 +359,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     NSString *action = [[self.operatorArr objectAtIndex:row] objectForKey:@"action"];
     NSString *str;
     if ([action isEqualToString:@"park_appoint"]) {
-        str = @"预约泊车成功，订单已分派，形成改变请及时修改您的预约信息。";
+        str = @"预约泊车成功，订单已分派，形成改变请及时修改您的预约信息";
     }
     if ([action isEqualToString:@"cancel"]) {
         str = @"订单已取消";
@@ -366,7 +371,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         str = @"取车时间已确认，停车结束计费，订单费用可在线支付或交现金给工作人员";
     }
     if ([action isEqualToString:@"finish"]) {
-        str = @"取车成功！感谢使用泊安飞服务，业务咨询或意见反馈，可致电4008138666联系客服。";
+        str = @"取车成功！感谢使用泊安飞服务，业务咨询或意见反馈，可致电4008138666联系客服";
     }
     if ([action isEqualToString:@"wash_car"]) {
         str = @"已为您的爱车洗车";
@@ -787,7 +792,6 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
-//            cell.serviceTitleLabel.text = [self orderFeeStr];
             NSString *feeStr = [NSString stringWithFormat:@"%@ %@",[self orderFeeStr],self.totalFeeStr];
             NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:feeStr];
             [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeStr rangeOfString:self.totalFeeStr]];

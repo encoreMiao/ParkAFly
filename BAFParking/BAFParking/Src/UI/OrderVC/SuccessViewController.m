@@ -55,6 +55,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     
     self.daystochange = 0;
     self.feeDic = [NSMutableDictionary dictionary];
+    
+    self.contactBtn.clipsToBounds = YES;
+    self.contactBtn.layer.cornerRadius = 3.0f;
+    
+    self.checktBtn.clipsToBounds = YES;
+    self.checktBtn.layer.cornerRadius = 3.0f;
 }
 
 - (IBAction)contactClicked:(id)sender {

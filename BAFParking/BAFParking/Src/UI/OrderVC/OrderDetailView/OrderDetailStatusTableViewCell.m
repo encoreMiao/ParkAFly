@@ -29,7 +29,7 @@
     _operatorDic = operatorDic;
     NSString *action = [operatorDic objectForKey:@"action"];
     if ([action isEqualToString:@"park_appoint"]) {
-        self.orderOperatorLabel.text = @"预约泊车成功，订单已分派，行程改变请及时修改您的预约信息。";
+        self.orderOperatorLabel.text = @"预约泊车成功，订单已分派，行程改变请及时修改您的预约信息";
     }
     if ([action isEqualToString:@"cancel"]) {
         self.orderOperatorLabel.text = @"订单已取消";
@@ -41,7 +41,7 @@
         self.orderOperatorLabel.text = @"取车时间已确认，停车结束计费，订单费用可在线支付或交现金给工作人员";
     }
     if ([action isEqualToString:@"finish"]) {
-        self.orderOperatorLabel.text = @"取车成功！感谢使用泊安飞服务，业务咨询或意见反馈，可致电4008138666联系客服。";
+        self.orderOperatorLabel.text = @"取车成功！感谢使用泊安飞服务，业务咨询或意见反馈，可致电4008138666联系客服";
     }
     if ([action isEqualToString:@"wash_car"]) {
         self.orderOperatorLabel.text = @"已为您的爱车洗车";

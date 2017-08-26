@@ -61,6 +61,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.userInfo = [[BAFUserModelManger sharedInstance] userInfo];
     [self setupView];
     self.serviceHeaderView.userInfo = self.userInfo;
+    
+    self.footerView.nextBtn.clipsToBounds = YES;
+    self.footerView.nextBtn.layer.cornerRadius = 3.0f;
 }
 
 - (void)didReceiveMemoryWarning {

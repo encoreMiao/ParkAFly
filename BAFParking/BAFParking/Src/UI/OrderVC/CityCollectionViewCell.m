@@ -14,6 +14,9 @@
     [super awakeFromNib];
     self.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
     self.layer.borderWidth = 1.0f;
+    
+    self.clipsToBounds = YES;
+    self.layer.cornerRadius = 3.0f;
 }
 
 - (void)layoutSubviews
@@ -25,8 +28,12 @@
 {
     if (citySelected) {
         self.layer.borderColor = [[UIColor colorWithHex:0x3492e9] CGColor];
+        self.clipsToBounds = YES;
+        self.layer.cornerRadius = 3.0f;
     }else{
         self.layer.borderColor = [[UIColor colorWithHex:0xc9c9c9] CGColor];
+        self.clipsToBounds = YES;
+        self.layer.cornerRadius = 3.0f;
     }
 }
 

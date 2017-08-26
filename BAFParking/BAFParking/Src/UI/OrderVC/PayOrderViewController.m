@@ -85,6 +85,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     self.detailBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -5-10, 0, 5+10);
     
     [self configOrderDic:self.orderDic];
+    
+    self.weixinBtn.clipsToBounds = YES;
+    self.weixinBtn.layer.cornerRadius = 3.0f;
+    
+    self.confirmPayBtn.clipsToBounds = YES;
+    self.confirmPayBtn.layer.cornerRadius = 3.0f;
 }
 
 - (void)didReceiveMemoryWarning {
