@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             [[BAFUserModelManger sharedInstance]saveUserInfo:userInfo];
             //userInfo.caddr 和 userInfo.cityname
             
-            NSString *token = [(NSDictionary *)obj objectForKey:@"token"];
+            NSString *token = [[(NSDictionary *)obj objectForKey:@"data"] objectForKey:@"token"];
             [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"token"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             

@@ -10,7 +10,7 @@
 #define BAFConfigFile_h
 
 /******************服务器环境切换开关******************/
-//#define PUBLISHCONFIG  //发布环境宏定义，在测试时注释掉该宏定义
+#define PUBLISHCONFIG  //发布环境宏定义，在测试时注释掉该宏定义
 
 /******************HTTPS请求支持******************/
 //#define kOpenHttpsSSL           //添加支持https证书请求

@@ -71,7 +71,7 @@
     
     
     self.cityCollectionview = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layoutForCityCollection];
-    _cityCollectionview.scrollEnabled = NO;
+    _cityCollectionview.scrollEnabled = YES;
     _cityCollectionview.backgroundColor = [UIColor clearColor];
     [_cityCollectionview registerNib:[UINib nibWithNibName:@"CityCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:CityCollectionViewCellIdentifier];
     self.cityCollectionview.delegate = self;

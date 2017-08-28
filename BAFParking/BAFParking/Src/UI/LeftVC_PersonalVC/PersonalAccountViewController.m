@@ -254,7 +254,11 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
         if (self.activityList.count>0) {
             BAFChargePageActivityInfo *activityInfo = self.activityList[0];
             NSString *s = activityInfo.descriptionOfActivity;
-            [str appendFormat:@"说明\n%@",s];
+            if (s) {
+                [str appendFormat:@"说明\n%@",s];
+            }else{
+                [str appendString:@"说明\n1.用户将金额充值到泊安飞账户，当时充值当时到账。\n2.进行充值后，余额会显示在“个人中心-账户”中，用于泊安飞下单时使用。\n3.充值送现金活动即将推出，敬请期待。"];
+            }
         }
         else{
             [str appendString:@"说明\n1.用户将金额充值到泊安飞账户，当时充值当时到账。\n2.进行充值后，余额会显示在“个人中心-账户”中，用于泊安飞下单时使用。\n3.充值送现金活动即将推出，敬请期待。"];
