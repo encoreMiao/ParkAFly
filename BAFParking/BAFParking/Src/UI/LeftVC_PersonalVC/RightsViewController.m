@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 @interface RightsViewController ()<UITableViewDelegate, UITableViewDataSource,RightsTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myRightsTableView;
 @property (strong, nonatomic) NSMutableArray *rightsArr;
+
+@property (strong, nonatomic) IBOutlet UIView *nonRightView;
 @end
 
 @implementation RightsViewController
@@ -119,6 +121,14 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 [self.rightsArr removeAllObjects];
             }
             self.rightsArr = [BAFEquityAccountInfo mj_objectArrayWithKeyValuesArray:[obj objectForKey:@"data"]];
+            
+            if (self.rightsArr.count<=0) {
+                [self.nonRightView setFrame:CGRectMake(0, 0, screenWidth,195)];
+                self.myRightsTableView.tableHeaderView = self.nonRightView;
+            }else{
+                self.myRightsTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 1)];
+            }
+
             [self.myRightsTableView reloadData];
         }else{
             

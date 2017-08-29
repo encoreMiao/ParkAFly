@@ -123,7 +123,6 @@
  */
 - (void)checkVersionRequestWithNumberIndex:(int)numberIndex delegte:(id)workThread version:(NSString *)version
 {
-    DLog(@"登录");
     //设置请求头
     NSDictionary *headerFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios", @"from", nil];
     

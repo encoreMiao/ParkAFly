@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 {
     kRequestNumberLatestOrder,
     kRequestNumberAppPhoto,
+    kRequestNumberIndexVersion,//检测版本号
 };
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate,BMKLocationServiceDelegate>{
@@ -38,6 +39,7 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 @property (nonatomic, weak) IBOutlet UIButton           *showOrderListButton;
 @property (nonatomic, weak) IBOutlet UIView             *headerScrollerView;
 @property (nonatomic, weak) IBOutlet BAFCenterOrderView *orderView;
+@property (nonatomic, strong) NSString *appstoreStr;
 @end
 
 
@@ -67,6 +69,12 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
     self.orderView.type = kBAFCenterOrderViewTypeNone;
     if (userInfo.clientid) {
         [self latestOrderWithClientId:userInfo.clientid];
+    }
+    
+    static BOOL needCheck = YES;
+    if (needCheck) {
+        [self checkVersion];
+        needCheck = NO;
     }
 }
 
@@ -181,6 +189,12 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 }
 
 #pragma mark - Request
+- (void)checkVersion
+{
+    id <HRLLoginInterface> loginReq = [[HRLogicManager sharedInstance] getLoginReqest];
+    [loginReq checkVersionRequestWithNumberIndex:kRequestNumberIndexVersion delegte:self version:@"1.0.0"];
+}
+
 - (void)latestOrderWithClientId:(NSString *)clientId
 {
     id <HRLOrderInterface> loginReq = [[HRLogicManager sharedInstance] getOrderReqest];
@@ -217,6 +231,38 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
             }
             _rollingBannerVC.rollingImages = mutArr;
             [_rollingBannerVC startRolling];
+        }
+    }
+    
+    if (aRequestID == kRequestNumberIndexVersion) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            obj = (NSDictionary *)obj;
+        }
+        if ([[obj objectForKey:@"code"] integerValue]==1000) {
+            //提示更新"message": "版本 述", "data": 下载地址
+            id message = [obj objectForKey:@"message"];
+            if (!message ||[message isEqual:[NSNull null]]||[message isEqualToString:@""]) {
+                
+            }else{
+                self.appstoreStr = [obj objectForKey:@"data"];
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"需要更新" delegate:self cancelButtonTitle:@"暂不更新" otherButtonTitles:@"更新",nil];
+                [alertView show];
+            }
+        }else{
+            
+        }
+    }
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1){
+        if (!self.appstoreStr ||[self.appstoreStr isEqual:[NSNull null]]||[self.appstoreStr isEqualToString:@""]) {
+            
+        }else{
+            //跳转
+//            self.appstoreStr = @"https://itunes.apple.com/cn/app/%E5%BE%AE%E4%BF%A1/id414478124?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.appstoreStr]];
         }
     }
 }

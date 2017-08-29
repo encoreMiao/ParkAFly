@@ -235,8 +235,10 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
     }else{
         CardRechargeCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CardRechargeCollectionViewCellIdentifier forIndexPath:indexPath];
         if (indexPath.row == 0) {
+            cell.inputTF.text = @"";
             cell.inputTF.placeholder = @"请输入卡号";
         }else{
+            cell.inputTF.text = @"";
             cell.inputTF.placeholder = @"请输入密码";
         }
         return cell;
