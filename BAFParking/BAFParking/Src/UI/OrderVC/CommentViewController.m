@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self commentTagRequest];
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (4*screenHeight)/5);
+        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (6*screenHeight)/7);
         
         self.navigationItem.hidesBackButton = YES;
         [self setNavigationRightButtonWithText:@"完成" method:@selector(backMethod:)];
@@ -87,13 +87,13 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [self commentTagRequest];
         self.commentfooterView = [[CommentFooterCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 220)];
         [self.mycollectionview registerClass:[CommentFooterCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (4*screenHeight)/5);
+        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (6*screenHeight)/7);
         [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     }else if (self.type == kCommentViewControllerTypeCommentCheck){
         [self setNavigationTitle:@"查看评价"];
         self.commentcheckfooterView = [[CommentCheckCollectionReusableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         [self.mycollectionview registerClass:[CommentCheckCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
-        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (4*screenHeight)/5);
+        self.layoutForComment.footerReferenceSize = CGSizeMake(screenWidth, (6*screenHeight)/7);
         [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
         [self viewCommentRequestWithOrderId:[self.orderDic objectForKey:@"id"]];
     }

@@ -776,7 +776,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         }
         cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
         
-        NSString *feeStr = [NSString stringWithFormat:@"%@ %@",[self orderFeeStr],self.totalFeeStr];
+        NSString *feeStr = @"";
+        if ([self orderFeeStr]) {
+            feeStr = [NSString stringWithFormat:@"%@ %@",[self orderFeeStr],self.totalFeeStr];
+        }
         NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:feeStr];
         [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeStr rangeOfString:self.totalFeeStr]];
         cell.serviceTitleLabel.attributedText = attributeStr;
@@ -792,7 +795,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.type = OrderDetailFeeTableViewCellTypeTotalFee;
-            NSString *feeStr = [NSString stringWithFormat:@"%@ %@",[self orderFeeStr],self.totalFeeStr];
+            NSString *feeStr = @"";
+            if ([self orderFeeStr]) {
+                feeStr = [NSString stringWithFormat:@"%@ %@",[self orderFeeStr],self.totalFeeStr];
+            }
             NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:feeStr];
             [attributeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0xfb694b],NSFontAttributeName:[UIFont systemFontOfSize:15]} range:[feeStr rangeOfString:self.totalFeeStr]];
             cell.serviceTitleLabel.attributedText = attributeStr;

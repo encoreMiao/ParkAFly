@@ -130,8 +130,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
             }
 
             [self.myRightsTableView reloadData];
-        }else{
-            
+        }else if ([[obj objectForKey:@"code"] integerValue]== 1){
+            [self.nonRightView setFrame:CGRectMake(0, 0, screenWidth,195)];
+            self.myRightsTableView.tableHeaderView = self.nonRightView;
         }
     }
 }
