@@ -208,6 +208,8 @@
 		8DBAE0C31F108E56003ACFAB /* ParkCommetnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBAE0C11F108E56003ACFAB /* ParkCommetnTableViewCell.xib */; };
 		8DC7BC661F2E9C9B00FDE5C0 /* ParkCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7BC641F2E9C9B00FDE5C0 /* ParkCommentViewController.m */; };
 		8DC7BC671F2E9C9B00FDE5C0 /* ParkCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7BC651F2E9C9B00FDE5C0 /* ParkCommentViewController.xib */; };
+		8DDBAA5A1F57D31000F941BB /* HCCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBAA571F57D31000F941BB /* HCCycleView.m */; };
+		8DDBAA5B1F57D31000F941BB /* HCPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBAA591F57D31000F941BB /* HCPageControl.m */; };
 		8DE433451EE9E4EA009379ED /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433431EE9E4EA009379ED /* PopTableViewCell.m */; };
 		8DE433461EE9E4EA009379ED /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */; };
 		8DE433491EEBC90A009379ED /* BAFParkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE433481EEBC90A009379ED /* BAFParkInfo.m */; };
@@ -599,6 +601,10 @@
 		8DC7BC631F2E9C9B00FDE5C0 /* ParkCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkCommentViewController.h; sourceTree = "<group>"; };
 		8DC7BC641F2E9C9B00FDE5C0 /* ParkCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkCommentViewController.m; sourceTree = "<group>"; };
 		8DC7BC651F2E9C9B00FDE5C0 /* ParkCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkCommentViewController.xib; sourceTree = "<group>"; };
+		8DDBAA561F57D31000F941BB /* HCCycleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCCycleView.h; sourceTree = "<group>"; };
+		8DDBAA571F57D31000F941BB /* HCCycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCCycleView.m; sourceTree = "<group>"; };
+		8DDBAA581F57D31000F941BB /* HCPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCPageControl.h; sourceTree = "<group>"; };
+		8DDBAA591F57D31000F941BB /* HCPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCPageControl.m; sourceTree = "<group>"; };
 		8DE433421EE9E4EA009379ED /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
 		8DE433431EE9E4EA009379ED /* PopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopTableViewCell.m; sourceTree = "<group>"; };
 		8DE433441EE9E4EA009379ED /* PopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopTableViewCell.xib; sourceTree = "<group>"; };
@@ -655,6 +661,10 @@
 		0001CDC81ED05130000889CE /* CenterVC_MainVC */ = {
 			isa = PBXGroup;
 			children = (
+				8DDBAA561F57D31000F941BB /* HCCycleView.h */,
+				8DDBAA571F57D31000F941BB /* HCCycleView.m */,
+				8DDBAA581F57D31000F941BB /* HCPageControl.h */,
+				8DDBAA591F57D31000F941BB /* HCPageControl.m */,
 				0001CDE91ED06C06000889CE /* OrderView */,
 				0001CDC91ED05130000889CE /* BAFCenterViewController.h */,
 				0001CDCA1ED05130000889CE /* BAFCenterViewController.m */,
@@ -1745,6 +1755,7 @@
 				00214B421ECFDAC100FF6FDE /* NSString+MJExtension.m in Sources */,
 				8DB6C95A1F32230E00012746 /* MapViewController.m in Sources */,
 				00D13ED81EB4C75A00B0D766 /* BAFUserInfo.m in Sources */,
+				8DDBAA5A1F57D31000F941BB /* HCCycleView.m in Sources */,
 				00214B521ECFF78900FF6FDE /* PersonalCenterCellShowInfo.m in Sources */,
 				0020934D1EDBFBA600C26176 /* BAFOrderServiceViewController.m in Sources */,
 				005E85C61E97924600115CAD /* main.m in Sources */,
@@ -1794,6 +1805,7 @@
 				002093511EDC29DC00C26176 /* OrderServiceHeaderView.m in Sources */,
 				8D3498071F08FC07009D723C /* CommentCollectionViewCell.m in Sources */,
 				0001CDDC1ED05179000889CE /* PersonalCenterHeaderView.m in Sources */,
+				8DDBAA5B1F57D31000F941BB /* HCPageControl.m in Sources */,
 				8DC7BC661F2E9C9B00FDE5C0 /* ParkCommentViewController.m in Sources */,
 				8D575E6E1EF68A340061474D /* CardRechargeCollectionViewCell.m in Sources */,
 				005074421EBB090F00A6E8B1 /* HRLOrderRequest.m in Sources */,

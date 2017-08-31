@@ -23,6 +23,7 @@
 #import "UIView+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "OrderDetailViewController.h"
+#import "HCCycleView.h"
 
 typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 {
@@ -33,7 +34,7 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 
 @interface BAFCenterViewController ()<BAFCenterOrderViewDelegate,BMKLocationServiceDelegate>{
     BMKLocationService *_locService;
-    DYMRollingBannerVC      *_rollingBannerVC;
+    HCCycleView      *_rollingBannerVC;
 }
 @property (nonatomic, weak) IBOutlet UIButton           *showPersonalCenterButton;
 @property (nonatomic, weak) IBOutlet UIButton           *showOrderListButton;
@@ -80,7 +81,7 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [_rollingBannerVC stopRolling];
+//    [_rollingBannerVC stopRolling];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,28 +102,26 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 
 - (void)setupScrollView
 {
-    _rollingBannerVC = [DYMRollingBannerVC new];
-    [_rollingBannerVC.view setFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(self.headerScrollerView.frame))];
-    _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
-                                       ,[UIImage imageNamed:@"home_banner4"]
-                                       ];
+    _rollingBannerVC = [HCCycleView cycleViewWithFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(self.headerScrollerView.frame)) delegate:self placeholderImage:[UIImage imageNamed:@"home_banner3"]];
+//    [_rollingBannerVC.view setFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(self.headerScrollerView.frame))];
+//    _rollingBannerVC.rollingImages = @[[UIImage imageNamed:@"home_banner3"]
+//                                       ,[UIImage imageNamed:@"home_banner4"]
+//                                       ];
+//    
+//    // Set the placeholder image (optional, the default place holder is nil)
+//    _rollingBannerVC.placeHolderImage = [UIImage imageNamed:@"home_banner3"];
+//    [_rollingBannerVC setRemoteImageLoadingBlock:^(UIImageView *imageView, NSString *imageUrlStr, UIImage *placeHolderImage) {
+//        [imageView sd_cancelCurrentImageLoad];
+//        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrlStr] placeholderImage:placeHolderImage options:SDWebImageProgressiveDownload];
+//    }];
+//    // Add a handler when a tap event occours (optional, default do noting)
+//    [_rollingBannerVC addBannerTapHandler:^(NSInteger whichIndex) {
+//        NSLog(@"banner tapped, index = %@", @(whichIndex));
+//    }];
+//    
+//    _rollingBannerVC.rollingInterval = 3;
     
-    // Set the placeholder image (optional, the default place holder is nil)
-    _rollingBannerVC.placeHolderImage = [UIImage imageNamed:@"home_banner3"];
-    [_rollingBannerVC setRemoteImageLoadingBlock:^(UIImageView *imageView, NSString *imageUrlStr, UIImage *placeHolderImage) {
-        [imageView sd_cancelCurrentImageLoad];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrlStr] placeholderImage:placeHolderImage options:SDWebImageProgressiveDownload];
-    }];
-    // Add a handler when a tap event occours (optional, default do noting)
-    [_rollingBannerVC addBannerTapHandler:^(NSInteger whichIndex) {
-        NSLog(@"banner tapped, index = %@", @(whichIndex));
-    }];
-    
-    _rollingBannerVC.rollingInterval = 3;
-    
-    [self addChildViewController:_rollingBannerVC];
-    [self.headerScrollerView addSubview:_rollingBannerVC.view];
-    [_rollingBannerVC didMoveToParentViewController:self];
+    [self.headerScrollerView addSubview:_rollingBannerVC];
 }
 
 #pragma mark - Button Handlers
@@ -229,8 +228,9 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
             for (id object in [obj objectForKey:@"data"]) {
                 [mutArr addObject:[object objectForKey:@"img_url"]];
             }
-            _rollingBannerVC.rollingImages = mutArr;
-            [_rollingBannerVC startRolling];
+//            _rollingBannerVC.rollingImages = mutArr;
+//            [_rollingBannerVC startRolling];
+            _rollingBannerVC.imageArrays = mutArr;
         }
     }
     

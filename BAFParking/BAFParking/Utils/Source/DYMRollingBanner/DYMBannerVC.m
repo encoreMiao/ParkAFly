@@ -67,6 +67,8 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [self loadImage];
+    _btnTap.frame = CGRectMake(0, 0, screenWidth, self.view.frame.size.height);
+    _imageView.frame = CGRectMake(0, 0, screenWidth, self.view.frame.size.height);
 }
 
 
