@@ -226,9 +226,11 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
         if ([[obj objectForKey:@"code"] integerValue]==200) {
             NSMutableArray *mutArr = [NSMutableArray array];
             __block NSMutableArray *urlArr = [NSMutableArray array];
+            __block NSMutableArray *titleArr = [NSMutableArray array];
             for (id object in [obj objectForKey:@"data"]) {
                 [mutArr addObject:[object objectForKey:@"img_url"]];
                 [urlArr addObject:[object objectForKey:@"detail_url"]];
+                [titleArr addObject:[object objectForKey:@"title"]];
             }
 //            _rollingBannerVC.rollingImages = mutArr;
 //            [_rollingBannerVC startRolling];
@@ -237,15 +239,19 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
             _rollingBannerVC.imageArrays = mutArr;
             _rollingBannerVC.didClickPicture = ^(NSInteger index){
                 NSString *urlstr = [urlArr objectAtIndex:index];
-                NSLog(@"%d %@",index,urlstr);
-                
+                NSString *titleStr = [titleArr objectAtIndex:index];
+                if ([urlstr isEqualToString:@""]||[urlstr isEqual:[NSNull null]]||!urlstr){
+                    titleStr = nil;
+                }
                 if ([urlstr isEqualToString:@""]||[urlstr isEqual:[NSNull null]]||!urlstr) {
                     
                 }else{
                     BAFWebViewController  *webview = [[BAFWebViewController alloc]init];
-                    webview.useWebTitle = YES;
+                    if (!titleStr) {
+                        webview.useWebTitle = YES;
+                    }
                     [weakself.navigationController pushViewController:webview animated:YES];
-                    [webview loadTargetURL:[NSURL URLWithString:urlstr] title:nil];
+                    [webview loadTargetURL:[NSURL URLWithString:urlstr] title:titleStr];
                 }
             };
         }
