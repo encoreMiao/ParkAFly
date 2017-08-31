@@ -48,7 +48,7 @@
         NSString *totalUrl = REQURL(urlStr);
         [self.parkImage sd_setImageWithURL:[NSURL URLWithString:totalUrl] placeholderImage:[UIImage imageNamed:@"parking_loading_img"]];
         
-        self.parkNameLabel.text = self.parkDetailInfo.map_address;
+        self.parkNameLabel.text = self.parkDetailInfo.map_title;
         
         NSString *carFee = [NSString stringWithFormat:@"车位费：%@",self.parkDetailInfo.map_price];
         NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:carFee];

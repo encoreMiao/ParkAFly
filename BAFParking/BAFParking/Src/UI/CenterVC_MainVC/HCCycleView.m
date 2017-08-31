@@ -64,9 +64,9 @@
 
 - (void)initialization {
     // 默认值
-    self.pageControlType = HCPageControlTypeBorder;
-    self.currentPageControlColor = [UIColor whiteColor];
-    self.pageControlColor = [UIColor grayColor];
+    self.pageControlType = HCPageControlTypeNone;
+//    self.currentPageControlColor = [UIColor whiteColor];
+//    self.pageControlColor = [UIColor grayColor];
     self.pageControlBottom = 10;
     self.pageControlDotSize = CGSizeMake(8, 8);
     self.pageControlDotBorderWidth = 0.70;
