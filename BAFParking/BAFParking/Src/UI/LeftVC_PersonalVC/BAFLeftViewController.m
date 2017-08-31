@@ -106,6 +106,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (iPhone5||iPhone4) {
+        return 40.0f;
+    }
     return 55.0f;
 }
 

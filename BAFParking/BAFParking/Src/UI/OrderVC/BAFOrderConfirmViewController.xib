@@ -37,16 +37,16 @@
                     <rect key="frame" x="0.0" y="605" width="375" height="62"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计费用：¥130" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbV-5M-BiD">
-                            <rect key="frame" x="20" y="0.0" width="140" height="62"/>
+                            <rect key="frame" x="20" y="0.0" width="120" height="62"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="140" id="aMg-cT-GNx"/>
+                                <constraint firstAttribute="width" constant="120" id="aMg-cT-GNx"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbK-AJ-iZP">
-                            <rect key="frame" x="160" y="0.0" width="75" height="62"/>
+                            <rect key="frame" x="140" y="0.0" width="115" height="62"/>
                             <color key="tintColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="明细" image="btn_detailed">
                                 <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,10 +56,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-BA-SGm">
-                            <rect key="frame" x="235" y="0.0" width="140" height="62"/>
+                            <rect key="frame" x="255" y="0.0" width="120" height="62"/>
                             <color key="backgroundColor" red="0.20392156862745098" green="0.5725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="140" id="FTx-lG-RTE"/>
+                                <constraint firstAttribute="width" constant="120" id="FTx-lG-RTE"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" title="提交预约">
