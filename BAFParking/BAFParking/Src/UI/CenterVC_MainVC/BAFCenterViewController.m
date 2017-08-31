@@ -225,12 +225,29 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
         }
         if ([[obj objectForKey:@"code"] integerValue]==200) {
             NSMutableArray *mutArr = [NSMutableArray array];
+            __block NSMutableArray *urlArr = [NSMutableArray array];
             for (id object in [obj objectForKey:@"data"]) {
                 [mutArr addObject:[object objectForKey:@"img_url"]];
+                [urlArr addObject:[object objectForKey:@"detail_url"]];
             }
 //            _rollingBannerVC.rollingImages = mutArr;
 //            [_rollingBannerVC startRolling];
+            
+            WS(weakself);
             _rollingBannerVC.imageArrays = mutArr;
+            _rollingBannerVC.didClickPicture = ^(NSInteger index){
+                NSString *urlstr = [urlArr objectAtIndex:index];
+                NSLog(@"%d %@",index,urlstr);
+                
+                if ([urlstr isEqualToString:@""]||[urlstr isEqual:[NSNull null]]||!urlstr) {
+                    
+                }else{
+                    BAFWebViewController  *webview = [[BAFWebViewController alloc]init];
+                    webview.useWebTitle = YES;
+                    [weakself.navigationController pushViewController:webview animated:YES];
+                    [webview loadTargetURL:[NSURL URLWithString:urlstr] title:nil];
+                }
+            };
         }
     }
     

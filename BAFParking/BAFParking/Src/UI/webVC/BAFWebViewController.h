@@ -9,6 +9,7 @@
 #import "BAFBaseViewController.h"
 
 @interface BAFWebViewController : BAFBaseViewController
+@property (nonatomic, assign) BOOL useWebTitle;
 - (void)loadTargetURL:(NSURL *)url title:(NSString *)title;
 @end
 

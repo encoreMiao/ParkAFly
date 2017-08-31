@@ -23,6 +23,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.useWebTitle = NO;
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
@@ -36,7 +37,9 @@
 {
     if ([url isKindOfClass:[NSURL class]]) {
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
-        self.webTitle = title;
+        if (title) {
+            self.webTitle = title;
+        }
         [self.myWebView loadRequest:request];
         [self setNavigationTitle:title];
     }
@@ -59,6 +62,11 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+    if (self.useWebTitle){
+        self.webTitle = [self.myWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        [self setNavigationTitle:self.webTitle];
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
