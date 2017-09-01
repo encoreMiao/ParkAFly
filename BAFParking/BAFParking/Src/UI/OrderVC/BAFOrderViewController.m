@@ -84,7 +84,15 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     if (self.type == kBAFOrderViewControllerTypeOrder) {
         //预约
         [self.footerView.nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
-        self.footerView.tipsLabel.text = @"1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。\n2.如有疑问，请致电4008138666联系客服。";
+        
+        NSString *footerTipStr = @"1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。\n2.如有疑问，请致电4008138666联系客服。";
+        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:footerTipStr];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        [mutStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, footerTipStr.length)];
+        
+//        self.footerView.tipsLabel.text = @"1.返程未定时，取车时间可留空。后续情提前到订单中预约您的取车时间，以便我们及时为您服务。\n2.如有疑问，请致电4008138666联系客服。";
+        self.footerView.tipsLabel.attributedText = mutStr;
         
         [self cityListRequest];
         if ([_dicDatasource objectForKey:OrderParamTypePark]) {
@@ -121,7 +129,17 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
     }else{
         //修改
         [self.footerView.nextBtn setTitle:@"保存" forState:UIControlStateNormal];
-        self.footerView.tipsLabel.text = @"修改订单不支持更改出发航站楼和停车场，如需更改信息请取消订单后重新下单。";
+//        self.footerView.tipsLabel.text = @"修改订单不支持更改出发航站楼和停车场，如需更改信息请取消订单后重新下单。";
+        NSString *footerTipStr = @"修改订单不支持更改出发航站楼和停车场，如需更改信息请取消订单后重新下单。";
+        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:footerTipStr];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        [mutStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, footerTipStr.length)];
+        self.footerView.tipsLabel.attributedText = mutStr;
+        
+        
+        
+        
         //根据cityid获取城市名称？？？
         if (self.dicDatasource.count>0) {
             [self.mainTableView reloadData];
@@ -193,8 +211,12 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex){
         [sectionFooterView setFrame:CGRectMake(0, 0, screenWidth, 29.5)];
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, screenWidth-24, 20)];
         label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont systemFontOfSize:13.0f];
+        label.font = [UIFont systemFontOfSize:14.0f];
         label.textColor = [UIColor colorWithHex:0x969696];
+//        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc]initWithString:_chargeRemark];
+//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//        [paragraphStyle setLineSpacing:6];
+//        [mutStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _chargeRemark.length)];
         label.text = _chargeRemark;
         [sectionFooterView addSubview:label];
         [linetop setFrame:CGRectMake(0, 0, screenWidth, 0.5)];

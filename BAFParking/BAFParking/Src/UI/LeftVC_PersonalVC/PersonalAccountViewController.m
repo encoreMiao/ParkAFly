@@ -267,6 +267,11 @@ typedef NS_ENUM(NSInteger,PersonalAccountViewControllerType)
         }
         NSMutableAttributedString *mutattr = [[NSMutableAttributedString alloc]initWithString:str];
         [mutattr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x3492e9]} range:[str rangeOfString:@"说明"]];
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        [mutattr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, str.length)];
+        
         footerview.label.attributedText = mutattr;
         footerview.delegate = self;
         reusableView = footerview;
