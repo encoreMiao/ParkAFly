@@ -279,7 +279,9 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
         }
         if ([[obj objectForKey:@"code"] integerValue]== 200) {
             self.parkDetailInfo = [BAFParkInfo mj_objectWithKeyValues:[obj objectForKey:@"data"]];
-            [self parkCommentListRequestWithParkId:self.parkid];
+            [self.myTableView reloadData];
+            
+//            [self parkCommentListRequestWithParkId:self.parkid];
         }else{
             
         }

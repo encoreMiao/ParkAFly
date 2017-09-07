@@ -2039,6 +2039,7 @@
 					"$(PROJECT_DIR)/BAFParking/Utils/Source/wexinSDK",
 					"$(PROJECT_DIR)/BAFParking/Utils/Source/leveldb",
 					"$(PROJECT_DIR)/BAFParking/Utils/Source",
+					"$(PROJECT_DIR)/BAFParking/Utils/Source/**",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boanfei.boanfei;
 				PRODUCT_NAME = "$(TARGET_NAME)";

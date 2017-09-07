@@ -24,7 +24,7 @@
                             <constraint firstAttribute="height" constant="185" id="4r7-RV-v1T"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首都机场天竺天禧广场会员停车场" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YqK-tP-GPk">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YqK-tP-GPk">
                         <rect key="frame" x="20" y="195" width="424" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="kvz-c8-lvY"/>
@@ -54,21 +54,21 @@
                             <constraint firstAttribute="width" constant="16" id="qfm-9F-meh"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parking_xiangq_star1" translatesAutoresizingMaskIntoConstraints="NO" id="oHx-9g-bhA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parking_xiangq_star2" translatesAutoresizingMaskIntoConstraints="NO" id="oHx-9g-bhA">
                         <rect key="frame" x="83" y="221" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="26O-VI-WZQ"/>
                             <constraint firstAttribute="width" constant="16" id="2yn-7i-wVc"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parking_xiangq_star1" translatesAutoresizingMaskIntoConstraints="NO" id="6AY-6H-NGC">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parking_xiangq_star2" translatesAutoresizingMaskIntoConstraints="NO" id="6AY-6H-NGC">
                         <rect key="frame" x="104" y="221" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="16" id="8a0-PA-bP3"/>
                             <constraint firstAttribute="height" constant="16" id="Mv3-6I-cX9"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0分  0条评价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUd-Ne-LRB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5分  0条评价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUd-Ne-LRB">
                         <rect key="frame" x="135" y="221" width="309" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -160,7 +160,6 @@
     </objects>
     <resources>
         <image name="btn_map" width="19" height="24"/>
-        <image name="parking_xiangq_star1" width="16" height="15"/>
         <image name="parking_xiangq_star2" width="16" height="15"/>
     </resources>
 </document>
