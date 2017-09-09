@@ -41,6 +41,10 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
     [self.footerBtn setFrame:CGRectMake(0, 0, screenWidth, 44)];
     self.myTableView.tableFooterView = self.footerBtn;
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self parkDetailRequestWithParkId:self.parkid];
+    self.parkCommentList = [NSMutableArray array];
+    self.parkDetailInfo = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,9 +60,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
     [self setNavigationBackButtonWithImage:[UIImage imageNamed:@"list_nav_back"] method:@selector(backMethod:)];
     
     
-    [self parkDetailRequestWithParkId:self.parkid];
-    self.parkCommentList = [NSMutableArray array];
-    self.parkDetailInfo = nil;
+    
 }
 
 - (void)backMethod:(id)sender
@@ -281,7 +283,7 @@ typedef NS_ENUM(NSInteger,RequestNumberIndex) {
             self.parkDetailInfo = [BAFParkInfo mj_objectWithKeyValues:[obj objectForKey:@"data"]];
             [self.myTableView reloadData];
             
-//            [self parkCommentListRequestWithParkId:self.parkid];
+            [self parkCommentListRequestWithParkId:self.parkid];
         }else{
             
         }

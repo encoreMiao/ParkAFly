@@ -191,7 +191,7 @@ typedef NS_ENUM(NSInteger, BAFCenterViewControllerRequestType)
 - (void)checkVersion
 {
     id <HRLLoginInterface> loginReq = [[HRLogicManager sharedInstance] getLoginReqest];
-    [loginReq checkVersionRequestWithNumberIndex:kRequestNumberIndexVersion delegte:self version:@"1.0.0"];
+    [loginReq checkVersionRequestWithNumberIndex:kRequestNumberIndexVersion delegte:self version:@"1.0.1"];
 }
 
 - (void)latestOrderWithClientId:(NSString *)clientId
